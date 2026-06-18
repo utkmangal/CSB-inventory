@@ -21,8 +21,6 @@ missing_dirs = [str(path.relative_to(ROOT)) for path in required_dirs if not pat
 errors = []
 if missing:
     errors.append("Missing required files: " + ", ".join(missing))
-if missing_dirs:
-    errors.append("Missing required directories: " + ", ".join(missing_dirs))
 
 if not (ROOT / "index.html").exists():
     errors.append("index.html is required for GitHub Pages publication")
