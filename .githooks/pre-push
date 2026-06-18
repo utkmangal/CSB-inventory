@@ -1,4 +1,16 @@
 #!/usr/bin/env sh
 set -eu
 ROOT_DIR="$(CDPATH= cd -- "$(dirname "$0")/.." && pwd)"
-python3 "$ROOT_DIR/scripts/pre_push_check.py"
+
+# Prefer the regular Python launcher on Windows, where `python3` may only be
+# a Microsoft Store alias. Keep the hook portable for Unix and Git Bash.
+if command -v python >/dev/null 2>&1; then
+    exec python "$ROOT_DIR/scripts/pre_push_check.py"
+elif command -v python3 >/dev/null 2>&1; then
+    exec python3 "$ROOT_DIR/scripts/pre_push_check.py"
+elif command -v py >/dev/null 2>&1; then
+    exec py -3 "$ROOT_DIR/scripts/pre_push_check.py"
+fi
+
+echo "Pre-push check could not run: Python was not found on PATH." >&2
+exit 1
