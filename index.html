@@ -1065,14 +1065,7 @@
   </style>
 </head>
 <body>
-<<<<<<< HEAD
   <div class="dashboard-container">
-=======
-
-  <div class="dashboard-container">
-    
-    <!-- Top Header -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     <header class="dashboard-header">
       <div class="header-logo-container">
         <img src="favicon.svg" alt="CSB Logo" class="logo-img" style="width: 3rem; height: 3rem; border-radius: 0.75rem; object-fit: contain; border: 2px solid var(--border);" />
@@ -1092,14 +1085,7 @@
       </div>
     </header>
 
-<<<<<<< HEAD
     <section class="kpi-grid">
-=======
-    <!-- KPI Summary Grid -->
-    <section class="kpi-grid">
-      
-      <!-- Total Card -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       <div class="kpi-card kpi-total active" id="kpi-card-all" onclick="setKPIFilter('all')">
         <div class="kpi-card-header">
           <span class="kpi-card-title">전체 등록 장비</span>
@@ -1110,11 +1096,6 @@
         <div class="kpi-card-value" id="kpi-total-val">0</div>
         <div class="kpi-card-footer">보유 중인 전체 장비</div>
       </div>
-<<<<<<< HEAD
-=======
-
-      <!-- Located Card -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       <div class="kpi-card kpi-located" id="kpi-card-located" onclick="setKPIFilter('located')">
         <div class="kpi-card-header">
           <span class="kpi-card-title">위치 지정됨</span>
@@ -1125,11 +1106,6 @@
         <div class="kpi-card-value" id="kpi-located-val">0</div>
         <div class="kpi-card-footer">설치 장소가 파악된 장비</div>
       </div>
-<<<<<<< HEAD
-=======
-
-      <!-- Unlocated Card -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       <div class="kpi-card kpi-unlocated" id="kpi-card-unlocated" onclick="setKPIFilter('unlocated')">
         <div class="kpi-card-header">
           <span class="kpi-card-title">위치 미지정</span>
@@ -1140,11 +1116,6 @@
         <div class="kpi-card-value" id="kpi-unlocated-val">0</div>
         <div class="kpi-card-footer">위치 파악 및 등록 필요</div>
       </div>
-<<<<<<< HEAD
-=======
-
-      <!-- Unassigned Card -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       <div class="kpi-card kpi-unassigned" id="kpi-card-unassigned" onclick="setKPIFilter('unassigned')">
         <div class="kpi-card-header">
           <span class="kpi-card-title">담당자 미지정</span>
@@ -1155,36 +1126,15 @@
         <div class="kpi-card-value" id="kpi-unassigned-val">0</div>
         <div class="kpi-card-footer">관리 관리자 매칭 필요</div>
       </div>
-<<<<<<< HEAD
     </section>
 
     <div class="dashboard-grid">
       <main class="main-panel">
         <section class="control-bar">
-=======
-
-    </section>
-
-    <!-- Main Work Area Grid -->
-    <div class="dashboard-grid">
-      
-      <!-- Left Main Panel: Lists & Controls -->
-      <main class="main-panel">
-        
-        <!-- Controls Bar -->
-        <section class="control-bar">
-          
-          <!-- Realtime Search -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
           <div class="search-wrapper">
             <i data-lucide="search"></i>
             <input type="text" id="search-input" class="search-input" placeholder="장비명, 설치 위치, 담당자 실시간 검색..." oninput="handleSearch(this.value)">
           </div>
-<<<<<<< HEAD
-=======
-
-          <!-- Advanced Dropdowns & Buttons -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
           <div class="filter-group">
             <select id="filter-location" class="filter-select" onchange="handleLocationFilter(this.value)">
               <option value="all">모든 위치</option>
@@ -1192,18 +1142,9 @@
             <select id="filter-manager" class="filter-select" onchange="handleManagerFilter(this.value)">
               <option value="all">모든 담당자</option>
             </select>
-<<<<<<< HEAD
             <button onclick="resetFilters()" class="btn-reset" title="모든 검색 및 필터 설정 초기화">
               <i data-lucide="rotate-ccw" class="w-4 h-4"></i> 초기화
             </button>
-=======
-            
-            <button onclick="resetFilters()" class="btn-reset" title="모든 검색 및 필터 설정 초기화">
-              <i data-lucide="rotate-ccw" class="w-4 h-4"></i> 초기화
-            </button>
-            
-            <!-- Grid / Table View Mode Toggle -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
             <div class="view-toggle">
               <button id="view-mode-table" class="active" onclick="setViewMode('table')" title="테이블 리스트 뷰">
                 <i data-lucide="list" class="w-4 h-4"></i> 리스트
@@ -1213,23 +1154,12 @@
               </button>
             </div>
           </div>
-<<<<<<< HEAD
         </section>
 
-=======
-
-        </section>
-
-        <!-- Current Results Indicator -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         <div class="results-counter">
           <span id="results-count-text">장비 로딩 중...</span>
         </div>
 
-<<<<<<< HEAD
-=======
-        <!-- Inventory List (Table View) -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         <div id="table-view-wrapper" class="table-container">
           <table class="table-element">
             <thead>
@@ -1242,27 +1172,12 @@
                 <th>비고</th>
               </tr>
             </thead>
-<<<<<<< HEAD
             <tbody id="inventory-table-body"></tbody>
           </table>
         </div>
 
         <div id="grid-view-wrapper" class="grid-container hidden"></div>
 
-=======
-            <tbody id="inventory-table-body">
-              <!-- Dynamically populated -->
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Inventory Grid (Card View) -->
-        <div id="grid-view-wrapper" class="grid-container hidden">
-          <!-- Dynamically populated -->
-        </div>
-
-        <!-- Empty State Container -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         <div id="empty-state" class="empty-state hidden">
           <i data-lucide="box-select" class="empty-icon"></i>
           <h3>일치하는 장비가 없습니다</h3>
@@ -1271,59 +1186,27 @@
             <i data-lucide="rotate-ccw" class="w-4 h-4 inline mr-1"></i> 전체 필터 초기화
           </button>
         </div>
-<<<<<<< HEAD
       </main>
 
       <aside class="sidebar-panel">
-=======
-
-      </main>
-
-      <!-- Right Sidebar Panel: Charts & Breakdown -->
-      <aside class="sidebar-panel">
-        
-        <!-- Location Distribution Card -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         <div class="card">
           <div class="chart-header">
             <h3 class="chart-title">설치 위치별 분포</h3>
             <span class="chart-subtitle" id="loc-chart-count">0개 범주</span>
           </div>
-<<<<<<< HEAD
           <div id="location-chart-container" class="chart-list"></div>
         </div>
 
-=======
-          <div id="location-chart-container" class="chart-list">
-            <!-- Dynamically populated -->
-          </div>
-        </div>
-
-        <!-- Manager Load Card -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         <div class="card">
           <div class="chart-header">
             <h3 class="chart-title">담당자별 관리 현황</h3>
             <span class="chart-subtitle" id="mgr-chart-count">0명</span>
           </div>
-<<<<<<< HEAD
           <div id="manager-chart-container" class="chart-list"></div>
         </div>
       </aside>
     </div>
 
-=======
-          <div id="manager-chart-container" class="chart-list">
-            <!-- Dynamically populated -->
-          </div>
-        </div>
-
-      </aside>
-
-    </div>
-
-    <!-- Image Preview Modal -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     <div id="image-modal" class="modal-overlay" onclick="closeModal()">
       <div class="modal-content" onclick="event.stopPropagation()">
         <button class="modal-close-btn" onclick="closeModal()" aria-label="닫기">
@@ -1334,7 +1217,6 @@
       </div>
     </div>
 
-<<<<<<< HEAD
     <div id="toast-container" class="toast-container"></div>
 
     <footer class="dashboard-footer">
@@ -1343,20 +1225,6 @@
   </div>
 
   <script>
-=======
-    <!-- Toast Popup System -->
-    <div id="toast-container" class="toast-container"></div>
-
-    <!-- Footer -->
-    <footer class="dashboard-footer">
-      <p>© 2026 Center for Symbiotic Biomaterials (CSB). All rights reserved. • Center for Symbiotic Biomaterials (CSB) Equipment Inventory Dashboard • Portable HTML Version</p>
-    </footer>
-
-  </div>
-
-  <script>
-    // Raw Equipment Data
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     const inventoryData = [
       {"no": 1, "name": "Minisaw", "loc": "교수님 방", "mgr": "만갈, 서지영", "remarks": ""},
       {"no": 2, "name": "저울", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
@@ -1409,7 +1277,6 @@
       {"no": 49, "name": "UV 멸균", "loc": "", "mgr": "윤정현, 왕링윤", "remarks": ""}
     ];
 
-<<<<<<< HEAD
     const state = {
       filters: { search: "", location: "all", manager: "all", kpi: "all" },
       sort: { column: "no", direction: "asc" },
@@ -1422,38 +1289,12 @@
     let managers = [];
 
     window.addEventListener('DOMContentLoaded', () => {
-=======
-    // State Variables
-    const state = {
-      filters: {
-        search: "",
-        location: "all",
-        manager: "all",
-        kpi: "all"
-      },
-      sort: {
-        column: "no",
-        direction: "asc"
-      },
-      viewMode: "table",
-      theme: "light"
-    };
-
-    // Derived lists for dropdown populations
-    let locations = [];
-    let managers = [];
-
-    // Initialize the application
-    window.addEventListener('DOMContentLoaded', () => {
-      // Set responsive default view
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       if (window.innerWidth < 768) {
         state.viewMode = 'grid';
         document.getElementById('view-mode-table').classList.remove('active');
         document.getElementById('view-mode-grid').classList.add('active');
       }
 
-<<<<<<< HEAD
       initTheme();
       extractCategories();
       populateDropdowns();
@@ -1464,29 +1305,6 @@
     function initTheme() {
       const savedTheme = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-=======
-      // Initialize theme from storage/system
-      initTheme();
-
-      // Extract unique locations and managers
-      extractCategories();
-
-      // Populate selects
-      populateDropdowns();
-
-      // Perform initial render
-      updateDashboard();
-
-      // Initialize Lucide Icons
-      lucide.createIcons();
-    });
-
-    // Theme initialization
-    function initTheme() {
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
         document.body.classList.add('dark');
         state.theme = 'dark';
@@ -1496,10 +1314,6 @@
       }
     }
 
-<<<<<<< HEAD
-=======
-    // Toggle Theme
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     function toggleTheme() {
       if (document.body.classList.contains('dark')) {
         document.body.classList.remove('dark');
@@ -1514,13 +1328,7 @@
       }
     }
 
-<<<<<<< HEAD
     function extractCategories() {
-=======
-    // Extract unique elements
-    function extractCategories() {
-      // Locations
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       const locSet = new Set();
       inventoryData.forEach(item => {
         const val = item.loc && item.loc.trim() !== "" ? item.loc.trim() : "미지정";
@@ -1528,10 +1336,6 @@
       });
       locations = Array.from(locSet);
 
-<<<<<<< HEAD
-=======
-      // Managers (can be multi-valued e.g., "만갈, 서지영")
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       const mgrSet = new Set();
       inventoryData.forEach(item => {
         if (item.mgr && item.mgr.trim() !== "") {
@@ -1543,7 +1347,6 @@
       managers = Array.from(mgrSet);
     }
 
-<<<<<<< HEAD
     function populateDropdowns() {
       const locSelect = document.getElementById('filter-location');
       const mgrSelect = document.getElementById('filter-manager');
@@ -1551,37 +1354,14 @@
       mgrSelect.innerHTML = '<option value="all">모든 담당자</option>';
       const sortedLocs = locations.filter(l => l !== '미지정').sort();
       if (locations.includes('미지정')) sortedLocs.push('미지정');
-=======
-    // Populate dropdown elements
-    function populateDropdowns() {
-      const locSelect = document.getElementById('filter-location');
-      const mgrSelect = document.getElementById('filter-manager');
-
-      // Clear existing except "all"
-      locSelect.innerHTML = '<option value="all">모든 위치</option>';
-      mgrSelect.innerHTML = '<option value="all">모든 담당자</option>';
-
-      // Sort and list locations, keeping "미지정" at the bottom
-      const sortedLocs = locations.filter(l => l !== '미지정').sort();
-      if (locations.includes('미지정')) sortedLocs.push('미지정');
-
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       sortedLocs.forEach(loc => {
         const opt = document.createElement('option');
         opt.value = loc;
         opt.textContent = loc;
         locSelect.appendChild(opt);
       });
-<<<<<<< HEAD
       const sortedMgrs = managers.filter(m => m !== '미지정').sort();
       if (managers.includes('미지정')) sortedMgrs.push('미지정');
-=======
-
-      // Sort and list managers, keeping "미지정" at the bottom
-      const sortedMgrs = managers.filter(m => m !== '미지정').sort();
-      if (managers.includes('미지정')) sortedMgrs.push('미지정');
-
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       sortedMgrs.forEach(mgr => {
         const opt = document.createElement('option');
         opt.value = mgr;
@@ -1590,26 +1370,11 @@
       });
     }
 
-<<<<<<< HEAD
     function getFilteredData() {
       return inventoryData.filter(item => {
         const s = state.filters.search.toLowerCase().trim();
         const matchSearch = s === "" || item.name.toLowerCase().includes(s) || (item.loc && item.loc.toLowerCase().includes(s)) || (item.mgr && item.mgr.toLowerCase().includes(s)) || (item.remarks && item.remarks.toLowerCase().includes(s));
 
-=======
-    // Process and filter data based on state
-    function getFilteredData() {
-      return inventoryData.filter(item => {
-        // 1. Search Query Check
-        const s = state.filters.search.toLowerCase().trim();
-        const matchSearch = s === "" || 
-          item.name.toLowerCase().includes(s) || 
-          (item.loc && item.loc.toLowerCase().includes(s)) || 
-          (item.mgr && item.mgr.toLowerCase().includes(s)) ||
-          (item.remarks && item.remarks.toLowerCase().includes(s));
-
-        // 2. Location Select Check
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         let matchLoc = true;
         if (state.filters.location !== "all") {
           if (state.filters.location === "미지정") {
@@ -1619,10 +1384,6 @@
           }
         }
 
-<<<<<<< HEAD
-=======
-        // 3. Manager Select Check
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         let matchMgr = true;
         if (state.filters.manager !== "all") {
           if (state.filters.manager === "미지정") {
@@ -1637,10 +1398,6 @@
           }
         }
 
-<<<<<<< HEAD
-=======
-        // 4. KPI Card Quick-Filter Check
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         let matchKPI = true;
         if (state.filters.kpi === "located") {
           matchKPI = item.loc && item.loc.trim() !== "";
@@ -1654,7 +1411,6 @@
       });
     }
 
-<<<<<<< HEAD
     function getSortedData(data) {
       const col = state.sort.column;
       const dir = state.sort.direction === 'asc' ? 1 : -1;
@@ -1666,31 +1422,10 @@
         }
         valA = valA ? valA.toString().trim() : "";
         valB = valB ? valB.toString().trim() : "";
-=======
-    // Sort Data array
-    function getSortedData(data) {
-      const col = state.sort.column;
-      const dir = state.sort.direction === 'asc' ? 1 : -1;
-
-      return [...data].sort((a, b) => {
-        let valA = a[col];
-        let valB = b[col];
-
-        // Ensure strings for comparisons (except 'no' which is numeric)
-        if (col === 'no') {
-          return (Number(valA) - Number(valB)) * dir;
-        }
-
-        valA = valA ? valA.toString().trim() : "";
-        valB = valB ? valB.toString().trim() : "";
-
-        // Locale specific string sort for Korean/English text
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         return valA.localeCompare(valB, 'ko', { numeric: true }) * dir;
       });
     }
 
-<<<<<<< HEAD
     function updateDashboard() {
       if (state.renderFrame !== null) {
         cancelAnimationFrame(state.renderFrame);
@@ -1725,84 +1460,23 @@
       });
     }
 
-=======
-    // Main Update pipeline
-    function updateDashboard() {
-      const filtered = getFilteredData();
-      const sorted = getSortedData(filtered);
-
-      // Render KPIs (calculated from full inventory, static mapping)
-      renderKPIs();
-
-      // Render List Views (Table or Grid)
-      if (state.viewMode === 'table') {
-        document.getElementById('table-view-wrapper').classList.remove('hidden');
-        document.getElementById('grid-view-wrapper').classList.add('hidden');
-        renderTable(sorted);
-      } else {
-        document.getElementById('table-view-wrapper').classList.add('hidden');
-        document.getElementById('grid-view-wrapper').classList.remove('hidden');
-        renderGrid(sorted);
-      }
-
-      // Render Analytics Panels
-      renderAnalytics(filtered);
-
-      // Toggle Empty State if zero results
-      const emptyStateEl = document.getElementById('empty-state');
-      const countTextEl = document.getElementById('results-count-text');
-      
-      if (sorted.length === 0) {
-        emptyStateEl.classList.remove('hidden');
-        document.getElementById('table-view-wrapper').classList.add('hidden');
-        document.getElementById('grid-view-wrapper').classList.add('hidden');
-        countTextEl.textContent = "검색 결과 0개";
-      } else {
-        emptyStateEl.classList.add('hidden');
-        countTextEl.innerHTML = `총 <strong>${inventoryData.length}</strong>개 중 <strong>${sorted.length}</strong>개 장비 표시 중`;
-      }
-
-      // Refresh Lucide SVGs
-      lucide.createIcons();
-    }
-
-    // Render KPI Cards (fixed statistics base)
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     function renderKPIs() {
       const total = inventoryData.length;
       const located = inventoryData.filter(item => item.loc && item.loc.trim() !== "").length;
       const unlocated = inventoryData.filter(item => !item.loc || item.loc.trim() === "").length;
       const unassigned = inventoryData.filter(item => !item.mgr || item.mgr.trim() === "").length;
-<<<<<<< HEAD
-=======
-
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       document.getElementById('kpi-total-val').textContent = total;
       document.getElementById('kpi-located-val').textContent = located;
       document.getElementById('kpi-unlocated-val').textContent = unlocated;
       document.getElementById('kpi-unassigned-val').textContent = unassigned;
-<<<<<<< HEAD
       const cards = { 'all': 'kpi-card-all', 'located': 'kpi-card-located', 'unlocated': 'kpi-card-unlocated', 'unassigned': 'kpi-card-unassigned' };
       Object.entries(cards).forEach(([key, id]) => {
-=======
-
-      // Update Card Active Border Ring styling
-      const cards = {
-        'all': 'kpi-card-all',
-        'located': 'kpi-card-located',
-        'unlocated': 'kpi-card-unlocated',
-        'unassigned': 'kpi-card-unassigned'
-      };
-
-      for (const [key, id] of Object.entries(cards)) {
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         const el = document.getElementById(id);
         if (state.filters.kpi === key) {
           el.classList.add('active');
         } else {
           el.classList.remove('active');
         }
-<<<<<<< HEAD
       });
     }
 
@@ -1813,115 +1487,41 @@
         const row = document.createElement('tr');
         const tdNo = document.createElement('td');
         tdNo.innerHTML = `<span class="eq-card-no">${item.no}</span>`;
-=======
-      }
-    }
-
-    // Table view builder
-    function renderTable(data) {
-      const tbody = document.getElementById('inventory-table-body');
-      tbody.innerHTML = "";
-
-      data.forEach(item => {
-        const row = document.createElement('tr');
-        
-        // No column
-        const tdNo = document.createElement('td');
-        tdNo.innerHTML = `<span class="eq-card-no">${item.no}</span>`;
-        row.appendChild(tdNo);
-
-        // Photo column
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         const tdPhoto = document.createElement('td');
         tdPhoto.style.textAlign = 'center';
         const hasImage = item.no >= 1 && item.no <= 36 && item.no !== 31;
         if (hasImage) {
-<<<<<<< HEAD
           tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" onclick="openImageModal('images/equipment_${item.no}.jpeg', '${item.name}')" title="이미지 크게 보기"><img src="images/equipment_${item.no}.jpeg" alt="${item.name}" class="table-thumbnail" loading="lazy"></div>`;
         } else {
           tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper no-image" title="이미지 없음"><i data-lucide="image-off" class="w-4 h-4 text-slate-400"></i></div>`;
         }
         const tdName = document.createElement('td');
         tdName.innerHTML = `<strong>${item.name}</strong>`;
-=======
-          tdPhoto.innerHTML = `
-            <div class="table-thumbnail-wrapper" onclick="openImageModal('images/equipment_${item.no}.jpeg', '${item.name}')" title="이미지 크게 보기">
-              <img src="images/equipment_${item.no}.jpeg" alt="${item.name}" class="table-thumbnail" loading="lazy">
-            </div>
-          `;
-        } else {
-          tdPhoto.innerHTML = `
-            <div class="table-thumbnail-wrapper no-image" title="이미지 없음">
-              <i data-lucide="image-off" class="w-4 h-4 text-slate-400"></i>
-            </div>
-          `;
-        }
-        row.appendChild(tdPhoto);
-
-        // Name column
-        const tdName = document.createElement('td');
-        tdName.innerHTML = `<strong>${item.name}</strong>`;
-        row.appendChild(tdName);
-
-        // Location column
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         const tdLoc = document.createElement('td');
         if (item.loc && item.loc.trim() !== "") {
           tdLoc.innerHTML = `<span class="badge badge-gray"><i data-lucide="map-pin" class="w-3 h-3 text-slate-400"></i> ${item.loc}</span>`;
         } else {
           tdLoc.innerHTML = `<span class="badge badge-warning"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> 위치 미지정</span>`;
         }
-<<<<<<< HEAD
         const tdMgr = document.createElement('td');
         if (item.mgr && item.mgr.trim() !== "") {
           const mgrList = item.mgr.split(",").map(m => `<span class="badge badge-success"><i data-lucide="user" class="w-3 h-3 text-emerald-500"></i> ${m.trim()}</span>`).join(" ");
-=======
-        row.appendChild(tdLoc);
-
-        // Manager column
-        const tdMgr = document.createElement('td');
-        if (item.mgr && item.mgr.trim() !== "") {
-          // Can have multiple, separate out
-          const mgrList = item.mgr.split(",").map(m => {
-            return `<span class="badge badge-success"><i data-lucide="user" class="w-3 h-3 text-emerald-500"></i> ${m.trim()}</span>`;
-          }).join(" ");
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
           tdMgr.innerHTML = mgrList;
         } else {
           tdMgr.innerHTML = `<span class="badge badge-danger"><i data-lucide="user-x" class="w-3.5 h-3.5"></i> 담당자 미지정</span>`;
         }
-<<<<<<< HEAD
         const tdRemarks = document.createElement('td');
         if (item.remarks && item.remarks.trim() !== "") {
           tdRemarks.innerHTML = `<div class="flex items-center gap-1.5 text-xs text-slate-500 italic" title="${item.remarks}"><i data-lucide="info" class="w-3.5 h-3.5 text-sky-500 flex-shrink-0"></i><span>${item.remarks}</span></div>`;
         } else {
           tdRemarks.innerHTML = `<span class="text-slate-300">-</span>`;
         }
-=======
-        row.appendChild(tdMgr);
-
-        // Remarks column
-        const tdRemarks = document.createElement('td');
-        if (item.remarks && item.remarks.trim() !== "") {
-          tdRemarks.innerHTML = `
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 italic" title="${item.remarks}">
-              <i data-lucide="info" class="w-3.5 h-3.5 text-sky-500 flex-shrink-0"></i>
-              <span>${item.remarks}</span>
-            </div>
-          `;
-        } else {
-          tdRemarks.innerHTML = `<span class="text-slate-300">-</span>`;
-        }
-        row.appendChild(tdRemarks);
-
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         row.appendChild(tdNo);
         row.appendChild(tdPhoto);
         row.appendChild(tdName);
         row.appendChild(tdLoc);
         row.appendChild(tdMgr);
         row.appendChild(tdRemarks);
-<<<<<<< HEAD
         tbody.appendChild(row);
       });
       updateSortArrows();
@@ -1944,149 +1544,31 @@
           imageHtml = `<div class="eq-card-image-wrapper"><div class="eq-card-image-placeholder"><i data-lucide="image-off"></i><span>이미지 준비중</span></div></div>`;
         }
         card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span>${locHtml}</div><h3 class="eq-card-name">${item.name}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">담당자:</span><div class="flex flex-wrap gap-1">${mgrHtml}</div></div></div></div>${remarksHtml}</div>`;
-=======
-
-        // Clear row innerHTML and reconstruct to avoid duplicate appends
-        row.innerHTML = "";
-        row.appendChild(tdNo);
-        row.appendChild(tdPhoto);
-        row.appendChild(tdName);
-        row.appendChild(tdLoc);
-        row.appendChild(tdMgr);
-        row.appendChild(tdRemarks);
-
-        tbody.appendChild(row);
-      });
-
-      // Update the table sorting arrows
-      updateSortArrows();
-    }
-
-    // Grid View Builder (Card view)
-    function renderGrid(data) {
-      const container = document.getElementById('grid-view-wrapper');
-      container.innerHTML = "";
-
-      data.forEach(item => {
-        const card = document.createElement('div');
-        card.className = "eq-card";
-
-        // Header info
-        const locHtml = item.loc && item.loc.trim() !== "" 
-          ? `<span class="badge badge-gray"><i data-lucide="map-pin"></i> ${item.loc}</span>`
-          : `<span class="badge badge-warning"><i data-lucide="alert-triangle"></i> 위치 미지정</span>`;
-
-        const mgrHtml = item.mgr && item.mgr.trim() !== ""
-          ? item.mgr.split(",").map(m => `<span class="badge badge-success"><i data-lucide="user"></i> ${m.trim()}</span>`).join(" ")
-          : `<span class="badge badge-danger"><i data-lucide="user-x"></i> 담당자 미지정</span>`;
-
-        const remarksHtml = item.remarks && item.remarks.trim() !== ""
-          ? `<div class="eq-card-remarks">
-               <i data-lucide="info" class="text-sky-500"></i>
-               <span>${item.remarks}</span>
-             </div>`
-          : "";
-
-        const hasImage = item.no >= 1 && item.no <= 36 && item.no !== 31;
-        let imageHtml = "";
-        if (hasImage) {
-          imageHtml = `
-            <div class="eq-card-image-wrapper" onclick="openImageModal('images/equipment_${item.no}.jpeg', '${item.name}')" title="이미지 크게 보기">
-              <img src="images/equipment_${item.no}.jpeg" alt="${item.name}" class="eq-card-image" loading="lazy">
-            </div>
-          `;
-        } else {
-          imageHtml = `
-            <div class="eq-card-image-wrapper">
-              <div class="eq-card-image-placeholder">
-                <i data-lucide="image-off"></i>
-                <span>이미지 준비중</span>
-              </div>
-            </div>
-          `;
-        }
-
-        card.innerHTML = `
-          ${imageHtml}
-          <div class="eq-card-body">
-            <div>
-              <div class="eq-card-header">
-                <span class="eq-card-no">No. ${item.no}</span>
-                ${locHtml}
-              </div>
-              <h3 class="eq-card-name">${item.name}</h3>
-              <div class="eq-card-info">
-                <div class="eq-card-item">
-                  <span class="text-xs text-slate-400 mr-1">담당자:</span>
-                  <div class="flex flex-wrap gap-1">${mgrHtml}</div>
-                </div>
-              </div>
-            </div>
-            ${remarksHtml}
-          </div>
-        `;
-
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         container.appendChild(card);
       });
     }
 
-<<<<<<< HEAD
     function renderAnalytics(filteredData) {
-=======
-    // Dynamic Render Charts (Location Distribution & Manager Load)
-    function renderAnalytics(filteredData) {
-      // 1. Locations Analytics
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       const locCounts = {};
       filteredData.forEach(item => {
         const val = item.loc && item.loc.trim() !== "" ? item.loc.trim() : "미지정";
         locCounts[val] = (locCounts[val] || 0) + 1;
       });
-<<<<<<< HEAD
       const sortedLocs = Object.entries(locCounts).sort((a, b) => b[1] - a[1]);
       document.getElementById('loc-chart-count').textContent = `${sortedLocs.length}개 범주`;
       const locMax = sortedLocs.length > 0 ? sortedLocs[0][1] : 1;
       const locChartEl = document.getElementById('location-chart-container');
       locChartEl.innerHTML = "";
-=======
-
-      // Sort location counts descending
-      const sortedLocs = Object.entries(locCounts).sort((a, b) => b[1] - a[1]);
-      document.getElementById('loc-chart-count').textContent = `${sortedLocs.length}개 범주`;
-
-      const locMax = sortedLocs.length > 0 ? sortedLocs[0][1] : 1;
-      const locChartEl = document.getElementById('location-chart-container');
-      locChartEl.innerHTML = "";
-
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       sortedLocs.forEach(([loc, count]) => {
         const pct = (count / locMax) * 100;
         const isActive = state.filters.location === loc;
         const row = document.createElement('div');
         row.className = `chart-row ${isActive ? 'active' : ''}`;
         row.onclick = () => toggleLocFilter(loc);
-<<<<<<< HEAD
         row.innerHTML = `<div class="chart-label-row"><span class="chart-label">${loc}</span><span class="chart-value">${count}개</span></div><div class="chart-bar-track"><div class="chart-bar-fill" style="width: ${pct}%"></div></div>`;
         locChartEl.appendChild(row);
       });
 
-=======
-        
-        row.innerHTML = `
-          <div class="chart-label-row">
-            <span class="chart-label">${loc}</span>
-            <span class="chart-value">${count}개</span>
-          </div>
-          <div class="chart-bar-track">
-            <div class="chart-bar-fill" style="width: ${pct}%"></div>
-          </div>
-        `;
-        locChartEl.appendChild(row);
-      });
-
-      // 2. Manager Load Analytics
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       const mgrCounts = {};
       filteredData.forEach(item => {
         if (item.mgr && item.mgr.trim() !== "") {
@@ -2098,51 +1580,22 @@
           mgrCounts["미지정"] = (mgrCounts["미지정"] || 0) + 1;
         }
       });
-<<<<<<< HEAD
       const sortedMgrs = Object.entries(mgrCounts).sort((a, b) => b[1] - a[1]);
       document.getElementById('mgr-chart-count').textContent = `${sortedMgrs.length}명`;
       const mgrMax = sortedMgrs.length > 0 ? sortedMgrs[0][1] : 1;
       const mgrChartEl = document.getElementById('manager-chart-container');
       mgrChartEl.innerHTML = "";
-=======
-
-      // Sort managers counts descending
-      const sortedMgrs = Object.entries(mgrCounts).sort((a, b) => b[1] - a[1]);
-      document.getElementById('mgr-chart-count').textContent = `${sortedMgrs.length}명`;
-
-      const mgrMax = sortedMgrs.length > 0 ? sortedMgrs[0][1] : 1;
-      const mgrChartEl = document.getElementById('manager-chart-container');
-      mgrChartEl.innerHTML = "";
-
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       sortedMgrs.forEach(([mgr, count]) => {
         const pct = (count / mgrMax) * 100;
         const isActive = state.filters.manager === mgr;
         const row = document.createElement('div');
         row.className = `chart-row ${isActive ? 'active' : ''}`;
         row.onclick = () => toggleMgrFilter(mgr);
-<<<<<<< HEAD
         row.innerHTML = `<div class="chart-label-row"><span class="chart-label">${mgr}</span><span class="chart-value">${count}개</span></div><div class="chart-bar-track"><div class="chart-bar-fill" style="width: ${pct}%"></div></div>`;
-=======
-        
-        row.innerHTML = `
-          <div class="chart-label-row">
-            <span class="chart-label">${mgr}</span>
-            <span class="chart-value">${count}개</span>
-          </div>
-          <div class="chart-bar-track">
-            <div class="chart-bar-fill" style="width: ${pct}%"></div>
-          </div>
-        `;
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
         mgrChartEl.appendChild(row);
       });
     }
 
-<<<<<<< HEAD
-=======
-    // Handles view sorting update display
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     function updateSortArrows() {
       const cols = ['no', 'name', 'loc', 'mgr'];
       cols.forEach(c => {
@@ -2158,10 +1611,6 @@
       });
     }
 
-<<<<<<< HEAD
-=======
-    // Sort Click Event Handler
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     function handleSort(column) {
       if (state.sort.column === column) {
         state.sort.direction = state.sort.direction === 'asc' ? 'desc' : 'asc';
@@ -2173,37 +1622,21 @@
       showToast(`정렬 기준 변경: ${column.toUpperCase()} (${state.sort.direction.toUpperCase()})`, "success");
     }
 
-<<<<<<< HEAD
-=======
-    // Live search input changes
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     function handleSearch(val) {
       state.filters.search = val;
       updateDashboard();
     }
 
-<<<<<<< HEAD
-=======
-    // Dropdown updates
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     function handleLocationFilter(val) {
       state.filters.location = val;
       updateDashboard();
     }
 
-<<<<<<< HEAD
-=======
-    // Dropdown updates
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     function handleManagerFilter(val) {
       state.filters.manager = val;
       updateDashboard();
     }
 
-<<<<<<< HEAD
-=======
-    // Chart row filter toggling
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     function toggleLocFilter(loc) {
       if (state.filters.location === loc) {
         state.filters.location = "all";
@@ -2226,72 +1659,33 @@
       showToast(`담당자 필터가 ${state.filters.manager === 'all' ? '해제되었습니다' : `'${state.filters.manager}'(으)로 적용되었습니다.`}`);
     }
 
-<<<<<<< HEAD
     function setKPIFilter(kpiType) {
       if (state.filters.kpi === kpiType) {
         state.filters.kpi = "all";
-=======
-    // KPI Card Click Filter
-    function setKPIFilter(kpiType) {
-      if (state.filters.kpi === kpiType) {
-        state.filters.kpi = "all"; // Reset if clicking the active one
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       } else {
         state.filters.kpi = kpiType;
       }
       updateDashboard();
-<<<<<<< HEAD
       const filterLabel = { 'all': '전체 장비 표시', 'located': '위치 지정됨 장비만 표시', 'unlocated': '위치 미지정 장비만 표시', 'unassigned': '담당자 미지정 장비만 표시' };
       showToast(filterLabel[state.filters.kpi], "success");
     }
 
-=======
-      
-      const filterLabel = {
-        'all': '전체 장비 표시',
-        'located': '위치 지정됨 장비만 표시',
-        'unlocated': '위치 미지정 장비만 표시',
-        'unassigned': '담당자 미지정 장비만 표시'
-      };
-      showToast(filterLabel[state.filters.kpi], "success");
-    }
-
-    // Reset filters
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     function resetFilters() {
       state.filters.search = "";
       state.filters.location = "all";
       state.filters.manager = "all";
       state.filters.kpi = "all";
-<<<<<<< HEAD
       document.getElementById('search-input').value = "";
       document.getElementById('filter-location').value = "all";
       document.getElementById('filter-manager').value = "all";
-=======
-
-      document.getElementById('search-input').value = "";
-      document.getElementById('filter-location').value = "all";
-      document.getElementById('filter-manager').value = "all";
-
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       updateDashboard();
       showToast("모든 필터가 초기화되었습니다.", "success");
     }
 
-<<<<<<< HEAD
     function setViewMode(mode) {
       state.viewMode = mode;
       const btnTable = document.getElementById('view-mode-table');
       const btnGrid = document.getElementById('view-mode-grid');
-=======
-    // Toggle views (Table vs Card Grid)
-    function setViewMode(mode) {
-      state.viewMode = mode;
-      
-      const btnTable = document.getElementById('view-mode-table');
-      const btnGrid = document.getElementById('view-mode-grid');
-
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       if (mode === 'table') {
         btnTable.classList.add('active');
         btnGrid.classList.remove('active');
@@ -2299,34 +1693,16 @@
         btnTable.classList.remove('active');
         btnGrid.classList.add('active');
       }
-<<<<<<< HEAD
       updateDashboard();
     }
 
-=======
-
-      updateDashboard();
-    }
-
-    // Image Modal Control
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     function openImageModal(imgSrc, name) {
       const modal = document.getElementById('image-modal');
       const modalImg = document.getElementById('modal-img');
       const modalCaption = document.getElementById('modal-caption');
-<<<<<<< HEAD
       modalImg.src = imgSrc;
       modalCaption.textContent = name;
       modal.classList.add('active');
-=======
-      
-      modalImg.src = imgSrc;
-      modalCaption.textContent = name;
-      
-      modal.classList.add('active');
-      
-      // Re-trigger Lucide Icons inside modal
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       lucide.createIcons();
     }
 
@@ -2337,42 +1713,25 @@
       }
     }
 
-<<<<<<< HEAD
-=======
-    // Escape Key Modal closing
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeModal();
       }
     });
 
-<<<<<<< HEAD
-=======
-    // CSV Exporter
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     function exportCSV() {
       const dataToExport = getSortedData(getFilteredData());
       if (dataToExport.length === 0) {
         showToast("내보낼 데이터가 없습니다.", "error");
         return;
       }
-<<<<<<< HEAD
       let csvContent = "No,장비명,설치 위치,담당 관리자,비고\n";
-=======
-
-      // Build CSV Headers
-      let csvContent = "No,장비명,설치 위치,담당 관리자,비고\n";
-
-      // Append items
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       dataToExport.forEach(item => {
         const no = item.no;
         const name = `"${item.name.replace(/"/g, '""')}"`;
         const loc = `"${(item.loc || '미지정').replace(/"/g, '""')}"`;
         const mgr = `"${(item.mgr || '미지정').replace(/"/g, '""')}"`;
         const remarks = `"${(item.remarks || '').replace(/"/g, '""')}"`;
-<<<<<<< HEAD
         csvContent += `${no},${name},${loc},${mgr},${remarks}\n`;
       });
       const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -2387,64 +1746,20 @@
       showToast(`CSV 내보내기 완료 (${dataToExport.length}개 항목)`, "success");
     }
 
-=======
-        
-        csvContent += `${no},${name},${loc},${mgr},${remarks}\n`;
-      });
-
-      // Prepend UTF-8 BOM to ensure Korean character support inside MS Excel
-      const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      
-      const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-      link.setAttribute("href", url);
-      link.setAttribute("download", `Center_for_Symbiotic_Biomaterials_CSB_장비목록_필터적용_${dateStr}.csv`);
-      
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      showToast(`CSV 내보내기 완료 (${dataToExport.length}개 항목)`, "success");
-    }
-
-    // Toast Popups
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
     function showToast(message, type = 'success') {
       const container = document.getElementById('toast-container');
       const toast = document.createElement('div');
       toast.className = `toast toast-${type}`;
-<<<<<<< HEAD
       let iconName = 'info';
       if (type === 'success') iconName = 'check-circle';
       if (type === 'error') iconName = 'alert-triangle';
       toast.innerHTML = `<i data-lucide="${iconName}" class="w-4 h-4"></i><span>${message}</span>`;
       container.appendChild(toast);
       lucide.createIcons();
-=======
-
-      let iconName = 'info';
-      if (type === 'success') iconName = 'check-circle';
-      if (type === 'error') iconName = 'alert-triangle';
-
-      toast.innerHTML = `
-        <i data-lucide="${iconName}" class="w-4 h-4"></i>
-        <span>${message}</span>
-      `;
-
-      container.appendChild(toast);
-      lucide.createIcons();
-
-      // Automatically remove toast element after animations run
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
       setTimeout(() => {
         toast.remove();
       }, 3000);
     }
   </script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
