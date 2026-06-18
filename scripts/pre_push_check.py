@@ -11,15 +11,16 @@ required_files = [
     ROOT / ".github" / "workflows" / "deploy.yml",
 ]
 
-required_dirs = [ROOT / "images"]
+required_dirs = [
+    ROOT / "images",
+]
+
+missing = [str(path.relative_to(ROOT)) for path in required_files if not path.exists()]
+missing_dirs = [str(path.relative_to(ROOT)) for path in required_dirs if not path.exists()]
 
 errors = []
-for path in required_files:
-    if not path.exists():
-        errors.append(f"Missing required file: {path.relative_to(ROOT)}")
-for path in required_dirs:
-    if not path.exists():
-        errors.append(f"Missing required directory: {path.relative_to(ROOT)}")
+if missing:
+    errors.append("Missing required files: " + ", ".join(missing))
 
 html_path = ROOT / "index.html"
 if html_path.exists():

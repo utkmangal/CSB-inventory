@@ -31,10 +31,11 @@ jobs:
 
       - name: Build site artifact
         run: |
-          mkdir dist
+          mkdir -p dist
           cp index.html dist/
           cp favicon.svg dist/
-          cp -r images dist/
+          if [ -f .nojekyll ]; then cp .nojekyll dist/; fi
+          if [ -d images ]; then cp -r images dist/; fi
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
