@@ -1330,28 +1330,28 @@
       {"no": 6, "name": "접촉각", "loc": "교수님 방", "mgr": "정수미", "remarks": ""},
       {"no": 7, "name": "Spin Coater", "loc": "치과대학 708호", "mgr": "만갈, 서지영", "remarks": ""},
       {"no": 8, "name": "UTM", "loc": "치과대학 708호", "mgr": "김민지", "remarks": ""},
-      {"no": 9, "name": "Incubator", "loc": "치과대학 707호", "mgr": "윤정현, 왕링윤", "remarks": ""},
+      {"no": 9, "name": "incubator", "loc": "치과대학 707호", "mgr": "윤정현, 왕링윤", "remarks": ""},
       {"no": 10, "name": "형광 단백질 광원", "loc": "치과대학 707호", "mgr": "왕링윤", "remarks": ""},
       {"no": 11, "name": "Mimics S/W", "loc": "치과대학 707호", "mgr": "김지윤", "remarks": "(simulation mod 업그레이드 예정)"},
       {"no": 12, "name": "광조사기", "loc": "치과대학 707호", "mgr": "왕링윤", "remarks": ""},
       {"no": 13, "name": "멸균기", "loc": "치과대학 708호", "mgr": "정수미, 왕링윤", "remarks": ""},
-      {"no": 14, "name": "Vacuum Oven", "loc": "치과대학 708호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 14, "name": "Vacuum oven", "loc": "치과대학 708호", "mgr": "만갈, 서지영", "remarks": ""},
       {"no": 15, "name": "Epoch", "loc": "치과대학 708호", "mgr": "윤정현", "remarks": ""},
       {"no": 16, "name": "초음파 세척기", "loc": "치과대학 708호", "mgr": "윤정현", "remarks": ""},
-      {"no": 17, "name": "Thermo CO2 Incubator", "loc": "ABMRC 507호", "mgr": "윤정현, 왕링윤", "remarks": ""},
+      {"no": 17, "name": "Thermo CO2 incubator", "loc": "ABMRC 507호", "mgr": "윤정현, 왕링윤", "remarks": ""},
       {"no": 18, "name": "질소탱크", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
       {"no": 19, "name": "Real-Time PCR", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
       {"no": 20, "name": "Centrifuge", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
-      {"no": 21, "name": "Thermal Cycler", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
-      {"no": 22, "name": "PHCbi CO2 Incubator", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
-      {"no": 23, "name": "Uniz", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 21, "name": "thermal cycler", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
+      {"no": 22, "name": "phcbi CO2 incubator", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
+      {"no": 23, "name": "uniz", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
       {"no": 24, "name": "질소 경화기", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
-      {"no": 25, "name": "Spinning", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 25, "name": "Spining", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
       {"no": 26, "name": "회전증발 농축기", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
-      {"no": 27, "name": "Ultrasonic Homogenizer Probes", "loc": "치과대학 505호", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 27, "name": "ultrasonic homogenizer probes", "loc": "치과대학 505호", "mgr": "박상은, 문정미", "remarks": ""},
       {"no": 28, "name": "UV 경화기 2개", "loc": "치과대학 707호", "mgr": "정수미", "remarks": ""},
       {"no": 29, "name": "큐레이", "loc": "교수님 방", "mgr": "김지윤", "remarks": ""},
-      {"no": 30, "name": "Electrospinning", "loc": "치과대학 708호", "mgr": "정수미", "remarks": ""},
+      {"no": 30, "name": "electrospinning", "loc": "치과대학 708호", "mgr": "정수미", "remarks": ""},
       {"no": 31, "name": "구강 스캐너", "loc": "교수님 방", "mgr": "김지윤", "remarks": ""},
       {"no": 32, "name": "FT-IR", "loc": "치과대학 708호", "mgr": "김민지", "remarks": ""},
       {"no": 33, "name": "연마기", "loc": "치과대학 708호", "mgr": "왕링윤", "remarks": ""},
@@ -1585,12 +1585,7 @@
         tdNo.innerHTML = `<span class="eq-card-no">${item.no}</span>`;
         const tdPhoto = document.createElement('td');
         tdPhoto.style.textAlign = 'center';
-        const hasImage = item.no >= 1 && item.no <= 36 && item.no !== 31;
-        if (hasImage) {
-          tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" onclick="openImageModal('images/equipment_${item.no}.jpeg', '${item.name}')" title="이미지 크게 보기"><img src="images/equipment_${item.no}.jpeg" alt="${item.name}" class="table-thumbnail" loading="lazy"></div>`;
-        } else {
-          tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper no-image" title="이미지 없음"><i data-lucide="image-off" class="w-4 h-4 text-slate-400"></i></div>`;
-        }
+        tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" onclick="openImageModal('images/equipment_${item.no}.jpeg', '${item.name}')" title="이미지 크게 보기"><img src="images/equipment_${item.no}.jpeg" alt="${item.name}" class="table-thumbnail" onerror="handleTableImageError(this)" loading="lazy"></div>`;
         const tdName = document.createElement('td');
         tdName.innerHTML = `<strong>${item.name}</strong>`;
         const tdLoc = document.createElement('td');
@@ -1632,13 +1627,7 @@
         const locHtml = item.loc && item.loc.trim() !== "" ? `<span class="badge badge-gray"><i data-lucide="map-pin"></i> ${item.loc}</span>` : `<span class="badge badge-warning"><i data-lucide="alert-triangle"></i> 위치 미지정</span>`;
         const mgrHtml = item.mgr && item.mgr.trim() !== "" ? item.mgr.split(",").map(m => `<span class="badge badge-success"><i data-lucide="user"></i> ${m.trim()}</span>`).join(" ") : `<span class="badge badge-danger"><i data-lucide="user-x"></i> 담당자 미지정</span>`;
         const remarksHtml = item.remarks && item.remarks.trim() !== "" ? `<div class="eq-card-remarks"><i data-lucide="info" class="text-sky-500"></i><span>${item.remarks}</span></div>` : "";
-        const hasImage = item.no >= 1 && item.no <= 36 && item.no !== 31;
-        let imageHtml = "";
-        if (hasImage) {
-          imageHtml = `<div class="eq-card-image-wrapper" onclick="openImageModal('images/equipment_${item.no}.jpeg', '${item.name}')" title="이미지 크게 보기"><img src="images/equipment_${item.no}.jpeg" alt="${item.name}" class="eq-card-image" loading="lazy"></div>`;
-        } else {
-          imageHtml = `<div class="eq-card-image-wrapper"><div class="eq-card-image-placeholder"><i data-lucide="image-off"></i><span>이미지 준비중</span></div></div>`;
-        }
+        const imageHtml = `<div class="eq-card-image-wrapper" onclick="openImageModal('images/equipment_${item.no}.jpeg', '${item.name}')" title="이미지 크게 보기"><img src="images/equipment_${item.no}.jpeg" alt="${item.name}" class="eq-card-image" onerror="handleImageError(this)" loading="lazy"></div>`;
         card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span>${locHtml}</div><h3 class="eq-card-name">${item.name}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">담당자:</span><div class="flex flex-wrap gap-1">${mgrHtml}</div></div></div></div>${remarksHtml}</div>`;
         container.appendChild(card);
       });
@@ -1790,6 +1779,23 @@
         btnGrid.classList.add('active');
       }
       updateDashboard();
+    }
+
+    function handleTableImageError(img) {
+      const wrapper = img.parentNode;
+      wrapper.removeAttribute('onclick');
+      wrapper.removeAttribute('title');
+      wrapper.classList.add('no-image');
+      wrapper.innerHTML = `<i data-lucide="image-off" class="w-4 h-4 text-slate-400"></i>`;
+      lucide.createIcons();
+    }
+
+    function handleImageError(img) {
+      const wrapper = img.parentNode;
+      wrapper.removeAttribute('onclick');
+      wrapper.removeAttribute('title');
+      wrapper.innerHTML = `<div class="eq-card-image-placeholder"><i data-lucide="image-off"></i><span>이미지 준비중</span></div>`;
+      lucide.createIcons();
     }
 
     function openImageModal(imgSrc, name) {
