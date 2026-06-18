@@ -19,22 +19,22 @@
   <style>
     /* CSS Variables & Theme Control - Yonsei University College of Dentistry Theme */
     :root {
-      /* Light Mode - Warm White & Subtle Grays */
-      --bg-primary: #f8fafc;       /* Clean slate-white background */
+      /* Light Mode - Crimson Noir & Champagne Theme */
+      --bg-primary: #FAF6F0;       /* Champagne background */
       --bg-secondary: #ffffff;     /* Pure white for dashboard cards/tables */
-      --bg-tertiary: #f1f5f9;      /* Light gray-blue for inputs & toggles */
+      --bg-tertiary: #F2EBE1;      /* Champagne gold input background */
       
-      --text-primary: #0f172a;     /* Deep slate black for high legibility */
-      --text-secondary: #475569;   /* Slate gray for body text */
-      --text-muted: #94a3b8;       /* Muted gray for inactive icons and hints */
+      --text-primary: #2D161B;     /* Deep burgundy for primary text */
+      --text-secondary: #5E3D44;   /* Muted burgundy gray for body text */
+      --text-muted: #A18288;       /* Soft burgundy gray for hints */
       
-      /* Yonsei Dentistry Brand Identity */
-      --primary: #002855;          /* Official Yonsei Blue */
-      --primary-hover: #001f42;    /* Deeper blue */
-      --primary-light: #e6f0fa;    /* 8% opacity tint for active states/hover highlights */
-      --accent: #b38f2d;           /* Official Dentistry Gold */
-      --accent-hover: #9c7b24;
-      --accent-light: #faf5e6;     /* Muted gold light background */
+      /* Primary Theme Identity */
+      --primary: #8A1538;          /* Scholarly Burgundy */
+      --primary-hover: #630E26;    /* Dark Crimson */
+      --primary-light: #FCE8EB;    /* Burgundy tint for active highlights */
+      --accent: #C59B27;           /* Champagne Gold Accent */
+      --accent-hover: #A5801B;
+      --accent-light: #FBF5DF;     /* Soft gold light background */
       
       /* Semantic Colors - Softened */
       --success: #10b981;
@@ -42,40 +42,18 @@
       --danger: #ef4444;
       
       /* Borders & Dividers - Ultra-thin hairline styles */
-      --border: rgba(0, 40, 85, 0.07);       /* Tainted with brand blue for cohesion */
-      --border-strong: rgba(0, 40, 85, 0.15);
+      --border: rgba(138, 21, 56, 0.08);       /* Tainted with brand burgundy for cohesion */
+      --border-strong: rgba(138, 21, 56, 0.16);
       
       /* Shadows - Ambient & lightweight */
-      --shadow: 0 1px 3px rgba(0, 40, 85, 0.02), 0 8px 24px rgba(0, 40, 85, 0.03);
-      --shadow-lg: 0 10px 30px rgba(0, 40, 85, 0.05);
+      --shadow: 0 1px 3px rgba(138, 21, 56, 0.02), 0 8px 24px rgba(138, 21, 56, 0.03);
+      --shadow-lg: 0 10px 30px rgba(138, 21, 56, 0.05);
       
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    body.dark {
-      /* Dark Mode - Obsidian with Brand Blue accents */
-      --bg-primary: #090d16;       /* Deep obsidian with dark blue undertone */
-      --bg-secondary: #0f1726;     /* Dark slate-blue paper */
-      --bg-tertiary: #1b2536;      /* Dark input/tab fill */
-      
-      --text-primary: #f8fafc;     /* Ice white */
-      --text-secondary: #94a3b8;   /* Cool gray-blue */
-      --text-muted: #475569;       /* Deep muted slate */
-      
-      --primary: #4d8df5;          /* Vibrant blue adapted for dark readability */
-      --primary-hover: #70a5f7;
-      --primary-light: #0d213d;
-      --accent: #ffc72c;           /* Vibrant gold adapted for dark mode */
-      --accent-hover: #ffd354;
-      --accent-light: #2c2100;
-      
-      --border: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.16);
-      
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.6);
-    }
+
 
     /* Reset and Base Styles */
     * {
@@ -117,7 +95,11 @@
       display: flex;
       flex-direction: column;
       gap: 2rem;
+      position: relative;
+      z-index: 1;
     }
+
+    
 
     /* Header Styling */
     .dashboard-header {
@@ -139,9 +121,9 @@
     }
 
     .logo-img {
-      width: 3rem;
-      height: 3rem;
-      border-radius: 0.375rem !important; /* Contemporary sharp-ish border radius */
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 0.75rem !important; /* Contemporary rounded corner */
       object-fit: cover;
       border: 1px solid var(--border);
     }
@@ -226,31 +208,6 @@
       background-color: var(--primary-hover);
       box-shadow: 0 4px 12px rgba(0, 40, 85, 0.15);
     }
-
-    .theme-toggle-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 2.375rem;
-      height: 2.375rem;
-      border-radius: 0.375rem;
-      border: 1px solid var(--border-strong);
-      background-color: var(--bg-secondary);
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .theme-toggle-btn:hover {
-      background-color: var(--bg-tertiary);
-      color: var(--primary);
-      border-color: var(--text-muted);
-    }
-
-    body.dark .sun-icon { display: block; }
-    body.dark .moon-icon { display: none; }
-    body:not(.dark) .sun-icon { display: none; }
-    body:not(.dark) .moon-icon { display: block; }
 
     /* KPI Cards */
     .kpi-grid {
@@ -451,35 +408,6 @@
       border-color: var(--danger);
     }
 
-    /* View Mode Toggle Switch */
-    .view-toggle {
-      display: flex;
-      background-color: var(--bg-tertiary);
-      padding: 0.1875rem;
-      border-radius: 0.375rem;
-      border: 1px solid var(--border);
-    }
-
-    .view-toggle button {
-      display: flex;
-      align-items: center;
-      gap: 0.375rem;
-      padding: 0.375rem 0.75rem;
-      border-radius: 0.25rem;
-      font-size: 0.8125rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      background: none;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .view-toggle button.active {
-      color: var(--primary);
-      background-color: var(--bg-secondary);
-      box-shadow: var(--shadow);
-    }
 
     /* Results Counter */
     .results-counter {
@@ -1129,9 +1057,6 @@
       .filter-select {
         width: 100%;
       }
-      .view-toggle {
-        justify-content: center;
-      }
       .kpi-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1157,6 +1082,40 @@
         width: 52px;
         height: 52px;
       }
+    /* Tabs styling */
+    .dashboard-tabs {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0px;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: none;
+      color: var(--text-secondary);
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 0.375rem 0.375rem 0 0;
+      transition: all 0.2s ease;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -1px;
+    }
+    .tab-btn:hover {
+      background-color: var(--primary-light);
+      color: var(--primary);
+    }
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom: 3px solid var(--primary);
+      background-color: var(--primary-light);
     }
   </style>
 </head>
@@ -1164,7 +1123,7 @@
   <div class="dashboard-container">
     <header class="dashboard-header">
       <div class="header-logo-container">
-        <img src="favicon.svg" alt="CSB Logo" class="logo-img" style="width: 3rem; height: 3rem; border-radius: 0.75rem; object-fit: cover; display: block;" />
+        <img src="favicon.svg" alt="CSB Logo" class="logo-img" style="width: 4.5rem; height: 4.5rem; border-radius: 0.75rem; object-fit: cover; display: block;" />
         <div class="header-title-wrapper">
           <h1 class="header-title">Center for Symbiotic Biomaterials (CSB) 장비 보유 현황</h1>
           <p class="header-subtitle">Center for Symbiotic Biomaterials (CSB) Equipment Inventory Dashboard • Yonsei University College of Dentistry</p>
@@ -1174,12 +1133,20 @@
         <button onclick="exportCSV()" class="btn-action btn-export">
           <i data-lucide="download"></i> 내보내기 (.csv)
         </button>
-        <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()" aria-label="다크 모드 토글">
-          <i data-lucide="sun" class="sun-icon"></i>
-          <i data-lucide="moon" class="moon-icon"></i>
-        </button>
       </div>
     </header>
+
+    <nav class="dashboard-tabs">
+      <button id="tab-general" class="tab-btn active" onclick="switchTab('general')">
+        <i data-lucide="database"></i> 일반 장비
+      </button>
+      <button id="tab-pipette" class="tab-btn" onclick="switchTab('pipette')">
+        <i data-lucide="droplet"></i> 피펫 관리
+      </button>
+      <button id="tab-pc" class="tab-btn" onclick="switchTab('pc')">
+        <i data-lucide="monitor"></i> PC 및 모니터
+      </button>
+    </nav>
 
     <section class="kpi-grid">
       <div class="kpi-card kpi-total active" id="kpi-card-all" onclick="setKPIFilter('all')">
@@ -1241,14 +1208,6 @@
             <button onclick="resetFilters()" class="btn-reset" title="모든 검색 및 필터 설정 초기화">
               <i data-lucide="rotate-ccw" class="w-4 h-4"></i> 초기화
             </button>
-            <div class="view-toggle">
-              <button id="view-mode-table" class="active" onclick="setViewMode('table')" title="테이블 리스트 뷰">
-                <i data-lucide="list" class="w-4 h-4"></i> 리스트
-              </button>
-              <button id="view-mode-grid" onclick="setViewMode('grid')" title="카드 그리드 뷰">
-                <i data-lucide="grid" class="w-4 h-4"></i> 카드
-              </button>
-            </div>
           </div>
         </section>
 
@@ -1295,7 +1254,7 @@
 
         <div class="card">
           <div class="chart-header">
-            <h3 class="chart-title">담당자별 관리 현황</h3>
+            <h3 class="chart-title" id="manager-chart-title">담당자별 관리 현황</h3>
             <span class="chart-subtitle" id="mgr-chart-count">0명</span>
           </div>
           <div id="manager-chart-container" class="chart-list"></div>
@@ -1322,58 +1281,166 @@
 
   <script>
     const inventoryData = [
-      {"no": 1, "name": "Minisaw", "loc": "교수님 방", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 2, "name": "저울", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 3, "name": "미세저울", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 4, "name": "가열교반기", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 5, "name": "pH/이온 측정기/ 비색계", "loc": "치과대학 707호", "mgr": "윤정현", "remarks": ""},
-      {"no": 6, "name": "접촉각", "loc": "교수님 방", "mgr": "정수미", "remarks": ""},
-      {"no": 7, "name": "Spin Coater", "loc": "치과대학 708호", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 8, "name": "UTM", "loc": "치과대학 708호", "mgr": "김민지", "remarks": ""},
-      {"no": 9, "name": "incubator", "loc": "치과대학 707호", "mgr": "윤정현, 왕링윤", "remarks": ""},
-      {"no": 10, "name": "형광 단백질 광원", "loc": "치과대학 707호", "mgr": "왕링윤", "remarks": ""},
-      {"no": 11, "name": "Mimics S/W", "loc": "치과대학 707호", "mgr": "김지윤", "remarks": "(simulation mod 업그레이드 예정)"},
-      {"no": 12, "name": "광조사기", "loc": "치과대학 707호", "mgr": "왕링윤", "remarks": ""},
-      {"no": 13, "name": "멸균기", "loc": "치과대학 708호", "mgr": "정수미, 왕링윤", "remarks": ""},
-      {"no": 14, "name": "Vacuum oven", "loc": "치과대학 708호", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 15, "name": "Epoch", "loc": "치과대학 708호", "mgr": "윤정현", "remarks": ""},
-      {"no": 16, "name": "초음파 세척기", "loc": "치과대학 708호", "mgr": "윤정현", "remarks": ""},
-      {"no": 17, "name": "Thermo CO2 incubator", "loc": "ABMRC 507호", "mgr": "윤정현, 왕링윤", "remarks": ""},
-      {"no": 18, "name": "질소탱크", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
-      {"no": 19, "name": "Real-Time PCR", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
-      {"no": 20, "name": "Centrifuge", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
-      {"no": 21, "name": "thermal cycler", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
-      {"no": 22, "name": "phcbi CO2 incubator", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
-      {"no": 23, "name": "uniz", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
-      {"no": 24, "name": "질소 경화기", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
-      {"no": 25, "name": "Spining", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
-      {"no": 26, "name": "회전증발 농축기", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
-      {"no": 27, "name": "ultrasonic homogenizer probes", "loc": "치과대학 505호", "mgr": "박상은, 문정미", "remarks": ""},
-      {"no": 28, "name": "UV 경화기 2개", "loc": "치과대학 707호", "mgr": "정수미", "remarks": ""},
-      {"no": 29, "name": "큐레이", "loc": "교수님 방", "mgr": "김지윤", "remarks": ""},
-      {"no": 30, "name": "electrospinning", "loc": "치과대학 708호", "mgr": "정수미", "remarks": ""},
-      {"no": 31, "name": "구강 스캐너", "loc": "교수님 방", "mgr": "김지윤", "remarks": ""},
-      {"no": 32, "name": "FT-IR", "loc": "치과대학 708호", "mgr": "김민지", "remarks": ""},
-      {"no": 33, "name": "연마기", "loc": "치과대학 708호", "mgr": "왕링윤", "remarks": ""},
-      {"no": 34, "name": "자동 제습 보관함", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 35, "name": "진공 데시게이터", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 36, "name": "EVOS M5000 이미징시스템", "loc": "치과대학 708호", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 37, "name": "볼텍스 믹서", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 38, "name": "냉장고 (세균, 공용)", "loc": "", "mgr": "", "remarks": ""},
-      {"no": 39, "name": "사진촬영", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 40, "name": "전동 파이펫, 파이펫", "loc": "", "mgr": "윤정현, 왕링윤", "remarks": ""},
-      {"no": 41, "name": "현미경", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 42, "name": "교정용 Vac Plus", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 43, "name": "PC 본체", "loc": "", "mgr": "", "remarks": ""},
-      {"no": 44, "name": "폐쇄기", "loc": "", "mgr": "", "remarks": ""},
-      {"no": 45, "name": "프린터", "loc": "", "mgr": "", "remarks": ""},
-      {"no": 46, "name": "노트북", "loc": "", "mgr": "김지윤", "remarks": ""},
-      {"no": 47, "name": "마이크로칩", "loc": "", "mgr": "만갈, 이민용", "remarks": ""},
-      {"no": 48, "name": "펌프 장비", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 49, "name": "UV 멸균", "loc": "", "mgr": "윤정현, 왕링윤", "remarks": ""}
+      {"no": 1, "name": "미니톱 (Minisaw)", "loc": "교수님 방", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 2, "name": "저울 (Scale)", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 3, "name": "미세저울 (Microscale)", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 4, "name": "가열교반기 (Hot Plate Stirrer)", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 5, "name": "pH/이온 측정기/비색계 (pH/Ion Meter & Colorimeter)", "loc": "치과대학 707호", "mgr": "윤정현", "remarks": ""},
+      {"no": 6, "name": "접촉각 측정기 (Contact Angle Meter)", "loc": "교수님 방", "mgr": "정수미", "remarks": ""},
+      {"no": 7, "name": "스핀 코터 (Spin Coater)", "loc": "치과대학 708호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 8, "name": "만능 재료 시험기 (UTM)", "loc": "치과대학 708호", "mgr": "김민지", "remarks": ""},
+      {"no": 9, "name": "인큐베이터 (Incubator)", "loc": "치과대학 707호", "mgr": "윤정현, 왕링윤", "remarks": ""},
+      {"no": 10, "name": "형광 단백질 광원 (Fluorescence Light Source)", "loc": "치과대학 707호", "mgr": "왕링윤", "remarks": ""},
+      {"no": 11, "name": "미믹스 소프트웨어 (Mimics S/W)", "loc": "치과대학 707호", "mgr": "김지윤", "remarks": "(simulation mod 업그레이드 예정)"},
+      {"no": 12, "name": "광조사기 (Light Curing Unit)", "loc": "치과대학 707호", "mgr": "왕링윤", "remarks": ""},
+      {"no": 13, "name": "고압멸균기 (Autoclave)", "loc": "치과대학 708호", "mgr": "정수미, 왕링윤", "remarks": ""},
+      {"no": 14, "name": "진공 오븐 (Vacuum Oven)", "loc": "치과대학 708호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 15, "name": "에포크 마이크로플레이트 리더 (Epoch Microplate Reader)", "loc": "치과대학 708호", "mgr": "윤정현", "remarks": ""},
+      {"no": 16, "name": "초음파 세척기 (Ultrasonic Cleaner)", "loc": "치과대학 708호", "mgr": "윤정현", "remarks": ""},
+      {"no": 17, "name": "써모 CO2 인큐베이터 (Thermo CO2 Incubator)", "loc": "ABMRC 507호", "mgr": "윤정현, 왕링윤", "remarks": ""},
+      {"no": 18, "name": "질소탱크 (Nitrogen Tank)", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
+      {"no": 19, "name": "실시간 유전자 증폭기 (Real-Time PCR)", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
+      {"no": 20, "name": "원심분리기 (Centrifuge)", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
+      {"no": 21, "name": "열 순환기 (Thermal Cycler)", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
+      {"no": 22, "name": "phcbi CO2 인큐베이터 (phcbi CO2 Incubator)", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
+      {"no": 23, "name": "유니즈 3D 프린터 (UNIZ 3D Printer)", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 24, "name": "질소 경화기 (Nitrogen Curing Chamber)", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 25, "name": "일렉트로스피닝 장치 (Spinning Device)", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 26, "name": "회전증발 농축기 (Rotary Evaporator)", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 27, "name": "초음파 균질기 프로브 (Ultrasonic Homogenizer Probes)", "loc": "치과대학 505호", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 28, "name": "UV 경화기 - 2개 (UV Curing Units - 2pcs)", "loc": "치과대학 707호", "mgr": "정수미", "remarks": ""},
+      {"no": 29, "name": "큐레이 구강카메라 (Q-ray Oral Camera)", "loc": "교수님 방", "mgr": "김지윤", "remarks": ""},
+      {"no": 30, "name": "전기방사 장치 (Electrospinning)", "loc": "치과대학 708호", "mgr": "정수미", "remarks": ""},
+      {"no": 31, "name": "구강 스캐너 (Intraoral Scanner)", "loc": "교수님 방", "mgr": "김지윤", "remarks": ""},
+      {"no": 32, "name": "적외선 분광 광도계 (FT-IR)", "loc": "치과대학 708호", "mgr": "김민지", "remarks": ""},
+      {"no": 33, "name": "연마기 (Polishing Machine)", "loc": "치과대학 708호", "mgr": "왕링윤", "remarks": ""},
+      {"no": 34, "name": "자동 제습 보관함 (Auto-Desiccating Cabinet)", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 35, "name": "진공 데시게이터 (Vacuum Desiccator)", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 36, "name": "EVOS M5000 이미징 시스템 (EVOS M5000 Imaging System)", "loc": "치과대학 708호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 37, "name": "볼텍스 믹서 (Vortex Mixer)", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 38, "name": "공용 세균 냉장고 (Shared Refrigerator)", "loc": "", "mgr": "", "remarks": ""},
+      {"no": 39, "name": "암실 사진 촬영기 (Photo Documentation System)", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 40, "name": "전동 파이펫 및 피펫 세트 (Pipette Aid & Pipette Set)", "loc": "", "mgr": "윤정현, 왕링윤", "remarks": ""},
+      {"no": 41, "name": "광학 현미경 (Microscope)", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 42, "name": "교정용 백플러스 (Calibration Vac Plus)", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 43, "name": "데스크탑 PC 본체 (PC Desktop Tower)", "loc": "", "mgr": "", "remarks": ""},
+      {"no": 44, "name": "씰링 튜브 폐쇄기 (Tube Sealer)", "loc": "", "mgr": "", "remarks": ""},
+      {"no": 45, "name": "사무용 프린터 (Office Printer)", "loc": "", "mgr": "", "remarks": ""},
+      {"no": 46, "name": "노트북 컴퓨터 (Laptop Computer)", "loc": "", "mgr": "김지윤", "remarks": ""},
+      {"no": 47, "name": "마이크로플루이딕 마이크로칩 (Microfluidic Microchip)", "loc": "", "mgr": "만갈, 이민용", "remarks": ""},
+      {"no": 48, "name": "유체 주입 펌프 장비 (Syringe Pump Equipment)", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 49, "name": "UV 멸균기 (UV Sterilizer)", "loc": "", "mgr": "윤정현, 왕링윤", "remarks": ""}
+    ];
+
+    const pipetteData = [
+      {"no": 1, "name": "Pipette", "spec": "1000 uL", "loc": "ABMRC", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 2, "name": "Pipette", "spec": "200 uL", "loc": "ABMRC", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 3, "name": "Pipette", "spec": "200 uL", "loc": "ABMRC", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 4, "name": "Pipette", "spec": "20 uL", "loc": "ABMRC", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 5, "name": "Pipette", "spec": "2 uL", "loc": "ABMRC", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 6, "name": "Pipette", "spec": "100 uL", "loc": "ABMRC", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 7, "name": "Pipette", "spec": "1000 uL", "loc": "세포실", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 8, "name": "Pipette", "spec": "200 uL", "loc": "세포실", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 9, "name": "Pipette", "spec": "20 uL", "loc": "세포실", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 10, "name": "Pipette", "spec": "1000 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "O", "remarks": ""},
+      {"no": 11, "name": "Pipette", "spec": "1000 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 12, "name": "Pipette", "spec": "200 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 13, "name": "Pipette", "spec": "200 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 14, "name": "Pipette", "spec": "200 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 15, "name": "Pipette", "spec": "2 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 16, "name": "Pipette", "spec": "20 uL", "loc": "707호", "brand": "한국분석기기㈜", "calib": "", "broken": "", "remarks": ""},
+      {"no": 17, "name": "Pipette", "spec": "1000 uL", "loc": "707호", "brand": "MICROLIT RBO", "calib": "", "broken": "", "remarks": ""},
+      {"no": 18, "name": "Pipette", "spec": "20 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 19, "name": "Pipette", "spec": "2 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 20, "name": "Pipette", "spec": "20 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 21, "name": "Pipette", "spec": "200 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 22, "name": "Pipette", "spec": "10 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 23, "name": "Pipette", "spec": "10 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 24, "name": "Pipette", "spec": "20 uL", "loc": "707호", "brand": "Eppendorf", "calib": "", "broken": "", "remarks": ""},
+      {"no": 25, "name": "Pipette", "spec": "1000 uL", "loc": "707호", "brand": "Eppendorf", "calib": "", "broken": "", "remarks": ""},
+      {"no": 26, "name": "Pipette", "spec": "20 µL", "loc": "세균실", "brand": "Gilson", "calib": "", "broken": "", "remarks": ""},
+      {"no": 27, "name": "Pipette", "spec": "100 µL", "loc": "세균실", "brand": "Micropette", "calib": "", "broken": "", "remarks": ""},
+      {"no": 28, "name": "Pipette", "spec": "200 µL", "loc": "세균실", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 29, "name": "Pipette", "spec": "1000 µL", "loc": "세균실", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 30, "name": "Pipette", "spec": "1000 µL", "loc": "세균실", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 31, "name": "Multichannel Pipette", "spec": "8 × 100 µL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 32, "name": "Multichannel Pipette", "spec": "8 × 200 µL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 33, "name": "Pipette", "spec": "200 µL", "loc": "707호", "brand": "한국분석기기㈜", "calib": "", "broken": "", "remarks": ""},
+      {"no": 34, "name": "Multichannel Pipette", "spec": "8 × 200 µL", "loc": "707호", "brand": "한국분석기기㈜", "calib": "", "broken": "", "remarks": ""},
+      {"no": 35, "name": "Hot plate stirrer", "spec": "9구", "loc": "707호", "brand": "Jeio Tech", "calib": "", "broken": "", "remarks": ""},
+      {"no": 36, "name": "Hot plate stirrer", "spec": "", "loc": "707호", "brand": "Corning", "calib": "", "broken": "", "remarks": ""},
+      {"no": 37, "name": "Hot plate stirrer", "spec": "", "loc": "707호", "brand": "Corning", "calib": "", "broken": "", "remarks": ""},
+      {"no": 38, "name": "Hot plate stirrer", "spec": "", "loc": "707호", "brand": "MTOPS", "calib": "", "broken": "", "remarks": ""},
+      {"no": 39, "name": "Hot plate stirrer", "spec": "", "loc": "Cold Room", "brand": "MTOPS", "calib": "", "broken": "", "remarks": ""},
+      {"no": 40, "name": "Pipette aid", "spec": "", "loc": "707호", "brand": "Macroman", "calib": "", "broken": "", "remarks": ""},
+      {"no": 41, "name": "Pipette aid", "spec": "", "loc": "세균실", "brand": "Macroman", "calib": "", "broken": "", "remarks": ""},
+      {"no": 42, "name": "Pipette aid", "spec": "", "loc": "707호", "brand": "Witeg", "calib": "", "broken": "", "remarks": ""},
+      {"no": 43, "name": "Pipette aid", "spec": "", "loc": "세포실", "brand": "BlueSwan", "calib": "", "broken": "", "remarks": ""},
+      {"no": 44, "name": "Vortex", "spec": "", "loc": "ABMRC", "brand": "Scientific Industries", "calib": "", "broken": "", "remarks": ""},
+      {"no": 45, "name": "Vortex", "spec": "", "loc": "세균실", "brand": "Scientific Industries", "calib": "", "broken": "", "remarks": ""},
+      {"no": 46, "name": "Vortex", "spec": "", "loc": "707호", "brand": "한국분석기기㈜", "calib": "", "broken": "", "remarks": ""},
+      {"no": 47, "name": "Ion meter", "spec": "", "loc": "707호", "brand": "Thermo Fisher", "calib": "", "broken": "", "remarks": ""},
+      {"no": 48, "name": "Ion meter", "spec": "", "loc": "707호", "brand": "Thermo Fisher", "calib": "", "broken": "", "remarks": ""},
+      {"no": 49, "name": "Light-Curing Unit", "spec": "", "loc": "707호", "brand": "3M", "calib": "", "broken": "", "remarks": ""},
+      {"no": 50, "name": "Light-Curing Unit", "spec": "", "loc": "707호", "brand": "3M", "calib": "", "broken": "", "remarks": ""},
+      {"no": 51, "name": "Light-Curing Unit", "spec": "", "loc": "707호", "brand": "3M", "calib": "", "broken": "", "remarks": ""},
+      {"no": 52, "name": "Light-Curing Unit", "spec": "", "loc": "707호", "brand": "3M", "calib": "", "broken": "", "remarks": ""},
+      {"no": 53, "name": "sonication", "spec": "", "loc": "708호", "brand": "MUJIGAE", "calib": "", "broken": "", "remarks": ""},
+      {"no": 54, "name": "sonication", "spec": "", "loc": "708호", "brand": "MUJIGAE", "calib": "", "broken": "", "remarks": ""}
+    ];
+    const pcData = [
+      {"no": 1, "kind": "모니터", "label": "CSB 모니터 1", "loc": "치과대학 707호", "user": "서지영", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 2, "kind": "모니터", "label": "CSB 모니터 2", "loc": "치과대학 707호", "user": "서지영", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 3, "kind": "모니터", "label": "CSB 모니터 3", "loc": "치과대학 707호", "user": "김민지", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 4, "kind": "모니터", "label": "CSB 모니터 4", "loc": "치과대학 707호", "user": "김민지", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 5, "kind": "모니터", "label": "CSB 모니터 5", "loc": "치과대학 707호", "user": "윤정현", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 6, "kind": "모니터", "label": "CSB 모니터 6", "loc": "치과대학 707호", "user": "윤정현", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 7, "kind": "모니터", "label": "CSB 모니터 7", "loc": "치과대학 707호", "user": "류정현", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 8, "kind": "모니터", "label": "CSB 모니터 8", "loc": "치과대학 707호", "user": "3D 프로그램", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 9, "kind": "모니터", "label": "CSB 모니터 9", "loc": "치과대학 707호", "user": "미지정", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 10, "kind": "모니터", "label": "CSB 모니터 10", "loc": "치과대학 707호", "user": "미지정", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 11, "kind": "모니터", "label": "CSB 모니터 11", "loc": "치과대학 707호", "user": "미지정", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 12, "kind": "모니터", "label": "CSB 모니터 12", "loc": "치과대학 708호", "user": "김재형", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 13, "kind": "모니터", "label": "CSB 모니터 13", "loc": "치과대학 708호", "user": "김재형", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 14, "kind": "모니터", "label": "CSB 모니터 14", "loc": "치과대학 708호", "user": "정수미", "brand": "DICLE", "photo": "", "sticker": ""},
+      {"no": 15, "kind": "모니터", "label": "CSB 모니터 15", "loc": "치과대학 708호", "user": "UTM", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 16, "kind": "모니터", "label": "CSB 모니터 16", "loc": "치과대학 708호", "user": "미지정", "brand": "DICLE", "photo": "", "sticker": ""},
+      {"no": 17, "kind": "모니터", "label": "CSB 모니터 17", "loc": "치과대학 708호", "user": "EPOCH", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 18, "kind": "모니터", "label": "CSB 모니터 18", "loc": "치과대학 708호", "user": "FT-IR", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 19, "kind": "모니터", "label": "CSB 모니터 19", "loc": "치과대학 704-2", "user": "만갈웃커시", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 20, "kind": "모니터", "label": "CSB 모니터 20", "loc": "치과대학 704-2", "user": "만갈웃커시", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 21, "kind": "모니터", "label": "CSB 모니터 21", "loc": "치과대학 704-2", "user": "만갈웃커시", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 22, "kind": "모니터", "label": "CSB 모니터 22", "loc": "치과대학 308호", "user": "김지윤", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 23, "kind": "모니터", "label": "CSB 모니터 23", "loc": "치과대학 308호", "user": "김지윤", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 24, "kind": "모니터", "label": "CSB 모니터 24", "loc": "대신빌딩", "user": "권미현", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 25, "kind": "모니터", "label": "CSB 모니터 25", "loc": "대신빌딩", "user": "권미현", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 26, "kind": "모니터", "label": "CSB 모니터 26", "loc": "대신빌딩", "user": "박상은", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 27, "kind": "모니터", "label": "CSB 모니터 27", "loc": "대신빌딩", "user": "박상은", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 29, "kind": "본체", "label": "CSB 본체 1", "loc": "치과대학 707호", "user": "서지영", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 30, "kind": "본체", "label": "CSB 본체 2", "loc": "치과대학 707호", "user": "김민지", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 31, "kind": "본체", "label": "CSB 본체 3", "loc": "치과대학 707호", "user": "윤정현", "brand": "MICRONICS", "photo": "", "sticker": ""},
+      {"no": 32, "kind": "본체", "label": "CSB 본체 4", "loc": "치과대학 707호", "user": "류정현", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 33, "kind": "본체", "label": "CSB 본체 5", "loc": "치과대학 707호", "user": "미지정", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 34, "kind": "본체", "label": "CSB 본체 6", "loc": "치과대학 707호", "user": "3D 프로그램", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 35, "kind": "본체", "label": "CSB 본체 7", "loc": "치과대학 708호", "user": "김재형", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 36, "kind": "본체", "label": "CSB 본체 8", "loc": "치과대학 708호", "user": "UTM", "brand": "NCORE", "photo": "", "sticker": ""},
+      {"no": 37, "kind": "본체", "label": "CSB 본체 9", "loc": "치과대학 708호", "user": "FT-IR", "brand": "", "photo": "", "sticker": ""},
+      {"no": 38, "kind": "본체", "label": "CSB 본체 10", "loc": "치과대학 708호", "user": "미지정", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 39, "kind": "본체", "label": "CSB 본체 11", "loc": "치과대학 708호", "user": "APOCH", "brand": "NCORE", "photo": "", "sticker": ""},
+      {"no": 40, "kind": "본체", "label": "CSB 본체 12", "loc": "치과대학 704-2", "user": "만갈웃커시", "brand": "", "photo": "", "sticker": ""},
+      {"no": 41, "kind": "본체", "label": "CSB 본체 13", "loc": "치과대학 704-2", "user": "만갈웃커시", "brand": "", "photo": "", "sticker": ""},
+      {"no": 42, "kind": "본체", "label": "CSB 본체 14", "loc": "치과대학 308호", "user": "김지윤", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 43, "kind": "본체", "label": "CSB 본체 15", "loc": "대신빌딩", "user": "권미현", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 44, "kind": "본체", "label": "CSB 본체 16", "loc": "대신빌딩", "user": "박상은", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 45, "kind": "노트북", "label": "CSB 노트북 1", "loc": "치과대학 308호", "user": "김지윤(내부망용)", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 46, "kind": "노트북", "label": "CSB 노트북 2", "loc": "교수님 방", "user": "Q-ray", "brand": "MSI", "photo": "", "sticker": ""},
+      {"no": 47, "kind": "노트북", "label": "CSB 노트북 3", "loc": "교수님 방", "user": "Medit(구강스캐너)", "brand": "LENOVO", "photo": "", "sticker": ""},
+      {"no": 48, "kind": "노트북", "label": "CSB 노트북 4", "loc": "치과대학 707호", "user": "회의용", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 49, "kind": "노트북", "label": "CSB 노트북 5", "loc": "치과대학 707호", "user": "미지정", "brand": "BASICS", "photo": "", "sticker": ""}
     ];
 
     const state = {
+      activeTab: "general",
       filters: { search: "", location: "all", manager: "all", kpi: "all" },
       sort: { column: "no", direction: "asc" },
       viewMode: "table",
@@ -1384,60 +1451,124 @@
     let locations = [];
     let managers = [];
 
-    window.addEventListener('DOMContentLoaded', () => {
-      if (window.innerWidth < 768) {
-        state.viewMode = 'grid';
-        document.getElementById('view-mode-table').classList.remove('active');
-        document.getElementById('view-mode-grid').classList.add('active');
-      }
+    function getActiveDataset() {
+      if (state.activeTab === 'pipette') return pipetteData;
+      if (state.activeTab === 'pc') return pcData;
+      return inventoryData;
+    }
 
-      initTheme();
+    function switchTab(tabName) {
+      if (state.activeTab === tabName) return;
+      state.activeTab = tabName;
+      
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      const activeTabBtn = document.getElementById(`tab-${tabName}`);
+      if (activeTabBtn) activeTabBtn.classList.add('active');
+      
+      state.filters.search = "";
+      state.filters.location = "all";
+      state.filters.manager = "all";
+      state.filters.kpi = "all";
+      state.sort.column = "no";
+      state.sort.direction = "asc";
+      
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) {
+        searchInput.value = "";
+        const placeholders = {
+          general: '장비명, 설치 위치, 담당자 실시간 검색...',
+          pipette: '품목명, 사양, 위치, 제조사 실시간 검색...',
+          pc: '종류, 라벨, 위치, 사용자, 제조사 실시간 검색...'
+        };
+        searchInput.placeholder = placeholders[tabName] || '실시간 검색...';
+      }
+      
+      extractCategories();
+      populateDropdowns();
+      
+      const locFilter = document.getElementById('filter-location');
+      const mgrFilter = document.getElementById('filter-manager');
+      if (locFilter) locFilter.value = "all";
+      if (mgrFilter) mgrFilter.value = "all";
+      
+      renderTableHeaders();
+      updateDashboard();
+      
+      const tabLabels = { 'general': '일반 장비', 'pipette': '피펫 관리', 'pc': 'PC 및 모니터' };
+      showToast(`${tabLabels[tabName]} 탭으로 전환되었습니다.`, "success");
+    }
+
+    function renderTableHeaders() {
+      const thead = document.querySelector('.table-element thead tr');
+      if (!thead) return;
+      thead.innerHTML = "";
+      
+      if (state.activeTab === 'general') {
+        thead.innerHTML = `
+          <th onclick="handleSort('no')" style="width: 80px;">No <span id="sort-icon-no"></span></th>
+          <th style="width: 90px; text-align: center;">사진</th>
+          <th onclick="handleSort('name')">장비명 <span id="sort-icon-name"></span></th>
+          <th onclick="handleSort('loc')">설치 위치 <span id="sort-icon-loc"></span></th>
+          <th onclick="handleSort('mgr')">담당 관리자 <span id="sort-icon-mgr"></span></th>
+          <th>비고</th>
+        `;
+      } else if (state.activeTab === 'pipette') {
+        thead.innerHTML = `
+          <th onclick="handleSort('no')" style="width: 80px;">No <span id="sort-icon-no"></span></th>
+          <th onclick="handleSort('name')">품목명 <span id="sort-icon-name"></span></th>
+          <th onclick="handleSort('spec')">사양 <span id="sort-icon-spec"></span></th>
+          <th onclick="handleSort('loc')">위치 <span id="sort-icon-loc"></span></th>
+          <th onclick="handleSort('brand')">제조사 <span id="sort-icon-brand"></span></th>
+          <th onclick="handleSort('broken')">상태 <span id="sort-icon-broken"></span></th>
+          <th>비고</th>
+        `;
+      } else if (state.activeTab === 'pc') {
+        thead.innerHTML = `
+          <th onclick="handleSort('no')" style="width: 80px;">No <span id="sort-icon-no"></span></th>
+          <th style="width: 90px; text-align: center;">사진</th>
+          <th onclick="handleSort('kind')">종류 <span id="sort-icon-kind"></span></th>
+          <th onclick="handleSort('label')">라벨 <span id="sort-icon-label"></span></th>
+          <th onclick="handleSort('loc')">위치 <span id="sort-icon-loc"></span></th>
+          <th onclick="handleSort('user')">사용자 <span id="sort-icon-user"></span></th>
+          <th onclick="handleSort('brand')">제조사 <span id="sort-icon-brand"></span></th>
+        `;
+      }
+      updateSortArrows();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderTableHeaders();
       extractCategories();
       populateDropdowns();
       updateDashboard();
       lucide.createIcons();
     });
 
-    function initTheme() {
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        document.body.classList.add('dark');
-        state.theme = 'dark';
-      } else {
-        document.body.classList.remove('dark');
-        state.theme = 'light';
-      }
-    }
-
-    function toggleTheme() {
-      if (document.body.classList.contains('dark')) {
-        document.body.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-        state.theme = 'light';
-        showToast("라이트 모드가 활성화되었습니다.", "success");
-      } else {
-        document.body.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-        state.theme = 'dark';
-        showToast("다크 모드가 활성화되었습니다.", "success");
-      }
-    }
-
     function extractCategories() {
+      const data = getActiveDataset();
       const locSet = new Set();
-      inventoryData.forEach(item => {
+      data.forEach(item => {
         const val = item.loc && item.loc.trim() !== "" ? item.loc.trim() : "미지정";
         locSet.add(val);
       });
       locations = Array.from(locSet);
 
       const mgrSet = new Set();
-      inventoryData.forEach(item => {
-        if (item.mgr && item.mgr.trim() !== "") {
-          item.mgr.split(",").forEach(m => mgrSet.add(m.trim()));
-        } else {
-          mgrSet.add("미지정");
+      data.forEach(item => {
+        if (state.activeTab === 'general') {
+          if (item.mgr && item.mgr.trim() !== "") {
+            item.mgr.split(",").forEach(m => mgrSet.add(m.trim()));
+          } else {
+            mgrSet.add("미지정");
+          }
+        } else if (state.activeTab === 'pipette') {
+          const val = item.brand && item.brand.trim() !== "" ? item.brand.trim() : "미지정";
+          mgrSet.add(val);
+        } else if (state.activeTab === 'pc') {
+          const val = item.user && item.user.trim() !== "" ? item.user.trim() : "미지정";
+          mgrSet.add(val);
         }
       });
       managers = Array.from(mgrSet);
@@ -1446,8 +1577,17 @@
     function populateDropdowns() {
       const locSelect = document.getElementById('filter-location');
       const mgrSelect = document.getElementById('filter-manager');
+      if (!locSelect || !mgrSelect) return;
+      
       locSelect.innerHTML = '<option value="all">모든 위치</option>';
-      mgrSelect.innerHTML = '<option value="all">모든 담당자</option>';
+      if (state.activeTab === 'general') {
+        mgrSelect.innerHTML = '<option value="all">모든 담당자</option>';
+      } else if (state.activeTab === 'pipette') {
+        mgrSelect.innerHTML = '<option value="all">모든 제조사</option>';
+      } else if (state.activeTab === 'pc') {
+        mgrSelect.innerHTML = '<option value="all">모든 사용자</option>';
+      }
+      
       const sortedLocs = locations.filter(l => l !== '미지정').sort();
       if (locations.includes('미지정')) sortedLocs.push('미지정');
       sortedLocs.forEach(loc => {
@@ -1467,9 +1607,31 @@
     }
 
     function getFilteredData() {
-      return inventoryData.filter(item => {
+      const data = getActiveDataset();
+      return data.filter(item => {
         const s = state.filters.search.toLowerCase().trim();
-        const matchSearch = s === "" || item.name.toLowerCase().includes(s) || (item.loc && item.loc.toLowerCase().includes(s)) || (item.mgr && item.mgr.toLowerCase().includes(s)) || (item.remarks && item.remarks.toLowerCase().includes(s));
+        
+        let matchSearch = true;
+        if (s !== "") {
+          if (state.activeTab === 'general') {
+            matchSearch = item.name.toLowerCase().includes(s) || 
+                          (item.loc && item.loc.toLowerCase().includes(s)) || 
+                          (item.mgr && item.mgr.toLowerCase().includes(s)) || 
+                          (item.remarks && item.remarks.toLowerCase().includes(s));
+          } else if (state.activeTab === 'pipette') {
+            matchSearch = item.name.toLowerCase().includes(s) || 
+                          (item.spec && item.spec.toLowerCase().includes(s)) || 
+                          (item.loc && item.loc.toLowerCase().includes(s)) || 
+                          (item.brand && item.brand.toLowerCase().includes(s)) || 
+                          (item.remarks && item.remarks.toLowerCase().includes(s));
+          } else if (state.activeTab === 'pc') {
+            matchSearch = item.kind.toLowerCase().includes(s) || 
+                          (item.label && item.label.toLowerCase().includes(s)) || 
+                          (item.loc && item.loc.toLowerCase().includes(s)) || 
+                          (item.user && item.user.toLowerCase().includes(s)) || 
+                          (item.brand && item.brand.toLowerCase().includes(s));
+          }
+        }
 
         let matchLoc = true;
         if (state.filters.location !== "all") {
@@ -1483,24 +1645,56 @@
         let matchMgr = true;
         if (state.filters.manager !== "all") {
           if (state.filters.manager === "미지정") {
-            matchMgr = !item.mgr || item.mgr.trim() === "";
+            if (state.activeTab === 'general') {
+              matchMgr = !item.mgr || item.mgr.trim() === "";
+            } else if (state.activeTab === 'pipette') {
+              matchMgr = !item.brand || item.brand.trim() === "";
+            } else if (state.activeTab === 'pc') {
+              matchMgr = !item.user || item.user.trim() === "";
+            }
           } else {
-            if (item.mgr) {
-              const itemMgrs = item.mgr.split(",").map(m => m.trim());
-              matchMgr = itemMgrs.includes(state.filters.manager);
-            } else {
-              matchMgr = false;
+            if (state.activeTab === 'general') {
+              if (item.mgr) {
+                const itemMgrs = item.mgr.split(",").map(m => m.trim());
+                matchMgr = itemMgrs.includes(state.filters.manager);
+              } else {
+                matchMgr = false;
+              }
+            } else if (state.activeTab === 'pipette') {
+              matchMgr = item.brand && item.brand.trim() === state.filters.manager;
+            } else if (state.activeTab === 'pc') {
+              matchMgr = item.user && item.user.trim() === state.filters.manager;
             }
           }
         }
 
         let matchKPI = true;
-        if (state.filters.kpi === "located") {
-          matchKPI = item.loc && item.loc.trim() !== "";
-        } else if (state.filters.kpi === "unlocated") {
-          matchKPI = !item.loc || item.loc.trim() === "";
-        } else if (state.filters.kpi === "unassigned") {
-          matchKPI = !item.mgr || item.mgr.trim() === "";
+        if (state.filters.kpi !== "all") {
+          if (state.activeTab === 'general') {
+            if (state.filters.kpi === "located") {
+              matchKPI = item.loc && item.loc.trim() !== "";
+            } else if (state.filters.kpi === "unlocated") {
+              matchKPI = !item.loc || item.loc.trim() === "";
+            } else if (state.filters.kpi === "unassigned") {
+              matchKPI = !item.mgr || item.mgr.trim() === "";
+            }
+          } else if (state.activeTab === 'pipette') {
+            if (state.filters.kpi === "located") {
+              matchKPI = item.loc && item.loc.trim() !== "";
+            } else if (state.filters.kpi === "normal") {
+              matchKPI = item.broken !== 'O';
+            } else if (state.filters.kpi === "broken") {
+              matchKPI = item.broken === 'O';
+            }
+          } else if (state.activeTab === 'pc') {
+            if (state.filters.kpi === "monitor") {
+              matchKPI = item.kind === '모니터';
+            } else if (state.filters.kpi === "desktop") {
+              matchKPI = item.kind === '본체';
+            } else if (state.filters.kpi === "laptop") {
+              matchKPI = item.kind === '노트북';
+            }
+          }
         }
 
         return matchSearch && matchLoc && matchMgr && matchKPI;
@@ -1531,25 +1725,47 @@
         const sorted = getSortedData(filtered);
         renderKPIs();
         if (state.viewMode === 'table') {
-          document.getElementById('table-view-wrapper').classList.remove('hidden');
-          document.getElementById('grid-view-wrapper').classList.add('hidden');
+          const viewTable = document.getElementById('table-view-wrapper');
+          const viewGrid = document.getElementById('grid-view-wrapper');
+          if (viewTable) viewTable.classList.remove('hidden');
+          if (viewGrid) viewGrid.classList.add('hidden');
           renderTable(sorted);
         } else {
-          document.getElementById('table-view-wrapper').classList.add('hidden');
-          document.getElementById('grid-view-wrapper').classList.remove('hidden');
+          const viewTable = document.getElementById('table-view-wrapper');
+          const viewGrid = document.getElementById('grid-view-wrapper');
+          if (viewTable) viewTable.classList.add('hidden');
+          if (viewGrid) viewGrid.classList.remove('hidden');
           renderGrid(sorted);
         }
         renderAnalytics(filtered);
+        
         const emptyStateEl = document.getElementById('empty-state');
         const countTextEl = document.getElementById('results-count-text');
+        const activeData = getActiveDataset();
+        
         if (sorted.length === 0) {
-          emptyStateEl.classList.remove('hidden');
-          document.getElementById('table-view-wrapper').classList.add('hidden');
-          document.getElementById('grid-view-wrapper').classList.add('hidden');
-          countTextEl.textContent = "검색 결과 0개";
+          if (emptyStateEl) {
+            emptyStateEl.classList.remove('hidden');
+            const h3 = emptyStateEl.querySelector('h3');
+            if (h3) {
+              const emptyMessages = {
+                general: '일치하는 장비가 없습니다',
+                pipette: '일치하는 피펫이 없습니다',
+                pc: '일치하는 PC 기기가 없습니다'
+              };
+              h3.textContent = emptyMessages[state.activeTab];
+            }
+          }
+          const viewTable = document.getElementById('table-view-wrapper');
+          const viewGrid = document.getElementById('grid-view-wrapper');
+          if (viewTable) viewTable.classList.add('hidden');
+          if (viewGrid) viewGrid.classList.add('hidden');
+          if (countTextEl) countTextEl.textContent = "검색 결과 0개";
         } else {
-          emptyStateEl.classList.add('hidden');
-          countTextEl.innerHTML = `총 <strong>${inventoryData.length}</strong>개 중 <strong>${sorted.length}</strong>개 장비 표시 중`;
+          if (emptyStateEl) emptyStateEl.classList.add('hidden');
+          const itemTypes = { general: '개 장비', pipette: '개 피펫', pc: '개 PC 기기' };
+          const unit = itemTypes[state.activeTab] || '개';
+          if (countTextEl) countTextEl.innerHTML = `총 <strong>${activeData.length}</strong>${unit} 중 <strong>${sorted.length}</strong>개 표시 중`;
         }
         lucide.createIcons();
         state.renderFrame = null;
@@ -1557,62 +1773,182 @@
     }
 
     function renderKPIs() {
-      const total = inventoryData.length;
-      const located = inventoryData.filter(item => item.loc && item.loc.trim() !== "").length;
-      const unlocated = inventoryData.filter(item => !item.loc || item.loc.trim() === "").length;
-      const unassigned = inventoryData.filter(item => !item.mgr || item.mgr.trim() === "").length;
-      document.getElementById('kpi-total-val').textContent = total;
-      document.getElementById('kpi-located-val').textContent = located;
-      document.getElementById('kpi-unlocated-val').textContent = unlocated;
-      document.getElementById('kpi-unassigned-val').textContent = unassigned;
-      const cards = { 'all': 'kpi-card-all', 'located': 'kpi-card-located', 'unlocated': 'kpi-card-unlocated', 'unassigned': 'kpi-card-unassigned' };
-      Object.entries(cards).forEach(([key, id]) => {
-        const el = document.getElementById(id);
-        if (state.filters.kpi === key) {
-          el.classList.add('active');
+      const data = getActiveDataset();
+      const cardConfigs = {
+        general: [
+          { title: "전체 등록 장비", val: data.length, desc: "보유 중인 전체 장비", icon: "database", filter: "all" },
+          { title: "위치 지정됨", val: data.filter(item => item.loc && item.loc.trim() !== "").length, desc: "설치 장소가 파악된 장비", icon: "map-pin", filter: "located" },
+          { title: "위치 미지정", val: data.filter(item => !item.loc || item.loc.trim() === "").length, desc: "위치 파악 및 등록 필요", icon: "alert-triangle", filter: "unlocated" },
+          { title: "담당자 미지정", val: data.filter(item => !item.mgr || item.mgr.trim() === "").length, desc: "관리 관리자 매칭 필요", icon: "user-x", filter: "unassigned" }
+        ],
+        pipette: [
+          { title: "전체 피펫", val: data.length, desc: "등록된 전체 피펫", icon: "database", filter: "all" },
+          { title: "위치 지정됨", val: data.filter(item => item.loc && item.loc.trim() !== "").length, desc: "설치 장소가 파악된 피펫", icon: "map-pin", filter: "located" },
+          { title: "정상 작동", val: data.filter(item => item.broken !== 'O').length, desc: "사용 가능한 피펫", icon: "check-circle", filter: "normal" },
+          { title: "고장 장비", val: data.filter(item => item.broken === 'O').length, desc: "점검 및 수리 필요", icon: "alert-octagon", filter: "broken" }
+        ],
+        pc: [
+          { title: "전체 PC 장비", val: data.length, desc: "보유 중인 전체 PC 기기", icon: "database", filter: "all" },
+          { title: "모니터", val: data.filter(item => item.kind === '모니터').length, desc: "모니터 수량", icon: "monitor", filter: "monitor" },
+          { title: "본체", val: data.filter(item => item.kind === '본체').length, desc: "본체 수량", icon: "cpu", filter: "desktop" },
+          { title: "노트북", val: data.filter(item => item.kind === '노트북').length, desc: "노트북 수량", icon: "laptop", filter: "laptop" }
+        ]
+      };
+      
+      const config = cardConfigs[state.activeTab];
+      const cardIds = ['kpi-card-all', 'kpi-card-located', 'kpi-card-unlocated', 'kpi-card-unassigned'];
+      
+      config.forEach((c, idx) => {
+        const cardEl = document.getElementById(cardIds[idx]);
+        if (!cardEl) return;
+        
+        cardEl.querySelector('.kpi-card-title').textContent = c.title;
+        cardEl.querySelector('.kpi-card-value').textContent = c.val;
+        cardEl.querySelector('.kpi-card-footer').textContent = c.desc;
+        cardEl.querySelector('.kpi-icon-container').innerHTML = `<i data-lucide="${c.icon}"></i>`;
+        
+        if (state.filters.kpi === c.filter) {
+          cardEl.className = `kpi-card active kpi-${c.filter}`;
         } else {
-          el.classList.remove('active');
+          cardEl.className = `kpi-card kpi-${c.filter}`;
         }
+        
+        cardEl.onclick = () => setKPIFilter(c.filter);
       });
+      lucide.createIcons();
     }
 
     function renderTable(data) {
       const tbody = document.getElementById('inventory-table-body');
+      if (!tbody) return;
       tbody.innerHTML = "";
+      
       data.forEach(item => {
         const row = document.createElement('tr');
+        
         const tdNo = document.createElement('td');
         tdNo.innerHTML = `<span class="eq-card-no">${item.no}</span>`;
-        const tdPhoto = document.createElement('td');
-        tdPhoto.style.textAlign = 'center';
-        tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" onclick="openImageModal('images/equipment_${item.no}.jpeg', '${item.name}')" title="이미지 크게 보기"><img src="images/equipment_${item.no}.jpeg" alt="${item.name}" class="table-thumbnail" onerror="handleTableImageError(this)" loading="lazy"></div>`;
-        const tdName = document.createElement('td');
-        tdName.innerHTML = `<strong>${item.name}</strong>`;
-        const tdLoc = document.createElement('td');
-        if (item.loc && item.loc.trim() !== "") {
-          tdLoc.innerHTML = `<span class="badge badge-gray"><i data-lucide="map-pin" class="w-3 h-3 text-slate-400"></i> ${item.loc}</span>`;
-        } else {
-          tdLoc.innerHTML = `<span class="badge badge-warning"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> 위치 미지정</span>`;
-        }
-        const tdMgr = document.createElement('td');
-        if (item.mgr && item.mgr.trim() !== "") {
-          const mgrList = item.mgr.split(",").map(m => `<span class="badge badge-success"><i data-lucide="user" class="w-3 h-3 text-emerald-500"></i> ${m.trim()}</span>`).join(" ");
-          tdMgr.innerHTML = mgrList;
-        } else {
-          tdMgr.innerHTML = `<span class="badge badge-danger"><i data-lucide="user-x" class="w-3.5 h-3.5"></i> 담당자 미지정</span>`;
-        }
-        const tdRemarks = document.createElement('td');
-        if (item.remarks && item.remarks.trim() !== "") {
-          tdRemarks.innerHTML = `<div class="flex items-center gap-1.5 text-xs text-slate-500 italic" title="${item.remarks}"><i data-lucide="info" class="w-3.5 h-3.5 text-sky-500 flex-shrink-0"></i><span>${item.remarks}</span></div>`;
-        } else {
-          tdRemarks.innerHTML = `<span class="text-slate-300">-</span>`;
-        }
         row.appendChild(tdNo);
-        row.appendChild(tdPhoto);
-        row.appendChild(tdName);
-        row.appendChild(tdLoc);
-        row.appendChild(tdMgr);
-        row.appendChild(tdRemarks);
+        
+        if (state.activeTab === 'general') {
+          const tdPhoto = document.createElement('td');
+          tdPhoto.style.textAlign = 'center';
+          tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" onclick="openImageModal('images/equipment_${item.no}.jpeg', '${item.name}')" title="이미지 크게 보기"><img src="images/equipment_${item.no}.jpeg" alt="${item.name}" class="table-thumbnail" onerror="handleTableImageError(this)" loading="lazy"></div>`;
+          row.appendChild(tdPhoto);
+          
+          const tdName = document.createElement('td');
+          tdName.innerHTML = `<strong>${item.name}</strong>`;
+          row.appendChild(tdName);
+          
+          const tdLoc = document.createElement('td');
+          if (item.loc && item.loc.trim() !== "") {
+            tdLoc.innerHTML = `<span class="badge badge-gray"><i data-lucide="map-pin" class="w-3 h-3 text-slate-400"></i> ${item.loc}</span>`;
+          } else {
+            tdLoc.innerHTML = `<span class="badge badge-warning"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> 위치 미지정</span>`;
+          }
+          row.appendChild(tdLoc);
+          
+          const tdMgr = document.createElement('td');
+          if (item.mgr && item.mgr.trim() !== "") {
+            const mgrList = item.mgr.split(",").map(m => `<span class="badge badge-success"><i data-lucide="user" class="w-3 h-3 text-emerald-500"></i> ${m.trim()}</span>`).join(" ");
+            tdMgr.innerHTML = mgrList;
+          } else {
+            tdMgr.innerHTML = `<span class="badge badge-danger"><i data-lucide="user-x" class="w-3.5 h-3.5"></i> 담당자 미지정</span>`;
+          }
+          row.appendChild(tdMgr);
+          
+          const tdRemarks = document.createElement('td');
+          if (item.remarks && item.remarks.trim() !== "") {
+            tdRemarks.innerHTML = `<div class="flex items-center gap-1.5 text-xs text-slate-500 italic" title="${item.remarks}"><i data-lucide="info" class="w-3.5 h-3.5 text-sky-500 flex-shrink-0"></i><span>${item.remarks}</span></div>`;
+          } else {
+            tdRemarks.innerHTML = `<span class="text-slate-300">-</span>`;
+          }
+          row.appendChild(tdRemarks);
+          
+        } else if (state.activeTab === 'pipette') {
+          const tdName = document.createElement('td');
+          tdName.innerHTML = `<strong>${item.name}</strong>`;
+          row.appendChild(tdName);
+          
+          const tdSpec = document.createElement('td');
+          tdSpec.textContent = item.spec || "-";
+          row.appendChild(tdSpec);
+          
+          const tdLoc = document.createElement('td');
+          if (item.loc && item.loc.trim() !== "") {
+            tdLoc.innerHTML = `<span class="badge badge-gray"><i data-lucide="map-pin" class="w-3 h-3 text-slate-400"></i> ${item.loc}</span>`;
+          } else {
+            tdLoc.innerHTML = `<span class="badge badge-warning"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> 위치 미지정</span>`;
+          }
+          row.appendChild(tdLoc);
+          
+          const tdBrand = document.createElement('td');
+          if (item.brand) {
+            tdBrand.innerHTML = `<span class="badge badge-gray">${item.brand}</span>`;
+          } else {
+            tdBrand.innerHTML = `<span class="text-slate-300">-</span>`;
+          }
+          row.appendChild(tdBrand);
+          
+          const tdBroken = document.createElement('td');
+          if (item.broken === 'O') {
+            tdBroken.innerHTML = `<span class="badge badge-danger"><i data-lucide="alert-octagon" class="w-3.5 h-3.5"></i> 고장</span>`;
+          } else {
+            tdBroken.innerHTML = `<span class="badge badge-success"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-500"></i> 정상</span>`;
+          }
+          row.appendChild(tdBroken);
+          
+          const tdRemarks = document.createElement('td');
+          if (item.remarks && item.remarks.trim() !== "") {
+            tdRemarks.innerHTML = `<div class="flex items-center gap-1.5 text-xs text-slate-500 italic" title="${item.remarks}"><i data-lucide="info" class="w-3.5 h-3.5 text-sky-500 flex-shrink-0"></i><span>${item.remarks}</span></div>`;
+          } else {
+            tdRemarks.innerHTML = `<span class="text-slate-300">-</span>`;
+          }
+          row.appendChild(tdRemarks);
+          
+        } else if (state.activeTab === 'pc') {
+          const tdPhoto = document.createElement('td');
+          tdPhoto.style.textAlign = 'center';
+          tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" onclick="openImageModal('images/pc_${item.no}.jpeg', '${item.label}')" title="이미지 크게 보기"><img src="images/pc_${item.no}.jpeg" alt="${item.label}" class="table-thumbnail" onerror="handleTableImageError(this)" loading="lazy"></div>`;
+          row.appendChild(tdPhoto);
+
+          const tdKind = document.createElement('td');
+          let icon = "monitor";
+          let badgeClass = "badge-gray";
+          if (item.kind === '본체') { icon = "cpu"; badgeClass = "badge-success"; }
+          else if (item.kind === '노트북') { icon = "laptop"; badgeClass = "badge-warning"; }
+          tdKind.innerHTML = `<span class="badge ${badgeClass}"><i data-lucide="${icon}" class="w-3 h-3"></i> ${item.kind}</span>`;
+          row.appendChild(tdKind);
+          
+          const tdLabel = document.createElement('td');
+          tdLabel.innerHTML = `<strong>${item.label}</strong>`;
+          row.appendChild(tdLabel);
+          
+          const tdLoc = document.createElement('td');
+          if (item.loc && item.loc.trim() !== "") {
+            tdLoc.innerHTML = `<span class="badge badge-gray"><i data-lucide="map-pin" class="w-3 h-3 text-slate-400"></i> ${item.loc}</span>`;
+          } else {
+            tdLoc.innerHTML = `<span class="badge badge-warning"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> 위치 미지정</span>`;
+          }
+          row.appendChild(tdLoc);
+          
+          const tdUser = document.createElement('td');
+          if (item.user && item.user.trim() !== "" && item.user !== "미지정") {
+            tdUser.innerHTML = `<span class="badge badge-success"><i data-lucide="user" class="w-3 h-3 text-emerald-500"></i> ${item.user}</span>`;
+          } else {
+            tdUser.innerHTML = `<span class="badge badge-danger"><i data-lucide="user-x" class="w-3.5 h-3.5"></i> 미지정</span>`;
+          }
+          row.appendChild(tdUser);
+          
+          const tdBrand = document.createElement('td');
+          if (item.brand) {
+            tdBrand.innerHTML = `<span class="badge badge-gray">${item.brand}</span>`;
+          } else {
+            tdBrand.innerHTML = `<span class="text-slate-300">-</span>`;
+          }
+          row.appendChild(tdBrand);
+        }
+        
         tbody.appendChild(row);
       });
       updateSortArrows();
@@ -1620,20 +1956,43 @@
 
     function renderGrid(data) {
       const container = document.getElementById('grid-view-wrapper');
+      if (!container) return;
       container.innerHTML = "";
+      
       data.forEach(item => {
         const card = document.createElement('div');
         card.className = "eq-card";
         const locHtml = item.loc && item.loc.trim() !== "" ? `<span class="badge badge-gray"><i data-lucide="map-pin"></i> ${item.loc}</span>` : `<span class="badge badge-warning"><i data-lucide="alert-triangle"></i> 위치 미지정</span>`;
-        const mgrHtml = item.mgr && item.mgr.trim() !== "" ? item.mgr.split(",").map(m => `<span class="badge badge-success"><i data-lucide="user"></i> ${m.trim()}</span>`).join(" ") : `<span class="badge badge-danger"><i data-lucide="user-x"></i> 담당자 미지정</span>`;
-        const remarksHtml = item.remarks && item.remarks.trim() !== "" ? `<div class="eq-card-remarks"><i data-lucide="info" class="text-sky-500"></i><span>${item.remarks}</span></div>` : "";
-        const imageHtml = `<div class="eq-card-image-wrapper" onclick="openImageModal('images/equipment_${item.no}.jpeg', '${item.name}')" title="이미지 크게 보기"><img src="images/equipment_${item.no}.jpeg" alt="${item.name}" class="eq-card-image" onerror="handleImageError(this)" loading="lazy"></div>`;
-        card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span>${locHtml}</div><h3 class="eq-card-name">${item.name}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">담당자:</span><div class="flex flex-wrap gap-1">${mgrHtml}</div></div></div></div>${remarksHtml}</div>`;
+        
+        if (state.activeTab === 'general') {
+          const mgrHtml = item.mgr && item.mgr.trim() !== "" ? item.mgr.split(",").map(m => `<span class="badge badge-success"><i data-lucide="user"></i> ${m.trim()}</span>`).join(" ") : `<span class="badge badge-danger"><i data-lucide="user-x"></i> 담당자 미지정</span>`;
+          const remarksHtml = item.remarks && item.remarks.trim() !== "" ? `<div class="eq-card-remarks"><i data-lucide="info" class="text-sky-500"></i><span>${item.remarks}</span></div>` : "";
+          const imageHtml = `<div class="eq-card-image-wrapper" onclick="openImageModal('images/equipment_${item.no}.jpeg', '${item.name}')" title="이미지 크게 보기"><img src="images/equipment_${item.no}.jpeg" alt="${item.name}" class="eq-card-image" onerror="handleImageError(this)" loading="lazy"></div>`;
+          card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span>${locHtml}</div><h3 class="eq-card-name">${item.name}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">담당자:</span><div class="flex flex-wrap gap-1">${mgrHtml}</div></div></div></div>${remarksHtml}</div>`;
+          
+        } else if (state.activeTab === 'pipette') {
+          const remarksHtml = item.remarks && item.remarks.trim() !== "" ? `<div class="eq-card-remarks"><i data-lucide="info" class="text-sky-500"></i><span>${item.remarks}</span></div>` : "";
+          const statusHtml = item.broken === 'O' ? `<span class="badge badge-danger"><i data-lucide="alert-octagon"></i> 고장</span>` : `<span class="badge badge-success"><i data-lucide="check-circle"></i> 정상</span>`;
+          const imageHtml = `<div class="eq-card-image-wrapper" style="display: flex; align-items: center; justify-content: center; background: var(--bg-tertiary); color: var(--primary);"><i data-lucide="droplet" style="width: 3.5rem; height: 3.5rem;"></i></div>`;
+          card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span>${locHtml}</div><h3 class="eq-card-name">${item.name}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">사양:</span><span>${item.spec || "-"}</span></div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">제조사:</span><span>${item.brand || "-"}</span></div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">상태:</span>${statusHtml}</div></div></div>${remarksHtml}</div>`;
+          
+        } else if (state.activeTab === 'pc') {
+          let icon = "monitor";
+          let badgeClass = "badge-gray";
+          if (item.kind === '본체') { icon = "cpu"; badgeClass = "badge-success"; }
+          else if (item.kind === '노트북') { icon = "laptop"; badgeClass = "badge-warning"; }
+          const kindHtml = `<span class="badge ${badgeClass}"><i data-lucide="${icon}"></i> ${item.kind}</span>`;
+          const userHtml = item.user && item.user.trim() !== "" && item.user !== "미지정" ? `<span class="badge badge-success"><i data-lucide="user"></i> ${item.user}</span>` : `<span class="badge badge-danger"><i data-lucide="user-x"></i> 미지정</span>`;
+          const imageHtml = `<div class="eq-card-image-wrapper" style="display: flex; align-items: center; justify-content: center; background: var(--bg-tertiary); color: var(--primary);"><i data-lucide="${icon}" style="width: 3.5rem; height: 3.5rem;"></i></div>`;
+          card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span>${locHtml}</div><h3 class="eq-card-name">${item.label}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">종류:</span>${kindHtml}</div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">제조사:</span><span>${item.brand || "-"}</span></div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">사용자:</span><div class="flex flex-wrap gap-1">${userHtml}</div></div></div></div></div>`;
+        }
+        
         container.appendChild(card);
       });
     }
 
     function renderAnalytics(filteredData) {
+      // 1. Location distribution chart
       const locCounts = {};
       filteredData.forEach(item => {
         const val = item.loc && item.loc.trim() !== "" ? item.loc.trim() : "미지정";
@@ -1654,22 +2013,47 @@
         locChartEl.appendChild(row);
       });
 
+      // 2. Secondary grouping chart (Manager / Brand / User depending on active tab)
       const mgrCounts = {};
       filteredData.forEach(item => {
-        if (item.mgr && item.mgr.trim() !== "") {
-          item.mgr.split(",").forEach(m => {
-            const trimmed = m.trim();
-            mgrCounts[trimmed] = (mgrCounts[trimmed] || 0) + 1;
-          });
-        } else {
-          mgrCounts["미지정"] = (mgrCounts["미지정"] || 0) + 1;
+        if (state.activeTab === 'general') {
+          if (item.mgr && item.mgr.trim() !== "") {
+            item.mgr.split(",").forEach(m => {
+              const cleaned = m.trim();
+              mgrCounts[cleaned] = (mgrCounts[cleaned] || 0) + 1;
+            });
+          } else {
+            mgrCounts["미지정"] = (mgrCounts["미지정"] || 0) + 1;
+          }
+        } else if (state.activeTab === 'pipette') {
+          const val = item.brand && item.brand.trim() !== "" ? item.brand.trim() : "미지정";
+          mgrCounts[val] = (mgrCounts[val] || 0) + 1;
+        } else if (state.activeTab === 'pc') {
+          const val = item.user && item.user.trim() !== "" ? item.user.trim() : "미지정";
+          mgrCounts[val] = (mgrCounts[val] || 0) + 1;
         }
       });
+
       const sortedMgrs = Object.entries(mgrCounts).sort((a, b) => b[1] - a[1]);
-      document.getElementById('mgr-chart-count').textContent = `${sortedMgrs.length}명`;
+      
+      const titleEl = document.getElementById('manager-chart-title');
+      const subtitleEl = document.getElementById('mgr-chart-count');
+      
+      if (state.activeTab === 'general') {
+        if (titleEl) titleEl.textContent = "담당자별 관리 현황";
+        if (subtitleEl) subtitleEl.textContent = `${sortedMgrs.length}명`;
+      } else if (state.activeTab === 'pipette') {
+        if (titleEl) titleEl.textContent = "제조사별 보유 현황";
+        if (subtitleEl) subtitleEl.textContent = `${sortedMgrs.length}개 제조사`;
+      } else if (state.activeTab === 'pc') {
+        if (titleEl) titleEl.textContent = "사용자별 보유 현황";
+        if (subtitleEl) subtitleEl.textContent = `${sortedMgrs.length}명`;
+      }
+
       const mgrMax = sortedMgrs.length > 0 ? sortedMgrs[0][1] : 1;
       const mgrChartEl = document.getElementById('manager-chart-container');
       mgrChartEl.innerHTML = "";
+      
       sortedMgrs.forEach(([mgr, count]) => {
         const pct = (count / mgrMax) * 100;
         const isActive = state.filters.manager === mgr;
@@ -1682,7 +2066,7 @@
     }
 
     function updateSortArrows() {
-      const cols = ['no', 'name', 'loc', 'mgr'];
+      const cols = ['no', 'name', 'loc', 'mgr', 'spec', 'brand', 'broken', 'kind', 'label', 'user'];
       cols.forEach(c => {
         const iconEl = document.getElementById(`sort-icon-${c}`);
         if (!iconEl) return;
@@ -1728,7 +2112,8 @@
       } else {
         state.filters.location = loc;
       }
-      document.getElementById('filter-location').value = state.filters.location;
+      const filterLoc = document.getElementById('filter-location');
+      if (filterLoc) filterLoc.value = state.filters.location;
       updateDashboard();
       showToast(`위치 필터가 ${state.filters.location === 'all' ? '해제되었습니다' : `'${state.filters.location}'(으)로 적용되었습니다.`}`);
     }
@@ -1739,9 +2124,15 @@
       } else {
         state.filters.manager = mgr;
       }
-      document.getElementById('filter-manager').value = state.filters.manager;
+      const filterMgr = document.getElementById('filter-manager');
+      if (filterMgr) filterMgr.value = state.filters.manager;
       updateDashboard();
-      showToast(`담당자 필터가 ${state.filters.manager === 'all' ? '해제되었습니다' : `'${state.filters.manager}'(으)로 적용되었습니다.`}`);
+      
+      let filterName = "담당자";
+      if (state.activeTab === 'pipette') filterName = "제조사";
+      else if (state.activeTab === 'pc') filterName = "사용자";
+      
+      showToast(`${filterName} 필터가 ${state.filters.manager === 'all' ? '해제되었습니다' : `'${state.filters.manager}'(으)로 적용되었습니다.`}`);
     }
 
     function setKPIFilter(kpiType) {
@@ -1751,9 +2142,21 @@
         state.filters.kpi = kpiType;
       }
       updateDashboard();
-      const filterLabel = { 'all': '전체 장비 표시', 'located': '위치 지정됨 장비만 표시', 'unlocated': '위치 미지정 장비만 표시', 'unassigned': '담당자 미지정 장비만 표시' };
-      showToast(filterLabel[state.filters.kpi], "success");
+      
+      let label = "전체 항목 표시";
+      if (state.activeTab === 'general') {
+        const filterLabel = { 'all': '전체 장비 표시', 'located': '위치 지정됨 장비만 표시', 'unlocated': '위치 미지정 장비만 표시', 'unassigned': '담당자 미지정 장비만 표시' };
+        label = filterLabel[state.filters.kpi] || "전체 장비 표시";
+      } else if (state.activeTab === 'pipette') {
+        const filterLabel = { 'all': '전체 피펫 표시', 'located': '위치 지정됨 피펫만 표시', 'normal': '정상 작동 피펫만 표시', 'broken': '고장 피펫만 표시' };
+        label = filterLabel[state.filters.kpi] || "전체 피펫 표시";
+      } else if (state.activeTab === 'pc') {
+        const filterLabel = { 'all': '전체 PC 기기 표시', 'monitor': '모니터만 표시', 'desktop': '본체만 표시', 'laptop': '노트북만 표시' };
+        label = filterLabel[state.filters.kpi] || "전체 PC 기기 표시";
+      }
+      showToast(label, "success");
     }
+
 
     function resetFilters() {
       state.filters.search = "";
@@ -1767,19 +2170,6 @@
       showToast("모든 필터가 초기화되었습니다.", "success");
     }
 
-    function setViewMode(mode) {
-      state.viewMode = mode;
-      const btnTable = document.getElementById('view-mode-table');
-      const btnGrid = document.getElementById('view-mode-grid');
-      if (mode === 'table') {
-        btnTable.classList.add('active');
-        btnGrid.classList.remove('active');
-      } else {
-        btnTable.classList.remove('active');
-        btnGrid.classList.add('active');
-      }
-      updateDashboard();
-    }
 
     function handleTableImageError(img) {
       const wrapper = img.parentNode;
@@ -1827,21 +2217,49 @@
         showToast("내보낼 데이터가 없습니다.", "error");
         return;
       }
-      let csvContent = "No,장비명,설치 위치,담당 관리자,비고\n";
-      dataToExport.forEach(item => {
-        const no = item.no;
-        const name = `"${item.name.replace(/"/g, '""')}"`;
-        const loc = `"${(item.loc || '미지정').replace(/"/g, '""')}"`;
-        const mgr = `"${(item.mgr || '미지정').replace(/"/g, '""')}"`;
-        const remarks = `"${(item.remarks || '').replace(/"/g, '""')}"`;
-        csvContent += `${no},${name},${loc},${mgr},${remarks}\n`;
-      });
+      let csvContent = "";
+      if (state.activeTab === 'general') {
+        csvContent = "No,장비명,설치 위치,담당 관리자,비고\n";
+        dataToExport.forEach(item => {
+          const no = item.no;
+          const name = `"${(item.name || '').replace(/"/g, '""')}"`;
+          const loc = `"${(item.loc || '미지정').replace(/"/g, '""')}"`;
+          const mgr = `"${(item.mgr || '미지정').replace(/"/g, '""')}"`;
+          const remarks = `"${(item.remarks || '').replace(/"/g, '""')}"`;
+          csvContent += `${no},${name},${loc},${mgr},${remarks}\n`;
+        });
+      } else if (state.activeTab === 'pipette') {
+        csvContent = "No,품목명,사양,위치,제조사,상태,비고\n";
+        dataToExport.forEach(item => {
+          const no = item.no;
+          const name = `"${(item.name || '').replace(/"/g, '""')}"`;
+          const spec = `"${(item.spec || '').replace(/"/g, '""')}"`;
+          const loc = `"${(item.loc || '미지정').replace(/"/g, '""')}"`;
+          const brand = `"${(item.brand || '').replace(/"/g, '""')}"`;
+          const status = item.broken === 'O' ? "고장" : "정상";
+          const remarks = `"${(item.remarks || '').replace(/"/g, '""')}"`;
+          csvContent += `${no},${name},${spec},${loc},${brand},${status},${remarks}\n`;
+        });
+      } else if (state.activeTab === 'pc') {
+        csvContent = "No,종류,라벨,위치,사용자,제조사\n";
+        dataToExport.forEach(item => {
+          const no = item.no;
+          const kind = `"${(item.kind || '').replace(/"/g, '""')}"`;
+          const label = `"${(item.label || '').replace(/"/g, '""')}"`;
+          const loc = `"${(item.loc || '미지정').replace(/"/g, '""')}"`;
+          const user = `"${(item.user || '미지정').replace(/"/g, '""')}"`;
+          const brand = `"${(item.brand || '').replace(/"/g, '""')}"`;
+          csvContent += `${no},${kind},${label},${loc},${user},${brand}\n`;
+        });
+      }
+      
       const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+      const tabLabels = { 'general': '장비목록', 'pipette': '피펫목록', 'pc': 'PC목록' };
       link.setAttribute("href", url);
-      link.setAttribute("download", `Center_for_Symbiotic_Biomaterials_CSB_장비목록_필터적용_${dateStr}.csv`);
+      link.setAttribute("download", `Center_for_Symbiotic_Biomaterials_CSB_${tabLabels[state.activeTab]}_필터적용_${dateStr}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
