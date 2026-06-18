@@ -15,21 +15,23 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
+    /* CSS Variables & Theme Control - Yonsei University College of Dentistry High Contrast Theme */
     :root {
+      /* Light Mode */
       --bg-primary: #f4f7fa;
       --bg-secondary: #ffffff;
       --bg-tertiary: #e9eff5;
-      --text-primary: #001f42;
+      --text-primary: #001f42; /* Extremely high contrast dark blue */
       --text-secondary: #1e3a5f;
       --text-muted: #5a738e;
-      --primary: #002855;
-      --primary-hover: #003e80;
-      --primary-light: #e6effc;
-      --accent: #b38f2d;
+      --primary: #002855; /* Official Yonsei Blue */
+      --primary-hover: #003e80; /* Brighter Blue */
+      --primary-light: #e6effc; /* Soft brand accent light blue */
+      --accent: #b38f2d; /* Rich brand gold */
       --success: #10b981;
       --warning: #f59e0b;
       --danger: #ef4444;
-      --border: #ccd6e0;
+      --border: #ccd6e0; /* Stronger borders for high contrast */
       --shadow: 0 4px 6px -1px rgb(0 40 85 / 0.08), 0 2px 4px -2px rgb(0 40 85 / 0.08);
       --shadow-lg: 0 10px 15px -3px rgb(0 40 85 / 0.1), 0 4px 6px -4px rgb(0 40 85 / 0.1);
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -37,16 +39,17 @@
     }
 
     body.dark {
-      --bg-primary: #050b14;
+      /* Dark Mode */
+      --bg-primary: #050b14; /* Deep space dark blue */
       --bg-secondary: #0d1624;
       --bg-tertiary: #172338;
       --text-primary: #f0f5fa;
       --text-secondary: #a0b2c6;
       --text-muted: #6a7f98;
-      --primary: #4d8df5;
+      --primary: #4d8df5; /* Vibrant blue for dark mode readability */
       --primary-hover: #357ae8;
       --primary-light: #0d2547;
-      --accent: #ffc72c;
+      --accent: #ffc72c; /* High-contrast bright gold */
       --success: #34d399;
       --warning: #fbbf24;
       --danger: #f87171;
@@ -55,7 +58,13 @@
       --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.55), 0 4px 6px -4px rgb(0 0 0 / 0.55);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* Reset and Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: var(--font-sans);
       background-color: var(--bg-primary);
@@ -65,22 +74,994 @@
       min-height: 100vh;
     }
 
-    .dashboard-container { max-width: 1440px; margin: 0 auto; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
-    .dashboard-header { display: flex; justify-content: space-between; align-items: center; background-color: var(--bg-secondary); border: 1px solid var(--border); border-radius: 1rem; padding: 1.25rem 1.5rem; box-shadow: var(--shadow); }
-    .header-logo-container { display: flex; align-items: center; gap: 1rem; }
-    .logo-circle { display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 0.75rem; color: #ffffff; }
-    .header-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.025em; }
-    .header-subtitle { font-size: 0.875rem; color: var(--text-muted); margin-top: 0.125rem; }
-    .header-actions { display: flex; align-items: center; gap: 0.75rem; }
-    .btn-action { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; border-radius: 0.75rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1px solid var(--border); background-color: var(--bg-secondary); color: var(--text-secondary); }
-    .btn-export { background-color: var(--primary); color: #ffffff; border: none; }
-    .theme-toggle-btn { display: flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 1px solid var(--border); background-color: var(--bg-secondary); color: var(--text-secondary); cursor: pointer; }
-    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
-    .kpi-card { background-color: var(--bg-secondary); border: 1px solid var(--border); border-radius: 1rem; padding: 1.25rem; box-shadow: var(--shadow); }
-    .kpi-card-value { font-size: 2rem; font-weight: 800; margin-top: 0.5rem; }
-    .main-panel { background-color: var(--bg-secondary); border: 1px solid var(--border); border-radius: 1rem; padding: 1.25rem; box-shadow: var(--shadow); }
-    .status-banner { background: var(--primary-light); color: var(--primary); padding: 0.9rem 1rem; border-radius: 0.75rem; margin-bottom: 1rem; }
-    @media (max-width: 768px) { .dashboard-header { flex-direction: column; align-items: flex-start; gap: 1rem; } }
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+
+    /* Dashboard Container */
+    .dashboard-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Header Styling */
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      box-shadow: var(--shadow);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .header-logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 0.75rem;
+      color: #ffffff;
+    }
+
+    .logo-circle i {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+
+    .header-title-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.025em;
+    }
+
+    .header-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 0.125rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Buttons */
+    .btn-action {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid var(--border);
+      background-color: var(--bg-secondary);
+      color: var(--text-secondary);
+    }
+
+    .btn-action:hover {
+      background-color: var(--bg-tertiary);
+      border-color: var(--text-muted);
+    }
+
+    .btn-export {
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+    }
+
+    .btn-export:hover {
+      background-color: var(--primary-hover);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+    }
+
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background-color: var(--bg-secondary);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background-color: var(--bg-tertiary);
+      color: var(--primary);
+    }
+
+    body.dark .sun-icon { display: block; }
+    body.dark .moon-icon { display: none; }
+    body:not(.dark) .sun-icon { display: none; }
+    body:not(.dark) .moon-icon { display: block; }
+
+    /* KPI Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .kpi-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .kpi-card.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light), var(--shadow-lg);
+    }
+
+    .kpi-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .kpi-card-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .kpi-card-value {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .kpi-card-footer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .kpi-icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 0.75rem;
+    }
+
+    /* KPI Colors */
+    .kpi-total .kpi-icon-container { background-color: var(--primary-light); color: var(--primary); }
+    .kpi-located .kpi-icon-container { background-color: rgba(16, 185, 129, 0.15); color: var(--success); }
+    .kpi-unlocated .kpi-icon-container { background-color: rgba(245, 158, 11, 0.15); color: var(--warning); }
+    .kpi-unassigned .kpi-icon-container { background-color: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+    /* Main Dashboard Grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2.5fr 1fr;
+      gap: 1.5rem;
+    }
+
+    /* Left Panel: Content & Search Controls */
+    .main-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* Search & Filter Bar */
+    .control-bar {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .search-wrapper {
+      position: relative;
+      flex-grow: 1;
+      min-width: 260px;
+    }
+
+    .search-wrapper i {
+      position: absolute;
+      left: 0.875rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.625rem 1rem 0.625rem 2.5rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background-color: var(--bg-secondary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.625rem;
+      align-items: center;
+    }
+
+    .filter-select {
+      padding: 0.625rem 2rem 0.625rem 0.875rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7' /%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 0.875rem;
+      min-width: 150px;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      background-color: var(--bg-secondary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .btn-reset {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.625rem 1rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+      background-color: var(--bg-secondary);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-reset:hover {
+      background-color: var(--bg-tertiary);
+      color: var(--danger);
+      border-color: var(--danger);
+    }
+
+    /* View Mode Toggle Switch */
+    .view-toggle {
+      display: flex;
+      background-color: var(--bg-tertiary);
+      padding: 0.25rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .view-toggle button {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.5rem 0.875rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .view-toggle button.active {
+      color: var(--primary);
+      background-color: var(--bg-secondary);
+      box-shadow: var(--shadow);
+    }
+
+    /* Results Counter */
+    .results-counter {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0.25rem;
+    }
+
+    /* Table View Styling */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background-color: var(--bg-secondary);
+      box-shadow: var(--shadow);
+    }
+
+    .table-element {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+
+    .table-element th {
+      background-color: var(--bg-tertiary);
+      color: var(--text-secondary);
+      font-weight: 600;
+      padding: 1rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .table-element th:hover {
+      background-color: var(--border);
+      color: var(--text-primary);
+    }
+
+    .table-element td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-primary);
+      vertical-align: middle;
+    }
+
+    .table-element tr:last-child td {
+      border-bottom: none;
+    }
+
+    .table-element tr:hover td {
+      background-color: var(--bg-primary);
+    }
+
+    .sort-indicator {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-left: 0.25rem;
+      display: inline-block;
+    }
+
+    .sort-indicator.active {
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    /* Card Grid View Styling */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .eq-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 0;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 340px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: itemFadeIn 0.3s ease-out forwards;
+    }
+
+    .eq-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .eq-card-image-wrapper {
+      width: 100%;
+      height: 160px;
+      background-color: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .eq-card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .eq-card-image-wrapper:hover .eq-card-image {
+      transform: scale(1.08);
+    }
+
+    .eq-card-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    }
+
+    .eq-card-image-placeholder i {
+      width: 2rem;
+      height: 2rem;
+      opacity: 0.6;
+    }
+
+    .eq-card-image-placeholder span {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .eq-card-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+    }
+
+    .eq-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .eq-card-no {
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: var(--font-display);
+      background-color: var(--bg-tertiary);
+      color: var(--text-secondary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+    }
+
+    .eq-card-name {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0.5rem 0;
+      line-height: 1.35;
+    }
+
+    .eq-card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .eq-card-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .eq-card-item i {
+      color: var(--text-muted);
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .eq-card-remarks {
+      border-top: 1px solid var(--border);
+      padding-top: 0.75rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.375rem;
+      line-height: 1.4;
+    }
+
+    .eq-card-remarks i {
+      width: 0.875rem;
+      height: 0.875rem;
+      margin-top: 0.125rem;
+      flex-shrink: 0;
+    }
+
+    /* Table Thumbnail Styling */
+    .table-thumbnail-wrapper {
+      width: 40px;
+      height: 40px;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bg-tertiary);
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+      margin: 0 auto;
+    }
+
+    .table-thumbnail-wrapper:hover {
+      transform: scale(1.1);
+      border-color: var(--primary);
+    }
+
+    .table-thumbnail-wrapper.no-image {
+      cursor: default;
+    }
+
+    .table-thumbnail-wrapper.no-image:hover {
+      transform: none;
+      border-color: var(--border);
+    }
+
+    .table-thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.625rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .badge-warning {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: var(--warning);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+
+    .badge-danger {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: var(--danger);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .badge-success {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .badge-info {
+      background-color: rgba(14, 165, 233, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+    }
+
+    .badge-gray {
+      background-color: var(--bg-tertiary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    /* Empty and Error states */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      text-align: center;
+      background-color: var(--bg-secondary);
+      border: 1px dashed var(--border);
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .empty-state.hidden {
+      display: none;
+    }
+
+    .empty-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .empty-state h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-state p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Right Panel: Charts/Analytics */
+    .sidebar-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .chart-title {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .chart-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .chart-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-height: 320px;
+      overflow-y: auto;
+      padding-right: 0.25rem;
+    }
+
+    .chart-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .chart-row:hover {
+      background-color: var(--bg-tertiary);
+    }
+
+    .chart-row.active {
+      background-color: var(--primary-light);
+      border-left: 3px solid var(--primary);
+      padding-left: 0.625rem;
+    }
+
+    .chart-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+    }
+
+    .chart-label {
+      font-weight: 500;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 75%;
+    }
+
+    .chart-row.active .chart-label {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .chart-value {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 0.875rem;
+    }
+
+    .chart-row.active .chart-value {
+      color: var(--primary);
+    }
+
+    .chart-bar-track {
+      height: 0.5rem;
+      background-color: var(--bg-tertiary);
+      border-radius: 9999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .chart-bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+      background-color: var(--accent);
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 0%;
+    }
+
+    .chart-row.active .chart-bar-fill {
+      background-color: var(--primary);
+    }
+
+    /* Toast Container & Toasts */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      z-index: 1000;
+    }
+
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background-color: var(--text-primary);
+      color: var(--bg-primary);
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(1rem);
+      opacity: 0;
+      animation: toastSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards, toastSlideOut 0.3s 2.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .toast-success {
+      border-left: 4px solid var(--success);
+    }
+
+    .toast-error {
+      border-left: 4px solid var(--danger);
+    }
+
+    @keyframes toastSlideIn {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes toastSlideOut {
+      to { transform: translateY(1rem); opacity: 0; }
+    }
+
+    /* Image Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(9, 13, 22, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease-out;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      position: relative;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      max-width: 90%;
+      max-height: 85vh;
+      box-shadow: var(--shadow-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      transform: scale(0.95);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-content img {
+      max-width: 100%;
+      max-height: 60vh;
+      border-radius: 0.75rem;
+      object-fit: contain;
+      box-shadow: var(--shadow);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      background-color: rgba(9, 13, 22, 0.6);
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      z-index: 10;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-close-btn:hover {
+      background-color: var(--primary);
+      transform: scale(1.05);
+    }
+
+    .modal-caption {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: center;
+    }
+
+    /* Animations */
+    @keyframes itemFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    tbody tr {
+      animation: itemFadeIn 0.2s ease-out forwards;
+    }
+
+    /* Footer */
+    .dashboard-footer {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      .sidebar-panel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar-panel {
+        grid-template-columns: 1fr;
+      }
+      .control-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filter-select {
+        width: 100%;
+      }
+      .view-toggle {
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -94,32 +1075,691 @@
         </div>
       </div>
       <div class="header-actions">
-        <button class="btn-action btn-export">GitHub Pages로 공개됨</button>
+        <button onclick="exportCSV()" class="btn-action btn-export">
+          <i data-lucide="download"></i> 내보내기 (.csv)
+        </button>
+        <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()" aria-label="다크 모드 토글">
+          <i data-lucide="sun" class="sun-icon"></i>
+          <i data-lucide="moon" class="moon-icon"></i>
+        </button>
       </div>
     </header>
 
     <section class="kpi-grid">
-      <div class="kpi-card">
-        <div class="kpi-card-title">전체 등록 장비</div>
-        <div class="kpi-card-value">36</div>
+      <div class="kpi-card kpi-total active" id="kpi-card-all" onclick="setKPIFilter('all')">
+        <div class="kpi-card-header">
+          <span class="kpi-card-title">전체 등록 장비</span>
+          <div class="kpi-icon-container">
+            <i data-lucide="database"></i>
+          </div>
+        </div>
+        <div class="kpi-card-value" id="kpi-total-val">0</div>
         <div class="kpi-card-footer">보유 중인 전체 장비</div>
       </div>
-      <div class="kpi-card">
-        <div class="kpi-card-title">위치 지정됨</div>
-        <div class="kpi-card-value">32</div>
+      <div class="kpi-card kpi-located" id="kpi-card-located" onclick="setKPIFilter('located')">
+        <div class="kpi-card-header">
+          <span class="kpi-card-title">위치 지정됨</span>
+          <div class="kpi-icon-container">
+            <i data-lucide="map-pin"></i>
+          </div>
+        </div>
+        <div class="kpi-card-value" id="kpi-located-val">0</div>
         <div class="kpi-card-footer">설치 장소가 파악된 장비</div>
       </div>
-      <div class="kpi-card">
-        <div class="kpi-card-title">미지정</div>
-        <div class="kpi-card-value">4</div>
-        <div class="kpi-card-footer">추가 위치 확인 필요</div>
+      <div class="kpi-card kpi-unlocated" id="kpi-card-unlocated" onclick="setKPIFilter('unlocated')">
+        <div class="kpi-card-header">
+          <span class="kpi-card-title">위치 미지정</span>
+          <div class="kpi-icon-container">
+            <i data-lucide="alert-triangle"></i>
+          </div>
+        </div>
+        <div class="kpi-card-value" id="kpi-unlocated-val">0</div>
+        <div class="kpi-card-footer">위치 파악 및 등록 필요</div>
+      </div>
+      <div class="kpi-card kpi-unassigned" id="kpi-card-unassigned" onclick="setKPIFilter('unassigned')">
+        <div class="kpi-card-header">
+          <span class="kpi-card-title">담당자 미지정</span>
+          <div class="kpi-icon-container">
+            <i data-lucide="user-x"></i>
+          </div>
+        </div>
+        <div class="kpi-card-value" id="kpi-unassigned-val">0</div>
+        <div class="kpi-card-footer">관리 관리자 매칭 필요</div>
       </div>
     </section>
 
-    <main class="main-panel">
-      <div class="status-banner">이 페이지는 GitHub Pages에서 자동 배포되며, 협업자가 소스 파일을 수정하면 푸시 시 새 버전으로 갱신됩니다.</div>
-      <p>협업자들은 저장소의 소스 파일을 수정한 뒤, push를 실행하면 Pages 배포 워크플로우가 자동으로 새 페이지를 게시합니다.</p>
-    </main>
+    <div class="dashboard-grid">
+      <main class="main-panel">
+        <section class="control-bar">
+          <div class="search-wrapper">
+            <i data-lucide="search"></i>
+            <input type="text" id="search-input" class="search-input" placeholder="장비명, 설치 위치, 담당자 실시간 검색..." oninput="handleSearch(this.value)">
+          </div>
+          <div class="filter-group">
+            <select id="filter-location" class="filter-select" onchange="handleLocationFilter(this.value)">
+              <option value="all">모든 위치</option>
+            </select>
+            <select id="filter-manager" class="filter-select" onchange="handleManagerFilter(this.value)">
+              <option value="all">모든 담당자</option>
+            </select>
+            <button onclick="resetFilters()" class="btn-reset" title="모든 검색 및 필터 설정 초기화">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i> 초기화
+            </button>
+            <div class="view-toggle">
+              <button id="view-mode-table" class="active" onclick="setViewMode('table')" title="테이블 리스트 뷰">
+                <i data-lucide="list" class="w-4 h-4"></i> 리스트
+              </button>
+              <button id="view-mode-grid" onclick="setViewMode('grid')" title="카드 그리드 뷰">
+                <i data-lucide="grid" class="w-4 h-4"></i> 카드
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <div class="results-counter">
+          <span id="results-count-text">장비 로딩 중...</span>
+        </div>
+
+        <div id="table-view-wrapper" class="table-container">
+          <table class="table-element">
+            <thead>
+              <tr>
+                <th onclick="handleSort('no')" style="width: 80px;">No <span id="sort-icon-no"></span></th>
+                <th style="width: 70px; text-align: center;">사진</th>
+                <th onclick="handleSort('name')">장비명 <span id="sort-icon-name"></span></th>
+                <th onclick="handleSort('loc')">설치 위치 <span id="sort-icon-loc"></span></th>
+                <th onclick="handleSort('mgr')">담당 관리자 <span id="sort-icon-mgr"></span></th>
+                <th>비고</th>
+              </tr>
+            </thead>
+            <tbody id="inventory-table-body"></tbody>
+          </table>
+        </div>
+
+        <div id="grid-view-wrapper" class="grid-container hidden"></div>
+
+        <div id="empty-state" class="empty-state hidden">
+          <i data-lucide="box-select" class="empty-icon"></i>
+          <h3>일치하는 장비가 없습니다</h3>
+          <p>검색어나 필터 설정을 초기화하고 다시 확인해 보세요.</p>
+          <button onclick="resetFilters()" class="btn-primary">
+            <i data-lucide="rotate-ccw" class="w-4 h-4 inline mr-1"></i> 전체 필터 초기화
+          </button>
+        </div>
+      </main>
+
+      <aside class="sidebar-panel">
+        <div class="card">
+          <div class="chart-header">
+            <h3 class="chart-title">설치 위치별 분포</h3>
+            <span class="chart-subtitle" id="loc-chart-count">0개 범주</span>
+          </div>
+          <div id="location-chart-container" class="chart-list"></div>
+        </div>
+
+        <div class="card">
+          <div class="chart-header">
+            <h3 class="chart-title">담당자별 관리 현황</h3>
+            <span class="chart-subtitle" id="mgr-chart-count">0명</span>
+          </div>
+          <div id="manager-chart-container" class="chart-list"></div>
+        </div>
+      </aside>
+    </div>
+
+    <div id="image-modal" class="modal-overlay" onclick="closeModal()">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="modal-close-btn" onclick="closeModal()" aria-label="닫기">
+          <i data-lucide="x"></i>
+        </button>
+        <img id="modal-img" src="" alt="장비 이미지">
+        <div id="modal-caption" class="modal-caption">장비 이름</div>
+      </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <footer class="dashboard-footer">
+      <p>© 2026 Center for Symbiotic Biomaterials (CSB). All rights reserved. • Center for Symbiotic Biomaterials (CSB) Equipment Inventory Dashboard • Portable HTML Version</p>
+    </footer>
   </div>
+
+  <script>
+    const inventoryData = [
+      {"no": 1, "name": "Minisaw", "loc": "교수님 방", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 2, "name": "저울", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 3, "name": "미세저울", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 4, "name": "가열교반기", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 5, "name": "pH/이온 측정기/ 비색계", "loc": "치과대학 707호", "mgr": "윤정현", "remarks": ""},
+      {"no": 6, "name": "접촉각", "loc": "교수님 방", "mgr": "정수미", "remarks": ""},
+      {"no": 7, "name": "Spin Coater", "loc": "치과대학 708호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 8, "name": "UTM", "loc": "치과대학 708호", "mgr": "김민지", "remarks": ""},
+      {"no": 9, "name": "incubator", "loc": "치과대학 707호", "mgr": "윤정현, 왕링윤", "remarks": ""},
+      {"no": 10, "name": "형광 단백질 광원", "loc": "치과대학 707호", "mgr": "왕링윤", "remarks": ""},
+      {"no": 11, "name": "Mimics S/W", "loc": "치과대학 707호", "mgr": "김지윤", "remarks": "(simulation mod 업그레이드 예정)"},
+      {"no": 12, "name": "광조사기", "loc": "치과대학 707호", "mgr": "왕링윤", "remarks": ""},
+      {"no": 13, "name": "멸균기", "loc": "치과대학 708호", "mgr": "정수미, 왕링윤", "remarks": ""},
+      {"no": 14, "name": "Vacuum oven", "loc": "치과대학 708호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 15, "name": "Epoch", "loc": "치과대학 708호", "mgr": "윤정현", "remarks": ""},
+      {"no": 16, "name": "초음파 세척기", "loc": "치과대학 708호", "mgr": "윤정현", "remarks": ""},
+      {"no": 17, "name": "Thermo CO2 incubator", "loc": "ABMRC 507호", "mgr": "윤정현, 왕링윤", "remarks": ""},
+      {"no": 18, "name": "질소탱크", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
+      {"no": 19, "name": "Real-Time PCR", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
+      {"no": 20, "name": "Centrifuge", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
+      {"no": 21, "name": "thermal cycler", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
+      {"no": 22, "name": "phcbi CO2 incubator", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
+      {"no": 23, "name": "uniz", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 24, "name": "질소 경화기", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 25, "name": "Spining", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 26, "name": "회전증발 농축기", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 27, "name": "ultrasonic homogenizer probes", "loc": "치과대학 505호", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 28, "name": "UV 경화기 2개", "loc": "치과대학 707호", "mgr": "정수미", "remarks": ""},
+      {"no": 29, "name": "큐레이", "loc": "교수님 방", "mgr": "김지윤", "remarks": ""},
+      {"no": 30, "name": "electrospinning", "loc": "치과대학 708호", "mgr": "정수미", "remarks": ""},
+      {"no": 31, "name": "구강 스캐너", "loc": "교수님 방", "mgr": "김지윤", "remarks": ""},
+      {"no": 32, "name": "FT-IR", "loc": "치과대학 708호", "mgr": "김민지", "remarks": ""},
+      {"no": 33, "name": "연마기", "loc": "치과대학 708호", "mgr": "왕링윤", "remarks": ""},
+      {"no": 34, "name": "자동 제습 보관함", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 35, "name": "진공 데시게이터", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 36, "name": "EVOS M5000 이미징시스템", "loc": "치과대학 708호", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 37, "name": "볼텍스 믹서", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 38, "name": "냉장고 (세균, 공용)", "loc": "", "mgr": "", "remarks": ""},
+      {"no": 39, "name": "사진촬영", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 40, "name": "전동 파이펫, 파이펫", "loc": "", "mgr": "윤정현, 왕링윤", "remarks": ""},
+      {"no": 41, "name": "현미경", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 42, "name": "교정용 Vac Plus", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 43, "name": "PC 본체", "loc": "", "mgr": "", "remarks": ""},
+      {"no": 44, "name": "폐쇄기", "loc": "", "mgr": "", "remarks": ""},
+      {"no": 45, "name": "프린터", "loc": "", "mgr": "", "remarks": ""},
+      {"no": 46, "name": "노트북", "loc": "", "mgr": "김지윤", "remarks": ""},
+      {"no": 47, "name": "마이크로칩", "loc": "", "mgr": "만갈, 이민용", "remarks": ""},
+      {"no": 48, "name": "펌프 장비", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 49, "name": "UV 멸균", "loc": "", "mgr": "윤정현, 왕링윤", "remarks": ""}
+    ];
+
+    const state = {
+      filters: { search: "", location: "all", manager: "all", kpi: "all" },
+      sort: { column: "no", direction: "asc" },
+      viewMode: "table",
+      theme: "light",
+      renderFrame: null
+    };
+
+    let locations = [];
+    let managers = [];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.innerWidth < 768) {
+        state.viewMode = 'grid';
+        document.getElementById('view-mode-table').classList.remove('active');
+        document.getElementById('view-mode-grid').classList.add('active');
+      }
+
+      initTheme();
+      extractCategories();
+      populateDropdowns();
+      updateDashboard();
+      lucide.createIcons();
+    });
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.body.classList.add('dark');
+        state.theme = 'dark';
+      } else {
+        document.body.classList.remove('dark');
+        state.theme = 'light';
+      }
+    }
+
+    function toggleTheme() {
+      if (document.body.classList.contains('dark')) {
+        document.body.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        state.theme = 'light';
+        showToast("라이트 모드가 활성화되었습니다.", "success");
+      } else {
+        document.body.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        state.theme = 'dark';
+        showToast("다크 모드가 활성화되었습니다.", "success");
+      }
+    }
+
+    function extractCategories() {
+      const locSet = new Set();
+      inventoryData.forEach(item => {
+        const val = item.loc && item.loc.trim() !== "" ? item.loc.trim() : "미지정";
+        locSet.add(val);
+      });
+      locations = Array.from(locSet);
+
+      const mgrSet = new Set();
+      inventoryData.forEach(item => {
+        if (item.mgr && item.mgr.trim() !== "") {
+          item.mgr.split(",").forEach(m => mgrSet.add(m.trim()));
+        } else {
+          mgrSet.add("미지정");
+        }
+      });
+      managers = Array.from(mgrSet);
+    }
+
+    function populateDropdowns() {
+      const locSelect = document.getElementById('filter-location');
+      const mgrSelect = document.getElementById('filter-manager');
+      locSelect.innerHTML = '<option value="all">모든 위치</option>';
+      mgrSelect.innerHTML = '<option value="all">모든 담당자</option>';
+      const sortedLocs = locations.filter(l => l !== '미지정').sort();
+      if (locations.includes('미지정')) sortedLocs.push('미지정');
+      sortedLocs.forEach(loc => {
+        const opt = document.createElement('option');
+        opt.value = loc;
+        opt.textContent = loc;
+        locSelect.appendChild(opt);
+      });
+      const sortedMgrs = managers.filter(m => m !== '미지정').sort();
+      if (managers.includes('미지정')) sortedMgrs.push('미지정');
+      sortedMgrs.forEach(mgr => {
+        const opt = document.createElement('option');
+        opt.value = mgr;
+        opt.textContent = mgr;
+        mgrSelect.appendChild(opt);
+      });
+    }
+
+    function getFilteredData() {
+      return inventoryData.filter(item => {
+        const s = state.filters.search.toLowerCase().trim();
+        const matchSearch = s === "" || item.name.toLowerCase().includes(s) || (item.loc && item.loc.toLowerCase().includes(s)) || (item.mgr && item.mgr.toLowerCase().includes(s)) || (item.remarks && item.remarks.toLowerCase().includes(s));
+
+        let matchLoc = true;
+        if (state.filters.location !== "all") {
+          if (state.filters.location === "미지정") {
+            matchLoc = !item.loc || item.loc.trim() === "";
+          } else {
+            matchLoc = item.loc && item.loc.trim() === state.filters.location;
+          }
+        }
+
+        let matchMgr = true;
+        if (state.filters.manager !== "all") {
+          if (state.filters.manager === "미지정") {
+            matchMgr = !item.mgr || item.mgr.trim() === "";
+          } else {
+            if (item.mgr) {
+              const itemMgrs = item.mgr.split(",").map(m => m.trim());
+              matchMgr = itemMgrs.includes(state.filters.manager);
+            } else {
+              matchMgr = false;
+            }
+          }
+        }
+
+        let matchKPI = true;
+        if (state.filters.kpi === "located") {
+          matchKPI = item.loc && item.loc.trim() !== "";
+        } else if (state.filters.kpi === "unlocated") {
+          matchKPI = !item.loc || item.loc.trim() === "";
+        } else if (state.filters.kpi === "unassigned") {
+          matchKPI = !item.mgr || item.mgr.trim() === "";
+        }
+
+        return matchSearch && matchLoc && matchMgr && matchKPI;
+      });
+    }
+
+    function getSortedData(data) {
+      const col = state.sort.column;
+      const dir = state.sort.direction === 'asc' ? 1 : -1;
+      return [...data].sort((a, b) => {
+        let valA = a[col];
+        let valB = b[col];
+        if (col === 'no') {
+          return (Number(valA) - Number(valB)) * dir;
+        }
+        valA = valA ? valA.toString().trim() : "";
+        valB = valB ? valB.toString().trim() : "";
+        return valA.localeCompare(valB, 'ko', { numeric: true }) * dir;
+      });
+    }
+
+    function updateDashboard() {
+      if (state.renderFrame !== null) {
+        cancelAnimationFrame(state.renderFrame);
+      }
+      state.renderFrame = requestAnimationFrame(() => {
+        const filtered = getFilteredData();
+        const sorted = getSortedData(filtered);
+        renderKPIs();
+        if (state.viewMode === 'table') {
+          document.getElementById('table-view-wrapper').classList.remove('hidden');
+          document.getElementById('grid-view-wrapper').classList.add('hidden');
+          renderTable(sorted);
+        } else {
+          document.getElementById('table-view-wrapper').classList.add('hidden');
+          document.getElementById('grid-view-wrapper').classList.remove('hidden');
+          renderGrid(sorted);
+        }
+        renderAnalytics(filtered);
+        const emptyStateEl = document.getElementById('empty-state');
+        const countTextEl = document.getElementById('results-count-text');
+        if (sorted.length === 0) {
+          emptyStateEl.classList.remove('hidden');
+          document.getElementById('table-view-wrapper').classList.add('hidden');
+          document.getElementById('grid-view-wrapper').classList.add('hidden');
+          countTextEl.textContent = "검색 결과 0개";
+        } else {
+          emptyStateEl.classList.add('hidden');
+          countTextEl.innerHTML = `총 <strong>${inventoryData.length}</strong>개 중 <strong>${sorted.length}</strong>개 장비 표시 중`;
+        }
+        lucide.createIcons();
+        state.renderFrame = null;
+      });
+    }
+
+    function renderKPIs() {
+      const total = inventoryData.length;
+      const located = inventoryData.filter(item => item.loc && item.loc.trim() !== "").length;
+      const unlocated = inventoryData.filter(item => !item.loc || item.loc.trim() === "").length;
+      const unassigned = inventoryData.filter(item => !item.mgr || item.mgr.trim() === "").length;
+      document.getElementById('kpi-total-val').textContent = total;
+      document.getElementById('kpi-located-val').textContent = located;
+      document.getElementById('kpi-unlocated-val').textContent = unlocated;
+      document.getElementById('kpi-unassigned-val').textContent = unassigned;
+      const cards = { 'all': 'kpi-card-all', 'located': 'kpi-card-located', 'unlocated': 'kpi-card-unlocated', 'unassigned': 'kpi-card-unassigned' };
+      Object.entries(cards).forEach(([key, id]) => {
+        const el = document.getElementById(id);
+        if (state.filters.kpi === key) {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      });
+    }
+
+    function renderTable(data) {
+      const tbody = document.getElementById('inventory-table-body');
+      tbody.innerHTML = "";
+      data.forEach(item => {
+        const row = document.createElement('tr');
+        const tdNo = document.createElement('td');
+        tdNo.innerHTML = `<span class="eq-card-no">${item.no}</span>`;
+        const tdPhoto = document.createElement('td');
+        tdPhoto.style.textAlign = 'center';
+        const hasImage = item.no >= 1 && item.no <= 36 && item.no !== 31;
+        if (hasImage) {
+          tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" onclick="openImageModal('images/equipment_${item.no}.jpeg', '${item.name}')" title="이미지 크게 보기"><img src="images/equipment_${item.no}.jpeg" alt="${item.name}" class="table-thumbnail" loading="lazy"></div>`;
+        } else {
+          tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper no-image" title="이미지 없음"><i data-lucide="image-off" class="w-4 h-4 text-slate-400"></i></div>`;
+        }
+        const tdName = document.createElement('td');
+        tdName.innerHTML = `<strong>${item.name}</strong>`;
+        const tdLoc = document.createElement('td');
+        if (item.loc && item.loc.trim() !== "") {
+          tdLoc.innerHTML = `<span class="badge badge-gray"><i data-lucide="map-pin" class="w-3 h-3 text-slate-400"></i> ${item.loc}</span>`;
+        } else {
+          tdLoc.innerHTML = `<span class="badge badge-warning"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> 위치 미지정</span>`;
+        }
+        const tdMgr = document.createElement('td');
+        if (item.mgr && item.mgr.trim() !== "") {
+          const mgrList = item.mgr.split(",").map(m => `<span class="badge badge-success"><i data-lucide="user" class="w-3 h-3 text-emerald-500"></i> ${m.trim()}</span>`).join(" ");
+          tdMgr.innerHTML = mgrList;
+        } else {
+          tdMgr.innerHTML = `<span class="badge badge-danger"><i data-lucide="user-x" class="w-3.5 h-3.5"></i> 담당자 미지정</span>`;
+        }
+        const tdRemarks = document.createElement('td');
+        if (item.remarks && item.remarks.trim() !== "") {
+          tdRemarks.innerHTML = `<div class="flex items-center gap-1.5 text-xs text-slate-500 italic" title="${item.remarks}"><i data-lucide="info" class="w-3.5 h-3.5 text-sky-500 flex-shrink-0"></i><span>${item.remarks}</span></div>`;
+        } else {
+          tdRemarks.innerHTML = `<span class="text-slate-300">-</span>`;
+        }
+        row.appendChild(tdNo);
+        row.appendChild(tdPhoto);
+        row.appendChild(tdName);
+        row.appendChild(tdLoc);
+        row.appendChild(tdMgr);
+        row.appendChild(tdRemarks);
+        tbody.appendChild(row);
+      });
+      updateSortArrows();
+    }
+
+    function renderGrid(data) {
+      const container = document.getElementById('grid-view-wrapper');
+      container.innerHTML = "";
+      data.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "eq-card";
+        const locHtml = item.loc && item.loc.trim() !== "" ? `<span class="badge badge-gray"><i data-lucide="map-pin"></i> ${item.loc}</span>` : `<span class="badge badge-warning"><i data-lucide="alert-triangle"></i> 위치 미지정</span>`;
+        const mgrHtml = item.mgr && item.mgr.trim() !== "" ? item.mgr.split(",").map(m => `<span class="badge badge-success"><i data-lucide="user"></i> ${m.trim()}</span>`).join(" ") : `<span class="badge badge-danger"><i data-lucide="user-x"></i> 담당자 미지정</span>`;
+        const remarksHtml = item.remarks && item.remarks.trim() !== "" ? `<div class="eq-card-remarks"><i data-lucide="info" class="text-sky-500"></i><span>${item.remarks}</span></div>` : "";
+        const hasImage = item.no >= 1 && item.no <= 36 && item.no !== 31;
+        let imageHtml = "";
+        if (hasImage) {
+          imageHtml = `<div class="eq-card-image-wrapper" onclick="openImageModal('images/equipment_${item.no}.jpeg', '${item.name}')" title="이미지 크게 보기"><img src="images/equipment_${item.no}.jpeg" alt="${item.name}" class="eq-card-image" loading="lazy"></div>`;
+        } else {
+          imageHtml = `<div class="eq-card-image-wrapper"><div class="eq-card-image-placeholder"><i data-lucide="image-off"></i><span>이미지 준비중</span></div></div>`;
+        }
+        card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span>${locHtml}</div><h3 class="eq-card-name">${item.name}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">담당자:</span><div class="flex flex-wrap gap-1">${mgrHtml}</div></div></div></div>${remarksHtml}</div>`;
+        container.appendChild(card);
+      });
+    }
+
+    function renderAnalytics(filteredData) {
+      const locCounts = {};
+      filteredData.forEach(item => {
+        const val = item.loc && item.loc.trim() !== "" ? item.loc.trim() : "미지정";
+        locCounts[val] = (locCounts[val] || 0) + 1;
+      });
+      const sortedLocs = Object.entries(locCounts).sort((a, b) => b[1] - a[1]);
+      document.getElementById('loc-chart-count').textContent = `${sortedLocs.length}개 범주`;
+      const locMax = sortedLocs.length > 0 ? sortedLocs[0][1] : 1;
+      const locChartEl = document.getElementById('location-chart-container');
+      locChartEl.innerHTML = "";
+      sortedLocs.forEach(([loc, count]) => {
+        const pct = (count / locMax) * 100;
+        const isActive = state.filters.location === loc;
+        const row = document.createElement('div');
+        row.className = `chart-row ${isActive ? 'active' : ''}`;
+        row.onclick = () => toggleLocFilter(loc);
+        row.innerHTML = `<div class="chart-label-row"><span class="chart-label">${loc}</span><span class="chart-value">${count}개</span></div><div class="chart-bar-track"><div class="chart-bar-fill" style="width: ${pct}%"></div></div>`;
+        locChartEl.appendChild(row);
+      });
+
+      const mgrCounts = {};
+      filteredData.forEach(item => {
+        if (item.mgr && item.mgr.trim() !== "") {
+          item.mgr.split(",").forEach(m => {
+            const trimmed = m.trim();
+            mgrCounts[trimmed] = (mgrCounts[trimmed] || 0) + 1;
+          });
+        } else {
+          mgrCounts["미지정"] = (mgrCounts["미지정"] || 0) + 1;
+        }
+      });
+      const sortedMgrs = Object.entries(mgrCounts).sort((a, b) => b[1] - a[1]);
+      document.getElementById('mgr-chart-count').textContent = `${sortedMgrs.length}명`;
+      const mgrMax = sortedMgrs.length > 0 ? sortedMgrs[0][1] : 1;
+      const mgrChartEl = document.getElementById('manager-chart-container');
+      mgrChartEl.innerHTML = "";
+      sortedMgrs.forEach(([mgr, count]) => {
+        const pct = (count / mgrMax) * 100;
+        const isActive = state.filters.manager === mgr;
+        const row = document.createElement('div');
+        row.className = `chart-row ${isActive ? 'active' : ''}`;
+        row.onclick = () => toggleMgrFilter(mgr);
+        row.innerHTML = `<div class="chart-label-row"><span class="chart-label">${mgr}</span><span class="chart-value">${count}개</span></div><div class="chart-bar-track"><div class="chart-bar-fill" style="width: ${pct}%"></div></div>`;
+        mgrChartEl.appendChild(row);
+      });
+    }
+
+    function updateSortArrows() {
+      const cols = ['no', 'name', 'loc', 'mgr'];
+      cols.forEach(c => {
+        const iconEl = document.getElementById(`sort-icon-${c}`);
+        if (!iconEl) return;
+        if (state.sort.column === c) {
+          iconEl.innerHTML = state.sort.direction === 'asc' ? '▲' : '▼';
+          iconEl.className = 'sort-indicator active';
+        } else {
+          iconEl.innerHTML = '↕';
+          iconEl.className = 'sort-indicator';
+        }
+      });
+    }
+
+    function handleSort(column) {
+      if (state.sort.column === column) {
+        state.sort.direction = state.sort.direction === 'asc' ? 'desc' : 'asc';
+      } else {
+        state.sort.column = column;
+        state.sort.direction = 'asc';
+      }
+      updateDashboard();
+      showToast(`정렬 기준 변경: ${column.toUpperCase()} (${state.sort.direction.toUpperCase()})`, "success");
+    }
+
+    function handleSearch(val) {
+      state.filters.search = val;
+      updateDashboard();
+    }
+
+    function handleLocationFilter(val) {
+      state.filters.location = val;
+      updateDashboard();
+    }
+
+    function handleManagerFilter(val) {
+      state.filters.manager = val;
+      updateDashboard();
+    }
+
+    function toggleLocFilter(loc) {
+      if (state.filters.location === loc) {
+        state.filters.location = "all";
+      } else {
+        state.filters.location = loc;
+      }
+      document.getElementById('filter-location').value = state.filters.location;
+      updateDashboard();
+      showToast(`위치 필터가 ${state.filters.location === 'all' ? '해제되었습니다' : `'${state.filters.location}'(으)로 적용되었습니다.`}`);
+    }
+
+    function toggleMgrFilter(mgr) {
+      if (state.filters.manager === mgr) {
+        state.filters.manager = "all";
+      } else {
+        state.filters.manager = mgr;
+      }
+      document.getElementById('filter-manager').value = state.filters.manager;
+      updateDashboard();
+      showToast(`담당자 필터가 ${state.filters.manager === 'all' ? '해제되었습니다' : `'${state.filters.manager}'(으)로 적용되었습니다.`}`);
+    }
+
+    function setKPIFilter(kpiType) {
+      if (state.filters.kpi === kpiType) {
+        state.filters.kpi = "all";
+      } else {
+        state.filters.kpi = kpiType;
+      }
+      updateDashboard();
+      const filterLabel = { 'all': '전체 장비 표시', 'located': '위치 지정됨 장비만 표시', 'unlocated': '위치 미지정 장비만 표시', 'unassigned': '담당자 미지정 장비만 표시' };
+      showToast(filterLabel[state.filters.kpi], "success");
+    }
+
+    function resetFilters() {
+      state.filters.search = "";
+      state.filters.location = "all";
+      state.filters.manager = "all";
+      state.filters.kpi = "all";
+      document.getElementById('search-input').value = "";
+      document.getElementById('filter-location').value = "all";
+      document.getElementById('filter-manager').value = "all";
+      updateDashboard();
+      showToast("모든 필터가 초기화되었습니다.", "success");
+    }
+
+    function setViewMode(mode) {
+      state.viewMode = mode;
+      const btnTable = document.getElementById('view-mode-table');
+      const btnGrid = document.getElementById('view-mode-grid');
+      if (mode === 'table') {
+        btnTable.classList.add('active');
+        btnGrid.classList.remove('active');
+      } else {
+        btnTable.classList.remove('active');
+        btnGrid.classList.add('active');
+      }
+      updateDashboard();
+    }
+
+    function openImageModal(imgSrc, name) {
+      const modal = document.getElementById('image-modal');
+      const modalImg = document.getElementById('modal-img');
+      const modalCaption = document.getElementById('modal-caption');
+      modalImg.src = imgSrc;
+      modalCaption.textContent = name;
+      modal.classList.add('active');
+      lucide.createIcons();
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('image-modal');
+      if (modal) {
+        modal.classList.remove('active');
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    function exportCSV() {
+      const dataToExport = getSortedData(getFilteredData());
+      if (dataToExport.length === 0) {
+        showToast("내보낼 데이터가 없습니다.", "error");
+        return;
+      }
+      let csvContent = "No,장비명,설치 위치,담당 관리자,비고\n";
+      dataToExport.forEach(item => {
+        const no = item.no;
+        const name = `"${item.name.replace(/"/g, '""')}"`;
+        const loc = `"${(item.loc || '미지정').replace(/"/g, '""')}"`;
+        const mgr = `"${(item.mgr || '미지정').replace(/"/g, '""')}"`;
+        const remarks = `"${(item.remarks || '').replace(/"/g, '""')}"`;
+        csvContent += `${no},${name},${loc},${mgr},${remarks}\n`;
+      });
+      const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `Center_for_Symbiotic_Biomaterials_CSB_장비목록_필터적용_${dateStr}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast(`CSV 내보내기 완료 (${dataToExport.length}개 항목)`, "success");
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      let iconName = 'info';
+      if (type === 'success') iconName = 'check-circle';
+      if (type === 'error') iconName = 'alert-triangle';
+      toast.innerHTML = `<i data-lucide="${iconName}" class="w-4 h-4"></i><span>${message}</span>`;
+      container.appendChild(toast);
+      lucide.createIcons();
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
+    }
+  </script>
 </body>
 </html>
