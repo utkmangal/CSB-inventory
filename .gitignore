@@ -1,0 +1,10 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Office temporary files
+~$*
+
+# Data sources and backups (exclude from git to prevent repository bloating)
+*.hwpx
+*.xlsx

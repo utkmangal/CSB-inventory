@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>Center for Symbiotic Biomaterials (CSB) 장비 보유 현황 대시보드</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    :root {
+      --bg-primary: #f4f7fa;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #e9eff5;
+      --text-primary: #001f42;
+      --text-secondary: #1e3a5f;
+      --text-muted: #5a738e;
+      --primary: #002855;
+      --primary-hover: #003e80;
+      --primary-light: #e6effc;
+      --accent: #b38f2d;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --border: #ccd6e0;
+      --shadow: 0 4px 6px -1px rgb(0 40 85 / 0.08), 0 2px 4px -2px rgb(0 40 85 / 0.08);
+      --shadow-lg: 0 10px 15px -3px rgb(0 40 85 / 0.1), 0 4px 6px -4px rgb(0 40 85 / 0.1);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body.dark {
+      --bg-primary: #050b14;
+      --bg-secondary: #0d1624;
+      --bg-tertiary: #172338;
+      --text-primary: #f0f5fa;
+      --text-secondary: #a0b2c6;
+      --text-muted: #6a7f98;
+      --primary: #4d8df5;
+      --primary-hover: #357ae8;
+      --primary-light: #0d2547;
+      --accent: #ffc72c;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --border: #20314b;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.45), 0 2px 4px -2px rgb(0 0 0 / 0.45);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.55), 0 4px 6px -4px rgb(0 0 0 / 0.55);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      transition: background-color 0.3s, color 0.3s;
+      min-height: 100vh;
+    }
+
+    .dashboard-container { max-width: 1440px; margin: 0 auto; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .dashboard-header { display: flex; justify-content: space-between; align-items: center; background-color: var(--bg-secondary); border: 1px solid var(--border); border-radius: 1rem; padding: 1.25rem 1.5rem; box-shadow: var(--shadow); }
+    .header-logo-container { display: flex; align-items: center; gap: 1rem; }
+    .logo-circle { display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 0.75rem; color: #ffffff; }
+    .header-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.025em; }
+    .header-subtitle { font-size: 0.875rem; color: var(--text-muted); margin-top: 0.125rem; }
+    .header-actions { display: flex; align-items: center; gap: 0.75rem; }
+    .btn-action { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; border-radius: 0.75rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1px solid var(--border); background-color: var(--bg-secondary); color: var(--text-secondary); }
+    .btn-export { background-color: var(--primary); color: #ffffff; border: none; }
+    .theme-toggle-btn { display: flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 1px solid var(--border); background-color: var(--bg-secondary); color: var(--text-secondary); cursor: pointer; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
+    .kpi-card { background-color: var(--bg-secondary); border: 1px solid var(--border); border-radius: 1rem; padding: 1.25rem; box-shadow: var(--shadow); }
+    .kpi-card-value { font-size: 2rem; font-weight: 800; margin-top: 0.5rem; }
+    .main-panel { background-color: var(--bg-secondary); border: 1px solid var(--border); border-radius: 1rem; padding: 1.25rem; box-shadow: var(--shadow); }
+    .status-banner { background: var(--primary-light); color: var(--primary); padding: 0.9rem 1rem; border-radius: 0.75rem; margin-bottom: 1rem; }
+    @media (max-width: 768px) { .dashboard-header { flex-direction: column; align-items: flex-start; gap: 1rem; } }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <div class="header-logo-container">
+        <img src="favicon.svg" alt="CSB Logo" class="logo-img" style="width: 3rem; height: 3rem; border-radius: 0.75rem; object-fit: contain; border: 2px solid var(--border);" />
+        <div class="header-title-wrapper">
+          <h1 class="header-title">Center for Symbiotic Biomaterials (CSB) 장비 보유 현황</h1>
+          <p class="header-subtitle">Center for Symbiotic Biomaterials (CSB) Equipment Inventory Dashboard • Yonsei University College of Dentistry</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn-action btn-export">GitHub Pages로 공개됨</button>
+      </div>
+    </header>
+
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-card-title">전체 등록 장비</div>
+        <div class="kpi-card-value">36</div>
+        <div class="kpi-card-footer">보유 중인 전체 장비</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-title">위치 지정됨</div>
+        <div class="kpi-card-value">32</div>
+        <div class="kpi-card-footer">설치 장소가 파악된 장비</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-title">미지정</div>
+        <div class="kpi-card-value">4</div>
+        <div class="kpi-card-footer">추가 위치 확인 필요</div>
+      </div>
+    </section>
+
+    <main class="main-panel">
+      <div class="status-banner">이 페이지는 GitHub Pages에서 자동 배포되며, 협업자가 소스 파일을 수정하면 푸시 시 새 버전으로 갱신됩니다.</div>
+      <p>협업자들은 저장소의 소스 파일을 수정한 뒤, push를 실행하면 Pages 배포 워크플로우가 자동으로 새 페이지를 게시합니다.</p>
+    </main>
+  </div>
+</body>
+</html>
