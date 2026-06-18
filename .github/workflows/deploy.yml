@@ -31,11 +31,18 @@ jobs:
 
       - name: Build site artifact
         run: |
+<<<<<<< HEAD
           mkdir -p dist
           cp index.html dist/
           cp favicon.svg dist/
           if [ -f .nojekyll ]; then cp .nojekyll dist/; fi
           if [ -d images ]; then cp -r images dist/; fi
+=======
+          mkdir dist
+          cp index.html dist/
+          cp favicon.svg dist/
+          cp -r images dist/
+>>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
