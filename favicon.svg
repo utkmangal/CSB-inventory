@@ -1,22 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
-<<<<<<< HEAD
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="CSB Center icon">
   <rect width="512" height="512" rx="128" fill="#002855"/>
-  <g transform="translate(106, 96)">
-    <path d="M150 40 C100 40 60 80 60 140 C60 220 120 280 120 320 C120 340 100 360 80 360 C70 360 60 350 60 340 L40 340 C40 370 65 390 90 390 C130 390 150 360 150 320 C150 240 90 180 90 140 C90 100 120 70 150 70 Z" fill="#FFFFFF"/>
-    <path d="M150 40 C200 40 240 80 240 140 C240 220 180 280 180 320 C180 340 200 360 220 360 C230 360 240 350 240 340 L260 340 C260 370 235 390 210 390 C170 390 150 360 150 320 C150 240 210 180 210 140 C210 100 180 70 150 70 Z" fill="#D4AF37"/>
-=======
-  <!-- High-contrast Yonsei Blue background -->
-  <rect width="512" height="512" rx="128" fill="#002855"/>
-  <!-- Minimalist Emblem: Tooth + Double Helix / Crystalline Symbiosis -->
-  <g transform="translate(106, 96)">
-    <!-- Left Lobe: White representation of biological structure -->
-    <path d="M150 40 C100 40 60 80 60 140 C60 220 120 280 120 320 C120 340 100 360 80 360 C70 360 60 350 60 340 L40 340 C40 370 65 390 90 390 C130 390 150 360 150 320 C150 240 90 180 90 140 C90 100 120 70 150 70 Z" fill="#FFFFFF"/>
-    <!-- Right Lobe: Gold representation of synthetic/material structure -->
-    <path d="M150 40 C200 40 240 80 240 140 C240 220 180 280 180 320 C180 340 200 360 220 360 C230 360 240 350 240 340 L260 340 C260 370 235 390 210 390 C170 390 150 360 150 320 C150 240 210 180 210 140 C210 100 180 70 150 70 Z" fill="#D4AF37"/>
-    <!-- Central intersection representing Symbiotic Connection -->
->>>>>>> 32d7021 (Initial commit: Center for Symbiotic Biomaterials (CSB) inventory dashboard)
-    <path d="M150 120 L175 160 L125 160 Z" fill="#D4AF37" opacity="0.95"/>
-    <path d="M150 220 L175 180 L125 180 Z" fill="#FFFFFF" opacity="0.95"/>
-    <circle cx="150" cy="170" r="16" fill="#002855" stroke="#FFFFFF" stroke-width="4"/>
-  </g>
+  <rect x="56" y="56" width="400" height="400" rx="108" fill="#083869" stroke="#D4AF37" stroke-width="12"/>
+  <text x="256" y="332" text-anchor="middle" fill="#FFFFFF" opacity="0.08" font-size="300" font-weight="800" font-family="Georgia, Times New Roman, serif">Y</text>
+  <text x="256" y="276" text-anchor="middle" fill="#FFFFFF" font-size="122" font-weight="800" font-family="Segoe UI, Arial, sans-serif" letter-spacing="8">CSB</text>
+  <text x="256" y="348" text-anchor="middle" fill="#D4AF37" font-size="30" font-weight="700" font-family="Segoe UI, Arial, sans-serif" letter-spacing="6">CENTER</text>
 </svg>
