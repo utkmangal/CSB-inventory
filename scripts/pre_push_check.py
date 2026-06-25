@@ -21,13 +21,25 @@ missing_dirs = [str(path.relative_to(ROOT)) for path in required_dirs if not pat
 errors = []
 if missing:
     errors.append("Missing required files: " + ", ".join(missing))
+<<<<<<< HEAD
+=======
+if missing_dirs:
+    errors.append("Missing required directories: " + ", ".join(missing_dirs))
+
+if not (ROOT / "index.html").exists():
+    errors.append("index.html is required for GitHub Pages publication")
+>>>>>>> 86227be (Add Pages workflow and pre-push integrity check)
 
 html_path = ROOT / "index.html"
 if html_path.exists():
     html = html_path.read_text(encoding="utf-8")
     if "<!DOCTYPE html>" not in html:
         errors.append("index.html does not look like a valid HTML document")
+<<<<<<< HEAD
     if "favicon.svg" not in html:
+=======
+    if "favicon.svg" not in html and "<link rel=\"icon\"" not in html:
+>>>>>>> 86227be (Add Pages workflow and pre-push integrity check)
         errors.append("index.html is missing the favicon reference")
 
 if errors:
