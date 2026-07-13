@@ -1,4 +1,5 @@
 @echo off
+cd /d "%~dp0"
 echo ===================================================
 echo CSB Equipment Inventory Dashboard Data Updater
 echo ===================================================
@@ -12,7 +13,16 @@ if %errorlevel% neq 0 (
     exit /b %errorlevel%
 )
 echo.
-echo 2. Running repository integrity check...
+echo 2. Extracting equipment images from 담당자.xlsx...
+python scripts/extract_equipment_images.py
+if %errorlevel% neq 0 (
+    echo.
+    echo [ERROR] Failed to extract equipment images. Please check the workbook and Pillow installation.
+    pause
+    exit /b %errorlevel%
+)
+echo.
+echo 3. Running repository integrity check...
 python scripts/pre_push_check.py
 if %errorlevel% neq 0 (
     echo.

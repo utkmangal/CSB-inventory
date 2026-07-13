@@ -1,0 +1,12 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^Set-Location \"c:\\\\Users\\\\utkma\\\\TEAM AIB Dropbox\\\\TEAM AIB의 팀 폴더\\\\Equipment-inventory\"; git add index\\.html; git commit -m \"Fix image fallback for equipment 37-48\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Set-Location \"c:\\\\Users\\\\utkma\\\\TEAM AIB Dropbox\\\\TEAM AIB의 팀 폴더\\\\Equipment-inventory\"; python -c \"from pathlib import Path; from io import BytesIO; import openpyxl; from PIL import Image\nroot=Path\\('\\.'\\); wb=openpyxl\\.load_workbook\\(root/'담당자\\.xlsx'\\); ws=next\\(\\(wb\\[s\\] for s in wb\\.sheetnames if s\\.strip\\(\\)=='장비 목록 \\(전체\\)'\\), None\\)\nif ws is None: raise SystemExit\\('sheet not found'\\)\nimages_dir=root/'images'; images_dir\\.mkdir\\(exist_ok=True\\)\nsaved=\\[\\]\nfor img in getattr\\(ws,'_images',\\[\\]\\):\n    a=getattr\\(img,'anchor',None\\)\n    if not hasattr\\(a,'_from'\\): continue\n    r=a\\._from\\.row\\+1; c=a\\._from\\.col\\+1\n    if c!=4: continue\n    no_val=None\n    for rr in \\(r, r-1, r\\+1, r-2, r\\+2\\):\n        if rr < 1: continue\n        v=ws\\.cell\\(row=rr, column=2\\)\\.value\n        try:\n            no_val=int\\(v\\); break\n        except Exception:\n            pass\n    if no_val is None or not \\(37<=no_val<=48\\):\n        continue\n    if isinstance\\(img\\.ref, BytesIO\\):\n        raw=img\\.ref\\.getvalue\\(\\)\n    elif hasattr\\(img\\.ref,'read'\\):\n        img\\.ref\\.seek\\(0\\); raw=img\\.ref\\.read\\(\\)\n    elif hasattr\\(img,'_data'\\):\n        raw=img\\._data\\(\\)\n    else:\n        continue\n    im=Image\\.open\\(BytesIO\\(raw\\)\\)\n    if im\\.mode!='RGB': im=im\\.convert\\('RGB'\\)\n    out=images_dir/f'equipment_\\{no_val\\}\\.jpeg'\n    im\\.save\\(out,'JPEG',quality=92\\)\n    saved\\.append\\(str\\(out\\.name\\)\\)\nwb\\.close\\(\\)\nprint\\('saved_count',len\\(saved\\)\\)\nprint\\('\\\\n'\\.join\\(sorted\\(set\\(saved\\), key=lambda x:int\\(x\\.split\\('_'\\)\\[1\\]\\.split\\('\\.'\\)\\[0\\]\\)\\)\\)\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
