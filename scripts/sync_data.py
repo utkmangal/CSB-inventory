@@ -76,12 +76,13 @@ def sync():
     try:
         wb = openpyxl.load_workbook(excel_path, read_only=True, data_only=True)
         sheet_name = "장비 목록 (전체)"
-        if sheet_name not in wb.sheetnames:
+        matched_sheet_name = next((name for name in wb.sheetnames if name.strip() == sheet_name), None)
+        if matched_sheet_name is None:
             print(f"Error: Sheet '{sheet_name}' not found in Excel file.")
             print(f"Available sheets: {wb.sheetnames}")
             return False
             
-        ws = wb[sheet_name]
+        ws = wb[matched_sheet_name]
         inventory_data = []
         
         for r_idx, row in enumerate(ws.iter_rows(min_row=4, values_only=True), start=4):
