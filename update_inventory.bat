@@ -22,7 +22,16 @@ if %errorlevel% neq 0 (
     exit /b %errorlevel%
 )
 echo.
-echo 3. Running repository integrity check...
+echo 3. Extracting animal-research-lab images...
+python scripts/extract_animal_lab_images.py
+if %errorlevel% neq 0 (
+    echo.
+    echo [ERROR] Failed to extract animal-research-lab images. Please check the workbook and Pillow installation.
+    pause
+    exit /b %errorlevel%
+)
+echo.
+echo 4. Running repository integrity check...
 python scripts/pre_push_check.py
 if %errorlevel% neq 0 (
     echo.

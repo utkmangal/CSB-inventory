@@ -1172,6 +1172,9 @@
       <button id="tab-pc" class="tab-btn" onclick="switchTab('pc')">
         <i data-lucide="monitor"></i> PC 및 모니터
       </button>
+      <button id="tab-animalLab" class="tab-btn" onclick="switchTab('animalLab')">
+        <i data-lucide="flask-conical"></i> 동물실험실 관련 물품
+      </button>
     </nav>
 
     <section class="kpi-grid">
@@ -1349,7 +1352,7 @@
       {"no": 40, "name": "전동 파이펫 및 피펫 세트 (Pipette Aid & Pipette Set)", "loc": "치과대학 707호(2대), 세균실(1대), 세포실 (1대)", "mgr": "윤정현, 왕링윤", "remarks": ""},
       {"no": 41, "name": "광학 현미경 (Microscope)", "loc": "치과대학 707호 (뒤)", "mgr": "만갈, 서지영", "remarks": ""},
       {"no": 42, "name": "교정용 백플러스 (Calibration Vac Plus)", "loc": "치과대학 707호 (뒤)", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 43, "name": "씰링 튜브 폐쇄기 (Tube Sealer)", "loc": "치과대학 704-2호", "mgr": "팀 전체", "remarks": ""},
+      {"no": 43, "name": "폐쇄기 (paper shredder)", "loc": "치과대학 704-2호", "mgr": "팀 전체", "remarks": ""},
       {"no": 44, "name": "사무용 프린터 (Office Printer)", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
       {"no": 45, "name": "마이크로플루이딕 마이크로칩 (Microfluidic Microchip)", "loc": "치과대학 708호", "mgr": "만갈, 이민용", "remarks": ""},
       {"no": 46, "name": "유체 주입 펌프 장비 (Syringe Pump Equipment)", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
@@ -1466,6 +1469,44 @@
       {"no": 49, "kind": "노트북", "label": "CSB 노트북 5", "loc": "치과대학 707호", "user": "미지정", "brand": "BASICS", "photo": "", "sticker": ""}
     ];
 
+    const animalLabData = [
+      {"no": 1, "code": "101D", "name": "드레싱카", "photo": "animal_lab_1", "mgr": "김재형, 정수미"},
+      {"no": 2, "code": "4-0107", "name": "홍재 개부밧드 (Tray) 7절", "photo": "animal_lab_2", "mgr": "김재형, 정수미"},
+      {"no": 3, "code": "4-0108", "name": "홍재 개부밧드 (Tray) 8절", "photo": "animal_lab_3", "mgr": "김재형, 정수미"},
+      {"no": 4, "code": "AM7020", "name": "RNAlater® RNA Stabilization Solutionwi", "photo": "animal_lab_4", "mgr": "김재형, 정수미"},
+      {"no": 5, "code": "NB324", "name": "봉합실 3-0", "photo": "animal_lab_5", "mgr": "김재형, 정수미"},
+      {"no": 6, "code": "NB526P", "name": "봉합사 5-0", "photo": "animal_lab_6", "mgr": "김재형, 정수미"},
+      {"no": 7, "code": "THB50", "name": "Trephine bur 5.0mm", "photo": "animal_lab_7", "mgr": "김재형, 정수미"},
+      {"no": 8, "code": "면봉", "name": "면봉", "photo": "animal_lab_8", "mgr": "김재형, 정수미"},
+      {"no": 9, "code": "멸균거즈", "name": "멸균거즈", "photo": "animal_lab_9", "mgr": "김재형, 정수미"},
+      {"no": 10, "code": "실리콘피부", "name": "피부봉합연습도구 실리콘피부패드", "photo": "animal_lab_10", "mgr": "김재형, 정수미"},
+      {"no": 11, "code": "정밀핀셋", "name": "E5SA TWEEZER ERGONINIC ESD", "photo": "animal_lab_11", "mgr": "김재형, 정수미"},
+      {"no": 12, "code": "제모크림", "name": "제모크림", "photo": "animal_lab_12", "mgr": "김재형, 정수미"},
+      {"no": 13, "code": "HC.04-0018-13", "name": "ARTERY FORCEP SPENCER WELL", "photo": "animal_lab_13", "mgr": "김재형, 정수미"},
+      {"no": 14, "code": "HC.13-112", "name": "Laboratory 14cm S/B Straight", "photo": "animal_lab_14", "mgr": "김재형, 정수미"},
+      {"no": 15, "code": "HC.15-122", "name": "DRESSING FORCEP THUMB", "photo": "animal_lab_15", "mgr": "김재형, 정수미"},
+      {"no": 16, "code": "HC.15-142", "name": "TISSUE FORCEP 14CM", "photo": "animal_lab_16", "mgr": "김재형, 정수미"},
+      {"no": 17, "code": "HC.17-160", "name": "KELLY FORCEP 14CM", "photo": "animal_lab_17", "mgr": "김재형, 정수미"},
+      {"no": 18, "code": "HC13-122", "name": "Operating Scissors (S/S) 14", "photo": "animal_lab_18", "mgr": "김재형, 정수미"},
+      {"no": 19, "code": "S-1101-14", "name": "Operating Scissor S-1101-14", "photo": "animal_lab_19", "mgr": "김재형, 정수미"},
+      {"no": 20, "code": "위생 깔개 매트", "name": "일회용방수패드", "photo": "animal_lab_20", "mgr": "김재형, 정수미"},
+      {"no": 21, "code": "전기매트", "name": "전기장판 바닥용", "photo": "animal_lab_21", "mgr": "김재형, 정수미"},
+      {"no": 22, "code": "전기이발기", "name": "전기이발기", "photo": "animal_lab_22", "mgr": "김재형, 정수미"},
+      {"no": 23, "code": "핸드피스", "name": "핸드피스", "photo": "animal_lab_23", "mgr": "김재형, 정수미"},
+      {"no": 24, "code": "수술용 칼", "name": "수술용 칼", "photo": "animal_lab_24", "mgr": "김재형, 정수미"},
+      {"no": 25, "code": "적외선조사기", "name": "적외선조사기", "photo": "animal_lab_25", "mgr": "김재형, 정수미"},
+      {"no": 26, "code": "HFE-SB11", "name": "Surgical Blade, 메스날 11호", "photo": "animal_lab_26", "mgr": "김재형, 정수미"},
+      {"no": 27, "code": "불소통", "name": "불소통", "photo": "animal_lab_27", "mgr": "김재형, 정수미"},
+      {"no": 28, "code": "스탠드 전등", "name": "스탠드 전등", "photo": "animal_lab_28", "mgr": "김재형, 정수미"},
+      {"no": 29, "code": "바이옵시펀치", "name": "biopsy punch(의료용천공기) 5mm", "photo": "animal_lab_29", "mgr": "김재형, 정수미"},
+      {"no": 30, "code": "JS20", "name": "가정용 석션기", "photo": "animal_lab_30", "mgr": "김재형, 정수미"},
+      {"no": 31, "code": "카메라", "name": "카메라 등", "photo": "animal_lab_31", "mgr": "김재형, 정수미"},
+      {"no": 32, "code": "M-32GB", "name": "메모리카드 32G", "photo": "animal_lab_32", "mgr": "김재형, 정수미"}
+    ];
+    animalLabData.forEach(item => {
+      item.loc = "ABMRC animal-research-lab B3/B4";
+    });
+
     const state = {
       activeTab: "general",
       filters: { search: "", location: "all", manager: "all", kpi: "all" },
@@ -1481,6 +1522,7 @@
     function getActiveDataset() {
       if (state.activeTab === 'pipette') return pipetteData;
       if (state.activeTab === 'pc') return pcData;
+      if (state.activeTab === 'animalLab') return animalLabData;
       return inventoryData;
     }
 
@@ -1507,7 +1549,8 @@
         const placeholders = {
           general: '장비명, 설치 위치, 담당자 실시간 검색...',
           pipette: '품목명, 사양, 위치, 제조사 실시간 검색...',
-          pc: '종류, 라벨, 위치, 사용자, 제조사 실시간 검색...'
+          pc: '종류, 라벨, 위치, 사용자, 제조사 실시간 검색...',
+          animalLab: '품목명 또는 품목코드 실시간 검색...'
         };
         searchInput.placeholder = placeholders[tabName] || '실시간 검색...';
       }
@@ -1523,7 +1566,7 @@
       renderTableHeaders();
       updateDashboard();
       
-      const tabLabels = { 'general': '일반 장비', 'pipette': '피펫 관리', 'pc': 'PC 및 모니터' };
+      const tabLabels = { 'general': '일반 장비', 'pipette': '피펫 관리', 'pc': 'PC 및 모니터', 'animalLab': '동물실험실 관련 물품' };
       showToast(`${tabLabels[tabName]} 탭으로 전환되었습니다.`, "success");
     }
 
@@ -1561,6 +1604,13 @@
           <th onclick="handleSort('user')">사용자 <span id="sort-icon-user"></span></th>
           <th onclick="handleSort('brand')">제조사 <span id="sort-icon-brand"></span></th>
         `;
+      } else if (state.activeTab === 'animalLab') {
+        thead.innerHTML = '<th onclick="handleSort(&quot;no&quot;)" style="width: 80px;">No <span id="sort-icon-no"></span></th>' +
+          '<th style="width: 90px; text-align: center;">사진</th>' +
+          '<th onclick="handleSort(&quot;code&quot;)">품목코드 <span id="sort-icon-code"></span></th>' +
+          '<th onclick="handleSort(&quot;name&quot;)">품명 <span id="sort-icon-name"></span></th>' +
+          '<th onclick="handleSort(&quot;loc&quot;)">위치 <span id="sort-icon-loc"></span></th>' +
+          '<th onclick="handleSort(&quot;mgr&quot;)">담당자 <span id="sort-icon-mgr"></span></th>';
       }
       updateSortArrows();
     }
@@ -1596,6 +1646,9 @@
         } else if (state.activeTab === 'pc') {
           const val = item.user && item.user.trim() !== "" ? item.user.trim() : "미지정";
           mgrSet.add(val);
+        } else if (state.activeTab === 'animalLab') {
+          const val = item.mgr && item.mgr.trim() !== "" ? item.mgr.trim() : "미지정";
+          val.split(",").forEach(manager => mgrSet.add(manager.trim()));
         }
       });
       managers = Array.from(mgrSet);
@@ -1605,7 +1658,7 @@
       const locSelect = document.getElementById('filter-location');
       const mgrSelect = document.getElementById('filter-manager');
       if (!locSelect || !mgrSelect) return;
-      
+
       locSelect.innerHTML = '<option value="all">모든 위치</option>';
       if (state.activeTab === 'general') {
         mgrSelect.innerHTML = '<option value="all">모든 담당자</option>';
@@ -1613,6 +1666,8 @@
         mgrSelect.innerHTML = '<option value="all">모든 제조사</option>';
       } else if (state.activeTab === 'pc') {
         mgrSelect.innerHTML = '<option value="all">모든 사용자</option>';
+      } else if (state.activeTab === 'animalLab') {
+        mgrSelect.innerHTML = '<option value="all">모든 담당자</option>';
       }
       
       const sortedLocs = locations.filter(l => l !== '미지정').sort();
@@ -1657,6 +1712,11 @@
                           (item.loc && item.loc.toLowerCase().includes(s)) || 
                           (item.user && item.user.toLowerCase().includes(s)) || 
                           (item.brand && item.brand.toLowerCase().includes(s));
+          } else if (state.activeTab === 'animalLab') {
+            matchSearch = item.name.toLowerCase().includes(s) ||
+                          (item.code && item.code.toLowerCase().includes(s)) ||
+                          (item.loc && item.loc.toLowerCase().includes(s)) ||
+                          (item.mgr && item.mgr.toLowerCase().includes(s));
           }
         }
 
@@ -1678,6 +1738,8 @@
               matchMgr = !item.brand || item.brand.trim() === "";
             } else if (state.activeTab === 'pc') {
               matchMgr = !item.user || item.user.trim() === "";
+            } else if (state.activeTab === 'animalLab') {
+              matchMgr = !item.mgr || item.mgr.trim() === "";
             }
           } else {
             if (state.activeTab === 'general') {
@@ -1691,6 +1753,9 @@
               matchMgr = item.brand && item.brand.trim() === state.filters.manager;
             } else if (state.activeTab === 'pc') {
               matchMgr = item.user && item.user.trim() === state.filters.manager;
+            } else if (state.activeTab === 'animalLab') {
+              const itemMgrs = item.mgr ? item.mgr.split(",").map(m => m.trim()) : [];
+              matchMgr = itemMgrs.includes(state.filters.manager);
             }
           }
         }
@@ -1720,6 +1785,14 @@
               matchKPI = item.kind === '본체';
             } else if (state.filters.kpi === "laptop") {
               matchKPI = item.kind === '노트북';
+            }
+          } else if (state.activeTab === 'animalLab') {
+            if (state.filters.kpi === "located") {
+              matchKPI = item.loc && item.loc.trim() !== "";
+            } else if (state.filters.kpi === "assigned") {
+              matchKPI = item.mgr && item.mgr.trim() !== "";
+            } else if (state.filters.kpi === "photographed") {
+              matchKPI = item.photo && item.photo.trim() !== "";
             }
           }
         }
@@ -1778,7 +1851,8 @@
               const emptyMessages = {
                 general: '일치하는 장비가 없습니다',
                 pipette: '일치하는 피펫이 없습니다',
-                pc: '일치하는 PC 기기가 없습니다'
+                pc: '일치하는 PC 기기가 없습니다',
+                animalLab: '일치하는 동물실험실 관련 물품이 없습니다'
               };
               h3.textContent = emptyMessages[state.activeTab];
             }
@@ -1790,7 +1864,7 @@
           if (countTextEl) countTextEl.textContent = "검색 결과 0개";
         } else {
           if (emptyStateEl) emptyStateEl.classList.add('hidden');
-          const itemTypes = { general: '개 장비', pipette: '개 피펫', pc: '개 PC 기기' };
+          const itemTypes = { general: '개 장비', pipette: '개 피펫', pc: '개 PC 기기', animalLab: '개 물품' };
           const unit = itemTypes[state.activeTab] || '개';
           if (countTextEl) countTextEl.innerHTML = `총 <strong>${activeData.length}</strong>${unit} 중 <strong>${sorted.length}</strong>개 표시 중`;
         }
@@ -1819,6 +1893,12 @@
           { title: "모니터", val: data.filter(item => item.kind === '모니터').length, desc: "모니터 수량", icon: "monitor", filter: "monitor" },
           { title: "본체", val: data.filter(item => item.kind === '본체').length, desc: "본체 수량", icon: "cpu", filter: "desktop" },
           { title: "노트북", val: data.filter(item => item.kind === '노트북').length, desc: "노트북 수량", icon: "laptop", filter: "laptop" }
+        ],
+        animalLab: [
+          { title: "전체 물품", val: data.length, desc: "동물실험실 관련 등록 물품", icon: "database", filter: "all" },
+          { title: "위치 지정됨", val: data.filter(item => item.loc && item.loc.trim() !== "").length, desc: "보관 위치가 등록된 물품", icon: "map-pin", filter: "located" },
+          { title: "담당자 지정됨", val: data.filter(item => item.mgr && item.mgr.trim() !== "").length, desc: "담당자가 등록된 물품", icon: "users", filter: "assigned" },
+          { title: "사진 등록", val: data.filter(item => item.photo && item.photo.trim() !== "").length, desc: "사진이 연결된 물품", icon: "image", filter: "photographed" }
         ]
       };
       
@@ -1987,6 +2067,45 @@
             tdBrand.innerHTML = `<span class="text-slate-300">-</span>`;
           }
           row.appendChild(tdBrand);
+        } else if (state.activeTab === 'animalLab') {
+          const imageCandidates = getImageCandidates('animalLab', item);
+          const primaryImage = imageCandidates[0] || '';
+          const fallbackList = imageCandidates.join('|');
+          const tdPhoto = document.createElement('td');
+          tdPhoto.style.textAlign = 'center';
+          const photoWrapper = document.createElement('div');
+          photoWrapper.className = 'table-thumbnail-wrapper';
+          photoWrapper.title = '이미지 크게 보기';
+          const photoImg = document.createElement('img');
+          photoImg.src = primaryImage;
+          photoImg.alt = item.name;
+          photoImg.className = 'table-thumbnail';
+          photoImg.dataset.fallbackList = fallbackList;
+          photoImg.dataset.fallbackIndex = '0';
+          photoImg.loading = 'lazy';
+          photoImg.onerror = () => handleTableImageError(photoImg);
+          photoWrapper.onclick = () => openImageModal(photoImg.src, item.name);
+          photoWrapper.appendChild(photoImg);
+          tdPhoto.appendChild(photoWrapper);
+          row.appendChild(tdPhoto);
+
+          const tdCode = document.createElement('td');
+          tdCode.innerHTML = item.code ? '<span class="badge badge-gray">' + item.code + '</span>' : '<span class="text-slate-300">-</span>';
+          row.appendChild(tdCode);
+
+          const tdName = document.createElement('td');
+          tdName.innerHTML = '<strong>' + item.name + '</strong>';
+          row.appendChild(tdName);
+
+          const tdLoc = document.createElement('td');
+          tdLoc.innerHTML = item.loc ? '<span class="badge badge-gray"><i data-lucide="map-pin" class="w-3 h-3"></i> ' + item.loc + '</span>' : '<span class="badge badge-warning">위치 미지정</span>';
+          row.appendChild(tdLoc);
+
+          const tdMgr = document.createElement('td');
+          tdMgr.innerHTML = item.mgr
+            ? item.mgr.split(',').map(manager => '<span class="badge badge-success"><i data-lucide="user" class="w-3 h-3"></i> ' + manager.trim() + '</span>').join(' ')
+            : '<span class="badge badge-danger">담당자 미지정</span>';
+          row.appendChild(tdMgr);
         }
         
         tbody.appendChild(row);
@@ -2036,8 +2155,25 @@
           const userHtml = item.user && item.user.trim() !== "" && item.user !== "미지정" ? `<span class="badge badge-success"><i data-lucide="user"></i> ${item.user}</span>` : `<span class="badge badge-danger"><i data-lucide="user-x"></i> 미지정</span>`;
           const imageHtml = `<div class="eq-card-image-wrapper" style="display: flex; align-items: center; justify-content: center; background: var(--bg-tertiary); color: var(--primary);"><i data-lucide="${icon}" style="width: 3.5rem; height: 3.5rem;"></i></div>`;
           card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span>${locHtml}</div><h3 class="eq-card-name">${item.label}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">종류:</span>${kindHtml}</div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">제조사:</span><span>${item.brand || "-"}</span></div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">사용자:</span><div class="flex flex-wrap gap-1">${userHtml}</div></div></div></div></div>`;
+        } else if (state.activeTab === 'animalLab') {
+          const imageCandidates = getImageCandidates('animalLab', item);
+          const primaryImage = imageCandidates[0] || '';
+          const fallbackList = imageCandidates.join('|');
+          const imageHtml = '<div class="eq-card-image-wrapper" title="이미지 크게 보기"><img src="' + primaryImage + '" data-fallback-list="' + fallbackList + '" data-fallback-index="0" alt="' + item.name + '" class="eq-card-image" loading="lazy"></div>';
+          const managerHtml = item.mgr
+            ? item.mgr.split(',').map(manager => '<span class="badge badge-success"><i data-lucide="user"></i> ' + manager.trim() + '</span>').join(' ')
+            : '<span class="badge badge-danger">담당자 미지정</span>';
+          card.innerHTML = imageHtml +
+            '<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ' + item.no + '</span>' + locHtml + '</div>' +
+            '<h3 class="eq-card-name">' + item.name + '</h3><div class="eq-card-info">' +
+            '<div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">품목코드:</span><span>' + (item.code || '-') + '</span></div>' +
+            '<div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">담당자:</span><div class="flex flex-wrap gap-1">' + managerHtml + '</div></div>' +
+            '</div></div></div>';
+          const cardImage = card.querySelector('img');
+          const cardImageWrapper = card.querySelector('.eq-card-image-wrapper');
+          cardImage.onerror = () => handleImageError(cardImage);
+          cardImageWrapper.onclick = () => openImageModal(cardImage.src, item.name);
         }
-        
         container.appendChild(card);
       });
     }
@@ -2082,6 +2218,15 @@
         } else if (state.activeTab === 'pc') {
           const val = item.user && item.user.trim() !== "" ? item.user.trim() : "미지정";
           mgrCounts[val] = (mgrCounts[val] || 0) + 1;
+        } else if (state.activeTab === 'animalLab') {
+          if (item.mgr && item.mgr.trim() !== "") {
+            item.mgr.split(",").forEach(m => {
+              const cleaned = m.trim();
+              mgrCounts[cleaned] = (mgrCounts[cleaned] || 0) + 1;
+            });
+          } else {
+            mgrCounts["미지정"] = (mgrCounts["미지정"] || 0) + 1;
+          }
         }
       });
 
@@ -2099,6 +2244,11 @@
       } else if (state.activeTab === 'pc') {
         if (titleEl) titleEl.textContent = "사용자별 보유 현황";
         if (subtitleEl) subtitleEl.textContent = `${sortedMgrs.length}명`;
+      }
+
+      if (state.activeTab === 'animalLab') {
+        if (titleEl) titleEl.textContent = "담당자별 관리 현황";
+        if (subtitleEl) subtitleEl.textContent = sortedMgrs.length + "명";
       }
 
       const mgrMax = sortedMgrs.length > 0 ? sortedMgrs[0][1] : 1;
@@ -2204,6 +2354,9 @@
       } else if (state.activeTab === 'pc') {
         const filterLabel = { 'all': '전체 PC 기기 표시', 'monitor': '모니터만 표시', 'desktop': '본체만 표시', 'laptop': '노트북만 표시' };
         label = filterLabel[state.filters.kpi] || "전체 PC 기기 표시";
+      } else if (state.activeTab === 'animalLab') {
+        const filterLabel = { 'all': '전체 동물실험실 관련 물품 표시', 'located': '위치 지정 물품만 표시', 'assigned': '담당자 지정 물품만 표시', 'photographed': '사진 등록 물품만 표시' };
+        label = filterLabel[state.filters.kpi] || "전체 동물실험실 관련 물품 표시";
       }
       showToast(label, "success");
     }
@@ -2254,6 +2407,11 @@
         addFromPhotoValue(item.photo);
         addBasename(`pc_${item.no}`);
         addBasename(`equipment_${item.no}`);
+      }
+
+      if (tab === "animalLab") {
+        addFromPhotoValue(item.photo);
+        addBasename("animal_lab_" + item.no);
       }
 
       return [...new Set(candidates)];
@@ -2364,11 +2522,23 @@
         });
       }
       
+      if (state.activeTab === 'animalLab') {
+        csvContent = "No,품목코드,품명,위치,담당자\n";
+        dataToExport.forEach(item => {
+          const no = item.no;
+          const code = '"' + (item.code || '').replace(/"/g, '""') + '"';
+          const name = '"' + (item.name || '').replace(/"/g, '""') + '"';
+          const loc = '"' + (item.loc || '미지정').replace(/"/g, '""') + '"';
+          const mgr = '"' + (item.mgr || '미지정').replace(/"/g, '""') + '"';
+          csvContent += no + ',' + code + ',' + name + ',' + loc + ',' + mgr + '\n';
+        });
+      }
+
       const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-      const tabLabels = { 'general': '장비목록', 'pipette': '피펫목록', 'pc': 'PC목록' };
+      const tabLabels = { 'general': '장비목록', 'pipette': '피펫목록', 'pc': 'PC목록', 'animalLab': '동물실험실관련물품목록' };
       link.setAttribute("href", url);
       link.setAttribute("download", `Center_for_Symbiotic_Biomaterials_CSB_${tabLabels[state.activeTab]}_필터적용_${dateStr}.csv`);
       document.body.appendChild(link);

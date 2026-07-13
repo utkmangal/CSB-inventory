@@ -54,7 +54,7 @@ def get_bilingual_name(name_val):
         "현미경": "광학 현미경 (Microscope)",
         "교정용 Vac Plus": "교정용 백플러스 (Calibration Vac Plus)",
         "PC 본체": "데스크탑 PC 본체 (PC Desktop Tower)",
-        "폐쇄기": "씰링 튜브 폐쇄기 (Tube Sealer)",
+        "폐쇄기": "폐쇄기 (paper shredder)",
         "프린터": "사무용 프린터 (Office Printer)",
         "노트북": "노트북 컴퓨터 (Laptop Computer)",
         "마이크로칩": "마이크로플루이딕 마이크로칩 (Microfluidic Microchip)",
@@ -252,6 +252,34 @@ def sync():
             print(f"An error occurred while reading the archive Excel: {e}")
             # Keep empty lists to avoid breaking the script
             
+    # Read the dedicated animal-lab inventory from its source workbook.
+    animal_lab_data = []
+    animal_lab_path = root / "archive" / "동물실험실 관련 물품 리스트.xlsx"
+    if animal_lab_path.exists():
+        try:
+            wb_animal = openpyxl.load_workbook(animal_lab_path, read_only=True, data_only=True)
+            ws_animal = wb_animal[wb_animal.sheetnames[0]]
+            for row in ws_animal.iter_rows(min_row=3, values_only=True):
+                code_val = row[2] if len(row) > 2 else None
+                name_val = row[3] if len(row) > 3 else None
+                if not code_val or not name_val:
+                    continue
+                no = len(animal_lab_data) + 1
+                animal_lab_data.append({
+                    "no": no,
+                    "code": str(code_val).strip(),
+                    "name": str(name_val).strip(),
+                    "photo": f"animal_lab_{no}",
+                    "loc": "ABMRC animal-research-lab B3/B4",
+                    "mgr": "김재형, 정수미"
+                })
+            wb_animal.close()
+            print(f"Successfully parsed {len(animal_lab_data)} animal-lab entries.")
+        except Exception as e:
+            print(f"Warning: Could not read animal-lab workbook: {e}")
+    else:
+        print(f"Warning: Animal-lab workbook not found at {animal_lab_path}.")
+
     # Write to index.html
     if not html_path.exists():
         print(f"Error: index.html not found at {html_path}")
@@ -294,6 +322,13 @@ def sync():
         html_content, count_pc = re.subn(pattern_pc, replacement_pc, html_content)
         if count_pc == 0:
             print("Warning: Could not locate 'const pcData = [...];' in index.html (will be added).")
+
+        formatted_animal_lab = format_json(animal_lab_data)
+        pattern_animal_lab = r"(const animalLabData = )\[[\s\S]*?\];"
+        replacement_animal_lab = f"\\1{formatted_animal_lab};"
+        html_content, count_animal_lab = re.subn(pattern_animal_lab, replacement_animal_lab, html_content)
+        if count_animal_lab == 0:
+            print("Warning: Could not locate 'const animalLabData = [...];' in index.html.")
             
         html_path.write_text(html_content, encoding="utf-8")
         print("index.html has been successfully updated with new data.")
