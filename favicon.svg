@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="CSB Center icon">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Symbiotic Biomaterials Lab icon">
   <rect width="512" height="512" rx="128" fill="#002855"/>
   <rect x="56" y="56" width="400" height="400" rx="108" fill="#083869" stroke="#D4AF37" stroke-width="12"/>
   <text x="256" y="332" text-anchor="middle" fill="#FFFFFF" opacity="0.08" font-size="300" font-weight="800" font-family="Georgia, Times New Roman, serif">Y</text>
-  <text x="256" y="276" text-anchor="middle" fill="#FFFFFF" font-size="122" font-weight="800" font-family="Segoe UI, Arial, sans-serif" letter-spacing="8">CSB</text>
+  <text x="256" y="276" text-anchor="middle" fill="#FFFFFF" font-size="122" font-weight="800" font-family="Segoe UI, Arial, sans-serif" letter-spacing="8">SBL</text>
   <text x="256" y="348" text-anchor="middle" fill="#D4AF37" font-size="30" font-weight="700" font-family="Segoe UI, Arial, sans-serif" letter-spacing="6">CENTER</text>
 </svg>
