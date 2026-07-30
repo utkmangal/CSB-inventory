@@ -1873,7 +1873,6 @@
       });
     }
 
-<<<<<<< HEAD
     function renderKPIs() {
       const data = getActiveDataset();
       const cardConfigs = {
@@ -1924,47 +1923,6 @@
         cardEl.onclick = () => setKPIFilter(c.filter);
       });
       lucide.createIcons();
-=======
-      state.renderFrame = requestAnimationFrame(() => {
-        const filtered = getFilteredData();
-        const sorted = getSortedData(filtered);
-
-        // Render KPIs (calculated from full inventory, static mapping)
-        renderKPIs();
-
-        // Render List Views (Table or Grid)
-        if (state.viewMode === 'table') {
-          document.getElementById('table-view-wrapper').classList.remove('hidden');
-          document.getElementById('grid-view-wrapper').classList.add('hidden');
-          renderTable(sorted);
-        } else {
-          document.getElementById('table-view-wrapper').classList.add('hidden');
-          document.getElementById('grid-view-wrapper').classList.remove('hidden');
-          renderGrid(sorted);
-        }
-
-        // Render Analytics Panels
-        renderAnalytics(filtered);
-
-        // Toggle Empty State if zero results
-        const emptyStateEl = document.getElementById('empty-state');
-        const countTextEl = document.getElementById('results-count-text');
-        
-        if (sorted.length === 0) {
-          emptyStateEl.classList.remove('hidden');
-          document.getElementById('table-view-wrapper').classList.add('hidden');
-          document.getElementById('grid-view-wrapper').classList.add('hidden');
-          countTextEl.textContent = "검색 결과 0개";
-        } else {
-          emptyStateEl.classList.add('hidden');
-          countTextEl.innerHTML = `총 <strong>${inventoryData.length}</strong>개 중 <strong>${sorted.length}</strong>개 장비 표시 중`;
-        }
-
-        // Refresh Lucide SVGs
-        lucide.createIcons();
-        state.renderFrame = null;
-      });
->>>>>>> 5ab5ecb (Restore complete dashboard and improve tab responsiveness)
     }
 
     function renderTable(data) {
