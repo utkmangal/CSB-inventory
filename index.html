@@ -2041,10 +2041,10 @@
         <i data-lucide="monitor"></i> PC 및 모니터
       </button>
       <button id="tab-animalLab" class="tab-btn" onclick="switchTab('animalLab')">
-        <i data-lucide="flask-conical"></i> 동물실험실 관련 물품
+        <i data-lucide="rat"></i> 동물실험실 관련 물품
       </button>
       <button id="tab-reagent" class="tab-btn" onclick="switchTab('reagent')">
-        <i data-lucide="test-tube-2"></i> 시약 리스트
+        <i data-lucide="test-tube-2"></i> 물품 시약 리스트
       </button>
     </nav>
 
@@ -2279,7 +2279,7 @@
       {"no": 40, "name": "전동 파이펫 및 피펫 세트 (Pipette Aid & Pipette Set)", "loc": "치과대학 707호(2대), 세균실(1대), 세포실 (1대)", "mgr": "윤정현, 왕링윤", "remarks": ""},
       {"no": 41, "name": "광학 현미경 (Microscope)", "loc": "치과대학 707호 (뒤)", "mgr": "만갈, 서지영", "remarks": ""},
       {"no": 42, "name": "교정용 백플러스 (Calibration Vac Plus)", "loc": "치과대학 707호 (뒤)", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 43, "name": "폐쇄기 (paper shredder)", "loc": "치과대학 704-2호", "mgr": "팀 전체", "remarks": ""},
+      {"no": 43, "name": "폐쇄기 (paper shredder)", "loc": "대신 building", "mgr": "팀 전체", "remarks": "", "icon": "rat"},
       {"no": 44, "name": "사무용 프린터 (Office Printer)", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
       {"no": 45, "name": "마이크로플루이딕 마이크로칩 (Microfluidic Microchip)", "loc": "치과대학 708호", "mgr": "만갈, 이민용", "remarks": ""},
       {"no": 46, "name": "유체 주입 펌프 장비 (Syringe Pump Equipment)", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
@@ -2934,7 +2934,7 @@
         'pipette': '피펫 관리',
         'pc': 'PC 및 모니터',
         'animalLab': '동물실험실 관련 물품',
-        'reagent': '시약 리스트'
+        'reagent': '물품 시약 리스트'
       };
       showToast(`${tabLabels[tabName] || tabName} 탭으로 전환되었습니다.`, "success");
     }
@@ -3492,7 +3492,7 @@
           const fallbackList = imageCandidates.join('|');
           const tdPhoto = document.createElement('td');
           tdPhoto.style.textAlign = 'center';
-          tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" onclick="openImageModal(this.querySelector('img').src, '${item.name}')" title="이미지 크게 보기"><img src="${primaryImage}" data-fallback-list="${fallbackList}" data-fallback-index="0" alt="${item.name}" class="table-thumbnail" onerror="handleTableImageError(this)" loading="lazy"></div>`;
+          tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" onclick="openImageModal(this.querySelector('img').src, '${item.name}')" title="이미지 크게 보기"><img src="${primaryImage}" data-fallback-list="${fallbackList}" data-fallback-index="0" data-fallback-icon="${item.icon || 'image-off'}" alt="${item.name}" class="table-thumbnail" onerror="handleTableImageError(this)" loading="lazy"></div>`;
           row.appendChild(tdPhoto);
           
           const tdName = document.createElement('td');
@@ -3688,7 +3688,7 @@
             return `<span class="badge ${isTeam ? "badge-team" : "badge-success"}"><i data-lucide="${isTeam ? "users" : "user"}"></i> ${manager}</span>`;
           }).join(" ") : `<span class="badge badge-danger"><i data-lucide="user-x"></i> 담당자 미지정</span>`;
           const remarksHtml = item.remarks && item.remarks.trim() !== "" ? `<div class="eq-card-remarks"><i data-lucide="info" class="text-sky-500"></i><span>${item.remarks}</span></div>` : "";
-          const imageHtml = `<div class="eq-card-image-wrapper" onclick="openImageModal(this.querySelector('img').src, '${item.name}')" title="이미지 크게 보기"><img src="${primaryImage}" data-fallback-list="${fallbackList}" data-fallback-index="0" alt="${item.name}" class="eq-card-image" onerror="handleImageError(this)" loading="lazy"></div>`;
+          const imageHtml = `<div class="eq-card-image-wrapper" onclick="openImageModal(this.querySelector('img').src, '${item.name}')" title="이미지 크게 보기"><img src="${primaryImage}" data-fallback-list="${fallbackList}" data-fallback-index="0" data-fallback-icon="${item.icon || 'image-off'}" alt="${item.name}" class="eq-card-image" onerror="handleImageError(this)" loading="lazy"></div>`;
           const isComputerLink = ["pc", "notebook"].includes(item.name.trim().toLowerCase());
           const nameHtml = isComputerLink
             ? `<button type="button" class="inventory-redirect" onclick="switchTab('pc')" title="PC 및 모니터 탭으로 이동">${item.name}</button>`
@@ -3991,7 +3991,6 @@
       } else if (tab === "pc") {
         addFromPhotoValue(item.photo);
         addBasename(`pc_${item.no}`);
-        addBasename(`equipment_${item.no}`);
       }
 
       if (tab === "animalLab") {
@@ -4026,7 +4025,7 @@
       wrapper.removeAttribute('onclick');
       wrapper.removeAttribute('title');
       wrapper.classList.add('no-image');
-      wrapper.innerHTML = `<i data-lucide="image-off" class="w-4 h-4 text-slate-400"></i>`;
+      wrapper.innerHTML = `<i data-lucide="${img.dataset.fallbackIcon || 'image-off'}" class="w-4 h-4 text-slate-400"></i>`;
       lucide.createIcons();
     }
 
@@ -4037,7 +4036,7 @@
       const wrapper = img.parentNode;
       wrapper.removeAttribute('onclick');
       wrapper.removeAttribute('title');
-      wrapper.innerHTML = `<div class="eq-card-image-placeholder"><i data-lucide="image-off"></i><span>이미지 준비중</span></div>`;
+      wrapper.innerHTML = `<div class="eq-card-image-placeholder"><i data-lucide="${img.dataset.fallbackIcon || 'image-off'}"></i><span>이미지 준비중</span></div>`;
       lucide.createIcons();
     }
 

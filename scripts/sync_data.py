@@ -116,13 +116,17 @@ def sync():
                 
             remarks = str(remarks_val).strip() if remarks_val is not None else ""
             
-            inventory_data.append({
+            inventory_item = {
                 "no": no,
                 "name": get_bilingual_name(name_val),
                 "loc": loc,
                 "mgr": mgr,
                 "remarks": remarks
-            })
+            }
+            if no == 43 or "폐쇄기" in str(name_val):
+                inventory_item["loc"] = "대신 building"
+                inventory_item["icon"] = "rat"
+            inventory_data.append(inventory_item)
             
         wb.close()
         print(f"Successfully parsed {len(inventory_data)} general equipment entries.")
