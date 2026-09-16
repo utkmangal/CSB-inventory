@@ -280,6 +280,76 @@ def sync():
     else:
         print(f"Warning: Animal-lab workbook not found at {animal_lab_path}.")
 
+    # Read reagent list workbook
+    reagent_data = []
+    reagent_files = sorted(
+        [f for f in root.glob("시약_리스트_*.xlsx") if not f.name.startswith("~$") and f.is_file()],
+        key=lambda x: x.name
+    )
+    if not reagent_files:
+        # Fallback to archive folder if exists
+        if archive_dir.exists():
+            reagent_files = sorted(
+                [f for f in archive_dir.glob("시약_리스트_*.xlsx") if not f.name.startswith("~$") and f.is_file()],
+                key=lambda x: x.name
+            )
+
+    if reagent_files:
+        latest_reagent = reagent_files[-1]
+        print(f"Reading Reagent inventory from {latest_reagent.name}...")
+        try:
+            wb_reagent = openpyxl.load_workbook(latest_reagent, read_only=True, data_only=True)
+            ws_reagent = wb_reagent[wb_reagent.sheetnames[0]]
+            for r_idx, row in enumerate(ws_reagent.iter_rows(min_row=2, values_only=True), start=1):
+                if not row or all(c is None for c in row):
+                    continue
+                loc_val = row[0] if len(row) > 0 else None
+                zone_val = row[1] if len(row) > 1 else None
+                folder_val = row[2] if len(row) > 2 else None
+                name_val = row[3] if len(row) > 3 else None
+                mfr_val = row[4] if len(row) > 4 else None
+                cat_val = row[5] if len(row) > 5 else None
+                cas_val = row[6] if len(row) > 6 else None
+                capacity_val = row[7] if len(row) > 7 else None
+                qty_val = row[8] if len(row) > 8 else None
+                remarks_val = row[9] if len(row) > 9 else None
+
+                name = str(name_val).strip() if name_val is not None else ""
+                if not name:
+                    continue
+
+                loc = str(loc_val).strip() if loc_val is not None else ""
+                zone = str(zone_val).strip() if zone_val is not None else ""
+                folder = str(folder_val).strip() if folder_val is not None else ""
+                mfr = str(mfr_val).strip() if mfr_val is not None else ""
+                cat = str(cat_val).strip() if cat_val is not None else ""
+                cas = str(cas_val).strip() if cas_val is not None else ""
+                capacity = str(capacity_val).strip() if capacity_val is not None else ""
+                qty = str(qty_val).strip() if qty_val is not None else ""
+                if qty.endswith(".0"):
+                    qty = qty[:-2]
+                remarks = str(remarks_val).strip() if remarks_val is not None else ""
+
+                reagent_data.append({
+                    "no": len(reagent_data) + 1,
+                    "loc": loc,
+                    "zone": zone,
+                    "folder": folder,
+                    "name": name,
+                    "mfr": mfr,
+                    "cat": cat,
+                    "cas": cas,
+                    "capacity": capacity,
+                    "qty": qty,
+                    "remarks": remarks
+                })
+            wb_reagent.close()
+            print(f"Successfully parsed {len(reagent_data)} reagent entries.")
+        except Exception as e:
+            print(f"Warning: Could not read reagent workbook: {e}")
+    else:
+        print("Warning: No reagent workbook (시약_리스트_*.xlsx) found.")
+
     # Write to index.html
     if not html_path.exists():
         print(f"Error: index.html not found at {html_path}")
@@ -329,6 +399,13 @@ def sync():
         html_content, count_animal_lab = re.subn(pattern_animal_lab, replacement_animal_lab, html_content)
         if count_animal_lab == 0:
             print("Warning: Could not locate 'const animalLabData = [...];' in index.html.")
+
+        formatted_reagent = format_json(reagent_data)
+        pattern_reagent = r"(const reagentData = )\[[\s\S]*?\];"
+        replacement_reagent = f"\\1{formatted_reagent};"
+        html_content, count_reagent = re.subn(pattern_reagent, replacement_reagent, html_content)
+        if count_reagent == 0:
+            print("Warning: Could not locate 'const reagentData = [...];' in index.html.")
             
         html_path.write_text(html_content, encoding="utf-8")
         print("index.html has been successfully updated with new data.")

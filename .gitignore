@@ -8,3 +8,9 @@ Thumbs.db
 # Data sources and backups (exclude from git to prevent repository bloating)
 *.hwpx
 *.xlsx
+
+# Local agent and Python-generated files
+.agents/
+.claude/
+scripts/__pycache__/
+skills-lock.json
