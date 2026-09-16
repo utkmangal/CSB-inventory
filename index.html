@@ -17,37 +17,33 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
-    /* CSS Variables & Theme Control - Yonsei University College of Dentistry Theme */
+    /* Hallmark · pre-emit critique: P5 H4 E4 S4 R5 V4 */
+    /* CSS Variables & Theme Control - Academic Blue and Neutral */
     :root {
-      /* Light Mode - Crimson Noir & Champagne Theme */
-      --bg-primary: #FAF6F0;       /* Champagne background */
-      --bg-secondary: #ffffff;     /* Pure white for dashboard cards/tables */
-      --bg-tertiary: #F2EBE1;      /* Champagne gold input background */
+      --bg-primary: #f5f7fa;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #edf2f7;
       
-      --text-primary: #2D161B;     /* Deep burgundy for primary text */
-      --text-secondary: #5E3D44;   /* Muted burgundy gray for body text */
-      --text-muted: #A18288;       /* Soft burgundy gray for hints */
+      --text-primary: #102a43;
+      --text-secondary: #486581;
+      --text-muted: #829ab1;
       
-      /* Primary Theme Identity */
-      --primary: #8A1538;          /* Scholarly Burgundy */
-      --primary-hover: #630E26;    /* Dark Crimson */
-      --primary-light: #FCE8EB;    /* Burgundy tint for active highlights */
-      --accent: #C59B27;           /* Champagne Gold Accent */
-      --accent-hover: #A5801B;
-      --accent-light: #FBF5DF;     /* Soft gold light background */
+      --primary: #123b66;
+      --primary-hover: #0b2948;
+      --primary-light: #e7eff7;
+      --accent: #6b8fb3;
+      --accent-hover: #4f7399;
+      --accent-light: #eef4f9;
       
-      /* Semantic Colors - Softened */
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
+      --success: #3f7d68;
+      --warning: #a67532;
+      --danger: #a65353;
       
-      /* Borders & Dividers - Ultra-thin hairline styles */
-      --border: rgba(138, 21, 56, 0.08);       /* Tainted with brand burgundy for cohesion */
-      --border-strong: rgba(138, 21, 56, 0.16);
+      --border: rgba(16, 42, 67, 0.10);
+      --border-strong: rgba(16, 42, 67, 0.18);
       
-      /* Shadows - Ambient & lightweight */
-      --shadow: 0 1px 3px rgba(138, 21, 56, 0.02), 0 8px 24px rgba(138, 21, 56, 0.03);
-      --shadow-lg: 0 10px 30px rgba(138, 21, 56, 0.05);
+      --shadow: 0 1px 3px rgba(16, 42, 67, 0.04), 0 8px 24px rgba(16, 42, 67, 0.05);
+      --shadow-lg: 0 10px 30px rgba(16, 42, 67, 0.08);
       
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -1108,6 +1104,7 @@
         width: 52px;
         height: 52px;
       }
+    }
     /* Tabs styling */
     .dashboard-tabs {
       display: flex;
@@ -1143,6 +1140,877 @@
       border-bottom: 3px solid var(--primary);
       background-color: var(--primary-light);
     }
+    .badge-cyan {
+      background-color: rgba(6, 182, 212, 0.10);
+      color: #0891b2;
+      border: 1px solid rgba(6, 182, 212, 0.22);
+    }
+    .badge-purple {
+      background-color: rgba(147, 51, 234, 0.10);
+      color: #9333ea;
+      border: 1px solid rgba(147, 51, 234, 0.22);
+    }
+    .badge-interactive {
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .badge-interactive:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      filter: brightness(0.95);
+    }
+    .copy-btn-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.15rem 0.4rem;
+      font-size: 0.7rem;
+      font-family: inherit;
+      border-radius: 0.25rem;
+      border: 1px solid var(--border);
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .copy-btn-inline:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* Reagent directory navigation */
+    .reagent-navigation {
+      display: none;
+      flex-direction: column;
+      gap: 1.25rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(138, 21, 56, 0.14);
+      border-radius: 0.625rem;
+      background: linear-gradient(135deg, #fffdf9 0%, #f8efe7 100%);
+      box-shadow: 0 8px 24px rgba(138, 21, 56, 0.05);
+    }
+
+    .reagent-navigation.reagent-visible {
+      display: flex;
+      animation: itemFadeIn 0.25s ease-out forwards;
+    }
+
+    .reagent-nav-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .reagent-nav-kicker {
+      margin-bottom: 0.35rem;
+      color: var(--accent-hover);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .reagent-nav-title {
+      color: var(--text-primary);
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .reagent-nav-summary {
+      margin-top: 0.3rem;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+    }
+
+    .reagent-nav-clear {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-shrink: 0;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid var(--border-strong);
+      border-radius: 0.35rem;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .reagent-nav-clear:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .reagent-filter-section {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      align-items: start;
+      gap: 0.75rem;
+    }
+
+    .reagent-filter-label {
+      padding-top: 0.45rem;
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .reagent-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .reagent-chip {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 2rem;
+      padding: 0.35rem 0.65rem;
+      border: 1px solid rgba(138, 21, 56, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: all 0.18s ease;
+    }
+
+    .reagent-chip:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .reagent-chip.active {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 3px 8px rgba(138, 21, 56, 0.18);
+    }
+
+    .reagent-chip-count {
+      min-width: 1.35rem;
+      padding: 0.08rem 0.3rem;
+      border-radius: 999px;
+      background: rgba(138, 21, 56, 0.08);
+      color: var(--primary);
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      text-align: center;
+    }
+
+    .reagent-chip.active .reagent-chip-count {
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+    }
+
+    .reagent-table-tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.7rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    .reagent-table-tools[hidden] {
+      display: none;
+    }
+
+    .pc-type-legend {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.65rem 0.9rem;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+    }
+
+    .pc-type-legend[hidden] {
+      display: none;
+    }
+
+    .pc-type-legend-title {
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pc-type-legend-item,
+    .pc-no-cell {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .pc-kind-marker {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      width: 1rem;
+      height: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .pc-kind-marker svg {
+      width: 0.9rem;
+      height: 0.9rem;
+      stroke-width: 1.8;
+    }
+
+    .reagent-scale {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.65rem 0.85rem;
+      min-width: 0;
+    }
+
+    .reagent-scale-title {
+      color: var(--text-secondary);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .reagent-scale-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.32rem;
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+      white-space: nowrap;
+    }
+
+    .reagent-marker {
+      display: inline-block;
+      width: 0.52rem;
+      height: 0.52rem;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9);
+    }
+
+    .reagent-marker-room { background: #38a169; }
+    .reagent-marker-cold { background: #0891b2; }
+    .reagent-marker-hazard { background: #dc2626; }
+    .reagent-marker-flammable { background: #ea580c; }
+    .reagent-marker-media { background: #9333ea; }
+    .reagent-marker-other { background: #94a3b8; }
+
+    .reagent-sort-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-shrink: 0;
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .reagent-sort-select {
+      min-width: 9.25rem;
+      padding: 0.4rem 1.8rem 0.4rem 0.55rem;
+      border: 1px solid var(--border-strong);
+      border-radius: 0.3rem;
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .reagent-sort-direction {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.85rem;
+      height: 1.85rem;
+      border: 1px solid var(--border-strong);
+      border-radius: 0.3rem;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .reagent-sort-direction:hover,
+    .reagent-sort-select:focus {
+      border-color: var(--primary);
+      outline: none;
+      color: var(--primary);
+    }
+
+    .reagent-row-marker {
+      display: inline-block;
+      width: 0.55rem;
+      height: 0.55rem;
+      margin-right: 0.35rem;
+      border-radius: 50%;
+      vertical-align: 0.05rem;
+    }
+
+    .reagent-location-cell {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.2rem 0.45rem;
+    }
+
+    .reagent-location-text {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .reagent-zone-text {
+      color: var(--text-secondary);
+      font-size: 0.76rem;
+    }
+
+    .reagent-identifier-cell {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .reagent-identifier-line {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .reagent-identifier-label {
+      flex: 0 0 auto;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .reagent-identifier-line .copy-btn-inline {
+      min-width: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-weight: 600;
+      text-align: left;
+      cursor: copy;
+    }
+
+    .reagent-identifier-line .copy-btn-inline:hover {
+      background: transparent;
+      color: inherit;
+    }
+
+    .reagent-mode #filter-location,
+    .reagent-mode #filter-manager {
+      display: none;
+    }
+
+    .reagent-mode .filter-group {
+      gap: 0;
+    }
+
+    .reagent-mode .dashboard-grid,
+    .reagent-mode .main-panel,
+    .reagent-mode .table-container {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .reagent-table-container .table-element {
+      width: 100%;
+      min-width: 0;
+      table-layout: fixed;
+    }
+
+    .reagent-table-container .table-element th,
+    .reagent-table-container .table-element td {
+      padding: 0.7rem 0.55rem;
+      overflow-wrap: anywhere;
+    }
+
+    .reagent-table-container .table-element th:nth-child(1),
+    .reagent-table-container .table-element td:nth-child(1) { width: 6%; }
+    .reagent-table-container .table-element th:nth-child(2),
+    .reagent-table-container .table-element td:nth-child(2) { width: 23%; }
+    .reagent-table-container .table-element th:nth-child(3),
+    .reagent-table-container .table-element td:nth-child(3) { width: 17%; }
+    .reagent-table-container .table-element th:nth-child(4),
+    .reagent-table-container .table-element td:nth-child(4) { width: 13%; }
+    .reagent-table-container .table-element th:nth-child(5),
+    .reagent-table-container .table-element td:nth-child(5) { width: 20%; }
+    .reagent-table-container .table-element th:nth-child(6),
+    .reagent-table-container .table-element td:nth-child(6) { width: 9%; }
+    .reagent-table-container .table-element th:nth-child(7),
+    .reagent-table-container .table-element td:nth-child(7) { width: 12%; }
+    .reagent-table-container .table-element th:first-child,
+    .reagent-table-container .table-element td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background: var(--bg-secondary);
+    }
+
+    .reagent-table-container .table-element th:first-child {
+      z-index: 3;
+    }
+
+    .reagent-table-container .table-element th:nth-child(2),
+    .reagent-table-container .table-element td:nth-child(2) {
+      position: sticky;
+      left: 6%;
+      z-index: 2;
+      background: var(--bg-secondary);
+    }
+
+    .reagent-table-container .table-element th:nth-child(2) {
+      z-index: 3;
+    }
+
+    .reagent-table-container .table-element td:nth-child(2) {
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .reagent-table-container .table-element tr:hover td:first-child {
+      background: var(--bg-primary);
+    }
+
+    @media (max-width: 768px) {
+      .reagent-navigation {
+        padding: 1.15rem;
+      }
+
+      .reagent-nav-header {
+        flex-direction: column;
+      }
+
+      .reagent-nav-clear {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .reagent-filter-section {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+      }
+
+      .reagent-filter-label {
+        padding-top: 0;
+      }
+
+      .reagent-chip-row {
+        flex-wrap: wrap;
+        overflow: visible;
+        padding-bottom: 0;
+      }
+
+      .reagent-chip {
+        min-height: 1.8rem;
+        padding: 0.3rem 0.55rem;
+        font-size: 0.72rem;
+      }
+
+      .reagent-chip-count {
+        min-width: 1.2rem;
+        padding: 0.06rem 0.25rem;
+        font-size: 0.64rem;
+      }
+
+      .reagent-table-tools {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+
+      .reagent-sort-control {
+        justify-content: space-between;
+      }
+
+      .reagent-sort-select {
+        flex: 1;
+      }
+
+      .reagent-table-container {
+        overflow-x: hidden;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .reagent-table-container .table-element,
+      .reagent-table-container .table-element tbody {
+        display: block;
+      }
+
+      .reagent-table-container .table-element thead {
+        display: none;
+      }
+
+      .reagent-table-container .table-element tbody {
+        display: grid;
+        gap: 0.65rem;
+      }
+
+      .reagent-table-container .table-element tbody tr {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 0.5rem;
+        background: var(--bg-secondary);
+        box-shadow: var(--shadow);
+      }
+
+      .reagent-table-container .table-element tbody td {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        min-width: 0;
+        width: 100% !important;
+        max-width: 100%;
+        padding: 0.6rem 0.7rem;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.78rem;
+        line-height: 1.35;
+      }
+
+      .reagent-table-container .table-element tbody td::before {
+        display: block;
+        margin-bottom: 0.22rem;
+        color: var(--text-muted);
+        content: attr(data-label);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .reagent-table-container .table-element tbody td:nth-child(1),
+      .reagent-table-container .table-element tbody td:nth-child(2) {
+        position: static;
+        left: auto;
+        z-index: auto;
+        background: transparent;
+      }
+
+      .reagent-table-container .table-element tbody td:nth-child(1) {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.45rem;
+        padding-bottom: 0.35rem;
+        border-bottom: 0;
+      }
+
+      .reagent-table-container .table-element tbody td:nth-child(1)::before {
+        margin: 0;
+      }
+
+      .reagent-table-container .table-element tbody td:nth-child(2) {
+        grid-column: 1 / -1;
+        padding-top: 0.35rem;
+        font-size: 0.92rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .reagent-table-container .table-element tbody td:nth-child(6),
+      .reagent-table-container .table-element tbody td:nth-child(7) {
+        border-bottom: 0;
+      }
+
+      .reagent-table-container .table-element tbody td:nth-child(7) {
+        grid-column: 1 / -1;
+      }
+    }
+
+    /* Hallmark · workbench shell */
+    html,
+    body {
+      overflow-x: clip;
+    }
+
+    .dashboard-container {
+      max-width: none;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: clamp(9.5rem, 17vw, 12rem) minmax(0, 1fr);
+      grid-template-rows: auto auto 1fr auto;
+      column-gap: clamp(1rem, 2.5vw, 2rem);
+      row-gap: 1.25rem;
+      padding: 1.5rem clamp(1rem, 3vw, 3rem);
+    }
+
+    .dashboard-header {
+      grid-column: 1 / -1;
+      padding: 0 0 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-title {
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+
+    .header-subtitle {
+      color: var(--text-muted);
+    }
+
+    .dashboard-tabs {
+      grid-column: 1;
+      grid-row: 2 / 4;
+      align-self: start;
+      position: sticky;
+      top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      margin: 0;
+      padding: 0.45rem;
+      border: 1px solid var(--border);
+      border-radius: 0.35rem;
+      background: var(--bg-secondary);
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    .tab-btn {
+      width: 100%;
+      min-width: 0;
+      justify-content: flex-start;
+      padding: 0.72rem 0.8rem;
+      border: 0;
+      border-left: 3px solid transparent;
+      border-radius: 0.2rem;
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      line-height: 1.25;
+      text-align: left;
+    }
+
+    .tab-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .tab-btn.active {
+      border-left-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .kpi-grid {
+      grid-column: 2;
+      grid-row: 2;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .kpi-card {
+      min-width: 0;
+      padding: 1rem;
+      border-radius: 0.35rem;
+      box-shadow: none;
+    }
+
+    .kpi-card:hover {
+      transform: none;
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .kpi-card-value {
+      color: var(--primary);
+    }
+
+    .dashboard-grid {
+      grid-column: 2;
+      grid-row: 3;
+      min-width: 0;
+      align-items: start;
+    }
+
+    .dashboard-container.reagent-mode .reagent-navigation {
+      grid-column: 2;
+      grid-row: 3;
+    }
+
+    .dashboard-container.reagent-mode .dashboard-grid {
+      grid-row: 4;
+    }
+
+    .reagent-navigation {
+      border-color: var(--border-strong);
+      border-radius: 0.35rem;
+      background: var(--bg-secondary);
+      box-shadow: var(--shadow);
+    }
+
+    .reagent-nav-kicker {
+      color: var(--primary);
+    }
+
+    .reagent-nav-title {
+      color: var(--primary);
+    }
+
+    .main-panel,
+    .sidebar-panel {
+      min-width: 0;
+    }
+
+    .main-panel {
+      border-radius: 0.35rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      border-radius: 0.35rem;
+      box-shadow: none;
+    }
+
+    .badge-team {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--border-strong);
+    }
+
+    .btn-export,
+    .btn-primary {
+      background: var(--primary);
+    }
+
+    .btn-export:hover,
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    @media (max-width: 1100px) {
+      .dashboard-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      .dashboard-tabs {
+        position: static;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .tab-btn {
+        width: auto;
+        flex: 0 0 auto;
+        border-left: 0;
+        border-bottom: 3px solid transparent;
+      }
+
+      .tab-btn.active {
+        border-left-color: transparent;
+        border-bottom-color: var(--primary);
+      }
+
+      .dashboard-container.reagent-mode .reagent-navigation,
+      .dashboard-container.reagent-mode .dashboard-grid,
+      .dashboard-grid,
+      .kpi-grid {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-container {
+        padding: 1rem;
+      }
+
+      .dashboard-tabs {
+        flex-wrap: wrap;
+        overflow: visible;
+      }
+
+      .dashboard-tabs .tab-btn {
+        flex: 1 1 calc(50% - 0.2rem);
+        min-width: 0;
+        justify-content: center;
+        padding: 0.6rem 0.45rem;
+        text-align: center;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .table-container {
+      min-width: 0;
+      overflow-x: hidden;
+    }
+
+    .table-element {
+      min-width: 0;
+      table-layout: fixed;
+    }
+
+    .table-element th,
+    .table-element td {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      word-break: normal;
+    }
+
+    .table-element th {
+      padding: 0.7rem 0.55rem;
+      line-height: 1.25;
+      white-space: normal;
+    }
+
+    .table-element th .sort-indicator {
+      white-space: nowrap;
+    }
+
+    .table-element td {
+      padding: 0.8rem 0.55rem;
+    }
+
+    .table-element .badge,
+    .table-element .copy-btn-inline {
+      max-width: 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 768px) {
+      .table-element th,
+      .table-element td {
+        padding: 0.6rem 0.45rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1174,6 +2042,9 @@
       </button>
       <button id="tab-animalLab" class="tab-btn" onclick="switchTab('animalLab')">
         <i data-lucide="flask-conical"></i> 동물실험실 관련 물품
+      </button>
+      <button id="tab-reagent" class="tab-btn" onclick="switchTab('reagent')">
+        <i data-lucide="test-tube-2"></i> 시약 리스트
       </button>
     </nav>
 
@@ -1220,6 +2091,31 @@
       </div>
     </section>
 
+    <section id="reagent-navigation" class="reagent-navigation" aria-label="시약 탐색">
+      <div class="reagent-nav-header">
+        <div>
+          <div class="reagent-nav-kicker">Storage directory</div>
+          <h2 class="reagent-nav-title">시약 찾기</h2>
+          <p id="reagent-filter-summary" class="reagent-nav-summary">전체 시약</p>
+        </div>
+        <button type="button" class="reagent-nav-clear" onclick="resetFilters()">
+          <i data-lucide="rotate-ccw" class="w-4 h-4"></i> 필터 초기화
+        </button>
+      </div>
+      <div class="reagent-filter-section">
+        <span class="reagent-filter-label">보관실</span>
+        <div id="reagent-location-nav" class="reagent-chip-row"></div>
+      </div>
+      <div class="reagent-filter-section">
+        <span class="reagent-filter-label">보관 구역</span>
+        <div id="reagent-zone-nav" class="reagent-chip-row"></div>
+      </div>
+      <div class="reagent-filter-section">
+        <span class="reagent-filter-label">폴더</span>
+        <div id="reagent-folder-nav" class="reagent-chip-row"></div>
+      </div>
+    </section>
+
     <div class="dashboard-grid">
       <main class="main-panel">
         <section class="control-bar">
@@ -1244,11 +2140,42 @@
           <span id="results-count-text">장비 로딩 중...</span>
         </div>
 
+        <div id="pc-type-legend" class="pc-type-legend" hidden aria-label="PC 종류 안내">
+          <span class="pc-type-legend-title">PC 종류</span>
+          <span class="pc-type-legend-item"><span class="pc-kind-marker"><i data-lucide="monitor"></i></span>모니터</span>
+          <span class="pc-type-legend-item"><span class="pc-kind-marker"><i data-lucide="cpu"></i></span>본체</span>
+          <span class="pc-type-legend-item"><span class="pc-kind-marker"><i data-lucide="laptop"></i></span>노트북</span>
+        </div>
+
+        <div id="reagent-table-tools" class="reagent-table-tools" hidden>
+          <div class="reagent-scale" aria-label="보관 구역 색상 안내">
+            <span class="reagent-scale-title">보관 구역</span>
+            <span class="reagent-scale-item"><span class="reagent-marker reagent-marker-room"></span>실온</span>
+            <span class="reagent-scale-item"><span class="reagent-marker reagent-marker-cold"></span>냉장/냉동</span>
+            <span class="reagent-scale-item"><span class="reagent-marker reagent-marker-hazard"></span>위험물질</span>
+            <span class="reagent-scale-item"><span class="reagent-marker reagent-marker-flammable"></span>가연성</span>
+            <span class="reagent-scale-item"><span class="reagent-marker reagent-marker-media"></span>배지</span>
+            <span class="reagent-scale-item"><span class="reagent-marker reagent-marker-other"></span>기타</span>
+          </div>
+          <label class="reagent-sort-control" for="reagent-sort-select">
+            정렬
+            <select id="reagent-sort-select" class="reagent-sort-select" onchange="handleReagentSort(this.value)">
+              <option value="no">번호</option>
+              <option value="name">시약명</option>
+              <option value="loc">보관위치</option>
+              <option value="mfr">제조사</option>
+              <option value="cas">CAS No.</option>
+              <option value="cat">Cat. No.</option>
+            </select>
+            <button type="button" id="reagent-sort-direction" class="reagent-sort-direction" onclick="toggleReagentSortDirection()" aria-label="정렬 방향 전환" title="정렬 방향 전환">▲</button>
+          </label>
+        </div>
+
         <div id="table-view-wrapper" class="table-container">
           <table class="table-element">
             <thead>
               <tr>
-                <th onclick="handleSort('no')" style="width: 80px;">No <span id="sort-icon-no"></span></th>
+                <th onclick="handleSort('no')" style="width: 56px;">No <span id="sort-icon-no"></span></th>
                 <th style="width: 90px; text-align: center;">사진</th>
                 <th onclick="handleSort('name')">장비명 <span id="sort-icon-name"></span></th>
                 <th onclick="handleSort('loc')">설치 위치 <span id="sort-icon-loc"></span></th>
@@ -1317,7 +2244,7 @@
       {"no": 5, "name": "pH/이온 측정기/비색계 (pH/Ion Meter & Colorimeter)", "loc": "치과대학 707호", "mgr": "윤정현", "remarks": ""},
       {"no": 6, "name": "접촉각 측정기 (Contact Angle Meter)", "loc": "치과대학 708호", "mgr": "정수미", "remarks": ""},
       {"no": 7, "name": "스핀 코터 (Spin Coater)", "loc": "치과대학 707호 (뒤)", "mgr": "만갈, 서지영", "remarks": ""},
-      {"no": 8, "name": "만능 재료 시험기 (UTM)", "loc": "치과대학 708호", "mgr": "김민지", "remarks": ""},
+      {"no": 8, "name": "만능 재료 시험기 (UTM)", "loc": "치과대학 708호", "mgr": "김지윤", "remarks": ""},
       {"no": 9, "name": "인큐베이터 (Incubator)", "loc": "치과대학 708호", "mgr": "윤정현, 왕링윤", "remarks": ""},
       {"no": 10, "name": "형광 단백질 광원 (Fluorescence Light Source)", "loc": "치과대학 707호", "mgr": "왕링윤", "remarks": ""},
       {"no": 11, "name": "미믹스 소프트웨어 (Mimics S/W)", "loc": "치과대학 707호", "mgr": "김지윤", "remarks": "(simulation mod 업그레이드 예정)"},
@@ -1332,16 +2259,16 @@
       {"no": 20, "name": "원심분리기 (Centrifuge)", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
       {"no": 21, "name": "열 순환기 (Thermal Cycler)", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
       {"no": 22, "name": "phcbi CO2 인큐베이터 (phcbi CO2 Incubator)", "loc": "ABMRC 507호", "mgr": "김재형", "remarks": ""},
-      {"no": 23, "name": "유니즈 3D 프린터 (UNIZ 3D Printer)", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
-      {"no": 24, "name": "질소 경화기 (Nitrogen Curing Chamber)", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
-      {"no": 25, "name": "일렉트로스피닝 장치 (Spinning Device)", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
-      {"no": 26, "name": "회전증발 농축기 (Rotary Evaporator)", "loc": "치과대학 505호 화학방", "mgr": "박상은, 문정미", "remarks": ""},
-      {"no": 27, "name": "초음파 균질기 프로브 (Ultrasonic Homogenizer Probes)", "loc": "치과대학 505호", "mgr": "박상은, 문정미", "remarks": ""},
+      {"no": 23, "name": "유니즈 3D 프린터 (UNIZ 3D Printer)", "loc": "치과대학 505호 화학방", "mgr": "윤정현, 문정미", "remarks": ""},
+      {"no": 24, "name": "질소 경화기 (Nitrogen Curing Chamber)", "loc": "치과대학 505호 화학방", "mgr": "윤정현, 문정미", "remarks": ""},
+      {"no": 25, "name": "일렉트로스피닝 장치 (Spinning Device)", "loc": "치과대학 505호 화학방", "mgr": "윤정현, 문정미", "remarks": ""},
+      {"no": 26, "name": "회전증발 농축기 (Rotary Evaporator)", "loc": "치과대학 505호 화학방", "mgr": "윤정현, 문정미", "remarks": ""},
+      {"no": 27, "name": "초음파 균질기 프로브 (Ultrasonic Homogenizer Probes)", "loc": "치과대학 505호", "mgr": "윤정현, 문정미", "remarks": ""},
       {"no": 28, "name": "UV 경화기 - 2개 (UV Curing Units - 2pcs)", "loc": "치과대학 707호", "mgr": "정수미", "remarks": ""},
       {"no": 29, "name": "큐레이 구강카메라 (Q-ray Oral Camera)", "loc": "교수님 방", "mgr": "김지윤", "remarks": ""},
       {"no": 30, "name": "전기방사 장치 (Electrospinning)", "loc": "치과대학 708호", "mgr": "정수미", "remarks": ""},
       {"no": 31, "name": "구강 스캐너 (Intraoral Scanner)", "loc": "교수님 방", "mgr": "김지윤", "remarks": ""},
-      {"no": 32, "name": "적외선 분광 광도계 (FT-IR)", "loc": "치과대학 708호", "mgr": "김민지", "remarks": ""},
+      {"no": 32, "name": "적외선 분광 광도계 (FT-IR)", "loc": "치과대학 708호", "mgr": "김지윤", "remarks": ""},
       {"no": 33, "name": "연마기 (Polishing Machine)", "loc": "치과대학 708호", "mgr": "왕링윤", "remarks": ""},
       {"no": 34, "name": "자동 제습 보관함 (Auto-Desiccating Cabinet)", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
       {"no": 35, "name": "진공 데시게이터 (Vacuum Desiccator)", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
@@ -1421,8 +2348,8 @@
     const pcData = [
       {"no": 1, "kind": "모니터", "label": "CSB 모니터 1", "loc": "치과대학 707호", "user": "서지영", "brand": "LG", "photo": "", "sticker": ""},
       {"no": 2, "kind": "모니터", "label": "CSB 모니터 2", "loc": "치과대학 707호", "user": "서지영", "brand": "LG", "photo": "", "sticker": ""},
-      {"no": 3, "kind": "모니터", "label": "CSB 모니터 3", "loc": "치과대학 707호", "user": "김민지", "brand": "LG", "photo": "", "sticker": ""},
-      {"no": 4, "kind": "모니터", "label": "CSB 모니터 4", "loc": "치과대학 707호", "user": "김민지", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 3, "kind": "모니터", "label": "CSB 모니터 3", "loc": "치과대학 707호", "user": "김지윤", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 4, "kind": "모니터", "label": "CSB 모니터 4", "loc": "치과대학 707호", "user": "김지윤", "brand": "LG", "photo": "", "sticker": ""},
       {"no": 5, "kind": "모니터", "label": "CSB 모니터 5", "loc": "치과대학 707호", "user": "윤정현", "brand": "LG", "photo": "", "sticker": ""},
       {"no": 6, "kind": "모니터", "label": "CSB 모니터 6", "loc": "치과대학 707호", "user": "윤정현", "brand": "LG", "photo": "", "sticker": ""},
       {"no": 7, "kind": "모니터", "label": "CSB 모니터 7", "loc": "치과대학 707호", "user": "류정현", "brand": "LG", "photo": "", "sticker": ""},
@@ -1444,10 +2371,10 @@
       {"no": 23, "kind": "모니터", "label": "CSB 모니터 23", "loc": "치과대학 308호", "user": "김지윤", "brand": "LG", "photo": "", "sticker": ""},
       {"no": 24, "kind": "모니터", "label": "CSB 모니터 24", "loc": "대신빌딩", "user": "권미현", "brand": "SAMSUNG", "photo": "", "sticker": ""},
       {"no": 25, "kind": "모니터", "label": "CSB 모니터 25", "loc": "대신빌딩", "user": "권미현", "brand": "SAMSUNG", "photo": "", "sticker": ""},
-      {"no": 26, "kind": "모니터", "label": "CSB 모니터 26", "loc": "대신빌딩", "user": "박상은", "brand": "SAMSUNG", "photo": "", "sticker": ""},
-      {"no": 27, "kind": "모니터", "label": "CSB 모니터 27", "loc": "대신빌딩", "user": "박상은", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 26, "kind": "모니터", "label": "CSB 모니터 26", "loc": "대신빌딩", "user": "윤정현", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 27, "kind": "모니터", "label": "CSB 모니터 27", "loc": "대신빌딩", "user": "윤정현", "brand": "SAMSUNG", "photo": "", "sticker": ""},
       {"no": 29, "kind": "본체", "label": "CSB 본체 1", "loc": "치과대학 707호", "user": "서지영", "brand": "OMYPC", "photo": "", "sticker": ""},
-      {"no": 30, "kind": "본체", "label": "CSB 본체 2", "loc": "치과대학 707호", "user": "김민지", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 30, "kind": "본체", "label": "CSB 본체 2", "loc": "치과대학 707호", "user": "김지윤", "brand": "OMYPC", "photo": "", "sticker": ""},
       {"no": 31, "kind": "본체", "label": "CSB 본체 3", "loc": "치과대학 707호", "user": "윤정현", "brand": "MICRONICS", "photo": "", "sticker": ""},
       {"no": 32, "kind": "본체", "label": "CSB 본체 4", "loc": "치과대학 707호", "user": "류정현", "brand": "OMYPC", "photo": "", "sticker": ""},
       {"no": 33, "kind": "본체", "label": "CSB 본체 5", "loc": "치과대학 707호", "user": "미지정", "brand": "OMYPC", "photo": "", "sticker": ""},
@@ -1461,7 +2388,7 @@
       {"no": 41, "kind": "본체", "label": "CSB 본체 13", "loc": "치과대학 704-2", "user": "만갈웃커시", "brand": "", "photo": "", "sticker": ""},
       {"no": 42, "kind": "본체", "label": "CSB 본체 14", "loc": "치과대학 308호", "user": "김지윤", "brand": "OMYPC", "photo": "", "sticker": ""},
       {"no": 43, "kind": "본체", "label": "CSB 본체 15", "loc": "대신빌딩", "user": "권미현", "brand": "OMYPC", "photo": "", "sticker": ""},
-      {"no": 44, "kind": "본체", "label": "CSB 본체 16", "loc": "대신빌딩", "user": "박상은", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 44, "kind": "본체", "label": "CSB 본체 16", "loc": "대신빌딩", "user": "윤정현", "brand": "OMYPC", "photo": "", "sticker": ""},
       {"no": 45, "kind": "노트북", "label": "CSB 노트북 1", "loc": "치과대학 308호", "user": "김지윤(내부망용)", "brand": "SAMSUNG", "photo": "", "sticker": ""},
       {"no": 46, "kind": "노트북", "label": "CSB 노트북 2", "loc": "교수님 방", "user": "Q-ray", "brand": "MSI", "photo": "", "sticker": ""},
       {"no": 47, "kind": "노트북", "label": "CSB 노트북 3", "loc": "교수님 방", "user": "Medit(구강스캐너)", "brand": "LENOVO", "photo": "", "sticker": ""},
@@ -1470,46 +2397,467 @@
     ];
 
     const animalLabData = [
-      {"no": 1, "code": "101D", "name": "드레싱카", "photo": "animal_lab_1", "mgr": "김재형, 정수미"},
-      {"no": 2, "code": "4-0107", "name": "홍재 개부밧드 (Tray) 7절", "photo": "animal_lab_2", "mgr": "김재형, 정수미"},
-      {"no": 3, "code": "4-0108", "name": "홍재 개부밧드 (Tray) 8절", "photo": "animal_lab_3", "mgr": "김재형, 정수미"},
-      {"no": 4, "code": "AM7020", "name": "RNAlater® RNA Stabilization Solutionwi", "photo": "animal_lab_4", "mgr": "김재형, 정수미"},
-      {"no": 5, "code": "NB324", "name": "봉합실 3-0", "photo": "animal_lab_5", "mgr": "김재형, 정수미"},
-      {"no": 6, "code": "NB526P", "name": "봉합사 5-0", "photo": "animal_lab_6", "mgr": "김재형, 정수미"},
-      {"no": 7, "code": "THB50", "name": "Trephine bur 5.0mm", "photo": "animal_lab_7", "mgr": "김재형, 정수미"},
-      {"no": 8, "code": "면봉", "name": "면봉", "photo": "animal_lab_8", "mgr": "김재형, 정수미"},
-      {"no": 9, "code": "멸균거즈", "name": "멸균거즈", "photo": "animal_lab_9", "mgr": "김재형, 정수미"},
-      {"no": 10, "code": "실리콘피부", "name": "피부봉합연습도구 실리콘피부패드", "photo": "animal_lab_10", "mgr": "김재형, 정수미"},
-      {"no": 11, "code": "정밀핀셋", "name": "E5SA TWEEZER ERGONINIC ESD", "photo": "animal_lab_11", "mgr": "김재형, 정수미"},
-      {"no": 12, "code": "제모크림", "name": "제모크림", "photo": "animal_lab_12", "mgr": "김재형, 정수미"},
-      {"no": 13, "code": "HC.04-0018-13", "name": "ARTERY FORCEP SPENCER WELL", "photo": "animal_lab_13", "mgr": "김재형, 정수미"},
-      {"no": 14, "code": "HC.13-112", "name": "Laboratory 14cm S/B Straight", "photo": "animal_lab_14", "mgr": "김재형, 정수미"},
-      {"no": 15, "code": "HC.15-122", "name": "DRESSING FORCEP THUMB", "photo": "animal_lab_15", "mgr": "김재형, 정수미"},
-      {"no": 16, "code": "HC.15-142", "name": "TISSUE FORCEP 14CM", "photo": "animal_lab_16", "mgr": "김재형, 정수미"},
-      {"no": 17, "code": "HC.17-160", "name": "KELLY FORCEP 14CM", "photo": "animal_lab_17", "mgr": "김재형, 정수미"},
-      {"no": 18, "code": "HC13-122", "name": "Operating Scissors (S/S) 14", "photo": "animal_lab_18", "mgr": "김재형, 정수미"},
-      {"no": 19, "code": "S-1101-14", "name": "Operating Scissor S-1101-14", "photo": "animal_lab_19", "mgr": "김재형, 정수미"},
-      {"no": 20, "code": "위생 깔개 매트", "name": "일회용방수패드", "photo": "animal_lab_20", "mgr": "김재형, 정수미"},
-      {"no": 21, "code": "전기매트", "name": "전기장판 바닥용", "photo": "animal_lab_21", "mgr": "김재형, 정수미"},
-      {"no": 22, "code": "전기이발기", "name": "전기이발기", "photo": "animal_lab_22", "mgr": "김재형, 정수미"},
-      {"no": 23, "code": "핸드피스", "name": "핸드피스", "photo": "animal_lab_23", "mgr": "김재형, 정수미"},
-      {"no": 24, "code": "수술용 칼", "name": "수술용 칼", "photo": "animal_lab_24", "mgr": "김재형, 정수미"},
-      {"no": 25, "code": "적외선조사기", "name": "적외선조사기", "photo": "animal_lab_25", "mgr": "김재형, 정수미"},
-      {"no": 26, "code": "HFE-SB11", "name": "Surgical Blade, 메스날 11호", "photo": "animal_lab_26", "mgr": "김재형, 정수미"},
-      {"no": 27, "code": "불소통", "name": "불소통", "photo": "animal_lab_27", "mgr": "김재형, 정수미"},
-      {"no": 28, "code": "스탠드 전등", "name": "스탠드 전등", "photo": "animal_lab_28", "mgr": "김재형, 정수미"},
-      {"no": 29, "code": "바이옵시펀치", "name": "biopsy punch(의료용천공기) 5mm", "photo": "animal_lab_29", "mgr": "김재형, 정수미"},
-      {"no": 30, "code": "JS20", "name": "가정용 석션기", "photo": "animal_lab_30", "mgr": "김재형, 정수미"},
-      {"no": 31, "code": "카메라", "name": "카메라 등", "photo": "animal_lab_31", "mgr": "김재형, 정수미"},
-      {"no": 32, "code": "M-32GB", "name": "메모리카드 32G", "photo": "animal_lab_32", "mgr": "김재형, 정수미"}
+      {"no": 1, "code": "101D", "name": "드레싱카", "photo": "animal_lab_1", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 2, "code": "4-0107", "name": "홍재 개부밧드 (Tray) 7절", "photo": "animal_lab_2", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 3, "code": "4-0108", "name": "홍재 개부밧드 (Tray) 8절", "photo": "animal_lab_3", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 4, "code": "AM7020", "name": "RNAlater® RNA Stabilization Solutionwi", "photo": "animal_lab_4", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 5, "code": "NB324", "name": "봉합실 3-0", "photo": "animal_lab_5", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 6, "code": "NB526P", "name": "봉합사 5-0", "photo": "animal_lab_6", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 7, "code": "THB50", "name": "Trephine bur 5.0mm", "photo": "animal_lab_7", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 8, "code": "면봉", "name": "면봉", "photo": "animal_lab_8", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 9, "code": "멸균거즈", "name": "멸균거즈", "photo": "animal_lab_9", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 10, "code": "실리콘피부", "name": "피부봉합연습도구 실리콘피부패드", "photo": "animal_lab_10", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 11, "code": "정밀핀셋", "name": "E5SA TWEEZER ERGONINIC ESD", "photo": "animal_lab_11", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 12, "code": "제모크림", "name": "제모크림", "photo": "animal_lab_12", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 13, "code": "HC.04-0018-13", "name": "ARTERY FORCEP SPENCER WELL", "photo": "animal_lab_13", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 14, "code": "HC.13-112", "name": "Laboratory 14cm S/B Straight", "photo": "animal_lab_14", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 15, "code": "HC.15-122", "name": "DRESSING FORCEP THUMB", "photo": "animal_lab_15", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 16, "code": "HC.15-142", "name": "TISSUE FORCEP 14CM", "photo": "animal_lab_16", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 17, "code": "HC.17-160", "name": "KELLY FORCEP 14CM", "photo": "animal_lab_17", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 18, "code": "HC13-122", "name": "Operating Scissors (S/S) 14", "photo": "animal_lab_18", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 19, "code": "S-1101-14", "name": "Operating Scissor S-1101-14", "photo": "animal_lab_19", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 20, "code": "위생 깔개 매트", "name": "일회용방수패드", "photo": "animal_lab_20", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 21, "code": "전기매트", "name": "전기장판 바닥용", "photo": "animal_lab_21", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 22, "code": "전기이발기", "name": "전기이발기", "photo": "animal_lab_22", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 23, "code": "핸드피스", "name": "핸드피스", "photo": "animal_lab_23", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 24, "code": "수술용 칼", "name": "수술용 칼", "photo": "animal_lab_24", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 25, "code": "적외선조사기", "name": "적외선조사기", "photo": "animal_lab_25", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 26, "code": "HFE-SB11", "name": "Surgical Blade, 메스날 11호", "photo": "animal_lab_26", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 27, "code": "불소통", "name": "불소통", "photo": "animal_lab_27", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 28, "code": "스탠드 전등", "name": "스탠드 전등", "photo": "animal_lab_28", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 29, "code": "바이옵시펀치", "name": "biopsy punch(의료용천공기) 5mm", "photo": "animal_lab_29", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 30, "code": "JS20", "name": "가정용 석션기", "photo": "animal_lab_30", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 31, "code": "카메라", "name": "카메라 등", "photo": "animal_lab_31", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 32, "code": "M-32GB", "name": "메모리카드 32G", "photo": "animal_lab_32", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"}
     ];
+
+    {
+    const pipetteData = [
+      {"no": 1, "name": "Pipette", "spec": "1000 uL", "loc": "ABMRC", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 2, "name": "Pipette", "spec": "200 uL", "loc": "ABMRC", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 3, "name": "Pipette", "spec": "200 uL", "loc": "ABMRC", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 4, "name": "Pipette", "spec": "20 uL", "loc": "ABMRC", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 5, "name": "Pipette", "spec": "2 uL", "loc": "ABMRC", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 6, "name": "Pipette", "spec": "100 uL", "loc": "ABMRC", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 7, "name": "Pipette", "spec": "1000 uL", "loc": "세포실", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 8, "name": "Pipette", "spec": "200 uL", "loc": "세포실", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 9, "name": "Pipette", "spec": "20 uL", "loc": "세포실", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 10, "name": "Pipette", "spec": "1000 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "O", "remarks": ""},
+      {"no": 11, "name": "Pipette", "spec": "1000 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 12, "name": "Pipette", "spec": "200 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 13, "name": "Pipette", "spec": "200 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 14, "name": "Pipette", "spec": "200 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 15, "name": "Pipette", "spec": "2 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 16, "name": "Pipette", "spec": "20 uL", "loc": "707호", "brand": "한국분석기기㈜", "calib": "", "broken": "", "remarks": ""},
+      {"no": 17, "name": "Pipette", "spec": "1000 uL", "loc": "707호", "brand": "MICROLIT RBO", "calib": "", "broken": "", "remarks": ""},
+      {"no": 18, "name": "Pipette", "spec": "20 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 19, "name": "Pipette", "spec": "2 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 20, "name": "Pipette", "spec": "20 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 21, "name": "Pipette", "spec": "200 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 22, "name": "Pipette", "spec": "10 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 23, "name": "Pipette", "spec": "10 uL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 24, "name": "Pipette", "spec": "20 uL", "loc": "707호", "brand": "Eppendorf", "calib": "", "broken": "", "remarks": ""},
+      {"no": 25, "name": "Pipette", "spec": "1000 uL", "loc": "707호", "brand": "Eppendorf", "calib": "", "broken": "", "remarks": ""},
+      {"no": 26, "name": "Pipette", "spec": "20 µL", "loc": "세균실", "brand": "Gilson", "calib": "", "broken": "", "remarks": ""},
+      {"no": 27, "name": "Pipette", "spec": "100 µL", "loc": "세균실", "brand": "Micropette", "calib": "", "broken": "", "remarks": ""},
+      {"no": 28, "name": "Pipette", "spec": "200 µL", "loc": "세균실", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 29, "name": "Pipette", "spec": "1000 µL", "loc": "세균실", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 30, "name": "Pipette", "spec": "1000 µL", "loc": "세균실", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 31, "name": "Multichannel Pipette", "spec": "8 × 100 µL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 32, "name": "Multichannel Pipette", "spec": "8 × 200 µL", "loc": "707호", "brand": "GILSON", "calib": "", "broken": "", "remarks": ""},
+      {"no": 33, "name": "Pipette", "spec": "200 µL", "loc": "707호", "brand": "한국분석기기㈜", "calib": "", "broken": "", "remarks": ""},
+      {"no": 34, "name": "Multichannel Pipette", "spec": "8 × 200 µL", "loc": "707호", "brand": "한국분석기기㈜", "calib": "", "broken": "", "remarks": ""},
+      {"no": 35, "name": "Hot plate stirrer", "spec": "9구", "loc": "707호", "brand": "Jeio Tech", "calib": "", "broken": "", "remarks": ""},
+      {"no": 36, "name": "Hot plate stirrer", "spec": "", "loc": "707호", "brand": "Corning", "calib": "", "broken": "", "remarks": ""},
+      {"no": 37, "name": "Hot plate stirrer", "spec": "", "loc": "707호", "brand": "Corning", "calib": "", "broken": "", "remarks": ""},
+      {"no": 38, "name": "Hot plate stirrer", "spec": "", "loc": "707호", "brand": "MTOPS", "calib": "", "broken": "", "remarks": ""},
+      {"no": 39, "name": "Hot plate stirrer", "spec": "", "loc": "Cold Room", "brand": "MTOPS", "calib": "", "broken": "", "remarks": ""},
+      {"no": 40, "name": "Pipette aid", "spec": "", "loc": "707호", "brand": "Macroman", "calib": "", "broken": "", "remarks": ""},
+      {"no": 41, "name": "Pipette aid", "spec": "", "loc": "세균실", "brand": "Macroman", "calib": "", "broken": "", "remarks": ""},
+      {"no": 42, "name": "Pipette aid", "spec": "", "loc": "707호", "brand": "Witeg", "calib": "", "broken": "", "remarks": ""},
+      {"no": 43, "name": "Pipette aid", "spec": "", "loc": "세포실", "brand": "BlueSwan", "calib": "", "broken": "", "remarks": ""},
+      {"no": 44, "name": "Vortex", "spec": "", "loc": "ABMRC", "brand": "Scientific Industries", "calib": "", "broken": "", "remarks": ""},
+      {"no": 45, "name": "Vortex", "spec": "", "loc": "세균실", "brand": "Scientific Industries", "calib": "", "broken": "", "remarks": ""},
+      {"no": 46, "name": "Vortex", "spec": "", "loc": "707호", "brand": "한국분석기기㈜", "calib": "", "broken": "", "remarks": ""},
+      {"no": 47, "name": "Ion meter", "spec": "", "loc": "707호", "brand": "Thermo Fisher", "calib": "", "broken": "", "remarks": ""},
+      {"no": 48, "name": "Ion meter", "spec": "", "loc": "707호", "brand": "Thermo Fisher", "calib": "", "broken": "", "remarks": ""},
+      {"no": 49, "name": "Light-Curing Unit", "spec": "", "loc": "707호", "brand": "3M", "calib": "", "broken": "", "remarks": ""},
+      {"no": 50, "name": "Light-Curing Unit", "spec": "", "loc": "707호", "brand": "3M", "calib": "", "broken": "", "remarks": ""},
+      {"no": 51, "name": "Light-Curing Unit", "spec": "", "loc": "707호", "brand": "3M", "calib": "", "broken": "", "remarks": ""},
+      {"no": 52, "name": "Light-Curing Unit", "spec": "", "loc": "707호", "brand": "3M", "calib": "", "broken": "", "remarks": ""},
+      {"no": 53, "name": "sonication", "spec": "", "loc": "708호", "brand": "MUJIGAE", "calib": "", "broken": "", "remarks": ""},
+      {"no": 54, "name": "sonication", "spec": "", "loc": "708호", "brand": "MUJIGAE", "calib": "", "broken": "", "remarks": ""}
+    ];
+    const pcData = [
+      {"no": 1, "kind": "모니터", "label": "CSB 모니터 1", "loc": "치과대학 707호", "user": "서지영", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 2, "kind": "모니터", "label": "CSB 모니터 2", "loc": "치과대학 707호", "user": "서지영", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 3, "kind": "모니터", "label": "CSB 모니터 3", "loc": "치과대학 707호", "user": "김지윤", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 4, "kind": "모니터", "label": "CSB 모니터 4", "loc": "치과대학 707호", "user": "김지윤", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 5, "kind": "모니터", "label": "CSB 모니터 5", "loc": "치과대학 707호", "user": "윤정현", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 6, "kind": "모니터", "label": "CSB 모니터 6", "loc": "치과대학 707호", "user": "윤정현", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 7, "kind": "모니터", "label": "CSB 모니터 7", "loc": "치과대학 707호", "user": "류정현", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 8, "kind": "모니터", "label": "CSB 모니터 8", "loc": "치과대학 707호", "user": "3D 프로그램", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 9, "kind": "모니터", "label": "CSB 모니터 9", "loc": "치과대학 707호", "user": "미지정", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 10, "kind": "모니터", "label": "CSB 모니터 10", "loc": "치과대학 707호", "user": "미지정", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 11, "kind": "모니터", "label": "CSB 모니터 11", "loc": "치과대학 707호", "user": "미지정", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 12, "kind": "모니터", "label": "CSB 모니터 12", "loc": "치과대학 708호", "user": "김재형", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 13, "kind": "모니터", "label": "CSB 모니터 13", "loc": "치과대학 708호", "user": "김재형", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 14, "kind": "모니터", "label": "CSB 모니터 14", "loc": "치과대학 708호", "user": "정수미", "brand": "DICLE", "photo": "", "sticker": ""},
+      {"no": 15, "kind": "모니터", "label": "CSB 모니터 15", "loc": "치과대학 708호", "user": "UTM", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 16, "kind": "모니터", "label": "CSB 모니터 16", "loc": "치과대학 708호", "user": "미지정", "brand": "DICLE", "photo": "", "sticker": ""},
+      {"no": 17, "kind": "모니터", "label": "CSB 모니터 17", "loc": "치과대학 708호", "user": "EPOCH", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 18, "kind": "모니터", "label": "CSB 모니터 18", "loc": "치과대학 708호", "user": "FT-IR", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 19, "kind": "모니터", "label": "CSB 모니터 19", "loc": "치과대학 704-2", "user": "만갈웃커시", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 20, "kind": "모니터", "label": "CSB 모니터 20", "loc": "치과대학 704-2", "user": "만갈웃커시", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 21, "kind": "모니터", "label": "CSB 모니터 21", "loc": "치과대학 704-2", "user": "만갈웃커시", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 22, "kind": "모니터", "label": "CSB 모니터 22", "loc": "치과대학 308호", "user": "김지윤", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 23, "kind": "모니터", "label": "CSB 모니터 23", "loc": "치과대학 308호", "user": "김지윤", "brand": "LG", "photo": "", "sticker": ""},
+      {"no": 24, "kind": "모니터", "label": "CSB 모니터 24", "loc": "대신빌딩", "user": "권미현", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 25, "kind": "모니터", "label": "CSB 모니터 25", "loc": "대신빌딩", "user": "권미현", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 26, "kind": "모니터", "label": "CSB 모니터 26", "loc": "대신빌딩", "user": "윤정현", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 27, "kind": "모니터", "label": "CSB 모니터 27", "loc": "대신빌딩", "user": "윤정현", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 29, "kind": "본체", "label": "CSB 본체 1", "loc": "치과대학 707호", "user": "서지영", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 30, "kind": "본체", "label": "CSB 본체 2", "loc": "치과대학 707호", "user": "김지윤", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 31, "kind": "본체", "label": "CSB 본체 3", "loc": "치과대학 707호", "user": "윤정현", "brand": "MICRONICS", "photo": "", "sticker": ""},
+      {"no": 32, "kind": "본체", "label": "CSB 본체 4", "loc": "치과대학 707호", "user": "류정현", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 33, "kind": "본체", "label": "CSB 본체 5", "loc": "치과대학 707호", "user": "미지정", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 34, "kind": "본체", "label": "CSB 본체 6", "loc": "치과대학 707호", "user": "3D 프로그램", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 35, "kind": "본체", "label": "CSB 본체 7", "loc": "치과대학 708호", "user": "김재형", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 36, "kind": "본체", "label": "CSB 본체 8", "loc": "치과대학 708호", "user": "UTM", "brand": "NCORE", "photo": "", "sticker": ""},
+      {"no": 37, "kind": "본체", "label": "CSB 본체 9", "loc": "치과대학 708호", "user": "FT-IR", "brand": "", "photo": "", "sticker": ""},
+      {"no": 38, "kind": "본체", "label": "CSB 본체 10", "loc": "치과대학 708호", "user": "미지정", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 39, "kind": "본체", "label": "CSB 본체 11", "loc": "치과대학 708호", "user": "APOCH", "brand": "NCORE", "photo": "", "sticker": ""},
+      {"no": 40, "kind": "본체", "label": "CSB 본체 12", "loc": "치과대학 704-2", "user": "만갈웃커시", "brand": "", "photo": "", "sticker": ""},
+      {"no": 41, "kind": "본체", "label": "CSB 본체 13", "loc": "치과대학 704-2", "user": "만갈웃커시", "brand": "", "photo": "", "sticker": ""},
+      {"no": 42, "kind": "본체", "label": "CSB 본체 14", "loc": "치과대학 308호", "user": "김지윤", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 43, "kind": "본체", "label": "CSB 본체 15", "loc": "대신빌딩", "user": "권미현", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 44, "kind": "본체", "label": "CSB 본체 16", "loc": "대신빌딩", "user": "윤정현", "brand": "OMYPC", "photo": "", "sticker": ""},
+      {"no": 45, "kind": "노트북", "label": "CSB 노트북 1", "loc": "치과대학 308호", "user": "김지윤(내부망용)", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 46, "kind": "노트북", "label": "CSB 노트북 2", "loc": "교수님 방", "user": "Q-ray", "brand": "MSI", "photo": "", "sticker": ""},
+      {"no": 47, "kind": "노트북", "label": "CSB 노트북 3", "loc": "교수님 방", "user": "Medit(구강스캐너)", "brand": "LENOVO", "photo": "", "sticker": ""},
+      {"no": 48, "kind": "노트북", "label": "CSB 노트북 4", "loc": "치과대학 707호", "user": "회의용", "brand": "SAMSUNG", "photo": "", "sticker": ""},
+      {"no": 49, "kind": "노트북", "label": "CSB 노트북 5", "loc": "치과대학 707호", "user": "미지정", "brand": "BASICS", "photo": "", "sticker": ""}
+    ];
+
+    const animalLabData = [
+      {"no": 1, "code": "101D", "name": "드레싱카", "photo": "animal_lab_1", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 2, "code": "4-0107", "name": "홍재 개부밧드 (Tray) 7절", "photo": "animal_lab_2", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 3, "code": "4-0108", "name": "홍재 개부밧드 (Tray) 8절", "photo": "animal_lab_3", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 4, "code": "AM7020", "name": "RNAlater® RNA Stabilization Solutionwi", "photo": "animal_lab_4", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 5, "code": "NB324", "name": "봉합실 3-0", "photo": "animal_lab_5", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 6, "code": "NB526P", "name": "봉합사 5-0", "photo": "animal_lab_6", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 7, "code": "THB50", "name": "Trephine bur 5.0mm", "photo": "animal_lab_7", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 8, "code": "면봉", "name": "면봉", "photo": "animal_lab_8", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 9, "code": "멸균거즈", "name": "멸균거즈", "photo": "animal_lab_9", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 10, "code": "실리콘피부", "name": "피부봉합연습도구 실리콘피부패드", "photo": "animal_lab_10", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 11, "code": "정밀핀셋", "name": "E5SA TWEEZER ERGONINIC ESD", "photo": "animal_lab_11", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 12, "code": "제모크림", "name": "제모크림", "photo": "animal_lab_12", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 13, "code": "HC.04-0018-13", "name": "ARTERY FORCEP SPENCER WELL", "photo": "animal_lab_13", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 14, "code": "HC.13-112", "name": "Laboratory 14cm S/B Straight", "photo": "animal_lab_14", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 15, "code": "HC.15-122", "name": "DRESSING FORCEP THUMB", "photo": "animal_lab_15", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 16, "code": "HC.15-142", "name": "TISSUE FORCEP 14CM", "photo": "animal_lab_16", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 17, "code": "HC.17-160", "name": "KELLY FORCEP 14CM", "photo": "animal_lab_17", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 18, "code": "HC13-122", "name": "Operating Scissors (S/S) 14", "photo": "animal_lab_18", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 19, "code": "S-1101-14", "name": "Operating Scissor S-1101-14", "photo": "animal_lab_19", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 20, "code": "위생 깔개 매트", "name": "일회용방수패드", "photo": "animal_lab_20", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 21, "code": "전기매트", "name": "전기장판 바닥용", "photo": "animal_lab_21", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 22, "code": "전기이발기", "name": "전기이발기", "photo": "animal_lab_22", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 23, "code": "핸드피스", "name": "핸드피스", "photo": "animal_lab_23", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 24, "code": "수술용 칼", "name": "수술용 칼", "photo": "animal_lab_24", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 25, "code": "적외선조사기", "name": "적외선조사기", "photo": "animal_lab_25", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 26, "code": "HFE-SB11", "name": "Surgical Blade, 메스날 11호", "photo": "animal_lab_26", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 27, "code": "불소통", "name": "불소통", "photo": "animal_lab_27", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 28, "code": "스탠드 전등", "name": "스탠드 전등", "photo": "animal_lab_28", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 29, "code": "바이옵시펀치", "name": "biopsy punch(의료용천공기) 5mm", "photo": "animal_lab_29", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 30, "code": "JS20", "name": "가정용 석션기", "photo": "animal_lab_30", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 31, "code": "카메라", "name": "카메라 등", "photo": "animal_lab_31", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"},
+      {"no": 32, "code": "M-32GB", "name": "메모리카드 32G", "photo": "animal_lab_32", "loc": "ABMRC animal-research-lab B3/B4", "mgr": "김재형, 정수미"}
+    ];
+    }
     animalLabData.forEach(item => {
       item.loc = "ABMRC animal-research-lab B3/B4";
     });
 
+    const reagentData = [
+      {"no": 1, "loc": "707호", "zone": "실온", "folder": "D", "name": "D-(+)-Glucose", "mfr": "TCI", "cat": "G0048", "cas": "50-99-7", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 2, "loc": "707호", "zone": "실온", "folder": "D", "name": "D-(-)-Fructose", "mfr": "TCI", "cat": "F0060", "cas": "57-48-7", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 3, "loc": "707호", "zone": "실온", "folder": "D", "name": "D(+)-글루코스(무수, Dextrose anhydrous)", "mfr": "JUNSEI", "cat": "-", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 4, "loc": "707호", "zone": "배지", "folder": "-", "name": "Sabouraud Dextrose (SD) Agar", "mfr": "MB Cell", "cat": "MB-S1527", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 5, "loc": "707호", "zone": "배지", "folder": "-", "name": "Yeast Extract", "mfr": "Thermo Scientific", "cat": "212750", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 6, "loc": "707호", "zone": "배지", "folder": "-", "name": "BBL Trypticase Soy Broth", "mfr": "BD", "cat": "211768", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 7, "loc": "707호", "zone": "배지", "folder": "-", "name": "Todd Hewitt Broth", "mfr": "BD/Difco", "cat": "249240", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 8, "loc": "707호", "zone": "배지", "folder": "-", "name": "Brain Heart Infusion", "mfr": "BD/Difco", "cat": "237500", "cas": "-", "capacity": "500 g", "qty": "2", "remarks": ""},
+      {"no": 9, "loc": "707호", "zone": "배지", "folder": "-", "name": "Sucrose", "mfr": "Millipore", "cat": "84100-1KG", "cas": "-", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 10, "loc": "707호", "zone": "배지", "folder": "-", "name": "Soluble Starch", "mfr": "BD/Difco", "cat": "217820", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 11, "loc": "707호", "zone": "배지", "folder": "-", "name": "Agar", "mfr": "BD/Difco", "cat": "214010", "cas": "-", "capacity": "454 g", "qty": "2", "remarks": ""},
+      {"no": 12, "loc": "707호", "zone": "배지", "folder": "-", "name": "Tryptic Soy Agar", "mfr": "BD/Difco", "cat": "236950", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 13, "loc": "707호", "zone": "배지", "folder": "-", "name": "Sabouraud Dextrose Broth", "mfr": "BD/Difco", "cat": "238230", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 14, "loc": "707호", "zone": "배지", "folder": "-", "name": "Columbia Broth", "mfr": "BD/Difco", "cat": "294420", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 15, "loc": "707호", "zone": "배지", "folder": "-", "name": "Proteose Peptone", "mfr": "Thermo Scientific", "cat": "211684", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 16, "loc": "707호", "zone": "배지", "folder": "", "name": "yeast nitrogen base without amino acids", "mfr": "Sigma-Aldrich", "cat": "Y0626-250G", "cas": "", "capacity": "250g", "qty": "1", "remarks": ""},
+      {"no": 17, "loc": "707호", "zone": "배지", "folder": "", "name": "YM Broth", "mfr": "BD/Difco", "cat": "271120", "cas": "", "capacity": "500g", "qty": "1", "remarks": ""},
+      {"no": 18, "loc": "707호", "zone": "멀티장", "folder": "-", "name": "Itaconic acid", "mfr": "Sigma-Aldrich", "cat": "I29204-1KG", "cas": "-", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 19, "loc": "707호", "zone": "멀티장", "folder": "-", "name": "Sodium carbonate", "mfr": "Sigma-Aldrich", "cat": "223530-1KG", "cas": "-", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 20, "loc": "707호", "zone": "멀티장", "folder": "-", "name": "Urea", "mfr": "Sigma-Aldrich", "cat": "U5128-1KG", "cas": "-", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 21, "loc": "707호", "zone": "멀티장", "folder": "-", "name": "Sodium alginate", "mfr": "Sigma-Aldrich", "cat": "W201502-1KG", "cas": "9005-38-3", "capacity": "1 kg", "qty": "2", "remarks": ""},
+      {"no": 22, "loc": "707호", "zone": "멀티장", "folder": "-", "name": "Paraffin wax", "mfr": "Sigma-Aldrich", "cat": "327212-1KG", "cas": "-", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 23, "loc": "707호", "zone": "락커", "folder": "-", "name": "Fibrillar Atelocollagen Powder", "mfr": "Guangdong Victoy Biotech", "cat": "GVB-atelo-03", "cas": "-", "capacity": "50 g", "qty": "1", "remarks": ""},
+      {"no": 24, "loc": "707호", "zone": "서랍", "folder": "서지영", "name": "LAP Photoinitiator", "mfr": "Smart MCs", "cat": "-", "cas": "-", "capacity": "0.025 g", "qty": "3", "remarks": ""},
+      {"no": 25, "loc": "707호", "zone": "서랍", "folder": "서지영", "name": "HAMA-150K Hydrogel", "mfr": "Smart MCs", "cat": "HM-150K", "cas": "-", "capacity": "0.5 g", "qty": "4", "remarks": ""},
+      {"no": 26, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Acetic Acid glacial", "mfr": "Duksan", "cat": "UN2789", "cas": "64-19-7", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 27, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Hexamethyldisilazane", "mfr": "Sigma-Aldrich", "cat": "440191-100ML", "cas": "-", "capacity": "100 mL", "qty": "2", "remarks": ""},
+      {"no": 28, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Iso-Propyl Alcohol", "mfr": "Duksan", "cat": "UN1219", "cas": "67-93-0", "capacity": "1 L", "qty": "1", "remarks": ""},
+      {"no": 29, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Ethanol absolute (pro analysi)", "mfr": "Merck", "cat": "1.00983.1011", "cas": "-", "capacity": "1 L", "qty": "6", "remarks": ""},
+      {"no": 30, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Xylene", "mfr": "Duksan", "cat": "-", "cas": "1330-20-7", "capacity": "1 L", "qty": "7", "remarks": ""},
+      {"no": 31, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Chloroform (biotech grade)", "mfr": "Sigma-Aldrich", "cat": "496189-1L", "cas": "-", "capacity": "1 L", "qty": "1", "remarks": ""},
+      {"no": 32, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "n-Decane 98%", "mfr": "Samchun", "cat": "D0047", "cas": "124-18-5", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 33, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Dimethyl sulfoxide (ACS) 99.9%", "mfr": "Sigma-Aldrich", "cat": "472301-1L", "cas": "-", "capacity": "1 L", "qty": "1", "remarks": ""},
+      {"no": 34, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Glycerine", "mfr": "Duksan", "cat": "", "cas": "56-81-5", "capacity": "1kg", "qty": "1", "remarks": ""},
+      {"no": 35, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Glycerine", "mfr": "Duksan", "cat": "-", "cas": "-", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 36, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Hexane (ReagentPlus)", "mfr": "Sigma-Aldrich", "cat": "139386-500ML", "cas": "110-54-3", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 37, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Formaldehyde solution", "mfr": "Duksan", "cat": "-", "cas": "-", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 38, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Ethanol, Absolute (HPLC grade)", "mfr": "Duksan", "cat": "Product No.76", "cas": "-", "capacity": "4 L", "qty": "1", "remarks": ""},
+      {"no": 39, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Formic Acid", "mfr": "Duksan", "cat": "-", "cas": "-", "capacity": "-", "qty": "1", "remarks": ""},
+      {"no": 40, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "10% Formalin", "mfr": "Duksan", "cat": "-", "cas": "-", "capacity": "1 L", "qty": "1", "remarks": ""},
+      {"no": 41, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "Glutaraldehyde solution, Grade II 25%", "mfr": "Sigma-Aldrich", "cat": "G6257-1L", "cas": "-", "capacity": "1 L", "qty": "1", "remarks": ""},
+      {"no": 42, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "2-Ethoxyethanol (ReagentPlus)", "mfr": "Sigma-Aldrich", "cat": "12082-1L", "cas": "-", "capacity": "1 L", "qty": "1", "remarks": ""},
+      {"no": 43, "loc": "707호", "zone": "위험물질", "folder": "-", "name": "1,2-Butylene Oxide", "mfr": "TCI", "cat": "B0719", "cas": "-", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 44, "loc": "707호", "zone": "실온", "folder": "B", "name": "1,4-Butanediol diglycidyl ether", "mfr": "Sigma-Aldrich", "cat": "220892-10G", "cas": "2425-79-8", "capacity": "10 g", "qty": "1", "remarks": ""},
+      {"no": 45, "loc": "707호", "zone": "실온", "folder": "A", "name": "Alcian Blue solution (1% in 3% acetic acid)", "mfr": "Sigma-Aldrich", "cat": "B8438-250ML", "cas": "-", "capacity": "250 mL", "qty": "1", "remarks": ""},
+      {"no": 46, "loc": "707호", "zone": "실온", "folder": "A", "name": "L-Ascorbic acid", "mfr": "Sigma-Aldrich", "cat": "A92902-100G", "cas": "50-81-7", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 47, "loc": "707호", "zone": "실온", "folder": "A", "name": "L-Ascorbic acid 2-phosphate sesquimagnesium salt hydrate", "mfr": "Sigma-Aldrich", "cat": "A8960-5G", "cas": "-", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 48, "loc": "707호", "zone": "실온", "folder": "B", "name": "Boric acid", "mfr": "Sigma-Aldrich", "cat": "B0394-500G", "cas": "10043-35-3", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 49, "loc": "707호", "zone": "실온", "folder": "A", "name": "Ammonium phosphate dibasic", "mfr": "Sigma-Aldrich", "cat": "Q9839-250G", "cas": "7783-28-0", "capacity": "250 g", "qty": "1", "remarks": ""},
+      {"no": 50, "loc": "707호", "zone": "실온", "folder": "A", "name": "L(+)-Ascorbic acid (Vitamin C)", "mfr": "JUNSEI", "cat": "10300-0301", "cas": "50-81-7", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 51, "loc": "707호", "zone": "실온", "folder": "A", "name": "L-Arginine", "mfr": "Sigma-Aldrich", "cat": "A5006-100G", "cas": "74-79-3", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 52, "loc": "707호", "zone": "실온", "folder": "A", "name": "Ammonium hydroxide solution (28-30% NH3)", "mfr": "Sigma-Aldrich", "cat": "221228-500ML-A", "cas": "1336-21-6", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 53, "loc": "707호", "zone": "실온", "folder": "C", "name": "L-Cystine", "mfr": "Sigma-Aldrich", "cat": "C8755-100G", "cas": "56-89-3", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 54, "loc": "707호", "zone": "실온", "folder": "C", "name": "Citric acid (ACS reagent)", "mfr": "Sigma-Aldrich", "cat": "251275-500G", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 55, "loc": "707호", "zone": "실온", "folder": "C", "name": "Crystal Violet Solution (1% aqueous)", "mfr": "Sigma-Aldrich", "cat": "V5265-500ML", "cas": "548-62-9", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 56, "loc": "707호", "zone": "실온", "folder": "C", "name": "Crystal Violet (ACS reagent)", "mfr": "Sigma-Aldrich", "cat": "C6158-50G", "cas": "-", "capacity": "50 g", "qty": "1", "remarks": ""},
+      {"no": 57, "loc": "707호", "zone": "실온", "folder": "C", "name": "Cetylpyridinium chloride monohydrate", "mfr": "Sigma-Aldrich", "cat": "C0732-100G", "cas": "6004-24-6", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 58, "loc": "707호", "zone": "실온", "folder": "C", "name": "Collagen from calf skin (Type I)", "mfr": "Sigma-Aldrich", "cat": "C9791-250MG", "cas": "9007-34-5", "capacity": "250 mg", "qty": "1", "remarks": ""},
+      {"no": 59, "loc": "707호", "zone": "실온", "folder": "C", "name": "Cerium(III) nitrate hexahydrate", "mfr": "Sigma-Aldrich", "cat": "202991-25G", "cas": "-", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 60, "loc": "707호", "zone": "실온", "folder": "C", "name": "Citric acid (ACS reagent)", "mfr": "Sigma-Aldrich", "cat": "251275-100G", "cas": "77-92-9", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 61, "loc": "707호", "zone": "실온", "folder": "C", "name": "Calcium chloride (anhydrous, granular)", "mfr": "Sigma-Aldrich", "cat": "C1016-500G", "cas": "10043-52-4", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 62, "loc": "707호", "zone": "실온", "folder": "C", "name": "Calcium chloride dihydrate, powder", "mfr": "Daejung", "cat": "2927-4405", "cas": "10035-04-8", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 63, "loc": "707호", "zone": "실온", "folder": "C", "name": "Calcium nitrate tetrahydrate", "mfr": "Sigma-Aldrich", "cat": "C1396-500G", "cas": "13477-34-4", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 64, "loc": "707호", "zone": "실온", "folder": "C", "name": "Calcium carbonate (ACS reagent)", "mfr": "Sigma-Aldrich", "cat": "239216-500G", "cas": "471-34-1", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 65, "loc": "707호", "zone": "실온", "folder": "C", "name": "Calcium nitrate tetrahydrate (cell culture용)", "mfr": "Sigma-Aldrich", "cat": "C2786-500G", "cas": "13477-34-4", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 66, "loc": "707호", "zone": "실온", "folder": "C", "name": "L-Cysteine hydrochloride monohydrate", "mfr": "Sigma-Aldrich", "cat": "C7880-100G", "cas": "-", "capacity": "100 g", "qty": "2", "remarks": ""},
+      {"no": 67, "loc": "707호", "zone": "실온", "folder": "C", "name": "Cerium(IV) oxide, nanopowder (<25 nm)", "mfr": "Sigma-Aldrich", "cat": "544841-25G", "cas": "1306-38-3", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 68, "loc": "707호", "zone": "실온", "folder": "C", "name": "Copper(II) chloride dihydrate", "mfr": "Sigma-Aldrich", "cat": "221783-100G", "cas": "10125-13-0", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 69, "loc": "707호", "zone": "실온", "folder": "C", "name": "Chitosan (low molecular weight)", "mfr": "Sigma-Aldrich", "cat": "448869-50G", "cas": "9012-76-4", "capacity": "50 g", "qty": "1", "remarks": ""},
+      {"no": 70, "loc": "707호", "zone": "실온", "folder": "C", "name": "Citric acid (cell culture tested, anhydrous)", "mfr": "Sigma-Aldrich", "cat": "C2404-500G", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 71, "loc": "707호", "zone": "실온", "folder": "C", "name": "Cobalt(II) chloride hexahydrate", "mfr": "Sigma-Aldrich", "cat": "C8661-25G", "cas": "7791-13-1", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 72, "loc": "707호", "zone": "실온", "folder": "C", "name": "Calcium fluoride 99.5% (metals basis)", "mfr": "Thermo Scientific", "cat": "011055.30", "cas": "7789-75-5", "capacity": "250 g", "qty": "1", "remarks": ""},
+      {"no": 73, "loc": "707호", "zone": "실온", "folder": "D", "name": "Direct Red 80", "mfr": "Sigma-Aldrich", "cat": "365548-5G", "cas": "-", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 74, "loc": "707호", "zone": "실온", "folder": "D", "name": "Deoxyribonucleic Acid Sodium Salt from Salmon Milt", "mfr": "TCI", "cat": "D3545", "cas": "9007-49-2", "capacity": "25 g", "qty": "1", "remarks": "PN"},
+      {"no": 75, "loc": "707호", "zone": "실온", "folder": "D", "name": "Dioctyl sulfosuccinate sodium salt", "mfr": "Sigma-Aldrich", "cat": "323586-5G", "cas": "577-11-7", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 76, "loc": "707호", "zone": "실온", "folder": "D", "name": "Diiodomethane", "mfr": "Sigma-Aldrich", "cat": "158429-25G", "cas": "75-11-6", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 77, "loc": "707호", "zone": "실온", "folder": "D", "name": "4-(Dimethylamino)benzoic acid 98%", "mfr": "Sigma-Aldrich", "cat": "D139459-25G", "cas": "619-84-1", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 78, "loc": "707호", "zone": "실온", "folder": "D", "name": "Dipheyl(2,4,6-trimethyl-benzoyl)phosphine oxide 97%", "mfr": "Sigma-Aldrich", "cat": "415952-50G", "cas": "", "capacity": "50g", "qty": "1", "remarks": ""},
+      {"no": 79, "loc": "707호", "zone": "실온", "folder": "D", "name": "Dimethyl sulfoxide(DMSO, ACS)", "mfr": "Sigma-Aldrich", "cat": "472301-100ML", "cas": "67-68-5", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 80, "loc": "707호", "zone": "실온", "folder": "E,F", "name": "Fumed Diamond Powder (NanoAmando)", "mfr": "NanoCarbon Research Institute", "cat": "SWZ-17010/172-10,170", "cas": "-", "capacity": "5.0 g", "qty": "1", "remarks": ""},
+      {"no": 81, "loc": "707호", "zone": "실온", "folder": "E,F", "name": "Ethylene glycol dimethacrylate", "mfr": "Sigma-Aldrich", "cat": "335681-100ML", "cas": "97-90-5", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 82, "loc": "707호", "zone": "실온", "folder": "E,F", "name": "EDTA-2Na dihydrate(Extra pure grade)", "mfr": "Duksan", "cat": "3067", "cas": "", "capacity": "1kg", "qty": "1", "remarks": ""},
+      {"no": 83, "loc": "707호", "zone": "실온", "folder": "E,F", "name": "Ethidium bromide solution (1%, 10mg/mL)", "mfr": "Carl Roth", "cat": "2218.1", "cas": "-", "capacity": "10 mL", "qty": "1", "remarks": ""},
+      {"no": 84, "loc": "707호", "zone": "실온", "folder": "E,F", "name": "Fluorescamin", "mfr": "Sigma-Aldrich", "cat": "F9015-100mg", "cas": "38183-12-9", "capacity": "100g", "qty": "1", "remarks": ""},
+      {"no": 85, "loc": "707호", "zone": "실온", "folder": "E,F", "name": "Fibrillar Atelocollagen Powder", "mfr": "Guangdong Victoy Biotech", "cat": "GVB-atelo-03", "cas": "-", "capacity": "50 g", "qty": "1", "remarks": ""},
+      {"no": 86, "loc": "707호", "zone": "실온", "folder": "G", "name": "Genipin", "mfr": "Sigma-Aldrich", "cat": "G4796-25MG", "cas": "-", "capacity": "25 mg", "qty": "1", "remarks": ""},
+      {"no": 87, "loc": "707호", "zone": "실온", "folder": "G", "name": "Gallium oxide", "mfr": "HWAN(罗恩)", "cat": "03720-25G", "cas": "12024-21-4", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 88, "loc": "707호", "zone": "실온", "folder": "G", "name": "Gelatin from porcine skin (Type A)", "mfr": "Sigma-Aldrich", "cat": "G2500-100G", "cas": "9000-70-8", "capacity": "100 g", "qty": "2", "remarks": ""},
+      {"no": 89, "loc": "707호", "zone": "실온", "folder": "G", "name": "Gelatin from porcine skin (Type A)", "mfr": "Sigma-Aldrich", "cat": "G2500-500G", "cas": "9000-70-8", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 90, "loc": "707호", "zone": "실온", "folder": "G", "name": "Glycine (ReagentPlus, HPLC)", "mfr": "Sigma-Aldrich", "cat": "G7126-100G", "cas": "56-40-6", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 91, "loc": "707호", "zone": "실온", "folder": "G", "name": "Glycerol 99% (Extra pure)", "mfr": "Samchun", "cat": "-", "cas": "-", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 92, "loc": "707호", "zone": "실온", "folder": "G", "name": "Gelatin", "mfr": "Daejung", "cat": "4055-1405", "cas": "9000-70-8", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 93, "loc": "707호", "zone": "실온", "folder": "G", "name": "Gelzan CM (Gelrite, agar substitute)", "mfr": "Sigma-Aldrich", "cat": "G1910-250G", "cas": "71010-52-1", "capacity": "250 g", "qty": "1", "remarks": ""},
+      {"no": 94, "loc": "707호", "zone": "실온", "folder": "G", "name": "Glycerol ≥99.5%", "mfr": "Sigma-Aldrich", "cat": "G9012-500ML", "cas": "-", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 95, "loc": "707호", "zone": "실온", "folder": "G", "name": "Gallium(III) oxide", "mfr": "Sigma-Aldrich", "cat": "215066-10G", "cas": "-", "capacity": "10 g", "qty": "1", "remarks": ""},
+      {"no": 96, "loc": "707호", "zone": "실온", "folder": "G", "name": "L-Glutamic acid (ReagentPlus, HPLC)", "mfr": "Sigma-Aldrich", "cat": "G1251-100G", "cas": "-", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 97, "loc": "707호", "zone": "실온", "folder": "G", "name": "식물성 글리세린(Glycerin)", "mfr": "맑은담", "cat": "-", "cas": "-", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 98, "loc": "707호", "zone": "실온", "folder": "H", "name": "1,1,1,3,3,3-Hexafluoro-2-propanol", "mfr": "Sigma-Aldrich", "cat": "105228-100G", "cas": "920-66-1", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 99, "loc": "707호", "zone": "실온", "folder": "H", "name": "2-Hydroxy-4'-(2-hydroxyethoxy)-2-methylpropiophenone", "mfr": "Sigma-Aldrich", "cat": "410896-50G", "cas": "106797-53-9", "capacity": "50 g", "qty": "1", "remarks": ""},
+      {"no": 100, "loc": "707호", "zone": "실온", "folder": "H", "name": "Hexadecyltrimethylammonium bromide", "mfr": "Sigma-Aldrich", "cat": "H5882-100G", "cas": "57-09-0", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 101, "loc": "707호", "zone": "실온", "folder": "H", "name": "Hydrogen Peroxide Solution (Antiseptic) 과산화수소수", "mfr": "두원사이언스", "cat": "-", "cas": "-", "capacity": "250 mL", "qty": "1", "remarks": ""},
+      {"no": 102, "loc": "707호", "zone": "실온", "folder": "H", "name": "2-Hydroxyethyl methacrylate", "mfr": "Sigma-Aldrich", "cat": "477028-100ML", "cas": "868-77-9", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 103, "loc": "707호", "zone": "실온", "folder": "N", "name": "N-Hydroxysuccinimide (NHS)", "mfr": "Sigma-Aldrich", "cat": "130672-25G", "cas": "6066-82-6", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 104, "loc": "707호", "zone": "실온", "folder": "N", "name": "N-Hydroxysuccinimide (NHS)", "mfr": "Daejung", "cat": "4194-4425", "cas": "6066-82-6", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 105, "loc": "707호", "zone": "실온", "folder": "N", "name": "N-Hydroxysuccinimide (NHS)", "mfr": "Sigma-Aldrich", "cat": "130672-5G", "cas": "6066-82-6", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 106, "loc": "707호", "zone": "실온", "folder": "H", "name": "Hydrocortisone", "mfr": "Sigma-Aldrich", "cat": "H0888-1G", "cas": "-", "capacity": "1 g", "qty": "1", "remarks": ""},
+      {"no": 107, "loc": "707호", "zone": "실온", "folder": "I,L", "name": "Indomethacin", "mfr": "Sigma-Aldrich", "cat": "I7378-5G", "cas": "-", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 108, "loc": "707호", "zone": "실온", "folder": "I,L", "name": "Iron(II) chloride 98%", "mfr": "Sigma-Aldrich", "cat": "372870-25G", "cas": "7758-94-3", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 109, "loc": "707호", "zone": "실온", "folder": "I,L", "name": "Lactic acid (USP)", "mfr": "Sigma-Aldrich", "cat": "L6661-100ML", "cas": "50-21-5", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 110, "loc": "707호", "zone": "실온", "folder": "I,L", "name": "Litmus, powder", "mfr": "Daejung", "cat": "5092-4125", "cas": "1393-92-6", "capacity": "25g", "qty": "1", "remarks": ""},
+      {"no": 111, "loc": "707호", "zone": "실온", "folder": "N", "name": "Nanodiamond (<10nm, 5% dispersion)", "mfr": "TCI", "cat": "N1082", "cas": "7782-40-3", "capacity": "25 g", "qty": "2", "remarks": ""},
+      {"no": 112, "loc": "707호", "zone": "실온", "folder": "N", "name": "Nanodiamond (<10nm, Amine-modified)", "mfr": "TCI", "cat": "N0968", "cas": "7782-40-3", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 113, "loc": "707호", "zone": "실온", "folder": "N", "name": "Nanodiamond (<10nm)", "mfr": "TCI", "cat": "N0962", "cas": "7782-40-3", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 114, "loc": "707호", "zone": "실온", "folder": "N", "name": "Ninhydrin", "mfr": "Sigma-Aldrich", "cat": "151173-25G", "cas": "485-47-2", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 115, "loc": "707호", "zone": "실온", "folder": "M", "name": "Methacrylic anhydride", "mfr": "Sigma-Aldrich", "cat": "276685-100ML", "cas": "760-93-0", "capacity": "100 mL", "qty": "3", "remarks": ""},
+      {"no": 116, "loc": "707호", "zone": "실온", "folder": "M", "name": "Methyl Red (ACS)", "mfr": "Sigma-Aldrich", "cat": "250198-25G", "cas": "493-52-7", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 117, "loc": "707호", "zone": "실온", "folder": "M", "name": "Menadione (Vitamin K3)", "mfr": "Sigma-Aldrich", "cat": "M5625-100G", "cas": "-", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 118, "loc": "707호", "zone": "실온", "folder": "S", "name": "Molecular Sieve SBA-15", "mfr": "ACS Material", "cat": "MSK15012", "cas": "-", "capacity": "20 g", "qty": "1", "remarks": "SBA-15"},
+      {"no": 119, "loc": "707호", "zone": "실온", "folder": "M", "name": "Manganese(II) chloride beads 98%", "mfr": "Sigma-Aldrich", "cat": "328146-25G", "cas": "7773-01-5", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 120, "loc": "707호", "zone": "실온", "folder": "M", "name": "Mucin Type II", "mfr": "HWAN(罗恩)", "cat": "84082-64-4", "cas": "84082-64-4", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 121, "loc": "707호", "zone": "실온", "folder": "M", "name": "Magnesium chloride hexahydrate", "mfr": "Daejung", "cat": "5503-4405", "cas": "7791-18-6", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 122, "loc": "707호", "zone": "실온", "folder": "M", "name": "Magnesium Chloride Hexahydrate", "mfr": "Wako", "cat": "135-00165", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 123, "loc": "707호", "zone": "실온", "folder": "M", "name": "methyl sulfoxide 99.9%", "mfr": "Acros Organics", "cat": "167852500", "cas": "67-68-5", "capacity": "250 mL", "qty": "1", "remarks": ""},
+      {"no": 124, "loc": "707호", "zone": "실온", "folder": "M", "name": "[2-(Methacryloyloxy)ethyl]dimethyl-(3-sulfopropyl)ammonium hydroxide (SBMA)", "mfr": "Sigma-Aldrich", "cat": "537284-50G", "cas": "3637-26-1", "capacity": "50 g", "qty": "2", "remarks": "SBMA"},
+      {"no": 125, "loc": "707호", "zone": "실온", "folder": "M", "name": "Magnesium phosphate dibasic trihydrate", "mfr": "Sigma-Aldrich", "cat": "M1265-250G", "cas": "-", "capacity": "250 g", "qty": "1", "remarks": ""},
+      {"no": 126, "loc": "707호", "zone": "실온", "folder": "M", "name": "Magnesium oxide (>99%, -325 mesh)", "mfr": "Sigma-Aldrich", "cat": "342793-250G", "cas": "-", "capacity": "250 g", "qty": "1", "remarks": ""},
+      {"no": 127, "loc": "707호", "zone": "실온", "folder": "M", "name": "[2-(Methacryloyloxy)ethyl]dimethyl-(3-sulfopropyl)ammonium hydroxide (SBMA)", "mfr": "Sigma-Aldrich", "cat": "537284-250G", "cas": "3637-26-1", "capacity": "250 g", "qty": "2", "remarks": "SBMA"},
+      {"no": 128, "loc": "707호", "zone": "실온", "folder": "P", "name": "Potassium phosphate monobasic", "mfr": "Sigma-Aldrich", "cat": "P5655-100G", "cas": "7778-77-0", "capacity": "100 g", "qty": "2", "remarks": ""},
+      {"no": 129, "loc": "707호", "zone": "실온", "folder": "P", "name": "Potassium hydroxide (ACS, pellets)", "mfr": "Sigma-Aldrich", "cat": "221473-500G", "cas": "1310-58-3", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 130, "loc": "707호", "zone": "실온", "folder": "P", "name": "Poly(ethylene oxide), Mv~300,000", "mfr": "Sigma-Aldrich", "cat": "182001-250G", "cas": "25322-68-3", "capacity": "250 g", "qty": "1", "remarks": ""},
+      {"no": 131, "loc": "707호", "zone": "실온", "folder": "P", "name": "Polyetheretherketone (PEEK 450PF)", "mfr": "GoodFellow", "cat": "LS545577", "cas": "-", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 132, "loc": "707호", "zone": "실온", "folder": "P", "name": "Phenol Red (BioReagent)", "mfr": "Sigma-Aldrich", "cat": "P3532-5G", "cas": "143-74-8", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 133, "loc": "707호", "zone": "실온", "folder": "P", "name": "Poly(ethylene oxide), Mv~900,000", "mfr": "Sigma-Aldrich", "cat": "189456-5G", "cas": "25322-68-3", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 134, "loc": "707호", "zone": "실온", "folder": "P", "name": "Potassium carbonate (ACS)", "mfr": "Sigma-Aldrich", "cat": "209619-100G", "cas": "584-08-7", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 135, "loc": "707호", "zone": "실온", "folder": "P", "name": "0.1mol/L-Potassium iodide solution (N/10)", "mfr": "Samchun", "cat": "000P2404", "cas": "7681-11-0", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 136, "loc": "707호", "zone": "실온", "folder": "P", "name": "Phosphorus pentoxide (ReagentPlus)", "mfr": "Sigma-Aldrich", "cat": "214701-1KG", "cas": "-", "capacity": "1 kg", "qty": "2", "remarks": ""},
+      {"no": 137, "loc": "707호", "zone": "실온", "folder": "P", "name": "Polycaprolactone (Mn 80,000)", "mfr": "Sigma-Aldrich", "cat": "440744-250G", "cas": "24980-41-4", "capacity": "250 g", "qty": "1", "remarks": ""},
+      {"no": 138, "loc": "707호", "zone": "실온", "folder": "P", "name": "Polycaprolactone (Mn 80,000)", "mfr": "Sigma-Aldrich", "cat": "440744-500G", "cas": "24980-41-4", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 139, "loc": "707호", "zone": "실온", "folder": "P", "name": "Poly(vinyl alcohol), Mw 9,000-10,000", "mfr": "Sigma-Aldrich", "cat": "360627-500G", "cas": "9002-89-5", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 140, "loc": "707호", "zone": "실온", "folder": "P", "name": "Poly(vinyl alcohol), Mw 85,000-124,000", "mfr": "Sigma-Aldrich", "cat": "363146-25G", "cas": "-", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 141, "loc": "707호", "zone": "실온", "folder": "P", "name": "Phenylbis(2,4,6-trimethylbenzoyl)phosphine oxide", "mfr": "Sigma-Aldrich", "cat": "511447-10G", "cas": "-", "capacity": "10 g", "qty": "1", "remarks": ""},
+      {"no": 142, "loc": "707호", "zone": "실온", "folder": "P", "name": "Pluronic F-127 (BioReagent)", "mfr": "Sigma-Aldrich", "cat": "P2443-250G", "cas": "9003-11-6", "capacity": "250 g", "qty": "1", "remarks": ""},
+      {"no": 143, "loc": "707호", "zone": "실온", "folder": "P", "name": "Potassium chloride", "mfr": "Daejung", "cat": "6566-4405", "cas": "7447-40-7", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 144, "loc": "707호", "zone": "실온", "folder": "P", "name": "Poly(acrylic acid) solution (Mw~250,000, 35wt%)", "mfr": "Sigma-Aldrich", "cat": "416002-250ML", "cas": "9003-01-4", "capacity": "250 mL", "qty": "1", "remarks": ""},
+      {"no": 145, "loc": "707호", "zone": "실온", "folder": "P", "name": "Potassium Chloride (Certified ACS)", "mfr": "Fisher Chemical", "cat": "P217-500", "cas": "7447-40-7", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 146, "loc": "707호", "zone": "실온", "folder": "P", "name": "Poly(acrylic acid sodium salt)", "mfr": "Sigma-Aldrich", "cat": "447013-100G", "cas": "9003-04-7", "capacity": "", "qty": "", "remarks": ""},
+      {"no": 147, "loc": "707호", "zone": "실온", "folder": "R", "name": "Resazurin (sodium salt)", "mfr": "Cayman Chemical", "cat": "14322", "cas": "-", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 148, "loc": "707호", "zone": "실온", "folder": "R", "name": "Rhodamine B (for fluorescence)", "mfr": "Sigma-Aldrich", "cat": "83689-1G", "cas": "-", "capacity": "1 g", "qty": "1", "remarks": "콘포칼(재광화용)"},
+      {"no": 149, "loc": "707호", "zone": "실온", "folder": "R", "name": "Rhodamine B (≥95%, HPLC)", "mfr": "Sigma-Aldrich", "cat": "R6626-25G", "cas": "-", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 150, "loc": "707호", "zone": "실온", "folder": "R", "name": "Resazurin Sodium Salt", "mfr": "TCI", "cat": "R0203", "cas": "62758-13-8", "capacity": "-", "qty": "1", "remarks": ""},
+      {"no": 151, "loc": "707호", "zone": "실온", "folder": "S", "name": "Silver(I) oxide 99+%", "mfr": "Thermo Scientific", "cat": "011407.14", "cas": "20667-12-3", "capacity": "-", "qty": "1", "remarks": ""},
+      {"no": 152, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium periodate (ACS)", "mfr": "Sigma-Aldrich", "cat": "311448-5G", "cas": "7790-28-5", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 153, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium deoxycholate", "mfr": "Sigma-Aldrich", "cat": "D6750-10G", "cas": "-", "capacity": "10 g", "qty": "1", "remarks": ""},
+      {"no": 154, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium acetate buffer solution (3M, pH5.2)", "mfr": "Sigma-Aldrich", "cat": "S7899-100ML", "cas": "126-96-5", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 155, "loc": "707호", "zone": "실온", "folder": "S", "name": "Silver nitrate (ACS)", "mfr": "Sigma-Aldrich", "cat": "209139-25G", "cas": "7761-88-8", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 156, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium molybdate dihydrate", "mfr": "Sigma-Aldrich", "cat": "M1003-100G", "cas": "10102-40-6", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 157, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium hydroxide solution 1.0N (BioReagent)", "mfr": "Sigma-Aldrich", "cat": "S2770-100ML", "cas": "1310-73-2", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 158, "loc": "707호", "zone": "실온", "folder": "S", "name": "Silica nanoparticles, mesoporous (200nm)", "mfr": "Sigma-Aldrich", "cat": "748161-5G", "cas": "-", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 159, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium dodecyl sulfate (SDS, ACS)", "mfr": "Sigma-Aldrich", "cat": "436143-25G", "cas": "-", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 160, "loc": "707호", "zone": "실온", "folder": "S", "name": "Strontium carbonate (trace metals basis)", "mfr": "Sigma-Aldrich", "cat": "472018-100G", "cas": "1633-05-2", "capacity": "100 g", "qty": "2", "remarks": ""},
+      {"no": 161, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium metasilicate pentahydrate", "mfr": "Sigma-Aldrich", "cat": "71746-250G", "cas": "-", "capacity": "250 g", "qty": "1", "remarks": ""},
+      {"no": 162, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium tartrate dibasic dihydrate", "mfr": "Sigma-Aldrich", "cat": "T6521-100G", "cas": "-", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 163, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sulfamic acid (alkalimetric)", "mfr": "Sigma-Aldrich", "cat": "07401-1KG-R", "cas": "5329-14-6", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 164, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium nitrite (ReagentPlus)", "mfr": "Sigma-Aldrich", "cat": "S2252-500G", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 165, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium phosphate dibasic (molecular biology)", "mfr": "Sigma-Aldrich", "cat": "S3264-500G", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 166, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium sulfite (ACS)", "mfr": "Sigma-Aldrich", "cat": "239321-500G", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 167, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium Chloride (Extra Pure)", "mfr": "Duksan", "cat": "-", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 168, "loc": "707호", "zone": "실온", "folder": "S", "name": "Saccharose (Extra Pure, Product No.848)", "mfr": "Duksan", "cat": "848", "cas": "57-50-1", "capacity": "500 g", "qty": "2", "remarks": ""},
+      {"no": 169, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium bicarbonate (BioReagent)", "mfr": "Sigma-Aldrich", "cat": "S5761-500G", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 170, "loc": "707호", "zone": "실온", "folder": "S", "name": "Silicon dioxide", "mfr": "Sigma-Aldrich", "cat": "342890-100G", "cas": "60676-86-0", "capacity": "100g", "qty": "", "remarks": ""},
+      {"no": 171, "loc": "707호", "zone": "실온", "folder": "S", "name": "Silicagel blue (Medium granular)", "mfr": "Daejung", "cat": "7510-1400", "cas": "7631-86-9", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 172, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium Phosphate monobasic monohydrate", "mfr": "Duksan", "cat": "3787", "cas": "10049-21-5", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 173, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium acetate (Molecular Biology Tested)", "mfr": "Sigma-Aldrich", "cat": "S2889-250G", "cas": "-", "capacity": "250 g", "qty": "1", "remarks": ""},
+      {"no": 174, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium citrate dihydrate (FG)", "mfr": "Sigma-Aldrich", "cat": "W302600-1KG-K", "cas": "-", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 175, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium hydroxide (ACS, pellets, caustic soda)", "mfr": "Sigma-Aldrich", "cat": "221465-500G", "cas": "1310-73-2", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 176, "loc": "707호", "zone": "실온", "folder": "S", "name": "The art of making glass(SCHOTT AG, Standort Landshut)", "mfr": "CoSPerm", "cat": "GM27884", "cas": "", "capacity": "", "qty": "1", "remarks": "SCHOTT, nano glass, 레진필러 제조할때"},
+      {"no": 177, "loc": "707호", "zone": "실온", "folder": "S", "name": "Sodium phosphate monobasic dihydrate", "mfr": "Sigma-Aldrich", "cat": "04269-1KG", "cas": "13472-35-0", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 178, "loc": "707호", "zone": "실온", "folder": "S", "name": "Safranin O Certified Biological Stain", "mfr": "Fisher Chemical", "cat": "S670-25", "cas": "477-73-6", "capacity": "25g", "qty": "1", "remarks": ""},
+      {"no": 179, "loc": "707호", "zone": "실온", "folder": "T", "name": "Tris(hydroxymethyl)aminomethane (Tris base, ACS)", "mfr": "Sigma-Aldrich", "cat": "252859-100G", "cas": "77-86-1", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 180, "loc": "707호", "zone": "실온", "folder": "T", "name": "Titanium(IV) oxide, anatase nanopowder (<25nm)", "mfr": "Sigma-Aldrich", "cat": "637254-50G", "cas": "-", "capacity": "50 g", "qty": "1", "remarks": ""},
+      {"no": 181, "loc": "707호", "zone": "실온", "folder": "T", "name": "3-(Trimethoxysilyl)propyl methacrylate", "mfr": "Sigma-Aldrich", "cat": "440159-100ML", "cas": "2530-85-0", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 182, "loc": "707호", "zone": "실온", "folder": "T", "name": "Triammonium phosphate trihydrate", "mfr": "阿拉丁(Aladdin)", "cat": "A112552-500g", "cas": "25447-33-0", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 183, "loc": "707호", "zone": "실온", "folder": "T", "name": "Triethylene glycol (for synthesis)", "mfr": "Sigma-Aldrich", "cat": "8.08245.1000", "cas": "112-27-6", "capacity": "1 L", "qty": "1", "remarks": ""},
+      {"no": 184, "loc": "707호", "zone": "실온", "folder": "T", "name": "Triethyl phosphate (ReagentPlus)", "mfr": "Sigma-Aldrich", "cat": "538728-100ML", "cas": "78-40-0", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 185, "loc": "707호", "zone": "실온", "folder": "T", "name": "Titanium(IV) oxide nanopowder (21nm, TEM)", "mfr": "Sigma-Aldrich", "cat": "718467-100G", "cas": "-", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 186, "loc": "707호", "zone": "실온", "folder": "T", "name": "Tannic acid (ACS reagent)", "mfr": "Sigma-Aldrich", "cat": "403040-50G", "cas": "-", "capacity": "50 g", "qty": "1", "remarks": ""},
+      {"no": 187, "loc": "707호", "zone": "실온", "folder": "Z", "name": "Zinc oxide, nanopowder (<100nm)", "mfr": "Sigma-Aldrich", "cat": "544906-10G", "cas": "-", "capacity": "10 g", "qty": "1", "remarks": ""},
+      {"no": 188, "loc": "707호", "zone": "실온", "folder": "Z", "name": "Zirconium(IV) oxide, nanopowder (<100nm)", "mfr": "Sigma-Aldrich", "cat": "544760-5G", "cas": "-", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 189, "loc": "707호", "zone": "실온", "folder": "Z", "name": "Zinc chloride (reagent grade)", "mfr": "Sigma-Aldrich", "cat": "208086-100G", "cas": "7646-85-7", "capacity": "100 g", "qty": "2", "remarks": ""},
+      {"no": 190, "loc": "707호", "zone": "실온", "folder": "Z", "name": "Zinc oxide (ReagentPlus, <5μm)", "mfr": "Sigma-Aldrich", "cat": "205532-100G", "cas": "1314-13-2", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 191, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Acetic acid, glacial (ReagentPlus)", "mfr": "Sigma-Aldrich", "cat": "A6283-100ML", "cas": "64-19-7", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 192, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Cyclohexane (HPLC)", "mfr": "Sigma-Aldrich", "cat": "34855-100ML", "cas": "-", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 193, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Hexane (ReagentPlus)", "mfr": "Sigma-Aldrich", "cat": "139386-500ML", "cas": "110-54-3", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 194, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Hexane (ReagentPlus)", "mfr": "Sigma-Aldrich", "cat": "139386-2.5L", "cas": "110-54-3", "capacity": "2.5 L", "qty": "1", "remarks": ""},
+      {"no": 195, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Diethyl ether (analytical standard)", "mfr": "Sigma-Aldrich", "cat": "91238-10ML-F", "cas": "60-29-7", "capacity": "10 mL", "qty": "1", "remarks": ""},
+      {"no": 196, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Hydrogen Peroxide (28%)", "mfr": "Duksan", "cat": "-", "cas": "7722-84-1", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 197, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Hydrogen Peroxide (Extra Pure)", "mfr": "Duksan", "cat": "3059", "cas": "7722-84-1", "capacity": "1 kg", "qty": "1", "remarks": ""},
+      {"no": 198, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Ethanol absolute pro analysi", "mfr": "Merck", "cat": "1.00983.1011", "cas": "-", "capacity": "1 L", "qty": "1", "remarks": ""},
+      {"no": 199, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Cumene hydroperoxide (technical, 80%)", "mfr": "Sigma-Aldrich", "cat": "247502-500G", "cas": "80-15-9", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 200, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Ethyl Alcohol 99.9% (GR)", "mfr": "Duksan", "cat": "UN1170", "cas": "64-17-5", "capacity": "1 L", "qty": "3", "remarks": ""},
+      {"no": 201, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Ethyl alcohol, anhydrous 99.9%", "mfr": "Samchun", "cat": "-", "cas": "64-17-5", "capacity": "1 L", "qty": "1", "remarks": ""},
+      {"no": 202, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "2,2,2-Trifluoroethanol (ReagentPlus)", "mfr": "Sigma-Aldrich", "cat": "T63002-500G", "cas": "75-89-8", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 203, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Tetraethyl orthosilicate (TEOS)", "mfr": "Sigma-Aldrich", "cat": "131903-500ML", "cas": "78-10-4", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 204, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Ethyl acetate (ACS)", "mfr": "Sigma-Aldrich", "cat": "319902-500ML", "cas": "141-78-6", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 205, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Chloroform (for HPLC)", "mfr": "Wako", "cat": "033-08631", "cas": "-", "capacity": "-", "qty": "2", "remarks": ""},
+      {"no": 206, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Formic acid (reagent grade)", "mfr": "Sigma-Aldrich", "cat": "F0507-500ML", "cas": "64-18-6", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 207, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "2-Propanol (EMSURE)", "mfr": "Merck/Supelco", "cat": "1.09634.1011", "cas": "67-63-0", "capacity": "1 L", "qty": "1", "remarks": ""},
+      {"no": 208, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Isopropyl alcohol", "mfr": "Daejung", "cat": "5035-4100", "cas": "67-63-0", "capacity": "1 L", "qty": "1", "remarks": ""},
+      {"no": 209, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Ethylene glycol methylether acrylate", "mfr": "Sigma-Aldrich", "cat": "408913-250ML", "cas": "3121-61-7", "capacity": "250 mL", "qty": "1", "remarks": ""},
+      {"no": 210, "loc": "708호", "zone": "가연성물질", "folder": "-", "name": "Acetic acid, glacial (ACS, 99.7%)", "mfr": "Sigma-Aldrich", "cat": "695092-100ML", "cas": "64-19-7", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 211, "loc": "708호", "zone": "가연성물질", "folder": "", "name": "Butanox M-60(Methyl Ethyl Ketone Peroxide)", "mfr": "Nouryon", "cat": "", "cas": "", "capacity": "50 g", "qty": "1", "remarks": ""},
+      {"no": 212, "loc": "708호", "zone": "냉동실", "folder": "-", "name": "XTT", "mfr": "Invitrogen", "cat": "X6493", "cas": "-", "capacity": "100 mg", "qty": "2", "remarks": ""},
+      {"no": 213, "loc": "708호", "zone": "냉동실", "folder": "-", "name": "Phenazine methosulfate", "mfr": "Sigma-Aldrich", "cat": "P9625-500MG", "cas": "299-11-6", "capacity": "500 mg", "qty": "1", "remarks": ""},
+      {"no": 214, "loc": "708호", "zone": "냉동실", "folder": "-", "name": "Poly-L-lysine hydrobromide", "mfr": "Sigma-Aldrich", "cat": "P2636-100MG", "cas": "25955-63-0", "capacity": "100 mg", "qty": "1", "remarks": ""},
+      {"no": 215, "loc": "708호", "zone": "냉동실", "folder": "-", "name": "4-(4,6-Dimethoxy-1,3,5-triazin-2-yl)-4-methylmorpholinium chloride (DMTMM)", "mfr": "Sigma-Aldrich", "cat": "74104-5G-F", "cas": "3945-69-5", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 216, "loc": "708호", "zone": "냉동실", "folder": "-", "name": "10-Methacryloyloxydecyl dihydrogen phosphate (MDP)", "mfr": "SY Innovation", "cat": "SME95007-100G", "cas": "85590-00-7", "capacity": "100 g", "qty": "2", "remarks": ""},
+      {"no": 217, "loc": "708호", "zone": "냉동실", "folder": "-", "name": "SYTO 9 green fluorescent nucleic acid stain", "mfr": "Invitrogen", "cat": "S34854", "cas": "-", "capacity": "100 μL", "qty": "1", "remarks": ""},
+      {"no": 218, "loc": "708호", "zone": "냉동실", "folder": "-", "name": "Propidium iodide", "mfr": "Invitrogen", "cat": "P1304MP", "cas": "-", "capacity": "100 mg", "qty": "1", "remarks": ""},
+      {"no": 219, "loc": "708호", "zone": "냉동실", "folder": "-", "name": "Concanavalin A, Alexa Fluor 647 conjugate", "mfr": "Invitrogen", "cat": "C21421", "cas": "-", "capacity": "5 mg", "qty": "1", "remarks": ""},
+      {"no": 220, "loc": "708호", "zone": "냉동실", "folder": "-", "name": "PrimeScript RT reagent Kit with gDNA Eraser", "mfr": "Takara", "cat": "RR047A", "cas": "-", "capacity": "100 Rxns", "qty": "1", "remarks": ""},
+      {"no": 221, "loc": "708호", "zone": "냉동실", "folder": "-", "name": "ZymoBIOMICS Microbial Community DNA Standard", "mfr": "Zymo Research", "cat": "D6306", "cas": "-", "capacity": "2000 ng", "qty": "1", "remarks": ""},
+      {"no": 222, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "3-(4,5-Dimethylthiazolyl)-2,5-diphenyl-2H-tetrazolium bromide (MTT)", "mfr": "Aladdin", "cat": "T100896", "cas": "298-93-1", "capacity": "1 g", "qty": "3", "remarks": ""},
+      {"no": 223, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "Benzophenone (ReagentPlus)", "mfr": "Sigma-Aldrich", "cat": "B9300-500G-A", "cas": "119-61-9", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 224, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "Bisphenol A glycerolate dimethacrylate", "mfr": "Sigma-Aldrich", "cat": "494356-100ML", "cas": "1565-94-2", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 225, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "Diethyl pyrocarbonate, approx.97% NMR", "mfr": "Sigma-Aldrich", "cat": "D5758-5ML", "cas": "-", "capacity": "5 mL", "qty": "1", "remarks": ""},
+      {"no": 226, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "Diethyl pyrocarbonate, approx.97% NMR", "mfr": "Sigma-Aldrich", "cat": "D5758-25ML", "cas": "-", "capacity": "25 mL", "qty": "1", "remarks": ""},
+      {"no": 227, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "N-Acetylmuramic acid", "mfr": "Sigma-Aldrich", "cat": "A3007-100MG", "cas": "-", "capacity": "100 mg", "qty": "1", "remarks": ""},
+      {"no": 228, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "Dexamethasone (BioReagent)", "mfr": "Sigma-Aldrich", "cat": "D4902-100MG", "cas": "-", "capacity": "100 mg", "qty": "1", "remarks": ""},
+      {"no": 229, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "N-Acetyl-D-glucosamine", "mfr": "Aladdin", "cat": "A118965-5g", "cas": "7512-17-6", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 230, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "2-(Dimethylamino)ethyl methacrylate", "mfr": "Sigma-Aldrich", "cat": "234907-100ML", "cas": "-", "capacity": "100 mL", "qty": "2", "remarks": ""},
+      {"no": 231, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "Camphorquinone", "mfr": "Sigma-Aldrich", "cat": "124893-10G", "cas": "10373-78-1", "capacity": "10 g", "qty": "1", "remarks": ""},
+      {"no": 232, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "Camphorquinone", "mfr": "Sigma-Aldrich", "cat": "124893-5G", "cas": "-", "capacity": "5 g", "qty": "1", "remarks": ""},
+      {"no": 233, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "Albumin-fluorescein isothiocyanate conjugate (FITC)", "mfr": "Sigma-Aldrich", "cat": "A9771-1G", "cas": "-", "capacity": "1 g", "qty": "1", "remarks": ""},
+      {"no": 234, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "Albumin-fluorescein isothiocyanate conjugate (FITC)", "mfr": "Sigma-Aldrich", "cat": "A9771-50MG", "cas": "-", "capacity": "50 mg", "qty": "1", "remarks": ""},
+      {"no": 235, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "Cumene hydroperoxide (technical, 80%)", "mfr": "Sigma-Aldrich", "cat": "247502-500G", "cas": "80-15-9", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 236, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "Biscover LV (Low Viscosity Liquid Polish)", "mfr": "Bisco", "cat": "G-93353P", "cas": "-", "capacity": "1 bottle(3mL)", "qty": "1", "remarks": ""},
+      {"no": 237, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "Bisphenol A ethoxylate dimethacrylate", "mfr": "Sigma-Aldrich", "cat": "455059-500ML", "cas": "41637-38-1", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 238, "loc": "708호", "zone": "냉장실", "folder": "A,B,C,D", "name": "Diurethane dimethacrylate (UDMA)", "mfr": "Sigma-Aldrich", "cat": "436909-100ML", "cas": "72869-86-4", "capacity": "100 mL", "qty": "2", "remarks": ""},
+      {"no": 239, "loc": "708호", "zone": "냉장실", "folder": "E,F,G,H", "name": "2-Hydroxyethyl methacrylate", "mfr": "Sigma-Aldrich", "cat": "477028-100ML", "cas": "868-77-9", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 240, "loc": "708호", "zone": "냉장실", "folder": "E,F,G,H", "name": "Hyaluronic acid methacrylate", "mfr": "Sigma-Aldrich", "cat": "914800-500MG", "cas": "-", "capacity": "500 mg", "qty": "2", "remarks": ""},
+      {"no": 241, "loc": "708호", "zone": "냉장실", "folder": "E,F,G,H", "name": "Hemin", "mfr": "TCI", "cat": "H0008", "cas": "16009-13-5", "capacity": "-", "qty": "4", "remarks": ""},
+      {"no": 242, "loc": "708호", "zone": "냉장실", "folder": "I,M,N,P", "name": "N-(2-Hydroxypropyl)methacrylamide", "mfr": "TCI", "cat": "H1770", "cas": "21442-01-3", "capacity": "-", "qty": "2", "remarks": ""},
+      {"no": 243, "loc": "708호", "zone": "냉장실", "folder": "E,F,G,H", "name": "Glutaraldehyde solution 50wt% in H2O", "mfr": "Sigma-Aldrich", "cat": "340855-25ML", "cas": "111-30-8", "capacity": "25 mL", "qty": "1", "remarks": ""},
+      {"no": 244, "loc": "708호", "zone": "냉장실", "folder": "E,F,G,H", "name": "1-Ethyl-3-(3-dimethylaminopropyl)carbodiimide hydrochloride (EDC)", "mfr": "Daejung", "cat": "4152-4125", "cas": "25952-53-8", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 245, "loc": "708호", "zone": "냉장실", "folder": "E,F,G,H", "name": "Glycidyltrimethylammonium chloride", "mfr": "Sigma-Aldrich", "cat": "50053-50ML", "cas": "-", "capacity": "50 mL", "qty": "1", "remarks": ""},
+      {"no": 246, "loc": "708호", "zone": "냉장실", "folder": "E,F,G,H", "name": "β-Glycerol phosphate disodium salt pentahydrate", "mfr": "Sigma-Aldrich", "cat": "50020-100G", "cas": "-", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 247, "loc": "708호", "zone": "냉장실", "folder": "I,M,N,P", "name": "3-[[2-(Methacryloyloxy)ethyl]dimethylammonio]propionate (CMB)", "mfr": "TCI", "cat": "M2359", "cas": "24249-95-4", "capacity": "-", "qty": "5", "remarks": ""},
+      {"no": 248, "loc": "708호", "zone": "냉장실", "folder": "I,M,N,P", "name": "(3-Mercaptopropyl)trimethoxysilane", "mfr": "Sigma-Aldrich", "cat": "175617-100G", "cas": "-", "capacity": "100 g", "qty": "1", "remarks": ""},
+      {"no": 249, "loc": "708호", "zone": "냉장실", "folder": "I,M,N,P", "name": "(3-Mercaptopropyl)trimethoxysilane", "mfr": "Sigma-Aldrich", "cat": "175617-25G", "cas": "-", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 250, "loc": "708호", "zone": "냉장실", "folder": "I,M,N,P", "name": "MS Collagen(s) (Type 1 Atelo-Collagen from Porcine skin)", "mfr": "자체제조(MS)", "cat": "-", "cas": "-", "capacity": "1 g", "qty": "1", "remarks": ""},
+      {"no": 251, "loc": "708호", "zone": "냉장실", "folder": "I,M,N,P", "name": "Propylamine", "mfr": "Sigma-Aldrich", "cat": "240958-50ML", "cas": "107-10-8", "capacity": "50 mL", "qty": "1", "remarks": ""},
+      {"no": 252, "loc": "708호", "zone": "냉장실", "folder": "I,M,N,P", "name": "2-Methacryloyloxyethyl phosphorylcholine (MPC)", "mfr": "Sigma-Aldrich", "cat": "730114-5G", "cas": "67881-98-5", "capacity": "5 g", "qty": "6", "remarks": ""},
+      {"no": 253, "loc": "708호", "zone": "냉장실", "folder": "I,M,N,P", "name": "Mucin from porcine stomach, Type III", "mfr": "Sigma-Aldrich", "cat": "M1778-10G", "cas": "", "capacity": "10 g", "qty": "1", "remarks": ""},
+      {"no": 254, "loc": "708호", "zone": "냉장실", "folder": "I,M,N,P", "name": "Paraformaldehyde", "mfr": "Sigma-Aldrich", "cat": "P6148-500G", "cas": "-", "capacity": "500 g", "qty": "1", "remarks": ""},
+      {"no": 255, "loc": "708호", "zone": "냉장실", "folder": "R,S,T,V", "name": "RNase-Free DNase Set (50)", "mfr": "Qiagen", "cat": "79254", "cas": "-", "capacity": "50 rxn", "qty": "1", "remarks": ""},
+      {"no": 256, "loc": "708호", "zone": "냉장실", "folder": "R,S,T,V", "name": "10X SBF Solution (Simulated Body Fluid)", "mfr": "GeneE Solution", "cat": "-", "cas": "-", "capacity": "-", "qty": "1", "remarks": ""},
+      {"no": 257, "loc": "708호", "zone": "냉장실", "folder": "R,S,T,V", "name": "Triethylene glycol dimethacrylate (TEGDMA)", "mfr": "Sigma-Aldrich", "cat": "261548-250ML", "cas": "-", "capacity": "250 mL", "qty": "2", "remarks": ""},
+      {"no": 258, "loc": "708호", "zone": "냉장실", "folder": "R,S,T,V", "name": "Sodium DL-lactate solution (60% w/w, BioReagent)", "mfr": "Sigma-Aldrich", "cat": "L4263-100ML", "cas": "72-17-3", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 259, "loc": "708호", "zone": "냉장실", "folder": "R,S,T,V", "name": "2,3,5-Triphenyltetrazolium chloride (TTC)", "mfr": "Sigma-Aldrich", "cat": "T8877-10G", "cas": "298-96-4", "capacity": "10 g", "qty": "1", "remarks": ""},
+      {"no": 260, "loc": "708호", "zone": "냉장실", "folder": "R,S,T,V", "name": "Sodium pyruvate", "mfr": "Daejung", "cat": "7796-4125", "cas": "-", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 261, "loc": "708호", "zone": "냉장실", "folder": "R,S,T,V", "name": "Thiazolyl Blue Tetrazolium Bromide (MTT)", "mfr": "Sigma-Aldrich", "cat": "M5655-1G", "cas": "298-93-1", "capacity": "1 g", "qty": "1", "remarks": ""},
+      {"no": 262, "loc": "708호", "zone": "냉장실", "folder": "R,S,T,V", "name": "Vitamin K1 (viscous liquid)", "mfr": "Sigma-Aldrich", "cat": "V3501-1G", "cas": "87-80-0", "capacity": "1 g", "qty": "2", "remarks": ""},
+      {"no": 263, "loc": "708호", "zone": "냉장실", "folder": "신선", "name": "HAMA-150K Hydrogel", "mfr": "Smart MCs", "cat": "HM-150K", "cas": "-", "capacity": "0.5 g", "qty": "5", "remarks": ""},
+      {"no": 264, "loc": "708호", "zone": "냉장실", "folder": "신선", "name": "LAP Photoinitiator", "mfr": "Smart MCs", "cat": "-", "cas": "-", "capacity": "0.025 g", "qty": "5", "remarks": ""},
+      {"no": 265, "loc": "708호", "zone": "냉장실", "folder": "R,S,T,V", "name": "RPMI 1640 Medium (Fresh Media)", "mfr": "Welgene", "cat": "LM 011-01", "cas": "-", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 266, "loc": "708호", "zone": "냉장실", "folder": "옆문", "name": "Sodium hypochlorite solution (NaOCl)", "mfr": "Sigma-Aldrich", "cat": "239305-500ML", "cas": "7681-52-9", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 267, "loc": "708호", "zone": "냉장실", "folder": "옆문", "name": "Ethylene glycol dimethacrylate", "mfr": "Sigma-Aldrich", "cat": "335681-100ML", "cas": "97-90-5", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 268, "loc": "708호", "zone": "냉장실", "folder": "옆문", "name": "Bisphenol A glycerolate dimethacrylate", "mfr": "Sigma-Aldrich", "cat": "494356-100ML", "cas": "1565-94-2", "capacity": "100 mL", "qty": "1", "remarks": ""},
+      {"no": 269, "loc": "708호", "zone": "냉장실", "folder": "옆문", "name": "1-(3-Dimethylaminopropyl)-3-ethylcarbodiimide Hydrochloride (EDC, Coupling Agent)", "mfr": "TCI", "cat": "D1601", "cas": "25952-53-8", "capacity": "25 g", "qty": "1", "remarks": ""},
+      {"no": 270, "loc": "708호", "zone": "냉장실", "folder": "옆문", "name": "0.5 M MES Buffer, pH 6.0 (Precision Solution)", "mfr": "Welgene", "cat": "ML 150-01", "cas": "-", "capacity": "500 mL", "qty": "1", "remarks": ""},
+      {"no": 271, "loc": "708호", "zone": "냉장실", "folder": "옆문", "name": "Polynucleotide, sodium salt (Medical device grade, injectable, Low Mw)", "mfr": "HTL Biotechnology", "cat": "PN Low Mw", "cas": "-", "capacity": "10.0 g", "qty": "1", "remarks": "Bag1"},
+      {"no": 272, "loc": "708호", "zone": "냉장실", "folder": "옆문", "name": "Polynucleotides, sodium salt (High Mw, Medical device grade)", "mfr": "HTL Biotechnology", "cat": "-", "cas": "-", "capacity": "50.0 g", "qty": "1", "remarks": "Bag18"},
+      {"no": 273, "loc": "708호", "zone": "냉장실", "folder": "옆문", "name": "MTT solubilization solution (kit component only)", "mfr": "Sigma-Aldrich", "cat": "M8910-125ML", "cas": "-", "capacity": "125 mL", "qty": "1", "remarks": ""},
+      {"no": 274, "loc": "Deep freezer", "zone": "-", "folder": "-", "name": "ZymoBIOMICS Microbial Community Standard", "mfr": "Zymo Research", "cat": "D6300", "cas": "-", "capacity": "-", "qty": "1", "remarks": ""}
+    ];
+
     const state = {
       activeTab: "general",
-      filters: { search: "", location: "all", manager: "all", kpi: "all" },
+      filters: { search: "", location: "all", manager: "all", kpi: "all", reagentLocation: "all", reagentZone: "all", reagentFolder: "all" },
       sort: { column: "no", direction: "asc" },
       viewMode: "table",
       theme: "light",
@@ -1521,9 +2869,19 @@
 
     function getActiveDataset() {
       if (state.activeTab === 'pipette') return pipetteData;
-      if (state.activeTab === 'pc') return pcData;
+      if (state.activeTab === 'pc') return pcData.map(item => ({ ...item, label: item.label.replace(/\bCSB\b/g, 'SBL') }));
       if (state.activeTab === 'animalLab') return animalLabData;
+      if (state.activeTab === 'reagent') return reagentData;
       return inventoryData;
+    }
+
+    function copyToClipboard(text, label) {
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`${label ? label + ': ' : ''}${text} 복사되었습니다.`, "success");
+      }).catch(() => {
+        showToast("복사에 실패했습니다.", "error");
+      });
     }
 
     function switchTab(tabName) {
@@ -1540,6 +2898,9 @@
       state.filters.location = "all";
       state.filters.manager = "all";
       state.filters.kpi = "all";
+      state.filters.reagentLocation = "all";
+      state.filters.reagentZone = "all";
+      state.filters.reagentFolder = "all";
       state.sort.column = "no";
       state.sort.direction = "asc";
       
@@ -1550,13 +2911,15 @@
           general: '장비명, 설치 위치, 담당자 실시간 검색...',
           pipette: '품목명, 사양, 위치, 제조사 실시간 검색...',
           pc: '종류, 라벨, 위치, 사용자, 제조사 실시간 검색...',
-          animalLab: '품목명 또는 품목코드 실시간 검색...'
+          animalLab: '품목명 또는 품목코드 실시간 검색...',
+          reagent: '시약명, CAS No., Cat.No, 제조사 실시간 검색...'
         };
         searchInput.placeholder = placeholders[tabName] || '실시간 검색...';
       }
       
       extractCategories();
       populateDropdowns();
+      renderReagentNavigation();
       
       const locFilter = document.getElementById('filter-location');
       const mgrFilter = document.getElementById('filter-manager');
@@ -1566,8 +2929,14 @@
       renderTableHeaders();
       updateDashboard();
       
-      const tabLabels = { 'general': '일반 장비', 'pipette': '피펫 관리', 'pc': 'PC 및 모니터', 'animalLab': '동물실험실 관련 물품' };
-      showToast(`${tabLabels[tabName]} 탭으로 전환되었습니다.`, "success");
+      const tabLabels = {
+        'general': '일반 장비',
+        'pipette': '피펫 관리',
+        'pc': 'PC 및 모니터',
+        'animalLab': '동물실험실 관련 물품',
+        'reagent': '시약 리스트'
+      };
+      showToast(`${tabLabels[tabName] || tabName} 탭으로 전환되었습니다.`, "success");
     }
 
     function renderTableHeaders() {
@@ -1577,7 +2946,7 @@
       
       if (state.activeTab === 'general') {
         thead.innerHTML = `
-          <th onclick="handleSort('no')" style="width: 80px;">No <span id="sort-icon-no"></span></th>
+          <th onclick="handleSort('no')" style="width: 56px;">No <span id="sort-icon-no"></span></th>
           <th style="width: 90px; text-align: center;">사진</th>
           <th onclick="handleSort('name')">장비명 <span id="sort-icon-name"></span></th>
           <th onclick="handleSort('loc')">설치 위치 <span id="sort-icon-loc"></span></th>
@@ -1586,7 +2955,7 @@
         `;
       } else if (state.activeTab === 'pipette') {
         thead.innerHTML = `
-          <th onclick="handleSort('no')" style="width: 80px;">No <span id="sort-icon-no"></span></th>
+          <th onclick="handleSort('no')" style="width: 56px;">No <span id="sort-icon-no"></span></th>
           <th onclick="handleSort('name')">품목명 <span id="sort-icon-name"></span></th>
           <th onclick="handleSort('spec')">사양 <span id="sort-icon-spec"></span></th>
           <th onclick="handleSort('loc')">위치 <span id="sort-icon-loc"></span></th>
@@ -1596,21 +2965,30 @@
         `;
       } else if (state.activeTab === 'pc') {
         thead.innerHTML = `
-          <th onclick="handleSort('no')" style="width: 80px;">No <span id="sort-icon-no"></span></th>
+          <th onclick="handleSort('no')" style="width: 56px;">No <span id="sort-icon-no"></span></th>
           <th style="width: 90px; text-align: center;">사진</th>
-          <th onclick="handleSort('kind')">종류 <span id="sort-icon-kind"></span></th>
           <th onclick="handleSort('label')">라벨 <span id="sort-icon-label"></span></th>
           <th onclick="handleSort('loc')">위치 <span id="sort-icon-loc"></span></th>
           <th onclick="handleSort('user')">사용자 <span id="sort-icon-user"></span></th>
           <th onclick="handleSort('brand')">제조사 <span id="sort-icon-brand"></span></th>
         `;
       } else if (state.activeTab === 'animalLab') {
-        thead.innerHTML = '<th onclick="handleSort(&quot;no&quot;)" style="width: 80px;">No <span id="sort-icon-no"></span></th>' +
+        thead.innerHTML = '<th onclick="handleSort(&quot;no&quot;)" style="width: 56px;">No <span id="sort-icon-no"></span></th>' +
           '<th style="width: 90px; text-align: center;">사진</th>' +
           '<th onclick="handleSort(&quot;code&quot;)">품목코드 <span id="sort-icon-code"></span></th>' +
           '<th onclick="handleSort(&quot;name&quot;)">품명 <span id="sort-icon-name"></span></th>' +
           '<th onclick="handleSort(&quot;loc&quot;)">위치 <span id="sort-icon-loc"></span></th>' +
           '<th onclick="handleSort(&quot;mgr&quot;)">담당자 <span id="sort-icon-mgr"></span></th>';
+      } else if (state.activeTab === 'reagent') {
+        thead.innerHTML = `
+          <th onclick="handleSort('no')" style="width: 70px;">No <span id="sort-icon-no"></span></th>
+          <th onclick="handleSort('name')">시약명 <span id="sort-icon-name"></span></th>
+          <th onclick="handleSort('loc')">보관위치 / 구역 <span id="sort-icon-loc"></span></th>
+          <th onclick="handleSort('mfr')">제조사 <span id="sort-icon-mfr"></span></th>
+          <th onclick="handleSort('cas')">CAS / Cat. No. <span id="sort-icon-cas"></span></th>
+          <th style="width: 100px;">용량/수량</th>
+          <th>비고</th>
+        `;
       }
       updateSortArrows();
     }
@@ -1649,6 +3027,9 @@
         } else if (state.activeTab === 'animalLab') {
           const val = item.mgr && item.mgr.trim() !== "" ? item.mgr.trim() : "미지정";
           val.split(",").forEach(manager => mgrSet.add(manager.trim()));
+        } else if (state.activeTab === 'reagent') {
+          const val = item.mfr && item.mfr.trim() !== "" ? item.mfr.trim() : "미지정";
+          mgrSet.add(val);
         }
       });
       managers = Array.from(mgrSet);
@@ -1668,6 +3049,8 @@
         mgrSelect.innerHTML = '<option value="all">모든 사용자</option>';
       } else if (state.activeTab === 'animalLab') {
         mgrSelect.innerHTML = '<option value="all">모든 담당자</option>';
+      } else if (state.activeTab === 'reagent') {
+        mgrSelect.innerHTML = '<option value="all">모든 제조사</option>';
       }
       
       const sortedLocs = locations.filter(l => l !== '미지정').sort();
@@ -1686,6 +3069,59 @@
         opt.textContent = mgr;
         mgrSelect.appendChild(opt);
       });
+    }
+
+    function renderReagentChipRow(containerId, filterKey, allLabel, values, matchesValue) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = "";
+      const options = [{ value: "all", label: allLabel }, ...values.map(value => ({ value, label: value }))];
+      options.forEach(option => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `reagent-chip${state.filters[filterKey] === option.value ? ' active' : ''}`;
+        button.onclick = () => setReagentFilter(filterKey, option.value);
+
+        const label = document.createElement('span');
+        label.textContent = option.label;
+        const count = document.createElement('span');
+        count.className = 'reagent-chip-count';
+        count.textContent = option.value === 'all'
+          ? reagentData.length
+          : reagentData.filter(item => matchesValue(item, option.value)).length;
+        button.append(label, count);
+        container.appendChild(button);
+      });
+    }
+
+    function renderReagentNavigation() {
+      const navigation = document.getElementById('reagent-navigation');
+      if (!navigation) return;
+      const isReagent = state.activeTab === 'reagent';
+      navigation.classList.toggle('reagent-visible', isReagent);
+      if (!isReagent) return;
+
+      const normalize = value => value && value.trim() && value.trim() !== '-' ? value.trim() : '미지정';
+      const locationValues = [...new Set(reagentData.map(item => normalize(item.loc)))].sort((a, b) => a.localeCompare(b, 'ko', { numeric: true }));
+      const zoneValues = [...new Set(reagentData.map(item => normalize(item.zone)))].sort((a, b) => a.localeCompare(b, 'ko', { numeric: true }));
+      const folderValues = [...new Set(reagentData.flatMap(item => (item.folder || '').split(',').map(folder => normalize(folder))))].sort((a, b) => a.localeCompare(b, 'ko', { numeric: true }));
+
+      renderReagentChipRow('reagent-location-nav', 'reagentLocation', '전체 보관실', locationValues, (item, value) => normalize(item.loc) === value);
+      renderReagentChipRow('reagent-zone-nav', 'reagentZone', '전체 구역', zoneValues, (item, value) => normalize(item.zone) === value);
+      renderReagentChipRow('reagent-folder-nav', 'reagentFolder', '전체 폴더', folderValues, (item, value) => (item.folder || '').split(',').map(folder => normalize(folder)).includes(value));
+
+      const activeLabels = [];
+      if (state.filters.reagentLocation !== 'all') activeLabels.push(`보관실: ${state.filters.reagentLocation}`);
+      if (state.filters.reagentZone !== 'all') activeLabels.push(`구역: ${state.filters.reagentZone}`);
+      if (state.filters.reagentFolder !== 'all') activeLabels.push(`폴더: ${state.filters.reagentFolder}`);
+      const summary = document.getElementById('reagent-filter-summary');
+      if (summary) summary.textContent = activeLabels.length ? activeLabels.join(' · ') : '전체 시약';
+    }
+
+    function setReagentFilter(filterKey, value) {
+      state.filters[filterKey] = state.filters[filterKey] === value && value !== 'all' ? 'all' : value;
+      state.filters.kpi = 'all';
+      updateDashboard();
     }
 
     function getFilteredData() {
@@ -1717,6 +3153,16 @@
                           (item.code && item.code.toLowerCase().includes(s)) ||
                           (item.loc && item.loc.toLowerCase().includes(s)) ||
                           (item.mgr && item.mgr.toLowerCase().includes(s));
+          } else if (state.activeTab === 'reagent') {
+            matchSearch = item.name.toLowerCase().includes(s) ||
+                          (item.loc && item.loc.toLowerCase().includes(s)) ||
+                          (item.zone && item.zone.toLowerCase().includes(s)) ||
+                          (item.folder && item.folder.toLowerCase().includes(s)) ||
+                          (item.mfr && item.mfr.toLowerCase().includes(s)) ||
+                          (item.cat && item.cat.toLowerCase().includes(s)) ||
+                          (item.cas && item.cas.toLowerCase().includes(s)) ||
+                          (item.capacity && item.capacity.toLowerCase().includes(s)) ||
+                          (item.remarks && item.remarks.toLowerCase().includes(s));
           }
         }
 
@@ -1740,6 +3186,8 @@
               matchMgr = !item.user || item.user.trim() === "";
             } else if (state.activeTab === 'animalLab') {
               matchMgr = !item.mgr || item.mgr.trim() === "";
+            } else if (state.activeTab === 'reagent') {
+              matchMgr = !item.mfr || item.mfr.trim() === "";
             }
           } else {
             if (state.activeTab === 'general') {
@@ -1756,6 +3204,8 @@
             } else if (state.activeTab === 'animalLab') {
               const itemMgrs = item.mgr ? item.mgr.split(",").map(m => m.trim()) : [];
               matchMgr = itemMgrs.includes(state.filters.manager);
+            } else if (state.activeTab === 'reagent') {
+              matchMgr = item.mfr && item.mfr.trim() === state.filters.manager;
             }
           }
         }
@@ -1794,10 +3244,32 @@
             } else if (state.filters.kpi === "photographed") {
               matchKPI = item.photo && item.photo.trim() !== "";
             }
+          } else if (state.activeTab === 'reagent') {
+            if (state.filters.kpi === "room") {
+              matchKPI = item.zone === "실온";
+            } else if (state.filters.kpi === "cold") {
+              matchKPI = item.zone === "냉장실" || item.zone === "냉동실" || (item.loc && item.loc.includes("freezer"));
+            } else if (state.filters.kpi === "hazard") {
+              matchKPI = item.zone === "위험물질" || item.zone === "가연성물질";
+            }
           }
         }
 
-        return matchSearch && matchLoc && matchMgr && matchKPI;
+        let matchReagentNavigation = true;
+        if (state.activeTab === 'reagent') {
+          const normalize = value => value && value.trim() && value.trim() !== '-' ? value.trim() : '미지정';
+          if (state.filters.reagentLocation !== 'all') {
+            matchReagentNavigation = normalize(item.loc) === state.filters.reagentLocation;
+          }
+          if (matchReagentNavigation && state.filters.reagentZone !== 'all') {
+            matchReagentNavigation = normalize(item.zone) === state.filters.reagentZone;
+          }
+          if (matchReagentNavigation && state.filters.reagentFolder !== 'all') {
+            matchReagentNavigation = (item.folder || '').split(',').map(folder => normalize(folder)).includes(state.filters.reagentFolder);
+          }
+        }
+
+        return matchSearch && matchLoc && matchMgr && matchKPI && matchReagentNavigation;
       });
     }
 
@@ -1816,7 +3288,68 @@
       });
     }
 
+    function getReagentMarkerClass(item) {
+      const zone = (item.zone || '').trim();
+      const location = (item.loc || '').toLowerCase();
+      if (zone === '실온') return 'reagent-marker-room';
+      if (zone === '냉장실' || zone === '냉동실' || location.includes('freezer')) return 'reagent-marker-cold';
+      if (zone === '위험물질') return 'reagent-marker-hazard';
+      if (zone === '가연성물질') return 'reagent-marker-flammable';
+      if (zone === '배지') return 'reagent-marker-media';
+      return 'reagent-marker-other';
+    }
+
+    function getPcTypeIcon(kind) {
+      return { '모니터': 'monitor', '본체': 'cpu', '노트북': 'laptop' }[kind] || 'monitor';
+    }
+
+    function renderPcTypeLegend() {
+      const legend = document.getElementById('pc-type-legend');
+      if (legend) legend.hidden = state.activeTab !== 'pc';
+    }
+
+    function renderReagentTableTools() {
+      const tools = document.getElementById('reagent-table-tools');
+      if (!tools) return;
+      const isReagent = state.activeTab === 'reagent';
+      tools.hidden = !isReagent;
+      if (!isReagent) return;
+
+      const reagentSortColumns = ['no', 'name', 'loc', 'mfr', 'cas', 'cat'];
+      const sortSelect = document.getElementById('reagent-sort-select');
+      if (sortSelect && reagentSortColumns.includes(state.sort.column)) {
+        sortSelect.value = state.sort.column;
+      }
+
+      const directionButton = document.getElementById('reagent-sort-direction');
+      if (directionButton) {
+        const isAscending = state.sort.direction === 'asc';
+        directionButton.textContent = isAscending ? '▲' : '▼';
+        directionButton.setAttribute('aria-label', isAscending ? '내림차순으로 정렬' : '오름차순으로 정렬');
+        directionButton.title = isAscending ? '내림차순으로 정렬' : '오름차순으로 정렬';
+      }
+    }
+
+    function handleReagentSort(column) {
+      const reagentSortColumns = ['no', 'name', 'loc', 'mfr', 'cas', 'cat'];
+      if (!reagentSortColumns.includes(column)) return;
+      state.sort.column = column;
+      state.sort.direction = 'asc';
+      updateDashboard();
+    }
+
+    function toggleReagentSortDirection() {
+      if (state.activeTab !== 'reagent') return;
+      state.sort.direction = state.sort.direction === 'asc' ? 'desc' : 'asc';
+      updateDashboard();
+    }
+
     function updateDashboard() {
+      const dashboardContainer = document.querySelector('.dashboard-container');
+      if (dashboardContainer) dashboardContainer.classList.toggle('reagent-mode', state.activeTab === 'reagent');
+      renderReagentNavigation();
+      renderReagentTableTools();
+      renderPcTypeLegend();
       if (state.renderFrame !== null) {
         cancelAnimationFrame(state.renderFrame);
       }
@@ -1827,6 +3360,7 @@
         if (state.viewMode === 'table') {
           const viewTable = document.getElementById('table-view-wrapper');
           const viewGrid = document.getElementById('grid-view-wrapper');
+          if (viewTable) viewTable.classList.toggle('reagent-table-container', state.activeTab === 'reagent');
           if (viewTable) viewTable.classList.remove('hidden');
           if (viewGrid) viewGrid.classList.add('hidden');
           renderTable(sorted);
@@ -1852,9 +3386,10 @@
                 general: '일치하는 장비가 없습니다',
                 pipette: '일치하는 피펫이 없습니다',
                 pc: '일치하는 PC 기기가 없습니다',
-                animalLab: '일치하는 동물실험실 관련 물품이 없습니다'
+                animalLab: '일치하는 동물실험실 관련 물품이 없습니다',
+                reagent: '일치하는 시약이 없습니다'
               };
-              h3.textContent = emptyMessages[state.activeTab];
+              h3.textContent = emptyMessages[state.activeTab] || '일치하는 항목이 없습니다';
             }
           }
           const viewTable = document.getElementById('table-view-wrapper');
@@ -1864,7 +3399,7 @@
           if (countTextEl) countTextEl.textContent = "검색 결과 0개";
         } else {
           if (emptyStateEl) emptyStateEl.classList.add('hidden');
-          const itemTypes = { general: '개 장비', pipette: '개 피펫', pc: '개 PC 기기', animalLab: '개 물품' };
+          const itemTypes = { general: '개 장비', pipette: '개 피펫', pc: '개 PC 기기', animalLab: '개 물품', reagent: '개 시약' };
           const unit = itemTypes[state.activeTab] || '개';
           if (countTextEl) countTextEl.innerHTML = `총 <strong>${activeData.length}</strong>${unit} 중 <strong>${sorted.length}</strong>개 표시 중`;
         }
@@ -1899,10 +3434,16 @@
           { title: "위치 지정됨", val: data.filter(item => item.loc && item.loc.trim() !== "").length, desc: "보관 위치가 등록된 물품", icon: "map-pin", filter: "located" },
           { title: "담당자 지정됨", val: data.filter(item => item.mgr && item.mgr.trim() !== "").length, desc: "담당자가 등록된 물품", icon: "users", filter: "assigned" },
           { title: "사진 등록", val: data.filter(item => item.photo && item.photo.trim() !== "").length, desc: "사진이 연결된 물품", icon: "image", filter: "photographed" }
+        ],
+        reagent: [
+          { title: "전체 등록 시약", val: data.length, desc: "보유 중인 전체 시약 품목", icon: "test-tube-2", filter: "all" },
+          { title: "실온 보관", val: data.filter(item => item.zone === "실온").length, desc: "실온 보관 시약", icon: "thermometer-sun", filter: "room" },
+          { title: "냉장 / 냉동 보관", val: data.filter(item => item.zone === "냉장실" || item.zone === "냉동실" || (item.loc && item.loc.includes("freezer"))).length, desc: "저온 보관 시약", icon: "snowflake", filter: "cold" },
+          { title: "위험 / 가연성", val: data.filter(item => item.zone === "위험물질" || item.zone === "가연성물질").length, desc: "안전 관리 대상 시약", icon: "flame", filter: "hazard" }
         ]
       };
       
-      const config = cardConfigs[state.activeTab];
+      const config = cardConfigs[state.activeTab] || cardConfigs.general;
       const cardIds = ['kpi-card-all', 'kpi-card-located', 'kpi-card-unlocated', 'kpi-card-unassigned'];
       
       config.forEach((c, idx) => {
@@ -1934,7 +3475,15 @@
         const row = document.createElement('tr');
         
         const tdNo = document.createElement('td');
-        tdNo.innerHTML = `<span class="eq-card-no">${item.no}</span>`;
+        tdNo.dataset.label = 'No';
+        if (state.activeTab === 'pc') {
+          tdNo.classList.add('pc-no-cell');
+          tdNo.innerHTML = `<span class="pc-kind-marker" title="${item.kind}" aria-label="${item.kind}"><i data-lucide="${getPcTypeIcon(item.kind)}"></i></span><span class="eq-card-no">${item.no}</span>`;
+        } else if (state.activeTab === 'reagent') {
+          tdNo.innerHTML = `<span class="reagent-row-marker ${getReagentMarkerClass(item)}"></span><span class="eq-card-no">${item.no}</span>`;
+        } else {
+          tdNo.innerHTML = `<span class="eq-card-no">${item.no}</span>`;
+        }
         row.appendChild(tdNo);
         
         if (state.activeTab === 'general') {
@@ -1954,24 +3503,11 @@
           row.appendChild(tdName);
           
           const tdLoc = document.createElement('td');
-          if (item.loc && item.loc.trim() !== "") {
-            tdLoc.innerHTML = `<span class="badge badge-gray"><i data-lucide="map-pin" class="w-3 h-3 text-slate-400"></i> ${item.loc}</span>`;
-          } else {
-            tdLoc.innerHTML = `<span class="badge badge-warning"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> 위치 미지정</span>`;
-          }
+          tdLoc.textContent = item.loc && item.loc.trim() !== "" ? item.loc.trim() : "위치 미지정";
           row.appendChild(tdLoc);
           
           const tdMgr = document.createElement('td');
-          if (item.mgr && item.mgr.trim() !== "") {
-            const mgrList = item.mgr.split(",").map(m => {
-              const manager = m.trim();
-              const isTeam = manager === "팀 전체";
-              return `<span class="badge ${isTeam ? "badge-team" : "badge-success"}"><i data-lucide="${isTeam ? "users" : "user"}" class="w-3 h-3 ${isTeam ? "text-blue-600" : "text-emerald-500"}"></i> ${manager}</span>`;
-            }).join(" ");
-            tdMgr.innerHTML = mgrList;
-          } else {
-            tdMgr.innerHTML = `<span class="badge badge-danger"><i data-lucide="user-x" class="w-3.5 h-3.5"></i> 담당자 미지정</span>`;
-          }
+          tdMgr.textContent = item.mgr && item.mgr.trim() !== "" ? item.mgr.trim() : "담당자 미지정";
           row.appendChild(tdMgr);
           
           const tdRemarks = document.createElement('td');
@@ -1992,27 +3528,15 @@
           row.appendChild(tdSpec);
           
           const tdLoc = document.createElement('td');
-          if (item.loc && item.loc.trim() !== "") {
-            tdLoc.innerHTML = `<span class="badge badge-gray"><i data-lucide="map-pin" class="w-3 h-3 text-slate-400"></i> ${item.loc}</span>`;
-          } else {
-            tdLoc.innerHTML = `<span class="badge badge-warning"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> 위치 미지정</span>`;
-          }
+          tdLoc.textContent = item.loc && item.loc.trim() !== "" ? item.loc.trim() : "위치 미지정";
           row.appendChild(tdLoc);
           
           const tdBrand = document.createElement('td');
-          if (item.brand) {
-            tdBrand.innerHTML = `<span class="badge badge-gray">${item.brand}</span>`;
-          } else {
-            tdBrand.innerHTML = `<span class="text-slate-300">-</span>`;
-          }
+          tdBrand.textContent = item.brand || "-";
           row.appendChild(tdBrand);
           
           const tdBroken = document.createElement('td');
-          if (item.broken === 'O') {
-            tdBroken.innerHTML = `<span class="badge badge-danger"><i data-lucide="alert-octagon" class="w-3.5 h-3.5"></i> 고장</span>`;
-          } else {
-            tdBroken.innerHTML = `<span class="badge badge-success"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-500"></i> 정상</span>`;
-          }
+          tdBroken.textContent = item.broken === 'O' ? "고장" : "정상";
           row.appendChild(tdBroken);
           
           const tdRemarks = document.createElement('td');
@@ -2032,40 +3556,20 @@
           tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" onclick="openImageModal(this.querySelector('img').src, '${item.label}')" title="이미지 크게 보기"><img src="${primaryImage}" data-fallback-list="${fallbackList}" data-fallback-index="0" alt="${item.label}" class="table-thumbnail" onerror="handleTableImageError(this)" loading="lazy"></div>`;
           row.appendChild(tdPhoto);
 
-          const tdKind = document.createElement('td');
-          let icon = "monitor";
-          let badgeClass = "badge-gray";
-          if (item.kind === '본체') { icon = "cpu"; badgeClass = "badge-success"; }
-          else if (item.kind === '노트북') { icon = "laptop"; badgeClass = "badge-warning"; }
-          tdKind.innerHTML = `<span class="badge ${badgeClass}"><i data-lucide="${icon}" class="w-3 h-3"></i> ${item.kind}</span>`;
-          row.appendChild(tdKind);
-          
           const tdLabel = document.createElement('td');
           tdLabel.innerHTML = `<strong>${item.label}</strong>`;
           row.appendChild(tdLabel);
           
           const tdLoc = document.createElement('td');
-          if (item.loc && item.loc.trim() !== "") {
-            tdLoc.innerHTML = `<span class="badge badge-gray"><i data-lucide="map-pin" class="w-3 h-3 text-slate-400"></i> ${item.loc}</span>`;
-          } else {
-            tdLoc.innerHTML = `<span class="badge badge-warning"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> 위치 미지정</span>`;
-          }
+          tdLoc.textContent = item.loc && item.loc.trim() !== "" ? item.loc.trim() : "위치 미지정";
           row.appendChild(tdLoc);
           
           const tdUser = document.createElement('td');
-          if (item.user && item.user.trim() !== "" && item.user !== "미지정") {
-            tdUser.innerHTML = `<span class="badge badge-success"><i data-lucide="user" class="w-3 h-3 text-emerald-500"></i> ${item.user}</span>`;
-          } else {
-            tdUser.innerHTML = `<span class="badge badge-danger"><i data-lucide="user-x" class="w-3.5 h-3.5"></i> 미지정</span>`;
-          }
+          tdUser.textContent = item.user && item.user.trim() !== "" && item.user !== "미지정" ? item.user : "미지정";
           row.appendChild(tdUser);
           
           const tdBrand = document.createElement('td');
-          if (item.brand) {
-            tdBrand.innerHTML = `<span class="badge badge-gray">${item.brand}</span>`;
-          } else {
-            tdBrand.innerHTML = `<span class="text-slate-300">-</span>`;
-          }
+          tdBrand.textContent = item.brand || "-";
           row.appendChild(tdBrand);
         } else if (state.activeTab === 'animalLab') {
           const imageCandidates = getImageCandidates('animalLab', item);
@@ -2098,14 +3602,65 @@
           row.appendChild(tdName);
 
           const tdLoc = document.createElement('td');
-          tdLoc.innerHTML = item.loc ? '<span class="badge badge-gray"><i data-lucide="map-pin" class="w-3 h-3"></i> ' + item.loc + '</span>' : '<span class="badge badge-warning">위치 미지정</span>';
+          tdLoc.textContent = item.loc && item.loc.trim() !== "" ? item.loc.trim() : "위치 미지정";
           row.appendChild(tdLoc);
 
           const tdMgr = document.createElement('td');
-          tdMgr.innerHTML = item.mgr
-            ? item.mgr.split(',').map(manager => '<span class="badge badge-success"><i data-lucide="user" class="w-3 h-3"></i> ' + manager.trim() + '</span>').join(' ')
-            : '<span class="badge badge-danger">담당자 미지정</span>';
+          tdMgr.textContent = item.mgr ? item.mgr.split(',').map(manager => manager.trim()).join(', ') : '담당자 미지정';
           row.appendChild(tdMgr);
+        } else if (state.activeTab === 'reagent') {
+          // Reagent Name & quick search links
+          const tdName = document.createElement('td');
+          tdName.dataset.label = '시약명';
+          tdName.innerHTML = `<strong>${item.name}</strong>`;
+          row.appendChild(tdName);
+
+          const tdLoc = document.createElement('td');
+          tdLoc.dataset.label = '보관위치 / 구역';
+          const locationText = item.loc && item.loc !== '-' ? item.loc : '위치 미지정';
+          const zoneText = item.zone && item.zone !== '-' ? item.zone : '';
+          tdLoc.textContent = zoneText ? `${locationText} (${zoneText})` : locationText;
+          row.appendChild(tdLoc);
+
+          // Manufacturer
+          const tdMfr = document.createElement('td');
+          tdMfr.dataset.label = '제조사';
+          if (item.mfr && item.mfr !== '-') {
+            tdMfr.textContent = item.mfr;
+          } else {
+            tdMfr.innerHTML = `<span class="text-slate-300">-</span>`;
+          }
+          row.appendChild(tdMfr);
+
+          const tdIdentifiers = document.createElement('td');
+          tdIdentifiers.dataset.label = 'CAS / Cat. No.';
+          const casHtml = item.cas && item.cas !== '-'
+            ? `<button type="button" class="copy-btn-inline" onclick="copyToClipboard('${item.cas}', 'CAS No.')" title="클릭하여 CAS 번호 복사">${item.cas}</button>`
+            : '<span>-</span>';
+          const catHtml = item.cat && item.cat !== '-'
+            ? `<button type="button" class="copy-btn-inline" onclick="copyToClipboard('${item.cat}', 'Cat.No')" title="클릭하여 제품번호 복사">${item.cat}</button>`
+            : '<span>-</span>';
+          tdIdentifiers.innerHTML = `<div class="reagent-identifier-cell"><div class="reagent-identifier-line"><span class="reagent-identifier-label">CAS</span>${casHtml}</div><div class="reagent-identifier-line"><span class="reagent-identifier-label">Cat.</span>${catHtml}</div></div>`;
+          row.appendChild(tdIdentifiers);
+
+          // Capacity & Qty
+          const tdCapQty = document.createElement('td');
+          tdCapQty.dataset.label = '용량 / 수량';
+          const capText = item.capacity && item.capacity !== '-' ? item.capacity : '';
+          const qtyText = item.qty && item.qty !== '-' ? `${item.qty}개` : '';
+          const fullCapQty = [capText, qtyText].filter(Boolean).join(' / ') || '-';
+          tdCapQty.innerHTML = `<span class="text-xs font-semibold text-slate-600">${fullCapQty}</span>`;
+          row.appendChild(tdCapQty);
+
+          // Remarks
+          const tdRemarks = document.createElement('td');
+          tdRemarks.dataset.label = '비고';
+          if (item.remarks && item.remarks.trim() !== "") {
+            tdRemarks.innerHTML = `<div class="flex items-center gap-1.5 text-xs text-slate-500 italic" title="${item.remarks}"><i data-lucide="info" class="w-3.5 h-3.5 text-sky-500 flex-shrink-0"></i><span>${item.remarks}</span></div>`;
+          } else {
+            tdRemarks.innerHTML = `<span class="text-slate-300">-</span>`;
+          }
+          row.appendChild(tdRemarks);
         }
         
         tbody.appendChild(row);
@@ -2173,6 +3728,16 @@
           const cardImageWrapper = card.querySelector('.eq-card-image-wrapper');
           cardImage.onerror = () => handleImageError(cardImage);
           cardImageWrapper.onclick = () => openImageModal(cardImage.src, item.name);
+        } else if (state.activeTab === 'reagent') {
+          const imageHtml = `<div class="eq-card-image-wrapper" style="display: flex; align-items: center; justify-content: center; background: var(--bg-tertiary); color: var(--primary);"><i data-lucide="test-tube-2" style="width: 3.5rem; height: 3.5rem;"></i></div>`;
+          const mfrHtml = item.mfr ? `<span class="badge badge-team">${item.mfr}</span>` : `<span class="text-slate-300">-</span>`;
+          const zoneHtml = item.zone && item.zone !== '-' ? `<span class="badge badge-gray">${item.zone}</span>` : '';
+          const casHtml = item.cas && item.cas !== '-' ? `<div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">CAS No:</span><button type="button" class="copy-btn-inline badge-interactive" onclick="copyToClipboard('${item.cas}', 'CAS No.')"><i data-lucide="copy" class="w-3 h-3"></i><span>${item.cas}</span></button></div>` : '';
+          const catHtml = item.cat && item.cat !== '-' ? `<div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">Cat No:</span><button type="button" class="copy-btn-inline badge-interactive" onclick="copyToClipboard('${item.cat}', 'Cat.No')"><i data-lucide="copy" class="w-3 h-3"></i><span>${item.cat}</span></button></div>` : '';
+          const capHtml = item.capacity || item.qty ? `<div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">용량/수량:</span><span>${item.capacity || ''} ${item.qty ? '(' + item.qty + '개)' : ''}</span></div>` : '';
+          const remarksHtml = item.remarks && item.remarks.trim() !== "" ? `<div class="eq-card-remarks"><i data-lucide="info" class="text-sky-500"></i><span>${item.remarks}</span></div>` : "";
+
+          card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span><div class="flex gap-1">${locHtml}${zoneHtml}</div></div><h3 class="eq-card-name">${item.name}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">제조사:</span>${mfrHtml}</div>${casHtml}${catHtml}${capHtml}</div></div>${remarksHtml}</div>`;
         }
         container.appendChild(card);
       });
@@ -2180,6 +3745,8 @@
 
     function renderAnalytics(filteredData) {
       // 1. Location distribution chart
+      const locationChartTitle = document.querySelector('.sidebar-panel .card:first-child .chart-title');
+      if (locationChartTitle) locationChartTitle.textContent = state.activeTab === 'reagent' ? '보관실별 분포' : '설치 위치별 분포';
       const locCounts = {};
       filteredData.forEach(item => {
         const val = item.loc && item.loc.trim() !== "" ? item.loc.trim() : "미지정";
@@ -2192,7 +3759,8 @@
       locChartEl.innerHTML = "";
       sortedLocs.forEach(([loc, count]) => {
         const pct = (count / locMax) * 100;
-        const isActive = state.filters.location === loc;
+        const activeLocation = state.activeTab === 'reagent' ? state.filters.reagentLocation : state.filters.location;
+        const isActive = activeLocation === loc;
         const row = document.createElement('div');
         row.className = `chart-row ${isActive ? 'active' : ''}`;
         row.onclick = () => toggleLocFilter(loc);
@@ -2200,7 +3768,7 @@
         locChartEl.appendChild(row);
       });
 
-      // 2. Secondary grouping chart (Manager / Brand / User depending on active tab)
+      // 2. Secondary grouping chart (Manager / Brand / User / Manufacturer depending on active tab)
       const mgrCounts = {};
       filteredData.forEach(item => {
         if (state.activeTab === 'general') {
@@ -2227,6 +3795,9 @@
           } else {
             mgrCounts["미지정"] = (mgrCounts["미지정"] || 0) + 1;
           }
+        } else if (state.activeTab === 'reagent') {
+          const val = item.mfr && item.mfr.trim() !== "" ? item.mfr.trim() : "미지정";
+          mgrCounts[val] = (mgrCounts[val] || 0) + 1;
         }
       });
 
@@ -2244,11 +3815,12 @@
       } else if (state.activeTab === 'pc') {
         if (titleEl) titleEl.textContent = "사용자별 보유 현황";
         if (subtitleEl) subtitleEl.textContent = `${sortedMgrs.length}명`;
-      }
-
-      if (state.activeTab === 'animalLab') {
+      } else if (state.activeTab === 'animalLab') {
         if (titleEl) titleEl.textContent = "담당자별 관리 현황";
         if (subtitleEl) subtitleEl.textContent = sortedMgrs.length + "명";
+      } else if (state.activeTab === 'reagent') {
+        if (titleEl) titleEl.textContent = "제조사별 보유 현황";
+        if (subtitleEl) subtitleEl.textContent = `${sortedMgrs.length}개 제조사`;
       }
 
       const mgrMax = sortedMgrs.length > 0 ? sortedMgrs[0][1] : 1;
@@ -2267,7 +3839,7 @@
     }
 
     function updateSortArrows() {
-      const cols = ['no', 'name', 'loc', 'mgr', 'spec', 'brand', 'broken', 'kind', 'label', 'user'];
+      const cols = ['no', 'name', 'loc', 'mgr', 'spec', 'brand', 'broken', 'kind', 'label', 'user', 'folder', 'mfr', 'cas', 'cat'];
       cols.forEach(c => {
         const iconEl = document.getElementById(`sort-icon-${c}`);
         if (!iconEl) return;
@@ -2298,7 +3870,11 @@
     }
 
     function handleLocationFilter(val) {
-      state.filters.location = val;
+      if (state.activeTab === 'reagent') {
+        state.filters.reagentLocation = val;
+      } else {
+        state.filters.location = val;
+      }
       updateDashboard();
     }
 
@@ -2308,6 +3884,10 @@
     }
 
     function toggleLocFilter(loc) {
+      if (state.activeTab === 'reagent') {
+        setReagentFilter('reagentLocation', loc);
+        return;
+      }
       if (state.filters.location === loc) {
         state.filters.location = "all";
       } else {
@@ -2330,7 +3910,7 @@
       updateDashboard();
       
       let filterName = "담당자";
-      if (state.activeTab === 'pipette') filterName = "제조사";
+      if (state.activeTab === 'pipette' || state.activeTab === 'reagent') filterName = "제조사";
       else if (state.activeTab === 'pc') filterName = "사용자";
       
       showToast(`${filterName} 필터가 ${state.filters.manager === 'all' ? '해제되었습니다' : `'${state.filters.manager}'(으)로 적용되었습니다.`}`);
@@ -2357,16 +3937,21 @@
       } else if (state.activeTab === 'animalLab') {
         const filterLabel = { 'all': '전체 동물실험실 관련 물품 표시', 'located': '위치 지정 물품만 표시', 'assigned': '담당자 지정 물품만 표시', 'photographed': '사진 등록 물품만 표시' };
         label = filterLabel[state.filters.kpi] || "전체 동물실험실 관련 물품 표시";
+      } else if (state.activeTab === 'reagent') {
+        const filterLabel = { 'all': '전체 시약 표시', 'room': '실온 보관 시약만 표시', 'cold': '냉장/냉동 보관 시약만 표시', 'hazard': '위험/가연성 물질만 표시' };
+        label = filterLabel[state.filters.kpi] || "전체 시약 표시";
       }
       showToast(label, "success");
     }
-
 
     function resetFilters() {
       state.filters.search = "";
       state.filters.location = "all";
       state.filters.manager = "all";
       state.filters.kpi = "all";
+      state.filters.reagentLocation = "all";
+      state.filters.reagentZone = "all";
+      state.filters.reagentFolder = "all";
       document.getElementById('search-input').value = "";
       document.getElementById('filter-location').value = "all";
       document.getElementById('filter-manager').value = "all";
@@ -2432,7 +4017,6 @@
       img.src = list[nextIndex];
       return true;
     }
-
 
     function handleTableImageError(img) {
       if (tryNextImageSource(img)) {
@@ -2520,9 +4104,7 @@
           const brand = `"${(item.brand || '').replace(/"/g, '""')}"`;
           csvContent += `${no},${kind},${label},${loc},${user},${brand}\n`;
         });
-      }
-      
-      if (state.activeTab === 'animalLab') {
+      } else if (state.activeTab === 'animalLab') {
         csvContent = "No,품목코드,품명,위치,담당자\n";
         dataToExport.forEach(item => {
           const no = item.no;
@@ -2532,15 +4114,31 @@
           const mgr = '"' + (item.mgr || '미지정').replace(/"/g, '""') + '"';
           csvContent += no + ',' + code + ',' + name + ',' + loc + ',' + mgr + '\n';
         });
+      } else if (state.activeTab === 'reagent') {
+        csvContent = "No,시약명,보관위치,보관구역,폴더,제조사,Cat.No,CAS No,용량,수량,비고\n";
+        dataToExport.forEach(item => {
+          const no = item.no;
+          const name = `"${(item.name || '').replace(/"/g, '""')}"`;
+          const loc = `"${(item.loc || '').replace(/"/g, '""')}"`;
+          const zone = `"${(item.zone || '').replace(/"/g, '""')}"`;
+          const folder = `"${(item.folder || '').replace(/"/g, '""')}"`;
+          const mfr = `"${(item.mfr || '').replace(/"/g, '""')}"`;
+          const cat = `"${(item.cat || '').replace(/"/g, '""')}"`;
+          const cas = `"${(item.cas || '').replace(/"/g, '""')}"`;
+          const capacity = `"${(item.capacity || '').replace(/"/g, '""')}"`;
+          const qty = `"${(item.qty || '').replace(/"/g, '""')}"`;
+          const remarks = `"${(item.remarks || '').replace(/"/g, '""')}"`;
+          csvContent += `${no},${name},${loc},${zone},${folder},${mfr},${cat},${cas},${capacity},${qty},${remarks}\n`;
+        });
       }
 
       const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-      const tabLabels = { 'general': '장비목록', 'pipette': '피펫목록', 'pc': 'PC목록', 'animalLab': '동물실험실관련물품목록' };
+      const tabLabels = { 'general': '장비목록', 'pipette': '피펫목록', 'pc': 'PC목록', 'animalLab': '동물실험실관련물품목록', 'reagent': '시약목록' };
       link.setAttribute("href", url);
-      link.setAttribute("download", `Symbiotic_Biomaterials_Lab_SBL_${tabLabels[state.activeTab]}_필터적용_${dateStr}.csv`);
+      link.setAttribute("download", `Symbiotic_Biomaterials_Lab_SBL_${tabLabels[state.activeTab] || '목록'}_필터적용_${dateStr}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
