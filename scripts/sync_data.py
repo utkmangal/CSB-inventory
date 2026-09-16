@@ -58,7 +58,7 @@ def get_bilingual_name(name_val):
         "프린터": "사무용 프린터 (Office Printer)",
         "노트북": "노트북 컴퓨터 (Laptop Computer)",
         "마이크로칩": "마이크로플루이딕 마이크로칩 (Microfluidic Microchip)",
-        "펌프 장비": "유체 주입 펌프 장비 (Syringe Pump Equipment)",
+        "펌프 장비": "진공 펌프 (Vacuum Pump)",
         "UV 멸균": "UV 멸균기 (UV Sterilizer)"
     }
     return name_map.get(name, name)

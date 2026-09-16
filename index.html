@@ -376,6 +376,11 @@
       box-shadow: var(--shadow);
     }
 
+    .filter-select-compact {
+      min-width: 118px;
+      width: 118px;
+    }
+
     .filter-select:focus {
       outline: none;
       border-color: var(--primary);
@@ -1527,8 +1532,17 @@
       display: none;
     }
 
+    #filter-capacity {
+      display: none;
+    }
+
+    .reagent-mode #filter-capacity,
+    .pipette-mode #filter-capacity {
+      display: block;
+    }
+
     .reagent-mode .filter-group {
-      gap: 0;
+      gap: 0.5rem;
     }
 
     .reagent-mode .dashboard-grid,
@@ -2130,6 +2144,9 @@
             <select id="filter-manager" class="filter-select" onchange="handleManagerFilter(this.value)">
               <option value="all">모든 담당자</option>
             </select>
+            <select id="filter-capacity" class="filter-select filter-select-compact" onchange="handleCapacityFilter(this.value)" aria-label="주요 용량 필터">
+              <option value="all">주요 용량</option>
+            </select>
             <button onclick="resetFilters()" class="btn-reset" title="모든 검색 및 필터 설정 초기화">
               <i data-lucide="rotate-ccw" class="w-4 h-4"></i> 초기화
             </button>
@@ -2282,7 +2299,7 @@
       {"no": 43, "name": "폐쇄기 (paper shredder)", "loc": "대신 building", "mgr": "팀 전체", "remarks": "", "icon": "rat"},
       {"no": 44, "name": "사무용 프린터 (Office Printer)", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
       {"no": 45, "name": "마이크로플루이딕 마이크로칩 (Microfluidic Microchip)", "loc": "치과대학 708호", "mgr": "만갈, 이민용", "remarks": ""},
-      {"no": 46, "name": "유체 주입 펌프 장비 (Syringe Pump Equipment)", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
+      {"no": 46, "name": "진공 펌프 (Vacuum Pump)", "loc": "", "mgr": "만갈, 서지영", "remarks": ""},
       {"no": 47, "name": "UV 멸균기 (UV Sterilizer)", "loc": "치과대학 708호", "mgr": "윤정현, 왕링윤", "remarks": ""},
       {"no": 48, "name": "멀티 가열 교반기", "loc": "치과대학 707호", "mgr": "만갈, 서지영", "remarks": ""},
       {"no": 49, "name": "PC", "loc": "치과대학", "mgr": "김지윤", "remarks": ""},
@@ -2857,7 +2874,7 @@
 
     const state = {
       activeTab: "general",
-      filters: { search: "", location: "all", manager: "all", kpi: "all", reagentLocation: "all", reagentZone: "all", reagentFolder: "all" },
+      filters: { search: "", location: "all", manager: "all", kpi: "all", reagentLocation: "all", reagentZone: "all", reagentFolder: "all", capacity: "all" },
       sort: { column: "no", direction: "asc" },
       viewMode: "table",
       theme: "light",
@@ -2901,6 +2918,7 @@
       state.filters.reagentLocation = "all";
       state.filters.reagentZone = "all";
       state.filters.reagentFolder = "all";
+      state.filters.capacity = "all";
       state.sort.column = "no";
       state.sort.direction = "asc";
       
@@ -2923,8 +2941,10 @@
       
       const locFilter = document.getElementById('filter-location');
       const mgrFilter = document.getElementById('filter-manager');
+      const capacityFilter = document.getElementById('filter-capacity');
       if (locFilter) locFilter.value = "all";
       if (mgrFilter) mgrFilter.value = "all";
+      if (capacityFilter) capacityFilter.value = "all";
       
       renderTableHeaders();
       updateDashboard();
@@ -3038,7 +3058,8 @@
     function populateDropdowns() {
       const locSelect = document.getElementById('filter-location');
       const mgrSelect = document.getElementById('filter-manager');
-      if (!locSelect || !mgrSelect) return;
+      const capacitySelect = document.getElementById('filter-capacity');
+      if (!locSelect || !mgrSelect || !capacitySelect) return;
 
       locSelect.innerHTML = '<option value="all">모든 위치</option>';
       if (state.activeTab === 'general') {
@@ -3069,6 +3090,49 @@
         opt.textContent = mgr;
         mgrSelect.appendChild(opt);
       });
+
+      capacitySelect.innerHTML = '<option value="all">주요 용량</option>';
+      const capacityItems = state.activeTab === 'pipette' ? pipetteData : reagentData;
+      const availableCapacities = new Set(capacityItems.map(item => normalizeCapacity(state.activeTab === 'pipette' ? item.spec : item.capacity)));
+      const majorCapacities = state.activeTab === 'pipette'
+        ? [
+            ['1000 µl', '1000 µL'],
+            ['200 µl', '200 µL'],
+            ['100 µl', '100 µL'],
+            ['20 µl', '20 µL'],
+            ['10 µl', '10 µL'],
+            ['2 µl', '2 µL']
+          ]
+        : [
+            ['500 g', '500 g'],
+            ['1 kg', '1 kg'],
+            ['500 ml', '500 mL'],
+            ['1 l', '1 L'],
+            ['100 g', '100 g'],
+            ['250 g', '250 g'],
+            ['50 g', '50 g'],
+            ['25 g', '25 g'],
+            ['100 ml', '100 mL'],
+            ['250 ml', '250 mL']
+          ];
+      majorCapacities.forEach(([value, label]) => {
+        if (!availableCapacities.has(value)) return;
+        const opt = document.createElement('option');
+        opt.value = value;
+        opt.textContent = label;
+        capacitySelect.appendChild(opt);
+      });
+      capacitySelect.value = state.filters.capacity;
+    }
+
+    function normalizeCapacity(value) {
+      const raw = value && value.toString().trim().toLowerCase();
+      if (!raw || raw === '-') return '미지정';
+      const compact = raw.replace(/\s+/g, '');
+      const match = compact.match(/^(\d+(?:\.\d+)?)(mg|kg|ml|ul|µl|g|l)$/) || compact.match(/(\d+(?:\.\d+)?)(mg|kg|ml|ul|µl|g|l)$/);
+      if (!match) return raw;
+      const unit = match[2] === 'ul' ? 'µl' : match[2];
+      return `${match[1]} ${unit}`;
     }
 
     function renderReagentChipRow(containerId, filterKey, allLabel, values, matchesValue) {
@@ -3114,6 +3178,7 @@
       if (state.filters.reagentLocation !== 'all') activeLabels.push(`보관실: ${state.filters.reagentLocation}`);
       if (state.filters.reagentZone !== 'all') activeLabels.push(`구역: ${state.filters.reagentZone}`);
       if (state.filters.reagentFolder !== 'all') activeLabels.push(`폴더: ${state.filters.reagentFolder}`);
+      if (state.filters.capacity !== 'all') activeLabels.push(`용량: ${state.filters.capacity}`);
       const summary = document.getElementById('reagent-filter-summary');
       if (summary) summary.textContent = activeLabels.length ? activeLabels.join(' · ') : '전체 시약';
     }
@@ -3269,7 +3334,13 @@
           }
         }
 
-        return matchSearch && matchLoc && matchMgr && matchKPI && matchReagentNavigation;
+        let matchCapacity = true;
+        if (state.filters.capacity !== 'all' && (state.activeTab === 'reagent' || state.activeTab === 'pipette')) {
+          const itemCapacity = state.activeTab === 'pipette' ? item.spec : item.capacity;
+          matchCapacity = normalizeCapacity(itemCapacity) === state.filters.capacity;
+        }
+
+        return matchSearch && matchLoc && matchMgr && matchKPI && matchReagentNavigation && matchCapacity;
       });
     }
 
@@ -3346,7 +3417,10 @@
 
     function updateDashboard() {
       const dashboardContainer = document.querySelector('.dashboard-container');
-      if (dashboardContainer) dashboardContainer.classList.toggle('reagent-mode', state.activeTab === 'reagent');
+      if (dashboardContainer) {
+        dashboardContainer.classList.toggle('reagent-mode', state.activeTab === 'reagent');
+        dashboardContainer.classList.toggle('pipette-mode', state.activeTab === 'pipette');
+      }
       renderReagentNavigation();
       renderReagentTableTools();
       renderPcTypeLegend();
@@ -3883,6 +3957,11 @@
       updateDashboard();
     }
 
+    function handleCapacityFilter(val) {
+      state.filters.capacity = val;
+      updateDashboard();
+    }
+
     function toggleLocFilter(loc) {
       if (state.activeTab === 'reagent') {
         setReagentFilter('reagentLocation', loc);
@@ -3952,9 +4031,11 @@
       state.filters.reagentLocation = "all";
       state.filters.reagentZone = "all";
       state.filters.reagentFolder = "all";
+      state.filters.capacity = "all";
       document.getElementById('search-input').value = "";
       document.getElementById('filter-location').value = "all";
       document.getElementById('filter-manager').value = "all";
+      document.getElementById('filter-capacity').value = "all";
       updateDashboard();
       showToast("모든 필터가 초기화되었습니다.", "success");
     }
