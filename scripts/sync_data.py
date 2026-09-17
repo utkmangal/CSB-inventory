@@ -307,6 +307,7 @@ def sync():
             for r_idx, row in enumerate(ws_reagent.iter_rows(min_row=2, values_only=True), start=1):
                 if not row or all(c is None for c in row):
                     continue
+                category_val = row[0] if len(row) > 0 else None
                 loc_val = row[0] if len(row) > 0 else None
                 zone_val = row[1] if len(row) > 1 else None
                 folder_val = row[2] if len(row) > 2 else None
@@ -317,6 +318,30 @@ def sync():
                 capacity_val = row[7] if len(row) > 7 else None
                 qty_val = row[8] if len(row) > 8 else None
                 remarks_val = row[9] if len(row) > 9 else None
+
+                if str(category_val).strip() == "장비":
+                    equipment_name = str(row[4]).strip() if len(row) > 4 and row[4] is not None else ""
+                    equipment_location = str(row[1]).strip() if len(row) > 1 and row[1] is not None else ""
+                    equipment_zone = str(row[2]).strip() if len(row) > 2 and row[2] is not None else ""
+                    equipment_mfr = str(row[5]).strip() if len(row) > 5 and row[5] is not None else ""
+                    equipment_qty = str(row[9]).strip() if len(row) > 9 and row[9] is not None else ""
+                    equipment_note = str(row[10]).strip() if len(row) > 10 and row[10] is not None else ""
+                    equipment_remarks = [
+                        value for value in (
+                            f"보관 구역: {equipment_zone}" if equipment_zone else "",
+                            f"제조사: {equipment_mfr}" if equipment_mfr else "",
+                            f"수량: {equipment_qty}" if equipment_qty else "",
+                            equipment_note
+                        ) if value
+                    ]
+                    inventory_data.append({
+                        "no": len(inventory_data) + 1,
+                        "name": equipment_name,
+                        "loc": equipment_location,
+                        "mgr": "",
+                        "remarks": "; ".join(equipment_remarks)
+                    })
+                    continue
 
                 name = str(name_val).strip() if name_val is not None else ""
                 if not name:
