@@ -304,28 +304,55 @@ def sync():
         try:
             wb_reagent = openpyxl.load_workbook(latest_reagent, read_only=True, data_only=True)
             ws_reagent = wb_reagent[wb_reagent.sheetnames[0]]
+            header_row = next(ws_reagent.iter_rows(min_row=1, max_row=1, values_only=True), ())
+            header_map = {
+                re.sub(r"\s+", "", str(header).strip()).lower(): index
+                for index, header in enumerate(header_row)
+                if header is not None
+            }
+
+            def cell_value(row, *header_names):
+                for header_name in header_names:
+                    index = header_map.get(re.sub(r"\s+", "", header_name).lower())
+                    if index is not None and index < len(row):
+                        return row[index]
+                return None
+
+            required_headers = {
+                "구분", "보관 위치", "구역", "세부", "시약명", "제조사",
+                "Cat.No (제품번호)", "CAS No.", "용량", "수량", "비고"
+            }
+            missing_headers = [
+                header for header in required_headers
+                if re.sub(r"\s+", "", header).lower() not in header_map
+            ]
+            if missing_headers:
+                print(f"Warning: Reagent workbook is missing headers: {', '.join(missing_headers)}")
+                wb_reagent.close()
+                return False
+
             for r_idx, row in enumerate(ws_reagent.iter_rows(min_row=2, values_only=True), start=1):
                 if not row or all(c is None for c in row):
                     continue
-                category_val = row[0] if len(row) > 0 else None
-                loc_val = row[0] if len(row) > 0 else None
-                zone_val = row[1] if len(row) > 1 else None
-                folder_val = row[2] if len(row) > 2 else None
-                name_val = row[3] if len(row) > 3 else None
-                mfr_val = row[4] if len(row) > 4 else None
-                cat_val = row[5] if len(row) > 5 else None
-                cas_val = row[6] if len(row) > 6 else None
-                capacity_val = row[7] if len(row) > 7 else None
-                qty_val = row[8] if len(row) > 8 else None
-                remarks_val = row[9] if len(row) > 9 else None
+                category_val = cell_value(row, "구분")
+                loc_val = cell_value(row, "보관 위치")
+                zone_val = cell_value(row, "구역")
+                folder_val = cell_value(row, "세부")
+                name_val = cell_value(row, "시약명")
+                mfr_val = cell_value(row, "제조사")
+                cat_val = cell_value(row, "Cat.No (제품번호)")
+                cas_val = cell_value(row, "CAS No.")
+                capacity_val = cell_value(row, "용량")
+                qty_val = cell_value(row, "수량")
+                remarks_val = cell_value(row, "비고")
 
                 if str(category_val).strip() == "장비":
-                    equipment_name = str(row[4]).strip() if len(row) > 4 and row[4] is not None else ""
-                    equipment_location = str(row[1]).strip() if len(row) > 1 and row[1] is not None else ""
-                    equipment_zone = str(row[2]).strip() if len(row) > 2 and row[2] is not None else ""
-                    equipment_mfr = str(row[5]).strip() if len(row) > 5 and row[5] is not None else ""
-                    equipment_qty = str(row[9]).strip() if len(row) > 9 and row[9] is not None else ""
-                    equipment_note = str(row[10]).strip() if len(row) > 10 and row[10] is not None else ""
+                    equipment_name = str(name_val).strip() if name_val is not None else ""
+                    equipment_location = str(loc_val).strip() if loc_val is not None else ""
+                    equipment_zone = str(zone_val).strip() if zone_val is not None else ""
+                    equipment_mfr = str(mfr_val).strip() if mfr_val is not None else ""
+                    equipment_qty = str(qty_val).strip() if qty_val is not None else ""
+                    equipment_note = str(remarks_val).strip() if remarks_val is not None else ""
                     equipment_remarks = [
                         value for value in (
                             f"보관 구역: {equipment_zone}" if equipment_zone else "",
