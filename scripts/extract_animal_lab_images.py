@@ -89,7 +89,8 @@ def save_as_jpeg(image_bytes, destination):
     with Image.open(BytesIO(image_bytes)) as image:
         if image.mode != "RGB":
             image = image.convert("RGB")
-        image.save(destination, "JPEG", quality=90)
+        image.thumbnail((1600, 1600), Image.LANCZOS)
+        image.save(destination, "JPEG", quality=82, optimize=True, progressive=True)
 
 
 def main():

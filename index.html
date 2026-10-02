@@ -2,7 +2,12 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Symbiotic Biomaterials Lab (SBL) 장비, 피펫, PC, 동물실험실 물품, 시약 보유 현황 대시보드">
+  <meta name="theme-color" content="#123b66">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Symbiotic Biomaterials Lab (SBL) 장비 보유 현황">
+  <meta property="og:description" content="연세대학교 치과대학 SBL 장비 및 시약 보유 현황 대시보드">
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20260725">
   <link rel="alternate icon" href="favicon.svg?v=20260725">
   <link rel="apple-touch-icon" href="favicon.svg?v=20260725">
@@ -11,10 +16,10 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
   
   <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@1.49.0/dist/umd/lucide.min.js" integrity="sha384-7mWwAGEOOlxvEBR+Mpy0eVhGL+9abGHkZtVoTs+dvrWkI5g00lyMaAxRIK+rqXGt" crossorigin="anonymous" defer></script>
   
   <style>
     /* Hallmark · pre-emit critique: P5 H4 E4 S4 R5 V4 */
@@ -26,7 +31,7 @@
       
       --text-primary: #102a43;
       --text-secondary: #486581;
-      --text-muted: #829ab1;
+      --text-muted: #556f88;
       
       --primary: #123b66;
       --primary-hover: #0b2948;
@@ -45,8 +50,17 @@
       --shadow: 0 1px 3px rgba(16, 42, 67, 0.04), 0 8px 24px rgba(16, 42, 67, 0.05);
       --shadow-lg: 0 10px 30px rgba(16, 42, 67, 0.08);
       
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-sans: 'Inter', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-display: 'Outfit', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+      --fs-xs: 0.75rem;
+      --fs-sm: 0.8125rem;
+      --fs-md: 0.875rem;
+      --fs-base: 0.9375rem;
+      --fs-lg: 1.125rem;
+      --fs-xl: 1.375rem;
+      --fs-2xl: 1.75rem;
+      --fs-3xl: 2rem;
     }
 
 
@@ -107,7 +121,7 @@
       border-radius: 0;
       padding: 1rem 0;
       box-shadow: none;
-      transition: all 0.3s;
+      transition: background-color 0.3s , color 0.3s , border-color 0.3s , box-shadow 0.3s , transform 0.3s , opacity 0.3s , filter 0.3s ;
     }
 
     .header-logo-container {
@@ -119,7 +133,7 @@
     .logo-img {
       width: 4.5rem;
       height: 4.5rem;
-      border-radius: 0.75rem !important; /* Contemporary rounded corner */
+      border-radius: 0.75rem;
       object-fit: cover;
       border: 1px solid var(--border);
     }
@@ -131,14 +145,14 @@
 
     .header-title {
       font-family: var(--font-display);
-      font-size: 1.375rem;
+      font-size: var(--fs-xl);
       font-weight: 600;
       color: var(--text-primary);
       letter-spacing: -0.03em;
     }
 
     .header-subtitle {
-      font-size: 0.725rem;
+      font-size: var(--fs-xs);
       color: var(--text-muted);
       margin-top: 0.25rem;
       text-transform: uppercase;
@@ -159,10 +173,10 @@
       gap: 0.5rem;
       padding: 0.625rem 1.125rem;
       border-radius: 0.375rem;
-      font-size: 0.825rem;
+      font-size: var(--fs-sm);
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), filter 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       border: 1px solid var(--border-strong);
       background-color: var(--bg-secondary);
       color: var(--text-secondary);
@@ -191,10 +205,10 @@
       gap: 0.5rem;
       padding: 0.625rem 1.25rem;
       border-radius: 0.375rem;
-      font-size: 0.875rem;
+      font-size: var(--fs-md);
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), filter 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       background-color: var(--primary);
       color: #ffffff;
       border: none;
@@ -218,7 +232,7 @@
       border-radius: 0.5rem;
       padding: 1.5rem;
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
@@ -245,7 +259,7 @@
     }
 
     .kpi-card-title {
-      font-size: 0.725rem;
+      font-size: var(--fs-xs);
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -254,7 +268,7 @@
 
     .kpi-card-value {
       font-family: var(--font-display);
-      font-size: 2rem;
+      font-size: var(--fs-3xl);
       font-weight: 600;
       color: var(--text-primary);
       line-height: 1;
@@ -263,7 +277,7 @@
     }
 
     .kpi-card-footer {
-      font-size: 0.75rem;
+      font-size: var(--fs-xs);
       color: var(--text-muted);
     }
 
@@ -340,8 +354,8 @@
       border: 1px solid var(--border);
       background-color: var(--bg-secondary);
       color: var(--text-primary);
-      font-size: 0.875rem;
-      transition: all 0.2s;
+      font-size: var(--fs-md);
+      transition: background-color 0.2s , color 0.2s , border-color 0.2s , box-shadow 0.2s , transform 0.2s , opacity 0.2s , filter 0.2s ;
       box-shadow: var(--shadow);
     }
 
@@ -364,9 +378,9 @@
       border: 1px solid var(--border);
       background-color: var(--bg-secondary);
       color: var(--text-primary);
-      font-size: 0.875rem;
+      font-size: var(--fs-md);
       cursor: pointer;
-      transition: all 0.2s;
+      transition: background-color 0.2s , color 0.2s , border-color 0.2s , box-shadow 0.2s , transform 0.2s , opacity 0.2s , filter 0.2s ;
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7' /%3E%3C/svg%3E");
       background-repeat: no-repeat;
@@ -396,10 +410,10 @@
       border: 1px solid var(--border);
       background-color: var(--bg-secondary);
       color: var(--text-secondary);
-      font-size: 0.875rem;
+      font-size: var(--fs-md);
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: background-color 0.2s , color 0.2s , border-color 0.2s , box-shadow 0.2s , transform 0.2s , opacity 0.2s , filter 0.2s ;
       box-shadow: var(--shadow);
     }
 
@@ -412,7 +426,7 @@
 
     /* Results Counter */
     .results-counter {
-      font-size: 0.8125rem;
+      font-size: var(--fs-sm);
       color: var(--text-secondary);
       display: flex;
       justify-content: space-between;
@@ -434,7 +448,7 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.875rem;
+      font-size: var(--fs-md);
     }
 
     .table-element th {
@@ -446,7 +460,7 @@
       user-select: none;
       transition: background-color 0.2s, color 0.2s;
       white-space: nowrap;
-      font-size: 0.725rem;
+      font-size: var(--fs-xs);
       text-transform: uppercase;
       letter-spacing: 0.05em;
       border-bottom: 2px solid var(--border);
@@ -473,7 +487,7 @@
     }
 
     .sort-indicator {
-      font-size: 0.75rem;
+      font-size: var(--fs-xs);
       color: var(--text-muted);
       margin-left: 0.25rem;
       display: inline-block;
@@ -502,7 +516,7 @@
       flex-direction: column;
       justify-content: space-between;
       min-height: 320px;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       animation: itemFadeIn 0.3s ease-out forwards;
     }
 
@@ -555,7 +569,7 @@
     }
 
     .eq-card-image-placeholder span {
-      font-size: 0.75rem;
+      font-size: var(--fs-xs);
       font-weight: 500;
     }
 
@@ -575,7 +589,7 @@
     }
 
     .eq-card-no {
-      font-size: 0.7rem;
+      font-size: var(--fs-xs);
       font-weight: 700;
       font-family: var(--font-display);
       background-color: var(--bg-tertiary);
@@ -585,7 +599,7 @@
     }
 
     .eq-card-name {
-      font-size: 1.05rem;
+      font-size: var(--fs-lg);
       font-weight: 600;
       color: var(--text-primary);
       margin: 0.5rem 0;
@@ -624,7 +638,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.8125rem;
+      font-size: var(--fs-sm);
       color: var(--text-secondary);
     }
 
@@ -637,7 +651,7 @@
     .eq-card-remarks {
       border-top: 1px solid var(--border);
       padding-top: 0.75rem;
-      font-size: 0.75rem;
+      font-size: var(--fs-xs);
       color: var(--text-muted);
       display: flex;
       align-items: flex-start;
@@ -695,7 +709,7 @@
       gap: 0.25rem;
       padding: 0.2rem 0.5rem;
       border-radius: 0.25rem;
-      font-size: 0.75rem;
+      font-size: var(--fs-xs);
       font-weight: 600;
       line-height: 1;
       white-space: nowrap;
@@ -763,7 +777,7 @@
     }
 
     .empty-state h3 {
-      font-size: 1.05rem;
+      font-size: var(--fs-lg);
       font-weight: 600;
       color: var(--text-primary);
       margin-bottom: 0.5rem;
@@ -771,7 +785,7 @@
 
     .empty-state p {
       color: var(--text-muted);
-      font-size: 0.875rem;
+      font-size: var(--fs-md);
       margin-bottom: 1.25rem;
     }
 
@@ -800,7 +814,7 @@
 
     .chart-title {
       font-family: var(--font-display);
-      font-size: 0.725rem;
+      font-size: var(--fs-xs);
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -808,7 +822,7 @@
     }
 
     .chart-subtitle {
-      font-size: 0.75rem;
+      font-size: var(--fs-xs);
       color: var(--text-muted);
       font-weight: 500;
     }
@@ -829,7 +843,7 @@
       cursor: pointer;
       padding: 0.5rem;
       border-radius: 0.375rem;
-      transition: all 0.2s;
+      transition: background-color 0.2s , color 0.2s , border-color 0.2s , box-shadow 0.2s , transform 0.2s , opacity 0.2s , filter 0.2s ;
     }
 
     .chart-row:hover {
@@ -847,7 +861,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.8125rem;
+      font-size: var(--fs-sm);
     }
 
     .chart-label {
@@ -868,7 +882,7 @@
       font-family: var(--font-display);
       font-weight: 600;
       color: var(--text-primary);
-      font-size: 0.8125rem;
+      font-size: var(--fs-sm);
     }
 
     .chart-row.active .chart-value {
@@ -914,7 +928,7 @@
       color: var(--bg-primary);
       padding: 0.625rem 1.125rem;
       border-radius: 0.375rem;
-      font-size: 0.8125rem;
+      font-size: var(--fs-sm);
       font-weight: 600;
       box-shadow: var(--shadow-lg);
       transform: translateY(1rem);
@@ -1006,7 +1020,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
+      transition: background-color 0.2s , color 0.2s , border-color 0.2s , box-shadow 0.2s , transform 0.2s , opacity 0.2s , filter 0.2s ;
       z-index: 10;
       backdrop-filter: blur(4px);
     }
@@ -1018,7 +1032,7 @@
 
     .modal-caption {
       font-family: var(--font-display);
-      font-size: 1.05rem;
+      font-size: var(--fs-lg);
       font-weight: 600;
       color: var(--text-primary);
       text-align: center;
@@ -1038,7 +1052,7 @@
     .dashboard-footer {
       text-align: center;
       padding: 2rem 0;
-      font-size: 0.75rem;
+      font-size: var(--fs-xs);
       color: var(--text-muted);
       border-top: 1px solid var(--border);
       margin-top: 2rem;
@@ -1100,10 +1114,10 @@
         grid-template-columns: repeat(2, 1fr);
       }
       .kpi-card-value {
-        font-size: 1.75rem;
+        font-size: var(--fs-2xl);
       }
       .header-title {
-        font-size: 1.125rem;
+        font-size: var(--fs-lg);
       }
       .table-thumbnail-wrapper {
         width: 52px;
@@ -1128,11 +1142,11 @@
       background: none;
       color: var(--text-secondary);
       font-family: var(--font-display);
-      font-size: 0.95rem;
+      font-size: var(--fs-base);
       font-weight: 600;
       cursor: pointer;
       border-radius: 0.375rem 0.375rem 0 0;
-      transition: all 0.2s ease;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
       border-bottom: 3px solid transparent;
       margin-bottom: -1px;
     }
@@ -1158,7 +1172,7 @@
     .badge-interactive {
       cursor: pointer;
       user-select: none;
-      transition: all 0.15s ease;
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, opacity 0.15s ease, filter 0.15s ease;
     }
     .badge-interactive:hover {
       transform: translateY(-1px);
@@ -1170,14 +1184,14 @@
       align-items: center;
       gap: 0.25rem;
       padding: 0.15rem 0.4rem;
-      font-size: 0.7rem;
+      font-size: var(--fs-xs);
       font-family: inherit;
       border-radius: 0.25rem;
       border: 1px solid var(--border);
       background: var(--bg-tertiary);
       color: var(--text-secondary);
       cursor: pointer;
-      transition: all 0.15s;
+      transition: background-color 0.15s , color 0.15s , border-color 0.15s , box-shadow 0.15s , transform 0.15s , opacity 0.15s , filter 0.15s ;
     }
     .copy-btn-inline:hover {
       background: var(--primary-light);
@@ -1212,7 +1226,7 @@
     .reagent-nav-kicker {
       margin-bottom: 0.35rem;
       color: var(--accent-hover);
-      font-size: 0.68rem;
+      font-size: var(--fs-xs);
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -1221,14 +1235,14 @@
     .reagent-nav-title {
       color: var(--text-primary);
       font-family: var(--font-display);
-      font-size: 1.35rem;
+      font-size: var(--fs-xl);
       font-weight: 700;
     }
 
     .reagent-nav-summary {
       margin-top: 0.3rem;
       color: var(--text-secondary);
-      font-size: 0.8rem;
+      font-size: var(--fs-sm);
     }
 
     .reagent-nav-clear {
@@ -1242,7 +1256,7 @@
       background: rgba(255, 255, 255, 0.72);
       color: var(--text-secondary);
       cursor: pointer;
-      font-size: 0.75rem;
+      font-size: var(--fs-xs);
       font-weight: 600;
     }
 
@@ -1261,7 +1275,7 @@
     .reagent-filter-label {
       padding-top: 0.45rem;
       color: var(--text-secondary);
-      font-size: 0.72rem;
+      font-size: var(--fs-xs);
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -1285,10 +1299,10 @@
       background: rgba(255, 255, 255, 0.76);
       color: var(--text-secondary);
       cursor: pointer;
-      font-size: 0.78rem;
+      font-size: var(--fs-xs);
       font-weight: 600;
       white-space: nowrap;
-      transition: all 0.18s ease;
+      transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
     }
 
     .reagent-chip:hover {
@@ -1311,7 +1325,7 @@
       background: rgba(138, 21, 56, 0.08);
       color: var(--primary);
       font-family: var(--font-display);
-      font-size: 0.68rem;
+      font-size: var(--fs-xs);
       text-align: center;
     }
 
@@ -1345,7 +1359,7 @@
       border-radius: 0.5rem;
       background: var(--bg-secondary);
       color: var(--text-secondary);
-      font-size: 0.72rem;
+      font-size: var(--fs-xs);
     }
 
     .pc-type-legend[hidden] {
@@ -1391,7 +1405,7 @@
 
     .reagent-scale-title {
       color: var(--text-secondary);
-      font-size: 0.7rem;
+      font-size: var(--fs-xs);
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -1402,7 +1416,7 @@
       align-items: center;
       gap: 0.32rem;
       color: var(--text-secondary);
-      font-size: 0.72rem;
+      font-size: var(--fs-xs);
       white-space: nowrap;
     }
 
@@ -1428,7 +1442,7 @@
       gap: 0.45rem;
       flex-shrink: 0;
       color: var(--text-secondary);
-      font-size: 0.72rem;
+      font-size: var(--fs-xs);
       font-weight: 600;
     }
 
@@ -1486,7 +1500,7 @@
 
     .reagent-zone-text {
       color: var(--text-secondary);
-      font-size: 0.76rem;
+      font-size: var(--fs-xs);
     }
 
     .reagent-identifier-cell {
@@ -1503,7 +1517,7 @@
 
     .reagent-identifier-label {
       flex: 0 0 auto;
-      font-size: 0.62rem;
+      font-size: var(--fs-xs);
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -1565,7 +1579,11 @@
     }
 
     .reagent-table-container .table-element th:nth-child(1),
-    .reagent-table-container .table-element td:nth-child(1) { width: 6%; }
+    .reagent-table-container .table-element td:nth-child(1) {
+      width: var(--reagent-no-width, 4.75rem);
+      min-width: var(--reagent-no-width, 4.75rem);
+      max-width: var(--reagent-no-width, 4.75rem);
+    }
     .reagent-table-container .table-element th:nth-child(2),
     .reagent-table-container .table-element td:nth-child(2) { width: 23%; }
     .reagent-table-container .table-element th:nth-child(3),
@@ -1593,7 +1611,7 @@
     .reagent-table-container .table-element th:nth-child(2),
     .reagent-table-container .table-element td:nth-child(2) {
       position: sticky;
-      left: 6%;
+      left: var(--reagent-no-width, 4.75rem);
       z-index: 2;
       background: var(--bg-secondary);
     }
@@ -1643,13 +1661,13 @@
       .reagent-chip {
         min-height: 1.8rem;
         padding: 0.3rem 0.55rem;
-        font-size: 0.72rem;
+        font-size: var(--fs-xs);
       }
 
       .reagent-chip-count {
         min-width: 1.2rem;
         padding: 0.06rem 0.25rem;
-        font-size: 0.64rem;
+        font-size: var(--fs-xs);
       }
 
       .reagent-table-tools {
@@ -1706,7 +1724,7 @@
         max-width: 100%;
         padding: 0.6rem 0.7rem;
         border-bottom: 1px solid var(--border);
-        font-size: 0.78rem;
+        font-size: var(--fs-xs);
         line-height: 1.35;
       }
 
@@ -1715,7 +1733,7 @@
         margin-bottom: 0.22rem;
         color: var(--text-muted);
         content: attr(data-label);
-        font-size: 0.62rem;
+        font-size: var(--fs-xs);
         font-weight: 700;
         letter-spacing: 0.06em;
         text-transform: uppercase;
@@ -1745,7 +1763,7 @@
       .reagent-table-container .table-element tbody td:nth-child(2) {
         grid-column: 1 / -1;
         padding-top: 0.35rem;
-        font-size: 0.92rem;
+        font-size: var(--fs-base);
         border-top: 1px solid var(--border);
       }
 
@@ -1819,7 +1837,7 @@
       border-radius: 0.2rem;
       margin: 0;
       color: var(--text-secondary);
-      font-size: 0.82rem;
+      font-size: var(--fs-sm);
       line-height: 1.25;
       text-align: left;
     }
@@ -1864,15 +1882,6 @@
       grid-row: 3;
       min-width: 0;
       align-items: start;
-    }
-
-    .dashboard-container.reagent-mode .reagent-navigation {
-      grid-column: 2;
-      grid-row: 3;
-    }
-
-    .dashboard-container.reagent-mode .dashboard-grid {
-      grid-row: 4;
     }
 
     .reagent-navigation {
@@ -2025,16 +2034,201 @@
         padding: 0.6rem 0.45rem;
       }
     }
+    /* Cross-device refinements */
+    body {
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      min-height: 100vh;
+      min-height: 100dvh;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    .dashboard-container {
+      max-width: 110rem;
+      margin-inline: auto;
+      padding-left: max(clamp(1rem, 3vw, 3rem), env(safe-area-inset-left));
+      padding-right: max(clamp(1rem, 3vw, 3rem), env(safe-area-inset-right));
+      padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+    }
+
+    @media (min-width: 1920px) {
+      html { font-size: 112.5%; }
+    }
+
+    html.modal-open { overflow: hidden; }
+
+    .noscript-note {
+      margin: 1rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border-strong);
+      border-radius: 0.35rem;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-size: var(--fs-md);
+    }
+
+    :where(a, button, select, input, summary, [role="button"], [tabindex]):focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .tab-btn:focus-visible,
+    .kpi-card:focus-visible,
+    .chart-row:focus-visible,
+    .table-element th:focus-visible {
+      outline-offset: -2px;
+    }
+
+    .modal-close-btn:focus-visible {
+      outline-color: var(--bg-secondary);
+    }
+
+    .col-no { width: 56px; }
+    .col-no-wide { width: 70px; }
+    .col-photo { width: 90px; text-align: center; }
+    .col-qty { width: 100px; }
+
+    .eq-card-image-wrapper.is-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-tertiary);
+      color: var(--primary);
+    }
+
+    .eq-card-image-wrapper.is-icon svg {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+
+    .table-container { overflow-x: clip; }
+
+    .table-element thead th {
+      position: sticky;
+      top: var(--control-bar-h, 0px);
+      z-index: 2;
+      background-color: var(--bg-secondary);
+    }
+
+    .reagent-table-container .table-element thead th:first-child {
+      white-space: nowrap;
+    }
+
+    .reagent-table-container .table-element tbody td:first-child {
+      white-space: nowrap;
+    }
+
+    .reagent-table-container .table-element tbody td:first-child .reagent-row-marker,
+    .reagent-table-container .table-element tbody td:first-child .eq-card-no {
+      flex: 0 0 auto;
+    }
+
+    @media (min-width: 1101px) {
+      .control-bar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        padding: 0.5rem 0;
+        background-color: var(--bg-primary);
+      }
+    }
+
+    .chart-card > summary {
+      list-style: none;
+      justify-content: flex-start;
+      gap: 0.75rem;
+      cursor: default;
+    }
+
+    .chart-card > summary::-webkit-details-marker { display: none; }
+    .chart-card .chart-subtitle { margin-left: auto; }
+    .chart-card:not([open]) > .chart-header { margin-bottom: 0; }
+
+    @media (max-width: 1024px) {
+      .chart-card > summary { cursor: pointer; }
+
+      .chart-card > summary::after {
+        content: "";
+        flex: 0 0 auto;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-right: 2px solid var(--text-muted);
+        border-bottom: 2px solid var(--text-muted);
+        transform: rotate(45deg);
+        transition: transform 0.2s;
+      }
+
+      .chart-card[open] > summary::after { transform: rotate(-135deg); }
+    }
+
+    .modal-content { max-height: 85dvh; }
+    .modal-content img { max-height: 60dvh; }
+
+    @media (max-width: 640px) {
+      .toast-container {
+        left: 1rem;
+        right: 1rem;
+        bottom: max(1rem, env(safe-area-inset-bottom));
+      }
+
+      .toast { width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 1rem; }
+      .modal-content { max-width: 94%; padding: 1rem; }
+    }
+
+    @media (pointer: coarse) {
+      .tab-btn,
+      .btn-reset,
+      .btn-action,
+      .btn-primary,
+      .filter-select,
+      .search-input,
+      .reagent-chip,
+      .reagent-nav-clear {
+        min-height: 44px;
+      }
+
+      .copy-btn-inline {
+        min-height: 36px;
+        padding-inline: 0.6rem;
+      }
+
+      .reagent-sort-direction {
+        width: 2.75rem;
+        height: 2.75rem;
+      }
+
+      .chart-row { min-height: 44px; }
+
+      .modal-close-btn {
+        width: 2.75rem;
+        height: 2.75rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
+  <noscript><p class="noscript-note">이 대시보드는 JavaScript가 필요합니다. 브라우저에서 JavaScript를 활성화해 주세요.</p></noscript>
   <div class="dashboard-container">
     <header class="dashboard-header">
       <div class="header-logo-container">
-        <img src="favicon.svg" alt="SBL Logo" class="logo-img" style="width: 4.5rem; height: 4.5rem; border-radius: 0.75rem; object-fit: cover; display: block;" />
+        <img src="favicon.svg" alt="SBL 로고" class="logo-img" width="72" height="72" />
         <div class="header-title-wrapper">
           <h1 class="header-title">Symbiotic Biomaterials Lab (SBL) 장비 보유 현황</h1>
-          <p class="header-subtitle">Symbiotic Biomaterials Lab (SBL) Equipment Inventory Dashboard • Yonsei University College of Dentistry</p>
+          <p class="header-subtitle">Equipment Inventory Dashboard • Yonsei University College of Dentistry</p>
         </div>
       </div>
       <div class="header-actions">
@@ -2044,26 +2238,26 @@
       </div>
     </header>
 
-    <nav class="dashboard-tabs">
-      <button id="tab-general" class="tab-btn active" onclick="switchTab('general')">
+    <nav class="dashboard-tabs" role="tablist" aria-label="장비 분류">
+      <button id="tab-general" class="tab-btn active" role="tab" aria-selected="true" onclick="switchTab('general')">
         <i data-lucide="database"></i> 일반 장비
       </button>
-      <button id="tab-pipette" class="tab-btn" onclick="switchTab('pipette')">
+      <button id="tab-pipette" class="tab-btn" role="tab" aria-selected="false" tabindex="-1" onclick="switchTab('pipette')">
         <i data-lucide="droplet"></i> 피펫 관리
       </button>
-      <button id="tab-pc" class="tab-btn" onclick="switchTab('pc')">
+      <button id="tab-pc" class="tab-btn" role="tab" aria-selected="false" tabindex="-1" onclick="switchTab('pc')">
         <i data-lucide="monitor"></i> PC 및 모니터
       </button>
-      <button id="tab-animalLab" class="tab-btn" onclick="switchTab('animalLab')">
+      <button id="tab-animalLab" class="tab-btn" role="tab" aria-selected="false" tabindex="-1" onclick="switchTab('animalLab')">
         <i data-lucide="rat"></i> 동물실험실 관련 물품
       </button>
-      <button id="tab-reagent" class="tab-btn" onclick="switchTab('reagent')">
+      <button id="tab-reagent" class="tab-btn" role="tab" aria-selected="false" tabindex="-1" onclick="switchTab('reagent')">
         <i data-lucide="test-tube-2"></i> 물품 시약 리스트
       </button>
     </nav>
 
     <section class="kpi-grid">
-      <div class="kpi-card kpi-total active" id="kpi-card-all" onclick="setKPIFilter('all')">
+      <div class="kpi-card kpi-total active" id="kpi-card-all" role="button" tabindex="0" aria-pressed="true" onclick="setKPIFilter('all')">
         <div class="kpi-card-header">
           <span class="kpi-card-title">전체 등록 장비</span>
           <div class="kpi-icon-container">
@@ -2073,7 +2267,7 @@
         <div class="kpi-card-value" id="kpi-total-val">0</div>
         <div class="kpi-card-footer">보유 중인 전체 장비</div>
       </div>
-      <div class="kpi-card kpi-located" id="kpi-card-located" onclick="setKPIFilter('located')">
+      <div class="kpi-card kpi-located" id="kpi-card-located" role="button" tabindex="0" aria-pressed="false" onclick="setKPIFilter('located')">
         <div class="kpi-card-header">
           <span class="kpi-card-title">위치 지정됨</span>
           <div class="kpi-icon-container">
@@ -2083,7 +2277,7 @@
         <div class="kpi-card-value" id="kpi-located-val">0</div>
         <div class="kpi-card-footer">설치 장소가 파악된 장비</div>
       </div>
-      <div class="kpi-card kpi-unlocated" id="kpi-card-unlocated" onclick="setKPIFilter('unlocated')">
+      <div class="kpi-card kpi-unlocated" id="kpi-card-unlocated" role="button" tabindex="0" aria-pressed="false" onclick="setKPIFilter('unlocated')">
         <div class="kpi-card-header">
           <span class="kpi-card-title">위치 미지정</span>
           <div class="kpi-icon-container">
@@ -2093,7 +2287,7 @@
         <div class="kpi-card-value" id="kpi-unlocated-val">0</div>
         <div class="kpi-card-footer">위치 파악 및 등록 필요</div>
       </div>
-      <div class="kpi-card kpi-unassigned" id="kpi-card-unassigned" onclick="setKPIFilter('unassigned')">
+      <div class="kpi-card kpi-unassigned" id="kpi-card-unassigned" role="button" tabindex="0" aria-pressed="false" onclick="setKPIFilter('unassigned')">
         <div class="kpi-card-header">
           <span class="kpi-card-title">담당자 미지정</span>
           <div class="kpi-icon-container">
@@ -2101,32 +2295,7 @@
           </div>
         </div>
         <div class="kpi-card-value" id="kpi-unassigned-val">0</div>
-        <div class="kpi-card-footer">관리 관리자 매칭 필요</div>
-      </div>
-    </section>
-
-    <section id="reagent-navigation" class="reagent-navigation" aria-label="시약 탐색">
-      <div class="reagent-nav-header">
-        <div>
-          <div class="reagent-nav-kicker">Storage directory</div>
-          <h2 class="reagent-nav-title">시약 찾기</h2>
-          <p id="reagent-filter-summary" class="reagent-nav-summary">전체 시약</p>
-        </div>
-        <button type="button" class="reagent-nav-clear" onclick="resetFilters()">
-          <i data-lucide="rotate-ccw" class="w-4 h-4"></i> 필터 초기화
-        </button>
-      </div>
-      <div class="reagent-filter-section">
-        <span class="reagent-filter-label">보관실</span>
-        <div id="reagent-location-nav" class="reagent-chip-row"></div>
-      </div>
-      <div class="reagent-filter-section">
-        <span class="reagent-filter-label">보관 구역</span>
-        <div id="reagent-zone-nav" class="reagent-chip-row"></div>
-      </div>
-      <div class="reagent-filter-section">
-        <span class="reagent-filter-label">폴더</span>
-        <div id="reagent-folder-nav" class="reagent-chip-row"></div>
+        <div class="kpi-card-footer">담당자 지정 필요</div>
       </div>
     </section>
 
@@ -2135,13 +2304,13 @@
         <section class="control-bar">
           <div class="search-wrapper">
             <i data-lucide="search"></i>
-            <input type="text" id="search-input" class="search-input" placeholder="장비명, 설치 위치, 담당자 실시간 검색..." oninput="handleSearch(this.value)">
+            <input type="search" id="search-input" class="search-input" aria-label="검색" autocomplete="off" placeholder="장비명, 설치 위치, 담당자 실시간 검색..." oninput="handleSearch(this.value)">
           </div>
           <div class="filter-group">
-            <select id="filter-location" class="filter-select" onchange="handleLocationFilter(this.value)">
+            <select id="filter-location" class="filter-select" aria-label="위치 필터" onchange="handleLocationFilter(this.value)">
               <option value="all">모든 위치</option>
             </select>
-            <select id="filter-manager" class="filter-select" onchange="handleManagerFilter(this.value)">
+            <select id="filter-manager" class="filter-select" aria-label="담당자 필터" onchange="handleManagerFilter(this.value)">
               <option value="all">모든 담당자</option>
             </select>
             <select id="filter-capacity" class="filter-select filter-select-compact" onchange="handleCapacityFilter(this.value)" aria-label="주요 용량 필터">
@@ -2153,7 +2322,32 @@
           </div>
         </section>
 
-        <div class="results-counter">
+        <section id="reagent-navigation" class="reagent-navigation" aria-label="시약 탐색">
+          <div class="reagent-nav-header">
+            <div>
+              <div class="reagent-nav-kicker">Storage directory</div>
+              <h2 class="reagent-nav-title">시약 찾기</h2>
+              <p id="reagent-filter-summary" class="reagent-nav-summary">전체 시약</p>
+            </div>
+            <button type="button" class="reagent-nav-clear" onclick="resetFilters()">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i> 필터 초기화
+            </button>
+          </div>
+          <div class="reagent-filter-section">
+            <span class="reagent-filter-label">보관실</span>
+            <div id="reagent-location-nav" class="reagent-chip-row"></div>
+          </div>
+          <div class="reagent-filter-section">
+            <span class="reagent-filter-label">보관 구역</span>
+            <div id="reagent-zone-nav" class="reagent-chip-row"></div>
+          </div>
+          <div class="reagent-filter-section">
+            <span class="reagent-filter-label">폴더</span>
+            <div id="reagent-folder-nav" class="reagent-chip-row"></div>
+          </div>
+        </section>
+
+        <div class="results-counter" role="status" aria-live="polite">
           <span id="results-count-text">장비 로딩 중...</span>
         </div>
 
@@ -2192,12 +2386,12 @@
           <table class="table-element">
             <thead>
               <tr>
-                <th onclick="handleSort('no')" style="width: 56px;">No <span id="sort-icon-no"></span></th>
-                <th style="width: 90px; text-align: center;">사진</th>
-                <th onclick="handleSort('name')">장비명 <span id="sort-icon-name"></span></th>
-                <th onclick="handleSort('loc')">설치 위치 <span id="sort-icon-loc"></span></th>
-                <th onclick="handleSort('mgr')">담당 관리자 <span id="sort-icon-mgr"></span></th>
-                <th>비고</th>
+                <th scope="col" class="col-no" data-sort="no" tabindex="0" aria-sort="none">No <span id="sort-icon-no"></span></th>
+                <th scope="col" class="col-photo">사진</th>
+                <th scope="col" data-sort="name" tabindex="0" aria-sort="none">장비명 <span id="sort-icon-name"></span></th>
+                <th scope="col" data-sort="loc" tabindex="0" aria-sort="none">설치 위치 <span id="sort-icon-loc"></span></th>
+                <th scope="col" data-sort="mgr" tabindex="0" aria-sort="none">담당 관리자 <span id="sort-icon-mgr"></span></th>
+                <th scope="col">비고</th>
               </tr>
             </thead>
             <tbody id="inventory-table-body"></tbody>
@@ -2217,25 +2411,25 @@
       </main>
 
       <aside class="sidebar-panel">
-        <div class="card">
-          <div class="chart-header">
+        <details class="card chart-card" open>
+          <summary class="chart-header">
             <h3 class="chart-title">설치 위치별 분포</h3>
             <span class="chart-subtitle" id="loc-chart-count">0개 범주</span>
-          </div>
+          </summary>
           <div id="location-chart-container" class="chart-list"></div>
-        </div>
+        </details>
 
-        <div class="card">
-          <div class="chart-header">
+        <details class="card chart-card" open>
+          <summary class="chart-header">
             <h3 class="chart-title" id="manager-chart-title">담당자별 관리 현황</h3>
             <span class="chart-subtitle" id="mgr-chart-count">0명</span>
-          </div>
+          </summary>
           <div id="manager-chart-container" class="chart-list"></div>
-        </div>
+        </details>
       </aside>
     </div>
 
-    <div id="image-modal" class="modal-overlay" onclick="closeModal()">
+    <div id="image-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-caption" inert onclick="closeModal()">
       <div class="modal-content" onclick="event.stopPropagation()">
         <button class="modal-close-btn" onclick="closeModal()" aria-label="닫기">
           <i data-lucide="x"></i>
@@ -2245,10 +2439,10 @@
       </div>
     </div>
 
-    <div id="toast-container" class="toast-container"></div>
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite"></div>
 
     <footer class="dashboard-footer">
-      <p>© 2026 Symbiotic Biomaterials Lab (SBL). All rights reserved. • Symbiotic Biomaterials Lab (SBL) Equipment Inventory Dashboard • Portable HTML Version</p>
+      <p>© 2026 Symbiotic Biomaterials Lab (SBL). All rights reserved.</p>
     </footer>
   </div>
 
@@ -2966,6 +3160,92 @@
 
     let locations = [];
     let managers = [];
+    let searchTimer = null;
+    let modalReturnFocus = null;
+
+    const HTML_ESCAPES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+    function esc(value) {
+      return String(value ?? '').replace(/[&<>"']/g, ch => HTML_ESCAPES[ch]);
+    }
+
+    const TAB_NAMES = ['general', 'pipette', 'pc', 'animalLab', 'reagent'];
+    const HASH_KEYS = { search: 'q', location: 'loc', manager: 'mgr', kpi: 'kpi', capacity: 'cap', reagentLocation: 'rloc', reagentZone: 'rzone', reagentFolder: 'rfolder' };
+
+    function syncHash() {
+      const params = new URLSearchParams();
+      if (state.activeTab !== 'general') params.set('tab', state.activeTab);
+      Object.entries(HASH_KEYS).forEach(([key, short]) => {
+        const value = state.filters[key];
+        if (value && value !== 'all') params.set(short, value);
+      });
+      if (state.sort.column !== 'no' || state.sort.direction !== 'asc') {
+        params.set('sort', state.sort.column);
+        params.set('dir', state.sort.direction);
+      }
+      const next = params.toString();
+      try {
+        history.replaceState(null, '', location.pathname + location.search + (next ? '#' + next : ''));
+      } catch (error) {
+        /* history API can be blocked on some file:// contexts */
+      }
+    }
+
+    function restoreFromHash() {
+      const params = new URLSearchParams(location.hash.slice(1));
+      const tab = params.get('tab');
+      if (TAB_NAMES.includes(tab) && tab !== state.activeTab) switchTab(tab, true);
+      Object.entries(HASH_KEYS).forEach(([key, short]) => {
+        const value = params.get(short);
+        if (value) state.filters[key] = value;
+      });
+      const sortColumn = params.get('sort');
+      const sortDirection = params.get('dir');
+      if (sortColumn) state.sort.column = sortColumn;
+      if (sortDirection === 'asc' || sortDirection === 'desc') state.sort.direction = sortDirection;
+
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.value = state.filters.search;
+
+      const controls = [
+        ['filter-location', state.activeTab === 'reagent' ? 'reagentLocation' : 'location'],
+        ['filter-manager', 'manager'],
+        ['filter-capacity', 'capacity']
+      ];
+      controls.forEach(([id, key]) => {
+        const select = document.getElementById(id);
+        if (!select) return;
+        select.value = state.filters[key];
+        if (select.value !== state.filters[key]) {
+          state.filters[key] = 'all';
+          select.value = 'all';
+        }
+      });
+    }
+
+    function initChartCards() {
+      const query = window.matchMedia('(max-width: 1024px)');
+      const cards = document.querySelectorAll('.chart-card');
+      const sync = () => cards.forEach(card => { card.open = !query.matches; });
+      sync();
+      query.addEventListener('change', sync);
+      cards.forEach(card => {
+        card.querySelector('summary').addEventListener('click', event => {
+          if (!query.matches) event.preventDefault();
+        });
+      });
+    }
+
+    function initControlBarOffset() {
+      const bar = document.querySelector('.control-bar');
+      if (!bar) return;
+      const update = () => {
+        const sticky = getComputedStyle(bar).position === 'sticky';
+        document.documentElement.style.setProperty('--control-bar-h', (sticky ? bar.offsetHeight : 0) + 'px');
+      };
+      if ('ResizeObserver' in window) new ResizeObserver(update).observe(bar);
+      window.addEventListener('resize', update);
+      update();
+    }
 
     function getActiveDataset() {
       if (state.activeTab === 'pipette') return pipetteData;
@@ -2984,15 +3264,17 @@
       });
     }
 
-    function switchTab(tabName) {
+    function switchTab(tabName, silent = false) {
       if (state.activeTab === tabName) return;
       state.activeTab = tabName;
+      clearTimeout(searchTimer);
       
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
+        const isActive = btn.id === `tab-${tabName}`;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', String(isActive));
+        btn.tabIndex = isActive ? 0 : -1;
       });
-      const activeTabBtn = document.getElementById(`tab-${tabName}`);
-      if (activeTabBtn) activeTabBtn.classList.add('active');
       
       state.filters.search = "";
       state.filters.location = "all";
@@ -3039,60 +3321,26 @@
         'animalLab': '동물실험실 관련 물품',
         'reagent': '물품 시약 리스트'
       };
-      showToast(`${tabLabels[tabName] || tabName} 탭으로 전환되었습니다.`, "success");
+      if (!silent) showToast(`${tabLabels[tabName] || tabName} 탭으로 전환되었습니다.`, "success");
     }
+
+    const TABLE_COLUMNS = {
+      general: [['no', 'No', 'col-no'], [null, '사진', 'col-photo'], ['name', '장비명'], ['loc', '설치 위치'], ['mgr', '담당 관리자'], [null, '비고']],
+      pipette: [['no', 'No', 'col-no'], ['name', '품목명'], ['spec', '사양'], ['loc', '위치'], ['brand', '제조사'], ['broken', '상태'], [null, '비고']],
+      pc: [['no', 'No', 'col-no'], [null, '사진', 'col-photo'], ['label', '라벨'], ['loc', '위치'], ['user', '사용자'], ['brand', '제조사']],
+      animalLab: [['no', 'No', 'col-no'], [null, '사진', 'col-photo'], ['code', '품목코드'], ['name', '품명'], ['loc', '위치'], ['mgr', '담당자']],
+      reagent: [['no', 'No', 'col-no-wide'], ['name', '시약명'], ['loc', '보관위치 / 구역'], ['mfr', '제조사'], ['cas', 'CAS / Cat. No.'], [null, '용량/수량', 'col-qty'], [null, '비고']]
+    };
 
     function renderTableHeaders() {
       const thead = document.querySelector('.table-element thead tr');
       if (!thead) return;
-      thead.innerHTML = "";
-      
-      if (state.activeTab === 'general') {
-        thead.innerHTML = `
-          <th onclick="handleSort('no')" style="width: 56px;">No <span id="sort-icon-no"></span></th>
-          <th style="width: 90px; text-align: center;">사진</th>
-          <th onclick="handleSort('name')">장비명 <span id="sort-icon-name"></span></th>
-          <th onclick="handleSort('loc')">설치 위치 <span id="sort-icon-loc"></span></th>
-          <th onclick="handleSort('mgr')">담당 관리자 <span id="sort-icon-mgr"></span></th>
-          <th>비고</th>
-        `;
-      } else if (state.activeTab === 'pipette') {
-        thead.innerHTML = `
-          <th onclick="handleSort('no')" style="width: 56px;">No <span id="sort-icon-no"></span></th>
-          <th onclick="handleSort('name')">품목명 <span id="sort-icon-name"></span></th>
-          <th onclick="handleSort('spec')">사양 <span id="sort-icon-spec"></span></th>
-          <th onclick="handleSort('loc')">위치 <span id="sort-icon-loc"></span></th>
-          <th onclick="handleSort('brand')">제조사 <span id="sort-icon-brand"></span></th>
-          <th onclick="handleSort('broken')">상태 <span id="sort-icon-broken"></span></th>
-          <th>비고</th>
-        `;
-      } else if (state.activeTab === 'pc') {
-        thead.innerHTML = `
-          <th onclick="handleSort('no')" style="width: 56px;">No <span id="sort-icon-no"></span></th>
-          <th style="width: 90px; text-align: center;">사진</th>
-          <th onclick="handleSort('label')">라벨 <span id="sort-icon-label"></span></th>
-          <th onclick="handleSort('loc')">위치 <span id="sort-icon-loc"></span></th>
-          <th onclick="handleSort('user')">사용자 <span id="sort-icon-user"></span></th>
-          <th onclick="handleSort('brand')">제조사 <span id="sort-icon-brand"></span></th>
-        `;
-      } else if (state.activeTab === 'animalLab') {
-        thead.innerHTML = '<th onclick="handleSort(&quot;no&quot;)" style="width: 56px;">No <span id="sort-icon-no"></span></th>' +
-          '<th style="width: 90px; text-align: center;">사진</th>' +
-          '<th onclick="handleSort(&quot;code&quot;)">품목코드 <span id="sort-icon-code"></span></th>' +
-          '<th onclick="handleSort(&quot;name&quot;)">품명 <span id="sort-icon-name"></span></th>' +
-          '<th onclick="handleSort(&quot;loc&quot;)">위치 <span id="sort-icon-loc"></span></th>' +
-          '<th onclick="handleSort(&quot;mgr&quot;)">담당자 <span id="sort-icon-mgr"></span></th>';
-      } else if (state.activeTab === 'reagent') {
-        thead.innerHTML = `
-          <th onclick="handleSort('no')" style="width: 70px;">No <span id="sort-icon-no"></span></th>
-          <th onclick="handleSort('name')">시약명 <span id="sort-icon-name"></span></th>
-          <th onclick="handleSort('loc')">보관위치 / 구역 <span id="sort-icon-loc"></span></th>
-          <th onclick="handleSort('mfr')">제조사 <span id="sort-icon-mfr"></span></th>
-          <th onclick="handleSort('cas')">CAS / Cat. No. <span id="sort-icon-cas"></span></th>
-          <th style="width: 100px;">용량/수량</th>
-          <th>비고</th>
-        `;
-      }
+      thead.innerHTML = (TABLE_COLUMNS[state.activeTab] || []).map(([key, label, cls]) => {
+        const className = cls ? ` class="${cls}"` : '';
+        return key
+          ? `<th scope="col"${className} data-sort="${key}" tabindex="0" aria-sort="none">${label} <span id="sort-icon-${key}"></span></th>`
+          : `<th scope="col"${className}>${label}</th>`;
+      }).join('');
       updateSortArrows();
     }
 
@@ -3100,8 +3348,11 @@
       renderTableHeaders();
       extractCategories();
       populateDropdowns();
+      restoreFromHash();
       updateDashboard();
       lucide.createIcons();
+      initChartCards();
+      initControlBarOffset();
     });
 
     function extractCategories() {
@@ -3499,6 +3750,7 @@
     }
 
     function updateDashboard() {
+      syncHash();
       const dashboardContainer = document.querySelector('.dashboard-container');
       if (dashboardContainer) {
         dashboardContainer.classList.toggle('reagent-mode', state.activeTab === 'reagent');
@@ -3572,7 +3824,7 @@
           { title: "전체 등록 장비", val: data.length, desc: "보유 중인 전체 장비", icon: "database", filter: "all" },
           { title: "위치 지정됨", val: data.filter(item => item.loc && item.loc.trim() !== "").length, desc: "설치 장소가 파악된 장비", icon: "map-pin", filter: "located" },
           { title: "위치 미지정", val: data.filter(item => !item.loc || item.loc.trim() === "").length, desc: "위치 파악 및 등록 필요", icon: "alert-triangle", filter: "unlocated" },
-          { title: "담당자 미지정", val: data.filter(item => !item.mgr || item.mgr.trim() === "").length, desc: "관리 관리자 매칭 필요", icon: "user-x", filter: "unassigned" }
+          { title: "담당자 미지정", val: data.filter(item => !item.mgr || item.mgr.trim() === "").length, desc: "담당자 지정 필요", icon: "user-x", filter: "unassigned" }
         ],
         pipette: [
           { title: "전체 피펫", val: data.length, desc: "등록된 전체 피펫", icon: "database", filter: "all" },
@@ -3618,6 +3870,7 @@
           cardEl.className = `kpi-card kpi-${c.filter}`;
         }
         
+        cardEl.setAttribute('aria-pressed', String(state.filters.kpi === c.filter));
         cardEl.onclick = () => setKPIFilter(c.filter);
       });
       lucide.createIcons();
@@ -3632,10 +3885,11 @@
         const row = document.createElement('tr');
         
         const tdNo = document.createElement('td');
+        tdNo.classList.add(state.activeTab === 'reagent' ? 'col-no-wide' : 'col-no');
         tdNo.dataset.label = 'No';
         if (state.activeTab === 'pc') {
           tdNo.classList.add('pc-no-cell');
-          tdNo.innerHTML = `<span class="pc-kind-marker" title="${item.kind}" aria-label="${item.kind}"><i data-lucide="${getPcTypeIcon(item.kind)}"></i></span><span class="eq-card-no">${item.no}</span>`;
+          tdNo.innerHTML = `<span class="pc-kind-marker" title="${esc(item.kind)}" aria-label="${esc(item.kind)}"><i data-lucide="${getPcTypeIcon(item.kind)}"></i></span><span class="eq-card-no">${item.no}</span>`;
         } else if (state.activeTab === 'reagent') {
           tdNo.innerHTML = `<span class="reagent-row-marker ${getReagentMarkerClass(item)}"></span><span class="eq-card-no">${item.no}</span>`;
         } else {
@@ -3649,14 +3903,14 @@
           const fallbackList = imageCandidates.join('|');
           const tdPhoto = document.createElement('td');
           tdPhoto.style.textAlign = 'center';
-          tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" onclick="openImageModal(this.querySelector('img').src, '${item.name}')" title="이미지 크게 보기"><img src="${primaryImage}" data-fallback-list="${fallbackList}" data-fallback-index="0" data-fallback-icon="${item.icon || 'image-off'}" alt="${item.name}" class="table-thumbnail" onerror="handleTableImageError(this)" loading="lazy"></div>`;
+          tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" role="button" tabindex="0" data-zoom="${esc(item.name)}" title="이미지 크게 보기"><img src="${esc(primaryImage)}" data-fallback-list="${esc(fallbackList)}" data-fallback-index="0" data-fallback-icon="${esc(item.icon || 'image-off')}" alt="${esc(item.name)}" class="table-thumbnail" onerror="handleTableImageError(this)" loading="lazy"></div>`;
           row.appendChild(tdPhoto);
           
           const tdName = document.createElement('td');
           const isComputerLink = ["pc", "notebook"].includes(item.name.trim().toLowerCase());
           tdName.innerHTML = isComputerLink
-            ? `<button type="button" class="inventory-redirect" onclick="switchTab('pc')" title="PC 및 모니터 탭으로 이동">${item.name}</button>`
-            : `<strong>${item.name}</strong>`;
+            ? `<button type="button" class="inventory-redirect" onclick="switchTab('pc')" title="PC 및 모니터 탭으로 이동">${esc(item.name)}</button>`
+            : `<strong>${esc(item.name)}</strong>`;
           row.appendChild(tdName);
           
           const tdLoc = document.createElement('td');
@@ -3669,7 +3923,7 @@
           
           const tdRemarks = document.createElement('td');
           if (item.remarks && item.remarks.trim() !== "") {
-            tdRemarks.innerHTML = `<div class="flex items-center gap-1.5 text-xs text-slate-500 italic" title="${item.remarks}"><i data-lucide="info" class="w-3.5 h-3.5 text-sky-500 flex-shrink-0"></i><span>${item.remarks}</span></div>`;
+            tdRemarks.innerHTML = `<div class="flex items-center gap-1.5 text-xs text-slate-500 italic" title="${esc(item.remarks)}"><i data-lucide="info" class="w-3.5 h-3.5 text-sky-500 flex-shrink-0"></i><span>${esc(item.remarks)}</span></div>`;
           } else {
             tdRemarks.innerHTML = `<span class="text-slate-300">-</span>`;
           }
@@ -3677,7 +3931,7 @@
           
         } else if (state.activeTab === 'pipette') {
           const tdName = document.createElement('td');
-          tdName.innerHTML = `<strong>${item.name}</strong>`;
+          tdName.innerHTML = `<strong>${esc(item.name)}</strong>`;
           row.appendChild(tdName);
           
           const tdSpec = document.createElement('td');
@@ -3698,7 +3952,7 @@
           
           const tdRemarks = document.createElement('td');
           if (item.remarks && item.remarks.trim() !== "") {
-            tdRemarks.innerHTML = `<div class="flex items-center gap-1.5 text-xs text-slate-500 italic" title="${item.remarks}"><i data-lucide="info" class="w-3.5 h-3.5 text-sky-500 flex-shrink-0"></i><span>${item.remarks}</span></div>`;
+            tdRemarks.innerHTML = `<div class="flex items-center gap-1.5 text-xs text-slate-500 italic" title="${esc(item.remarks)}"><i data-lucide="info" class="w-3.5 h-3.5 text-sky-500 flex-shrink-0"></i><span>${esc(item.remarks)}</span></div>`;
           } else {
             tdRemarks.innerHTML = `<span class="text-slate-300">-</span>`;
           }
@@ -3710,11 +3964,11 @@
           const fallbackList = imageCandidates.join('|');
           const tdPhoto = document.createElement('td');
           tdPhoto.style.textAlign = 'center';
-          tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" onclick="openImageModal(this.querySelector('img').src, '${item.label}')" title="이미지 크게 보기"><img src="${primaryImage}" data-fallback-list="${fallbackList}" data-fallback-index="0" alt="${item.label}" class="table-thumbnail" onerror="handleTableImageError(this)" loading="lazy"></div>`;
+          tdPhoto.innerHTML = `<div class="table-thumbnail-wrapper" role="button" tabindex="0" data-zoom="${esc(item.label)}" title="이미지 크게 보기"><img src="${esc(primaryImage)}" data-fallback-list="${esc(fallbackList)}" data-fallback-index="0" alt="${esc(item.label)}" class="table-thumbnail" onerror="handleTableImageError(this)" loading="lazy"></div>`;
           row.appendChild(tdPhoto);
 
           const tdLabel = document.createElement('td');
-          tdLabel.innerHTML = `<strong>${item.label}</strong>`;
+          tdLabel.innerHTML = `<strong>${esc(item.label)}</strong>`;
           row.appendChild(tdLabel);
           
           const tdLoc = document.createElement('td');
@@ -3737,6 +3991,9 @@
           const photoWrapper = document.createElement('div');
           photoWrapper.className = 'table-thumbnail-wrapper';
           photoWrapper.title = '이미지 크게 보기';
+          photoWrapper.setAttribute('role', 'button');
+          photoWrapper.tabIndex = 0;
+          photoWrapper.dataset.zoom = item.name;
           const photoImg = document.createElement('img');
           photoImg.src = primaryImage;
           photoImg.alt = item.name;
@@ -3745,17 +4002,16 @@
           photoImg.dataset.fallbackIndex = '0';
           photoImg.loading = 'lazy';
           photoImg.onerror = () => handleTableImageError(photoImg);
-          photoWrapper.onclick = () => openImageModal(photoImg.src, item.name);
           photoWrapper.appendChild(photoImg);
           tdPhoto.appendChild(photoWrapper);
           row.appendChild(tdPhoto);
 
           const tdCode = document.createElement('td');
-          tdCode.innerHTML = item.code ? '<span class="badge badge-gray">' + item.code + '</span>' : '<span class="text-slate-300">-</span>';
+          tdCode.innerHTML = item.code ? '<span class="badge badge-gray">' + esc(item.code) + '</span>' : '<span class="text-slate-300">-</span>';
           row.appendChild(tdCode);
 
           const tdName = document.createElement('td');
-          tdName.innerHTML = '<strong>' + item.name + '</strong>';
+          tdName.innerHTML = '<strong>' + esc(item.name) + '</strong>';
           row.appendChild(tdName);
 
           const tdLoc = document.createElement('td');
@@ -3769,7 +4025,7 @@
           // Reagent Name & quick search links
           const tdName = document.createElement('td');
           tdName.dataset.label = '시약명';
-          tdName.innerHTML = `<strong>${item.name}</strong>`;
+          tdName.innerHTML = `<strong>${esc(item.name)}</strong>`;
           row.appendChild(tdName);
 
           const tdLoc = document.createElement('td');
@@ -3792,10 +4048,10 @@
           const tdIdentifiers = document.createElement('td');
           tdIdentifiers.dataset.label = 'CAS / Cat. No.';
           const casHtml = item.cas && item.cas !== '-'
-            ? `<button type="button" class="copy-btn-inline" onclick="copyToClipboard('${item.cas}', 'CAS No.')" title="클릭하여 CAS 번호 복사">${item.cas}</button>`
+            ? `<button type="button" class="copy-btn-inline" data-copy="${esc(item.cas)}" data-copy-label="CAS No." title="클릭하여 CAS 번호 복사">${esc(item.cas)}</button>`
             : '<span>-</span>';
           const catHtml = item.cat && item.cat !== '-'
-            ? `<button type="button" class="copy-btn-inline" onclick="copyToClipboard('${item.cat}', 'Cat.No')" title="클릭하여 제품번호 복사">${item.cat}</button>`
+            ? `<button type="button" class="copy-btn-inline" data-copy="${esc(item.cat)}" data-copy-label="Cat.No" title="클릭하여 제품번호 복사">${esc(item.cat)}</button>`
             : '<span>-</span>';
           tdIdentifiers.innerHTML = `<div class="reagent-identifier-cell"><div class="reagent-identifier-line"><span class="reagent-identifier-label">CAS</span>${casHtml}</div><div class="reagent-identifier-line"><span class="reagent-identifier-label">Cat.</span>${catHtml}</div></div>`;
           row.appendChild(tdIdentifiers);
@@ -3803,8 +4059,8 @@
           // Capacity & Qty
           const tdCapQty = document.createElement('td');
           tdCapQty.dataset.label = '용량 / 수량';
-          const capText = item.capacity && item.capacity !== '-' ? item.capacity : '';
-          const qtyText = item.qty && item.qty !== '-' ? `${item.qty}개` : '';
+          const capText = item.capacity && item.capacity !== '-' ? esc(item.capacity) : '';
+          const qtyText = item.qty && item.qty !== '-' ? `${esc(item.qty)}개` : '';
           const fullCapQty = [capText, qtyText].filter(Boolean).join(' / ') || '-';
           tdCapQty.innerHTML = `<span class="text-xs font-semibold text-slate-600">${fullCapQty}</span>`;
           row.appendChild(tdCapQty);
@@ -3813,7 +4069,7 @@
           const tdRemarks = document.createElement('td');
           tdRemarks.dataset.label = '비고';
           if (item.remarks && item.remarks.trim() !== "") {
-            tdRemarks.innerHTML = `<div class="flex items-center gap-1.5 text-xs text-slate-500 italic" title="${item.remarks}"><i data-lucide="info" class="w-3.5 h-3.5 text-sky-500 flex-shrink-0"></i><span>${item.remarks}</span></div>`;
+            tdRemarks.innerHTML = `<div class="flex items-center gap-1.5 text-xs text-slate-500 italic" title="${esc(item.remarks)}"><i data-lucide="info" class="w-3.5 h-3.5 text-sky-500 flex-shrink-0"></i><span>${esc(item.remarks)}</span></div>`;
           } else {
             tdRemarks.innerHTML = `<span class="text-slate-300">-</span>`;
           }
@@ -3833,7 +4089,7 @@
       data.forEach(item => {
         const card = document.createElement('div');
         card.className = "eq-card";
-        const locHtml = item.loc && item.loc.trim() !== "" ? `<span class="badge badge-gray"><i data-lucide="map-pin"></i> ${item.loc}</span>` : `<span class="badge badge-warning"><i data-lucide="alert-triangle"></i> 위치 미지정</span>`;
+        const locHtml = item.loc && item.loc.trim() !== "" ? `<span class="badge badge-gray"><i data-lucide="map-pin"></i> ${esc(item.loc)}</span>` : `<span class="badge badge-warning"><i data-lucide="alert-triangle"></i> 위치 미지정</span>`;
         
         if (state.activeTab === 'general') {
           const imageCandidates = getImageCandidates('general', item);
@@ -3842,59 +4098,61 @@
           const mgrHtml = item.mgr && item.mgr.trim() !== "" ? item.mgr.split(",").map(m => {
             const manager = m.trim();
             const isTeam = manager === "팀 전체";
-            return `<span class="badge ${isTeam ? "badge-team" : "badge-success"}"><i data-lucide="${isTeam ? "users" : "user"}"></i> ${manager}</span>`;
+            return `<span class="badge ${isTeam ? "badge-team" : "badge-success"}"><i data-lucide="${isTeam ? "users" : "user"}"></i> ${esc(manager)}</span>`;
           }).join(" ") : `<span class="badge badge-danger"><i data-lucide="user-x"></i> 담당자 미지정</span>`;
-          const remarksHtml = item.remarks && item.remarks.trim() !== "" ? `<div class="eq-card-remarks"><i data-lucide="info" class="text-sky-500"></i><span>${item.remarks}</span></div>` : "";
-          const imageHtml = `<div class="eq-card-image-wrapper" onclick="openImageModal(this.querySelector('img').src, '${item.name}')" title="이미지 크게 보기"><img src="${primaryImage}" data-fallback-list="${fallbackList}" data-fallback-index="0" data-fallback-icon="${item.icon || 'image-off'}" alt="${item.name}" class="eq-card-image" onerror="handleImageError(this)" loading="lazy"></div>`;
+          const remarksHtml = item.remarks && item.remarks.trim() !== "" ? `<div class="eq-card-remarks"><i data-lucide="info" class="text-sky-500"></i><span>${esc(item.remarks)}</span></div>` : "";
+          const imageHtml = `<div class="eq-card-image-wrapper" role="button" tabindex="0" data-zoom="${esc(item.name)}" title="이미지 크게 보기"><img src="${esc(primaryImage)}" data-fallback-list="${esc(fallbackList)}" data-fallback-index="0" data-fallback-icon="${esc(item.icon || 'image-off')}" alt="${esc(item.name)}" class="eq-card-image" onerror="handleImageError(this)" loading="lazy"></div>`;
           const isComputerLink = ["pc", "notebook"].includes(item.name.trim().toLowerCase());
           const nameHtml = isComputerLink
-            ? `<button type="button" class="inventory-redirect" onclick="switchTab('pc')" title="PC 및 모니터 탭으로 이동">${item.name}</button>`
+            ? `<button type="button" class="inventory-redirect" onclick="switchTab('pc')" title="PC 및 모니터 탭으로 이동">${esc(item.name)}</button>`
             : item.name;
           card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span>${locHtml}</div><h3 class="eq-card-name">${nameHtml}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">담당자:</span><div class="flex flex-wrap gap-1">${mgrHtml}</div></div></div></div>${remarksHtml}</div>`;
           
         } else if (state.activeTab === 'pipette') {
-          const remarksHtml = item.remarks && item.remarks.trim() !== "" ? `<div class="eq-card-remarks"><i data-lucide="info" class="text-sky-500"></i><span>${item.remarks}</span></div>` : "";
+          const remarksHtml = item.remarks && item.remarks.trim() !== "" ? `<div class="eq-card-remarks"><i data-lucide="info" class="text-sky-500"></i><span>${esc(item.remarks)}</span></div>` : "";
           const statusHtml = item.broken === 'O' ? `<span class="badge badge-danger"><i data-lucide="alert-octagon"></i> 고장</span>` : `<span class="badge badge-success"><i data-lucide="check-circle"></i> 정상</span>`;
-          const imageHtml = `<div class="eq-card-image-wrapper" style="display: flex; align-items: center; justify-content: center; background: var(--bg-tertiary); color: var(--primary);"><i data-lucide="droplet" style="width: 3.5rem; height: 3.5rem;"></i></div>`;
-          card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span>${locHtml}</div><h3 class="eq-card-name">${item.name}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">사양:</span><span>${item.spec || "-"}</span></div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">제조사:</span><span>${item.brand || "-"}</span></div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">상태:</span>${statusHtml}</div></div></div>${remarksHtml}</div>`;
+          const imageHtml = `<div class="eq-card-image-wrapper is-icon"><i data-lucide="droplet"></i></div>`;
+          card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span>${locHtml}</div><h3 class="eq-card-name">${esc(item.name)}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">사양:</span><span>${item.spec || "-"}</span></div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">제조사:</span><span>${item.brand || "-"}</span></div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">상태:</span>${statusHtml}</div></div></div>${remarksHtml}</div>`;
           
         } else if (state.activeTab === 'pc') {
           let icon = "monitor";
           let badgeClass = "badge-gray";
           if (item.kind === '본체') { icon = "cpu"; badgeClass = "badge-success"; }
           else if (item.kind === '노트북') { icon = "laptop"; badgeClass = "badge-warning"; }
-          const kindHtml = `<span class="badge ${badgeClass}"><i data-lucide="${icon}"></i> ${item.kind}</span>`;
-          const userHtml = item.user && item.user.trim() !== "" && item.user !== "미지정" ? `<span class="badge badge-success"><i data-lucide="user"></i> ${item.user}</span>` : `<span class="badge badge-danger"><i data-lucide="user-x"></i> 미지정</span>`;
-          const imageHtml = `<div class="eq-card-image-wrapper" style="display: flex; align-items: center; justify-content: center; background: var(--bg-tertiary); color: var(--primary);"><i data-lucide="${icon}" style="width: 3.5rem; height: 3.5rem;"></i></div>`;
-          card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span>${locHtml}</div><h3 class="eq-card-name">${item.label}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">종류:</span>${kindHtml}</div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">제조사:</span><span>${item.brand || "-"}</span></div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">사용자:</span><div class="flex flex-wrap gap-1">${userHtml}</div></div></div></div></div>`;
+          const kindHtml = `<span class="badge ${badgeClass}"><i data-lucide="${icon}"></i> ${esc(item.kind)}</span>`;
+          const userHtml = item.user && item.user.trim() !== "" && item.user !== "미지정" ? `<span class="badge badge-success"><i data-lucide="user"></i> ${esc(item.user)}</span>` : `<span class="badge badge-danger"><i data-lucide="user-x"></i> 미지정</span>`;
+          const imageHtml = `<div class="eq-card-image-wrapper is-icon"><i data-lucide="${icon}"></i></div>`;
+          card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span>${locHtml}</div><h3 class="eq-card-name">${esc(item.label)}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">종류:</span>${kindHtml}</div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">제조사:</span><span>${item.brand || "-"}</span></div><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">사용자:</span><div class="flex flex-wrap gap-1">${userHtml}</div></div></div></div></div>`;
         } else if (state.activeTab === 'animalLab') {
           const imageCandidates = getImageCandidates('animalLab', item);
           const primaryImage = imageCandidates[0] || '';
           const fallbackList = imageCandidates.join('|');
-          const imageHtml = '<div class="eq-card-image-wrapper" title="이미지 크게 보기"><img src="' + primaryImage + '" data-fallback-list="' + fallbackList + '" data-fallback-index="0" alt="' + item.name + '" class="eq-card-image" loading="lazy"></div>';
+          const imageHtml = '<div class="eq-card-image-wrapper" title="이미지 크게 보기"><img src="' + esc(primaryImage) + '" data-fallback-list="' + esc(fallbackList) + '" data-fallback-index="0" alt="' + esc(item.name) + '" class="eq-card-image" loading="lazy" decoding="async"></div>';
           const managerHtml = item.mgr
-            ? item.mgr.split(',').map(manager => '<span class="badge badge-success"><i data-lucide="user"></i> ' + manager.trim() + '</span>').join(' ')
+            ? item.mgr.split(',').map(manager => '<span class="badge badge-success"><i data-lucide="user"></i> ' + esc(manager.trim()) + '</span>').join(' ')
             : '<span class="badge badge-danger">담당자 미지정</span>';
           card.innerHTML = imageHtml +
             '<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ' + item.no + '</span>' + locHtml + '</div>' +
-            '<h3 class="eq-card-name">' + item.name + '</h3><div class="eq-card-info">' +
-            '<div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">품목코드:</span><span>' + (item.code || '-') + '</span></div>' +
+            '<h3 class="eq-card-name">' + esc(item.name) + '</h3><div class="eq-card-info">' +
+            '<div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">품목코드:</span><span>' + esc(item.code || '-') + '</span></div>' +
             '<div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">담당자:</span><div class="flex flex-wrap gap-1">' + managerHtml + '</div></div>' +
             '</div></div></div>';
           const cardImage = card.querySelector('img');
           const cardImageWrapper = card.querySelector('.eq-card-image-wrapper');
           cardImage.onerror = () => handleImageError(cardImage);
-          cardImageWrapper.onclick = () => openImageModal(cardImage.src, item.name);
+          cardImageWrapper.setAttribute('role', 'button');
+          cardImageWrapper.tabIndex = 0;
+          cardImageWrapper.dataset.zoom = item.name;
         } else if (state.activeTab === 'reagent') {
-          const imageHtml = `<div class="eq-card-image-wrapper" style="display: flex; align-items: center; justify-content: center; background: var(--bg-tertiary); color: var(--primary);"><i data-lucide="test-tube-2" style="width: 3.5rem; height: 3.5rem;"></i></div>`;
-          const mfrHtml = item.mfr ? `<span class="badge badge-team">${item.mfr}</span>` : `<span class="text-slate-300">-</span>`;
-          const zoneHtml = item.zone && item.zone !== '-' ? `<span class="badge badge-gray">${item.zone}</span>` : '';
-          const casHtml = item.cas && item.cas !== '-' ? `<div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">CAS No:</span><button type="button" class="copy-btn-inline badge-interactive" onclick="copyToClipboard('${item.cas}', 'CAS No.')"><i data-lucide="copy" class="w-3 h-3"></i><span>${item.cas}</span></button></div>` : '';
-          const catHtml = item.cat && item.cat !== '-' ? `<div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">Cat No:</span><button type="button" class="copy-btn-inline badge-interactive" onclick="copyToClipboard('${item.cat}', 'Cat.No')"><i data-lucide="copy" class="w-3 h-3"></i><span>${item.cat}</span></button></div>` : '';
+          const imageHtml = `<div class="eq-card-image-wrapper is-icon"><i data-lucide="test-tube-2"></i></div>`;
+          const mfrHtml = item.mfr ? `<span class="badge badge-team">${esc(item.mfr)}</span>` : `<span class="text-slate-300">-</span>`;
+          const zoneHtml = item.zone && item.zone !== '-' ? `<span class="badge badge-gray">${esc(item.zone)}</span>` : '';
+          const casHtml = item.cas && item.cas !== '-' ? `<div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">CAS No:</span><button type="button" class="copy-btn-inline badge-interactive" data-copy="${esc(item.cas)}" data-copy-label="CAS No."><i data-lucide="copy" class="w-3 h-3"></i><span>${esc(item.cas)}</span></button></div>` : '';
+          const catHtml = item.cat && item.cat !== '-' ? `<div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">Cat No:</span><button type="button" class="copy-btn-inline badge-interactive" data-copy="${esc(item.cat)}" data-copy-label="Cat.No"><i data-lucide="copy" class="w-3 h-3"></i><span>${esc(item.cat)}</span></button></div>` : '';
           const capHtml = item.capacity || item.qty ? `<div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">용량/수량:</span><span>${item.capacity || ''} ${item.qty ? '(' + item.qty + '개)' : ''}</span></div>` : '';
-          const remarksHtml = item.remarks && item.remarks.trim() !== "" ? `<div class="eq-card-remarks"><i data-lucide="info" class="text-sky-500"></i><span>${item.remarks}</span></div>` : "";
+          const remarksHtml = item.remarks && item.remarks.trim() !== "" ? `<div class="eq-card-remarks"><i data-lucide="info" class="text-sky-500"></i><span>${esc(item.remarks)}</span></div>` : "";
 
-          card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span><div class="flex gap-1">${locHtml}${zoneHtml}</div></div><h3 class="eq-card-name">${item.name}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">제조사:</span>${mfrHtml}</div>${casHtml}${catHtml}${capHtml}</div></div>${remarksHtml}</div>`;
+          card.innerHTML = `${imageHtml}<div class="eq-card-body"><div><div class="eq-card-header"><span class="eq-card-no">No. ${item.no}</span><div class="flex gap-1">${locHtml}${zoneHtml}</div></div><h3 class="eq-card-name">${esc(item.name)}</h3><div class="eq-card-info"><div class="eq-card-item"><span class="text-xs text-slate-400 mr-1">제조사:</span>${mfrHtml}</div>${casHtml}${catHtml}${capHtml}</div></div>${remarksHtml}</div>`;
         }
         container.appendChild(card);
       });
@@ -3920,8 +4178,11 @@
         const isActive = activeLocation === loc;
         const row = document.createElement('div');
         row.className = `chart-row ${isActive ? 'active' : ''}`;
+        row.setAttribute('role', 'button');
+        row.tabIndex = 0;
+        row.setAttribute('aria-pressed', String(isActive));
         row.onclick = () => toggleLocFilter(loc);
-        row.innerHTML = `<div class="chart-label-row"><span class="chart-label">${loc}</span><span class="chart-value">${count}개</span></div><div class="chart-bar-track"><div class="chart-bar-fill" style="width: ${pct}%"></div></div>`;
+        row.innerHTML = `<div class="chart-label-row"><span class="chart-label" title="${esc(loc)}">${esc(loc)}</span><span class="chart-value">${count}개</span></div><div class="chart-bar-track"><div class="chart-bar-fill" style="width: ${pct}%"></div></div>`;
         locChartEl.appendChild(row);
       });
 
@@ -3989,8 +4250,11 @@
         const isActive = state.filters.manager === mgr;
         const row = document.createElement('div');
         row.className = `chart-row ${isActive ? 'active' : ''}`;
+        row.setAttribute('role', 'button');
+        row.tabIndex = 0;
+        row.setAttribute('aria-pressed', String(isActive));
         row.onclick = () => toggleMgrFilter(mgr);
-        row.innerHTML = `<div class="chart-label-row"><span class="chart-label">${mgr}</span><span class="chart-value">${count}개</span></div><div class="chart-bar-track"><div class="chart-bar-fill" style="width: ${pct}%"></div></div>`;
+        row.innerHTML = `<div class="chart-label-row"><span class="chart-label" title="${esc(mgr)}">${esc(mgr)}</span><span class="chart-value">${count}개</span></div><div class="chart-bar-track"><div class="chart-bar-fill" style="width: ${pct}%"></div></div>`;
         mgrChartEl.appendChild(row);
       });
     }
@@ -4000,6 +4264,10 @@
       cols.forEach(c => {
         const iconEl = document.getElementById(`sort-icon-${c}`);
         if (!iconEl) return;
+        const headerCell = iconEl.closest('th');
+        if (headerCell) {
+          headerCell.setAttribute('aria-sort', state.sort.column === c ? (state.sort.direction === 'asc' ? 'ascending' : 'descending') : 'none');
+        }
         if (state.sort.column === c) {
           iconEl.innerHTML = state.sort.direction === 'asc' ? '▲' : '▼';
           iconEl.className = 'sort-indicator active';
@@ -4022,8 +4290,11 @@
     }
 
     function handleSearch(val) {
-      state.filters.search = val;
-      updateDashboard();
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        state.filters.search = val;
+        updateDashboard();
+      }, 150);
     }
 
     function handleLocationFilter(val) {
@@ -4107,6 +4378,7 @@
     }
 
     function resetFilters() {
+      clearTimeout(searchTimer);
       state.filters.search = "";
       state.filters.location = "all";
       state.filters.manager = "all";
@@ -4186,8 +4458,7 @@
         return;
       }
       const wrapper = img.parentNode;
-      wrapper.removeAttribute('onclick');
-      wrapper.removeAttribute('title');
+      disableZoom(wrapper);
       wrapper.classList.add('no-image');
       wrapper.innerHTML = `<i data-lucide="${img.dataset.fallbackIcon || 'image-off'}" class="w-4 h-4 text-slate-400"></i>`;
       lucide.createIcons();
@@ -4198,19 +4469,27 @@
         return;
       }
       const wrapper = img.parentNode;
-      wrapper.removeAttribute('onclick');
-      wrapper.removeAttribute('title');
+      disableZoom(wrapper);
       wrapper.innerHTML = `<div class="eq-card-image-placeholder"><i data-lucide="${img.dataset.fallbackIcon || 'image-off'}"></i><span>이미지 준비중</span></div>`;
       lucide.createIcons();
     }
 
-    function openImageModal(imgSrc, name) {
+    function disableZoom(wrapper) {
+      ['data-zoom', 'role', 'tabindex', 'title', 'aria-label'].forEach(name => wrapper.removeAttribute(name));
+    }
+
+    function openImageModal(imgSrc, name, trigger) {
       const modal = document.getElementById('image-modal');
       const modalImg = document.getElementById('modal-img');
       const modalCaption = document.getElementById('modal-caption');
       modalImg.src = imgSrc;
+      modalImg.alt = name || '장비 이미지';
       modalCaption.textContent = name;
+      modalReturnFocus = trigger || document.activeElement;
+      modal.removeAttribute('inert');
       modal.classList.add('active');
+      document.documentElement.classList.add('modal-open');
+      modal.querySelector('.modal-close-btn').focus();
       lucide.createIcons();
     }
 
@@ -4218,13 +4497,60 @@
       const modal = document.getElementById('image-modal');
       if (modal) {
         modal.classList.remove('active');
+        modal.setAttribute('inert', '');
+        document.documentElement.classList.remove('modal-open');
+        if (modalReturnFocus && modalReturnFocus.isConnected) modalReturnFocus.focus();
+        modalReturnFocus = null;
       }
     }
 
     window.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('image-modal');
+      const modalOpen = modal && modal.classList.contains('active');
       if (e.key === 'Escape') {
         closeModal();
+      } else if (e.key === 'Tab' && modalOpen) {
+        e.preventDefault();
+        modal.querySelector('.modal-close-btn').focus();
       }
+    });
+
+    document.addEventListener('click', (event) => {
+      const sortHeader = event.target.closest('th[data-sort]');
+      if (sortHeader) {
+        handleSort(sortHeader.dataset.sort);
+        return;
+      }
+      const copyButton = event.target.closest('[data-copy]');
+      if (copyButton) {
+        copyToClipboard(copyButton.dataset.copy, copyButton.dataset.copyLabel);
+        return;
+      }
+      const zoomTarget = event.target.closest('[data-zoom]');
+      const zoomImage = zoomTarget && zoomTarget.querySelector('img');
+      if (zoomImage) openImageModal(zoomImage.src, zoomTarget.dataset.zoom, zoomTarget);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      const target = event.target;
+      if (target.matches && target.matches('.kpi-card, th[data-sort], [data-zoom], .chart-row')) {
+        event.preventDefault();
+        target.click();
+      }
+    });
+
+    document.querySelector('.dashboard-tabs').addEventListener('keydown', (event) => {
+      const keys = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+      if (!(event.key in keys) && event.key !== 'Home' && event.key !== 'End') return;
+      const tabs = [...document.querySelectorAll('.tab-btn')];
+      let index = tabs.indexOf(document.activeElement);
+      if (index < 0) return;
+      if (event.key === 'Home') index = 0;
+      else if (event.key === 'End') index = tabs.length - 1;
+      else index = (index + keys[event.key] + tabs.length) % tabs.length;
+      event.preventDefault();
+      tabs[index].focus();
     });
 
     function exportCSV() {
@@ -4315,7 +4641,10 @@
       let iconName = 'info';
       if (type === 'success') iconName = 'check-circle';
       if (type === 'error') iconName = 'alert-triangle';
-      toast.innerHTML = `<i data-lucide="${iconName}" class="w-4 h-4"></i><span>${message}</span>`;
+      toast.innerHTML = `<i data-lucide="${iconName}" class="w-4 h-4"></i>`;
+      const toastText = document.createElement('span');
+      toastText.textContent = message;
+      toast.appendChild(toastText);
       container.appendChild(toast);
       lucide.createIcons();
       setTimeout(() => {

@@ -62,12 +62,14 @@ def main():
                 
             if col_idx in (6, 7):
                 dest_path = images_dir / f"pc_{no_val}.jpeg"
-                pil_img.save(dest_path, "JPEG", quality=90)
+                pil_img.thumbnail((1600, 1600), Image.LANCZOS)
+                pil_img.save(dest_path, "JPEG", quality=82, optimize=True, progressive=True)
                 print(f"Saved photo: pc_{no_val}.jpeg (anchored at row {row_idx}, col {col_idx})")
                 extracted_photos += 1
             elif col_idx == 8:
                 dest_path = images_dir / f"pc_{no_val}_sticker.jpeg"
-                pil_img.save(dest_path, "JPEG", quality=90)
+                pil_img.thumbnail((1600, 1600), Image.LANCZOS)
+                pil_img.save(dest_path, "JPEG", quality=82, optimize=True, progressive=True)
                 print(f"Saved sticker: pc_{no_val}_sticker.jpeg (anchored at row {row_idx}, col {col_idx})")
                 extracted_stickers += 1
             else:
