@@ -2242,6 +2242,11 @@
     #inventory-table-body tr[data-detail]:hover td { background: var(--accent-light); }
     .count-pill { display: inline-block; min-width: 1.25rem; margin-left: 0.25rem; padding: 0 0.4rem; border-radius: 999px; background: var(--warning); color: #fff; font-size: var(--fs-xs); text-align: center; }
 
+    .connect-modal { position: fixed; inset: 0; z-index: 120; display: flex; align-items: center; justify-content: center; padding: 1rem; background: rgba(16, 42, 67, 0.6); }
+    .connect-modal[hidden] { display: none; }
+    .connect-box { position: relative; background: #fff; border-radius: 16px; padding: 0.5rem; max-width: min(960px, 100%); max-height: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.35); }
+    .connect-box img { display: block; max-width: 100%; max-height: calc(100vh - 3rem); border-radius: 12px; }
+    .connect-close { position: absolute; top: -14px; right: -14px; width: 36px; height: 36px; border-radius: 50%; border: 0; background: #102a43; color: #fff; font-size: 1.4rem; line-height: 1; cursor: pointer; }
     .drawer-backdrop { position: fixed; inset: 0; z-index: 90; background: rgba(16, 42, 67, 0.35); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
     .drawer-backdrop.active { opacity: 1; pointer-events: auto; }
     .side-drawer {
@@ -2310,6 +2315,9 @@
         </button>
         <button type="button" onclick="copyShareLink()" class="btn-action btn-export" title="현재 필터가 적용된 링크 복사">
           <i data-lucide="link"></i> 링크 복사
+        </button>
+        <button type="button" onclick="openConnect()" class="btn-action btn-export" title="SBL 장비 예약 & 문의 안내">
+          <i data-lucide="message-circle"></i> SBL Connect
         </button>
         <button type="button" onclick="printList()" class="btn-action btn-export" title="현재 목록 인쇄">
           <i data-lucide="printer"></i> 인쇄
@@ -2536,6 +2544,12 @@
       </div>
     </div>
 
+    <div id="connect-modal" class="connect-modal" role="dialog" aria-modal="true" aria-label="SBL Connect" hidden onclick="if(event.target===this)closeConnect()">
+      <div class="connect-box">
+        <button type="button" class="connect-close" onclick="closeConnect()" aria-label="닫기">&times;</button>
+        <img src="images/sbl-connect.png" alt="SBL Connect - 장비 예약 및 문의 안내와 QR 코드">
+      </div>
+    </div>
     <div id="drawer-backdrop" class="drawer-backdrop" onclick="closeDrawer()"></div>
     <aside id="side-drawer" class="side-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" inert>
       <div class="drawer-header">
@@ -5260,6 +5274,17 @@
       lucide.createIcons();
       document.getElementById('drawer-close').focus();
     }
+
+    function openConnect() {
+      document.getElementById('connect-modal').hidden = false;
+      document.querySelector('.connect-close').focus();
+    }
+    function closeConnect() {
+      document.getElementById('connect-modal').hidden = true;
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeConnect();
+    });
 
     function closeDrawer() {
       const drawer = document.getElementById('side-drawer');
