@@ -1,8 +1,8 @@
-"""Extract the in-cell equipment photos from ``담당자.xlsx``.
+"""Extract equipment photos from the latest equipment-list workbook.
 
-Recent Excel versions store pictures inserted with "Place in Cell" as rich-data
-values.  Those images are not exposed through ``openpyxl.worksheet._images``,
-so their order must be read from the XLSX package metadata instead.
+The workbook (``*장비목록*.xlsx``) has the columns ``No | 장비명 | 설치 위치``
+and the photos are floating pictures anchored next to each row.  Each picture
+is mapped to the equipment number of the row it is anchored on.
 """
 
 from io import BytesIO
@@ -14,83 +14,66 @@ import xml.etree.ElementTree as ET
 import openpyxl
 from PIL import Image
 
-
-WORKBOOK_NAME = "담당자.xlsx"
-TARGET_SHEET_NAME = "장비 목록 (전체)"
-HEADER_ROW_LIMIT = 10
+WORKBOOK_GLOB = "*장비목록*.xlsx"
+ROW_HEIGHT_EMU = 1008000  # rows are 80.1pt high, pictures are 1008000 EMU tall
 
 MAIN_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
 DOC_REL_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 PACKAGE_REL_NS = "http://schemas.openxmlformats.org/package/2006/relationships"
-RICH_DATA_NS = "http://schemas.microsoft.com/office/spreadsheetml/2017/richdata"
-RICH_REL_NS = "http://schemas.microsoft.com/office/spreadsheetml/2022/richvaluerel"
+DRAWING_NS = "http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing"
+DRAWING_MAIN_NS = "http://schemas.openxmlformats.org/drawingml/2006/main"
 
 
-def find_target_sheet(workbook):
-    return next((ws for ws in workbook.worksheets if ws.title.strip() == TARGET_SHEET_NAME), None)
+def find_workbook(root):
+    candidates = sorted(
+        (p for p in root.glob(WORKBOOK_GLOB) if p.is_file() and not p.name.startswith("~$")),
+        key=lambda p: p.name,
+    )
+    return candidates[-1] if candidates else None
 
 
-def find_header_row_and_columns(worksheet):
-    for row_idx in range(1, min(HEADER_ROW_LIMIT, worksheet.max_row) + 1):
-        headers = {str(cell.value).strip(): cell.column for cell in worksheet[row_idx] if cell.value is not None}
-        if "번호" in headers and "사진" in headers:
-            return row_idx, headers["번호"], headers["사진"]
-    return None, None, None
+def relationships(package, rels_path, base_dir):
+    root = ET.fromstring(package.read(rels_path))
+    return {
+        rel.attrib["Id"]: normpath(f"{base_dir}/{rel.attrib['Target']}")
+        for rel in root.findall(f"{{{PACKAGE_REL_NS}}}Relationship")
+    }
 
 
-def workbook_sheet_path(package, target_sheet_name):
-    """Return the ZIP member for a sheet name, without assuming sheet numbers."""
+def first_sheet_path(package):
     workbook = ET.fromstring(package.read("xl/workbook.xml"))
-    relationships = ET.fromstring(package.read("xl/_rels/workbook.xml.rels"))
-    targets = {
-        rel.attrib["Id"]: rel.attrib["Target"]
-        for rel in relationships.findall(f"{{{PACKAGE_REL_NS}}}Relationship")
-    }
-    for sheet in workbook.findall(f".//{{{MAIN_NS}}}sheet"):
-        if sheet.attrib["name"].strip() == target_sheet_name:
-            relationship_id = sheet.attrib[f"{{{DOC_REL_NS}}}id"]
-            return normpath(f"xl/{targets[relationship_id]}")
-    raise ValueError(f"Could not find sheet named '{target_sheet_name}'.")
+    targets = relationships(package, "xl/_rels/workbook.xml.rels", "xl")
+    sheet = workbook.find(f".//{{{MAIN_NS}}}sheet")
+    return targets[sheet.attrib[f"{{{DOC_REL_NS}}}id"]]
 
 
-def rich_value_images(package):
-    """Return ``{value-metadata-index: image-bytes}`` for Excel in-cell images."""
-    rich_values = ET.fromstring(package.read("xl/richData/rdrichvalue.xml"))
-    rich_relations = ET.fromstring(package.read("xl/richData/richValueRel.xml"))
-    relation_file = ET.fromstring(package.read("xl/richData/_rels/richValueRel.xml.rels"))
+def sheet_drawing_path(package, sheet_path):
+    sheet = ET.fromstring(package.read(sheet_path))
+    drawing = sheet.find(f"{{{MAIN_NS}}}drawing")
+    if drawing is None:
+        return None
+    sheet_dir, sheet_file = sheet_path.rsplit("/", 1)
+    targets = relationships(package, f"{sheet_dir}/_rels/{sheet_file}.rels", sheet_dir)
+    return targets[drawing.attrib[f"{{{DOC_REL_NS}}}id"]]
 
-    targets = {
-        rel.attrib["Id"]: normpath(f"xl/richData/{rel.attrib['Target']}")
-        for rel in relation_file.findall(f"{{{PACKAGE_REL_NS}}}Relationship")
-    }
-    relation_ids = [rel.attrib[f"{{{DOC_REL_NS}}}id"] for rel in rich_relations.findall(f"{{{RICH_REL_NS}}}rel")]
 
-    images = {}
-    for metadata_idx, rich_value in enumerate(rich_values.findall(f"{{{RICH_DATA_NS}}}rv"), start=1):
-        values = rich_value.findall(f"{{{RICH_DATA_NS}}}v")
-        if not values:
+def anchored_pictures(package, drawing_path):
+    """Yield (0-based row index, image bytes) for every picture in the drawing."""
+    drawing_dir, drawing_file = drawing_path.rsplit("/", 1)
+    targets = relationships(package, f"{drawing_dir}/_rels/{drawing_file}.rels", drawing_dir)
+    drawing = ET.fromstring(package.read(drawing_path))
+    for anchor in drawing:
+        start = anchor.find(f"{{{DRAWING_NS}}}from")
+        blip = anchor.find(f".//{{{DRAWING_MAIN_NS}}}blip")
+        if start is None or blip is None:
             continue
-        try:
-            relation_idx = int(values[0].text)
-            image_path = targets[relation_ids[relation_idx]]
-            images[metadata_idx] = package.read(image_path)
-        except (IndexError, KeyError, TypeError, ValueError):
-            # A rich value can be text or another non-image data type.
+        image_path = targets.get(blip.attrib.get(f"{{{DOC_REL_NS}}}embed"))
+        if image_path is None:
             continue
-    return images
-
-
-def image_cells(package, sheet_path, image_column_idx):
-    """Yield (row, value-metadata-index) for rich images in the photo column."""
-    worksheet = ET.fromstring(package.read(sheet_path))
-    for cell in worksheet.findall(f".//{{{MAIN_NS}}}c"):
-        metadata_idx = cell.attrib.get("vm")
-        coordinate = cell.attrib.get("r", "")
-        column = "".join(char for char in coordinate if char.isalpha())
-        row = "".join(char for char in coordinate if char.isdigit())
-        if not metadata_idx or not row or openpyxl.utils.column_index_from_string(column) != image_column_idx:
-            continue
-        yield int(row), int(metadata_idx)
+        row = int(start.find(f"{{{DRAWING_NS}}}row").text)
+        row_offset = int(start.find(f"{{{DRAWING_NS}}}rowOff").text)
+        # A picture shifted down by a full row height belongs to the next row.
+        yield row + round(row_offset / ROW_HEIGHT_EMU), package.read(image_path)
 
 
 def save_as_jpeg(image_bytes, destination):
@@ -103,56 +86,50 @@ def save_as_jpeg(image_bytes, destination):
 
 def main():
     root = Path(__file__).resolve().parents[1]
-    xlsx_path = root / WORKBOOK_NAME
+    xlsx_path = find_workbook(root)
     images_dir = root / "images"
     images_dir.mkdir(exist_ok=True)
 
-    if not xlsx_path.exists():
-        print(f"Error: {xlsx_path} not found.")
-        return
+    if xlsx_path is None:
+        print(f"Error: no workbook matching '{WORKBOOK_GLOB}' found in {root}.")
+        return 1
 
     workbook = openpyxl.load_workbook(xlsx_path, read_only=True, data_only=True)
-    worksheet = find_target_sheet(workbook)
-    if worksheet is None:
-        print(f"Error: Could not find sheet named '{TARGET_SHEET_NAME}'.")
-        workbook.close()
-        return
+    numbers = {
+        row_idx: row[0]
+        for row_idx, row in enumerate(workbook.worksheets[0].iter_rows(max_col=1, values_only=True), start=1)
+    }
+    workbook.close()
 
-    header_row_idx, number_col_idx, image_col_idx = find_header_row_and_columns(worksheet)
-    if header_row_idx is None:
-        print("Error: Could not locate the '번호' and '사진' headers.")
-        workbook.close()
-        return
-
-    print(f"Loaded {xlsx_path.name}. Extracting in-cell images from '{worksheet.title}'...")
+    print(f"Loaded {xlsx_path.name}. Extracting equipment photos...")
     extracted_count = 0
     with ZipFile(xlsx_path) as package:
-        try:
-            sheet_path = workbook_sheet_path(package, TARGET_SHEET_NAME)
-            images_by_metadata = rich_value_images(package)
-        except (KeyError, ET.ParseError, ValueError) as exc:
-            print(f"Error: This workbook has no readable Excel in-cell image data: {exc}")
-            workbook.close()
-            return
+        drawing_path = sheet_drawing_path(package, first_sheet_path(package))
+        if drawing_path is None:
+            print("Error: the workbook sheet contains no pictures.")
+            return 1
 
-        for row_idx, metadata_idx in image_cells(package, sheet_path, image_col_idx):
-            equipment_no = worksheet.cell(row=row_idx, column=number_col_idx).value
-            image_bytes = images_by_metadata.get(metadata_idx)
-            if equipment_no is None or image_bytes is None:
-                print(f"Warning: Skipped photo cell at row {row_idx} (missing number or image data).")
-                continue
+        for zero_based_row, image_bytes in anchored_pictures(package, drawing_path):
+            row_idx = zero_based_row + 1
+            equipment_no = numbers.get(row_idx)
             try:
                 equipment_no = int(equipment_no)
+            except (TypeError, ValueError):
+                print(f"Warning: Skipped picture at row {row_idx} (no equipment number).")
+                continue
+            try:
                 destination = images_dir / f"equipment_{equipment_no}.jpeg"
                 save_as_jpeg(image_bytes, destination)
+                for stale in (images_dir / f"equipment_{equipment_no}.png", images_dir / f"equipment_{equipment_no}.jpg"):
+                    stale.unlink(missing_ok=True)
                 print(f"Saved {destination.name} (row {row_idx})")
                 extracted_count += 1
-            except (TypeError, ValueError, OSError) as exc:
+            except OSError as exc:
                 print(f"Error extracting image at row {row_idx}: {exc}")
 
-    workbook.close()
-    print(f"\nExtraction complete: saved {extracted_count} equipment images in equipment-number order.")
+    print(f"\nExtraction complete: saved {extracted_count} equipment images.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -4,7 +4,7 @@ echo ===================================================
 echo CSB Equipment Inventory Dashboard Data Updater
 echo ===================================================
 echo.
-echo 1. Reading Excel file (담당자.xlsx)...
+echo 1. Reading equipment list (*장비목록*.xlsx) and managers (담당자.xlsx)...
 python scripts/sync_data.py
 if %errorlevel% neq 0 (
     echo.
@@ -13,7 +13,7 @@ if %errorlevel% neq 0 (
     exit /b %errorlevel%
 )
 echo.
-echo 2. Extracting equipment images from 담당자.xlsx...
+echo 2. Extracting equipment images from the equipment list workbook...
 python scripts/extract_equipment_images.py
 if %errorlevel% neq 0 (
     echo.

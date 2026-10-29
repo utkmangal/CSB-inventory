@@ -65,35 +65,55 @@ def get_bilingual_name(name_val):
 
 def sync():
     root = Path(__file__).resolve().parents[1]
-    excel_path = root / "담당자.xlsx"
     html_path = root / "index.html"
+    manager_path = root / "담당자.xlsx"
+    equipment_files = sorted(
+        [f for f in root.glob("*장비목록*.xlsx") if f.is_file() and not f.name.startswith("~$")],
+        key=lambda x: x.name
+    )
     
-    if not excel_path.exists():
-        print(f"Error: Excel file '{excel_path}' not found.")
+    if not equipment_files:
+        print("Error: No equipment list workbook (*장비목록*.xlsx) found.")
         return False
+    excel_path = equipment_files[-1]
+
+    # The equipment list has no manager column, so managers come from 담당자.xlsx (keyed by No.).
+    managers = {}
+    if manager_path.exists():
+        try:
+            wb_mgr = openpyxl.load_workbook(manager_path, read_only=True, data_only=True)
+            mgr_sheet = next((n for n in wb_mgr.sheetnames if n.strip() == "장비 목록 (전체)"), None)
+            if mgr_sheet is not None:
+                for row in wb_mgr[mgr_sheet].iter_rows(min_row=4, values_only=True):
+                    if len(row) < 7 or row[1] is None:
+                        continue
+                    try:
+                        mgr_no = int(row[1])
+                    except (ValueError, TypeError):
+                        continue
+                    mgr_name = str(row[5]).strip() if row[5] is not None else ""
+                    managers[mgr_no] = ("" if mgr_name == "미지정" else mgr_name,
+                                        str(row[6]).strip() if row[6] is not None else "")
+            wb_mgr.close()
+        except Exception as e:
+            print(f"Warning: Could not read managers from {manager_path.name}: {e}")
+    else:
+        print(f"Warning: {manager_path.name} not found; managers will be empty.")
         
     print(f"Reading general equipment from {excel_path.name}...")
     try:
         wb = openpyxl.load_workbook(excel_path, read_only=True, data_only=True)
-        sheet_name = "장비 목록 (전체)"
-        matched_sheet_name = next((name for name in wb.sheetnames if name.strip() == sheet_name), None)
-        if matched_sheet_name is None:
-            print(f"Error: Sheet '{sheet_name}' not found in Excel file.")
-            print(f"Available sheets: {wb.sheetnames}")
-            return False
-            
-        ws = wb[matched_sheet_name]
+        ws = wb.worksheets[0]
         inventory_data = []
         
-        for r_idx, row in enumerate(ws.iter_rows(min_row=4, values_only=True), start=4):
-            if len(row) < 7:
+        for r_idx, row in enumerate(ws.iter_rows(min_row=2, values_only=True), start=2):
+            if len(row) < 3:
                 continue
                 
-            no_val = row[1]
-            name_val = row[2]
-            loc_val = row[4]
-            mgr_val = row[5]
-            remarks_val = row[6]
+            no_val = row[0]
+            name_val = row[1]
+            loc_val = row[2]
+            mgr_val, remarks_val = managers.get(no_val if isinstance(no_val, int) else None, ("", ""))
             
             if no_val is None:
                 continue
@@ -118,7 +138,7 @@ def sync():
             
             inventory_item = {
                 "no": no,
-                "name": get_bilingual_name(name_val),
+                "name": get_bilingual_name(str(name_val).replace("pH_이온", "pH/이온")),
                 "loc": loc,
                 "mgr": mgr,
                 "remarks": remarks
@@ -132,7 +152,7 @@ def sync():
         print(f"Successfully parsed {len(inventory_data)} general equipment entries.")
         
     except Exception as e:
-        print(f"An error occurred while reading 담당자.xlsx: {e}")
+        print(f"An error occurred while reading {excel_path.name}: {e}")
         return False
 
     # Now read pipette and PC from archive
@@ -348,6 +368,7 @@ def sync():
 
                 if str(category_val).strip() == "장비":
                     equipment_name = str(name_val).strip() if name_val is not None else ""
+                    existing = next((item for item in inventory_data if item["name"] == equipment_name), None)
                     equipment_location = str(loc_val).strip() if loc_val is not None else ""
                     equipment_zone = str(zone_val).strip() if zone_val is not None else ""
                     equipment_mfr = str(mfr_val).strip() if mfr_val is not None else ""
@@ -361,6 +382,10 @@ def sync():
                             equipment_note
                         ) if value
                     ]
+                    if existing is not None:
+                        if not existing["remarks"]:
+                            existing["remarks"] = "; ".join(equipment_remarks)
+                        continue
                     inventory_data.append({
                         "no": len(inventory_data) + 1,
                         "name": equipment_name,
