@@ -37,6 +37,10 @@ TEXT_FIXES = [
     (r"전동 파이펫", "전동 피펫"),
     (r"simulation mod\b", "simulation module"),
     (r"Stabilization Solutionwi\b", "Stabilization Solution"),
+    (r"일렉트로스피닝 장치 \(Spinning Device\)", "전기방사 장치 (Electrospinning Device)"),
+    (r"^neurolux$", "Neurolux"),
+    (r"neurolux inc", "Neurolux Inc."),
+    (r"^generator \(", "Generator ("),
     (r"(?<=\d) uL\b", " µL"),
 ]
 
