@@ -22,9 +22,28 @@ TEXT_FIXES = [
     (r"에포치", "에포크"),
     (r"폐쇄기 \(paper shredder\)", "파쇄기 (Paper Shredder)"),
     (r"폐쇄기", "파쇄기"),
+    (r"pro analysi\b", "pro analysis"),
+    (r"Alexa fluor", "Alexa Fluor"),
+    (r"donkey anti-rabbit", "Donkey anti-Rabbit"),
+    (r"\bclostridium histolyticum", "Clostridium histolyticum"),
+    (r"Cellbanker1", "Cellbanker 1"),
+    (r"methylether", "methyl ether"),
+    (r"CD 11b", "CD11b"),
+    (r"Molecularporous", "Molecular/Porous"),
+    (r"ERGONINIC", "ERGONOMIC"),
+    (r"\bAPOCH\b", "EPOCH"),
+    (r"tektronics", "Tektronix"),
+    (r"\bphcbi\b", "PHCbi"),
+    (r"전동 파이펫", "전동 피펫"),
+    (r"simulation mod\b", "simulation module"),
+    (r"Stabilization Solutionwi\b", "Stabilization Solution"),
+    (r"(?<=\d) uL\b", " µL"),
 ]
 
 MANUFACTURER_FIXES = {
+    "Guangdong Victoy Biotech": "Guangdong Victory Biotech",
+    "GoodFellow": "Goodfellow",
+    "ANASPEC": "AnaSpec",
     "Welgene": "WELGENE",
     "dojindo": "DojinDo",
     "abcam": "Abcam",
@@ -41,6 +60,7 @@ def apply_text_fixes(text):
 def normalize_capacity_text(text):
     """Unify mu characters and spacing/casing of plain '<number><unit>' capacities."""
     text = text.replace("μ", "µ")
+    text = re.sub(r"(?<=\d) ?ug\b", " µg", text)
     match = re.fullmatch(r"(\d+(?:\.\d+)?)\s*(mg|kg|g|ml|l|ul|µl)", text, re.IGNORECASE)
     if not match:
         return text
@@ -518,8 +538,12 @@ def sync():
             item[field] = apply_text_fixes(item[field])
         item["mfr"] = MANUFACTURER_FIXES.get(item["mfr"], item["mfr"])
         item["capacity"] = normalize_capacity_text(item["capacity"])
+    for dataset in (inventory_data, pipette_data, pc_data, animal_lab_data):
+        for item in dataset:
+            for field, value in item.items():
+                if isinstance(value, str) and field not in ("image", "photo", "icon"):
+                    item[field] = apply_text_fixes(value)
     for item in inventory_data:
-        item["name"] = apply_text_fixes(item["name"])
         if "파쇄기" in item["name"]:
             item["icon"] = "rat"
 
