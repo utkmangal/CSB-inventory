@@ -6,6 +6,48 @@ import json
 from pathlib import Path
 import openpyxl
 
+TEXT_FIXES = [
+    (r"Dipheyl", "Diphenyl"),
+    (r"\bFluorescamin\b", "Fluorescamine"),
+    (r"PRimeScript RT reagent kKit", "PrimeScript RT reagent Kit"),
+    (r"\blgG\b", "IgG"),
+    (r"CD806", "CD86"),
+    (r"cellROX", "CellROX"),
+    (r"Mitotracker", "MitoTracker"),
+    (r"뒷편", "뒤편"),
+    (r"공구 서랍(\d)", r"공구 서랍 \1"),
+    (r"Weight Dish", "Weighing Dish"),
+    (r"밧드", "바트"),
+    (r"칼블럭", "칼브럭"),
+    (r"에포치", "에포크"),
+    (r"폐쇄기 \(paper shredder\)", "파쇄기 (Paper Shredder)"),
+    (r"폐쇄기", "파쇄기"),
+]
+
+MANUFACTURER_FIXES = {
+    "Welgene": "WELGENE",
+    "dojindo": "DojinDo",
+    "abcam": "Abcam",
+    "阿拉丁(Aladdin)": "Aladdin",
+}
+
+
+def apply_text_fixes(text):
+    for pattern, replacement in TEXT_FIXES:
+        text = re.sub(pattern, replacement, text)
+    return text
+
+
+def normalize_capacity_text(text):
+    """Unify mu characters and spacing/casing of plain '<number><unit>' capacities."""
+    text = text.replace("μ", "µ")
+    match = re.fullmatch(r"(\d+(?:\.\d+)?)\s*(mg|kg|g|ml|l|ul|µl)", text, re.IGNORECASE)
+    if not match:
+        return text
+    unit = {"ml": "mL", "l": "L", "ul": "µL", "µl": "µL"}.get(match.group(2).lower(), match.group(2).lower())
+    return f"{match.group(1)} {unit}"
+
+
 def get_bilingual_name(name_val):
     if name_val is None:
         return ""
@@ -344,9 +386,10 @@ def sync():
                         continue
                     for row in ws_reagent.iter_rows(min_row=2, values_only=True):
                         if row and any(c is not None for c in row):
-                            yield header_map, name_header, row
+                            yield ws_reagent.title, header_map, name_header, row
 
-            for header_map, name_header, row in sheet_rows():
+            type_labels = {"시약": "시약", "재료": "재료", "buffers": "Buffers"}
+            for sheet_title, header_map, name_header, row in sheet_rows():
                 def cell_value(row, *header_names):
                     for header_name in header_names:
                         index = header_map.get(normalize(header_name))
@@ -413,6 +456,7 @@ def sync():
 
                 reagent_data.append({
                     "no": len(reagent_data) + 1,
+                    "type": type_labels.get(sheet_title.strip().lower(), sheet_title.strip()),
                     "loc": loc,
                     "zone": zone,
                     "folder": folder,
@@ -456,7 +500,7 @@ def sync():
                     if entry["qty"].endswith(".0"):
                         entry["qty"] = entry["qty"][:-2]
                     reagent_data.append({
-                        "no": len(reagent_data) + 1, "loc": room, "zone": entry["zone"],
+                        "no": len(reagent_data) + 1, "type": "소모품", "loc": room, "zone": entry["zone"],
                         "folder": entry["folder"], "name": entry["name"], "mfr": entry["mfr"],
                         "cat": "", "cas": "", "capacity": entry["capacity"], "qty": entry["qty"],
                         "remarks": entry["remarks"]
@@ -467,6 +511,17 @@ def sync():
             print(f"Warning: Could not read reagent workbook: {e}")
     else:
         print("Warning: No reagent workbook (시약_리스트_*.xlsx) found.")
+
+    # Write to index.html
+    for item in reagent_data:
+        for field in ("name", "zone", "folder", "remarks"):
+            item[field] = apply_text_fixes(item[field])
+        item["mfr"] = MANUFACTURER_FIXES.get(item["mfr"], item["mfr"])
+        item["capacity"] = normalize_capacity_text(item["capacity"])
+    for item in inventory_data:
+        item["name"] = apply_text_fixes(item["name"])
+        if "파쇄기" in item["name"]:
+            item["icon"] = "rat"
 
     # Write to index.html
     if not html_path.exists():
