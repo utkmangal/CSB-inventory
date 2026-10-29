@@ -3,6 +3,7 @@ import os
 import re
 import sys
 import json
+import datetime
 from pathlib import Path
 import openpyxl
 
@@ -608,6 +609,21 @@ def sync():
         if count_reagent == 0:
             print("Warning: Could not locate 'const reagentData = [...];' in index.html.")
             
+        meta_parts = [f"데이터 갱신: {datetime.date.today():%Y-%m-%d}"]
+        equipment_stamp = re.search(r"\d{8}", excel_path.name)
+        if equipment_stamp:
+            meta_parts.append(f"장비목록 {equipment_stamp.group()}")
+        reagent_stamp = re.search(r"v[\d.]+", reagent_files[-1].name) if reagent_files else None
+        if reagent_stamp:
+            meta_parts.append(f"시약목록 {reagent_stamp.group()}")
+        meta_text = " · ".join(meta_parts)
+        html_content = re.sub(
+            r"<!--DATA_META-->.*?<!--/DATA_META-->",
+            lambda _: f"<!--DATA_META-->{meta_text}<!--/DATA_META-->",
+            html_content,
+            flags=re.S,
+        )
+
         html_path.write_text(html_content, encoding="utf-8")
         print("index.html has been successfully updated with new data.")
         return True

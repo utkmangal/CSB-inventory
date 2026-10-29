@@ -2218,6 +2218,79 @@
         scroll-behavior: auto !important;
       }
     }
+
+    .active-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 0.5rem 0 0.25rem; }
+    .active-filters[hidden], .other-tab-hits[hidden], .load-more-wrap[hidden] { display: none; }
+    .active-filter-label { font-size: var(--fs-xs); font-weight: 600; color: var(--text-muted); }
+    .active-filter-chip {
+      display: inline-flex; align-items: center; gap: 0.35rem; max-width: 100%;
+      padding: 0.25rem 0.35rem 0.25rem 0.65rem; border: 1px solid var(--border-strong); border-radius: 999px;
+      background: var(--primary-light); color: var(--primary); font: inherit; font-size: var(--fs-xs); font-weight: 600; cursor: pointer;
+    }
+    .active-filter-chip:hover { background: var(--accent-light); }
+    .active-filter-chip .chip-x { font-size: 0.95rem; line-height: 1; opacity: 0.7; padding: 0 0.25rem; }
+    mark.search-hit { background: #fde68a; color: inherit; border-radius: 2px; padding: 0 1px; }
+    .other-tab-hits { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 0 0 0.5rem; font-size: var(--fs-xs); color: var(--text-secondary); }
+    .other-tab-hit, .empty-suggestions button {
+      padding: 0.2rem 0.6rem; border: 1px dashed var(--accent); border-radius: 999px; background: transparent;
+      color: var(--primary); font: inherit; font-size: var(--fs-xs); font-weight: 600; cursor: pointer;
+    }
+    .other-tab-hit:hover, .empty-suggestions button:hover { background: var(--accent-light); }
+    .load-more-wrap { display: flex; justify-content: center; padding: 1rem 0; }
+    .empty-suggestions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; margin: 0.75rem 0; }
+    #inventory-table-body tr[data-detail], .eq-card[data-detail] { cursor: pointer; }
+    #inventory-table-body tr[data-detail]:hover td { background: var(--accent-light); }
+    .count-pill { display: inline-block; min-width: 1.25rem; margin-left: 0.25rem; padding: 0 0.4rem; border-radius: 999px; background: var(--warning); color: #fff; font-size: var(--fs-xs); text-align: center; }
+
+    .drawer-backdrop { position: fixed; inset: 0; z-index: 90; background: rgba(16, 42, 67, 0.35); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .drawer-backdrop.active { opacity: 1; pointer-events: auto; }
+    .side-drawer {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 91; display: flex; flex-direction: column;
+      width: min(440px, 100vw); background: var(--bg-secondary); box-shadow: var(--shadow-lg);
+      transform: translateX(100%); visibility: hidden; transition: transform 0.25s, visibility 0.25s;
+    }
+    .side-drawer.active { transform: none; visibility: visible; }
+    .drawer-header { display: flex; align-items: center; gap: 0.5rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); }
+    .drawer-title { flex: 1; margin: 0; font-size: var(--fs-lg); font-family: var(--font-display); color: var(--primary); overflow-wrap: anywhere; }
+    .drawer-icon-btn {
+      display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem;
+      border: 1px solid var(--border); border-radius: 8px; background: var(--bg-secondary); color: var(--text-secondary); cursor: pointer;
+    }
+    .drawer-icon-btn:hover:not(:disabled) { background: var(--accent-light); }
+    .drawer-icon-btn:disabled { opacity: 0.35; cursor: default; }
+    .drawer-body { flex: 1; overflow-y: auto; padding: 1.25rem; }
+    .drawer-image { display: block; max-width: 100%; max-height: 220px; margin: 0 auto 1rem; border-radius: 10px; }
+    .drawer-fields { margin: 0; }
+    .drawer-field { padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
+    .drawer-field dt { font-size: var(--fs-xs); font-weight: 600; color: var(--text-muted); }
+    .drawer-field dd { margin: 0.15rem 0 0; font-size: var(--fs-md); color: var(--text-primary); overflow-wrap: anywhere; }
+    .drawer-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .drawer-link { padding: 0.4rem 0.75rem; border: 1px solid var(--border-strong); border-radius: 8px; color: var(--primary); font-size: var(--fs-sm); font-weight: 600; text-decoration: none; }
+    .drawer-link:hover { background: var(--accent-light); }
+    .hub-section-title { margin: 1.25rem 0 0.5rem; font-size: var(--fs-md); font-weight: 700; color: var(--primary); }
+    .hub-section-title:first-child { margin-top: 0; }
+    .hub-table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+    .hub-table th, .hub-table td { padding: 0.4rem 0.35rem; border-bottom: 1px solid var(--border); text-align: center; }
+    .hub-table th:first-child, .hub-table td:first-child { text-align: left; }
+    .hub-count { padding: 0 0.4rem; border: 0; border-radius: 6px; background: transparent; color: var(--primary); font: inherit; font-weight: 600; cursor: pointer; }
+    .hub-count:hover { background: var(--accent-light); }
+    .hub-issue-list { display: grid; gap: 0.35rem; margin: 0; padding: 0; list-style: none; }
+    .hub-issue {
+      display: flex; align-items: baseline; gap: 0.5rem; width: 100%; padding: 0.45rem 0.6rem; border: 1px solid var(--border);
+      border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary); font: inherit; font-size: var(--fs-sm); text-align: left; cursor: pointer;
+    }
+    .hub-issue:hover { background: var(--accent-light); }
+    .hub-issue-tab { flex: 0 0 auto; font-size: var(--fs-xs); font-weight: 700; color: var(--accent-hover); }
+    .hub-more, .hub-empty { color: var(--text-muted); font-size: var(--fs-sm); }
+
+    @media print {
+      .dashboard-header, .dashboard-tabs, .kpi-grid, .control-bar, .reagent-navigation, .sidebar-panel, .active-filters,
+      .other-tab-hits, .load-more-wrap, .side-drawer, .drawer-backdrop, .toast-container, .reagent-table-tools, .dashboard-footer { display: none !important; }
+      .dashboard-grid { display: block !important; }
+      .table-container { overflow: visible !important; }
+      .table-element thead th { position: static !important; }
+      #inventory-table-body tr { break-inside: avoid; }
+    }
   </style>
 </head>
 <body>
@@ -2232,6 +2305,18 @@
         </div>
       </div>
       <div class="header-actions">
+        <button type="button" onclick="openHub()" class="btn-action btn-export" id="hub-btn" title="방별 현황 및 확인 필요 항목">
+          <i data-lucide="clipboard-check"></i> 점검·현황<span id="hub-badge" class="count-pill" hidden></span>
+        </button>
+        <button type="button" onclick="copyShareLink()" class="btn-action btn-export" title="현재 필터가 적용된 링크 복사">
+          <i data-lucide="link"></i> 링크 복사
+        </button>
+        <button type="button" onclick="printList()" class="btn-action btn-export" title="현재 목록 인쇄">
+          <i data-lucide="printer"></i> 인쇄
+        </button>
+        <button type="button" onclick="cycleTextSize()" class="btn-action btn-export" id="text-size-btn" title="글자 크기 변경" aria-label="글자 크기 변경">
+          <i data-lucide="a-large-small"></i> 글자
+        </button>
         <button onclick="exportCSV()" class="btn-action btn-export">
           <i data-lucide="download"></i> 내보내기 (.csv)
         </button>
@@ -2351,6 +2436,9 @@
           </div>
         </section>
 
+        <div id="active-filters" class="active-filters" aria-label="적용된 필터" hidden></div>
+        <div id="other-tab-hits" class="other-tab-hits" hidden></div>
+
         <div class="results-counter" role="status" aria-live="polite">
           <span id="results-count-text">장비 로딩 중...</span>
         </div>
@@ -2404,10 +2492,15 @@
 
         <div id="grid-view-wrapper" class="grid-container hidden"></div>
 
+        <div id="load-more-wrap" class="load-more-wrap" hidden>
+          <button type="button" id="load-more-btn" class="btn-primary" onclick="loadMore()"></button>
+        </div>
+
         <div id="empty-state" class="empty-state hidden">
           <i data-lucide="box-select" class="empty-icon"></i>
           <h3>일치하는 장비가 없습니다</h3>
           <p>검색어나 필터 설정을 초기화하고 다시 확인해 보세요.</p>
+          <div id="empty-suggestions" class="empty-suggestions"></div>
           <button onclick="resetFilters()" class="btn-primary">
             <i data-lucide="rotate-ccw" class="w-4 h-4 inline mr-1"></i> 전체 필터 초기화
           </button>
@@ -2443,10 +2536,22 @@
       </div>
     </div>
 
+    <div id="drawer-backdrop" class="drawer-backdrop" onclick="closeDrawer()"></div>
+    <aside id="side-drawer" class="side-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" inert>
+      <div class="drawer-header">
+        <button type="button" id="drawer-prev" class="drawer-icon-btn" onclick="stepDetail(-1)" aria-label="이전 항목"><i data-lucide="chevron-left"></i></button>
+        <button type="button" id="drawer-next" class="drawer-icon-btn" onclick="stepDetail(1)" aria-label="다음 항목"><i data-lucide="chevron-right"></i></button>
+        <h2 id="drawer-title" class="drawer-title"></h2>
+        <button type="button" id="drawer-close" class="drawer-icon-btn" onclick="closeDrawer()" aria-label="닫기"><i data-lucide="x"></i></button>
+      </div>
+      <div id="drawer-body" class="drawer-body"></div>
+    </aside>
+
     <div id="toast-container" class="toast-container" role="status" aria-live="polite"></div>
 
     <footer class="dashboard-footer">
       <p>© 2026 Symbiotic Biomaterials Lab (SBL). All rights reserved.</p>
+      <p id="data-updated"><!--DATA_META-->데이터 갱신: 2026-10-30 · 장비목록 20261019 · 시약목록 v1.261028<!--/DATA_META--></p>
     </footer>
   </div>
 
@@ -3445,8 +3550,13 @@
       sort: { column: "no", direction: "asc" },
       viewMode: "table",
       theme: "light",
-      renderFrame: null
+      renderFrame: null,
+      visible: 100,
+      pageSignature: "",
+      viewList: [],
+      detailIndex: -1
     };
+    const PAGE_SIZE = 100;
 
     let locations = [];
     let managers = [];
@@ -3537,12 +3647,35 @@
       update();
     }
 
-    function getActiveDataset() {
-      if (state.activeTab === 'pipette') return pipetteData;
-      if (state.activeTab === 'pc') return pcData.map(item => ({ ...item, label: item.label.replace(/\bCSB\b/g, 'SBL') }));
-      if (state.activeTab === 'animalLab') return animalLabData;
-      if (state.activeTab === 'reagent') return reagentData;
+    function datasetFor(tab) {
+      if (tab === 'pipette') return pipetteData;
+      if (tab === 'pc') return pcData.map(item => ({ ...item, label: item.label.replace(/\bCSB\b/g, 'SBL') }));
+      if (tab === 'animalLab') return animalLabData;
+      if (tab === 'reagent') return reagentData;
       return inventoryData;
+    }
+
+    function getActiveDataset() {
+      return datasetFor(state.activeTab);
+    }
+
+    const SEARCH_SKIP_FIELDS = new Set(['no', 'photo', 'icon', 'image', 'sticker', 'calib', 'broken']);
+
+    function normalizeSearchText(text) {
+      return String(text ?? '').toLowerCase().replace(/[^\p{L}\p{N}µ]+/gu, ' ').trim();
+    }
+
+    function searchTokens(query) {
+      const normalized = normalizeSearchText(query);
+      return normalized ? normalized.split(' ') : [];
+    }
+
+    function itemMatchesSearch(item, tokens) {
+      if (!tokens.length) return true;
+      const haystack = ' ' + normalizeSearchText(Object.entries(item)
+        .filter(([key, value]) => typeof value === 'string' && !SEARCH_SKIP_FIELDS.has(key))
+        .map(([, value]) => value).join(' ')) + ' ';
+      return tokens.every(token => haystack.includes(token));
     }
 
     function copyToClipboard(text, label) {
@@ -3644,6 +3777,8 @@
       lucide.createIcons();
       initChartCards();
       initControlBarOffset();
+      initTextSize();
+      updateHubBadge();
     });
 
     function extractCategories() {
@@ -3779,6 +3914,7 @@
         const button = document.createElement('button');
         button.type = 'button';
         button.className = `reagent-chip${isActive ? ' active' : ''}`;
+        button.setAttribute('aria-pressed', String(isActive));
         button.onclick = () => setReagentFilter(filterKey, option.value);
 
         const label = document.createElement('span');
@@ -3870,45 +4006,9 @@
 
     function getFilteredData() {
       const data = getActiveDataset();
+      const searchTokensList = searchTokens(state.filters.search);
       return data.filter(item => {
-        const s = state.filters.search.toLowerCase().trim();
-        
-        let matchSearch = true;
-        if (s !== "") {
-          if (state.activeTab === 'general') {
-            matchSearch = item.name.toLowerCase().includes(s) || 
-                          (item.loc && item.loc.toLowerCase().includes(s)) || 
-                          (item.mgr && item.mgr.toLowerCase().includes(s)) || 
-                          (item.remarks && item.remarks.toLowerCase().includes(s));
-          } else if (state.activeTab === 'pipette') {
-            matchSearch = item.name.toLowerCase().includes(s) || 
-                          (item.spec && item.spec.toLowerCase().includes(s)) || 
-                          (item.loc && item.loc.toLowerCase().includes(s)) || 
-                          (item.brand && item.brand.toLowerCase().includes(s)) || 
-                          (item.remarks && item.remarks.toLowerCase().includes(s));
-          } else if (state.activeTab === 'pc') {
-            matchSearch = item.kind.toLowerCase().includes(s) || 
-                          (item.label && item.label.toLowerCase().includes(s)) || 
-                          (item.loc && item.loc.toLowerCase().includes(s)) || 
-                          (item.user && item.user.toLowerCase().includes(s)) || 
-                          (item.brand && item.brand.toLowerCase().includes(s));
-          } else if (state.activeTab === 'animalLab') {
-            matchSearch = item.name.toLowerCase().includes(s) ||
-                          (item.code && item.code.toLowerCase().includes(s)) ||
-                          (item.loc && item.loc.toLowerCase().includes(s)) ||
-                          (item.mgr && item.mgr.toLowerCase().includes(s));
-          } else if (state.activeTab === 'reagent') {
-            matchSearch = item.name.toLowerCase().includes(s) ||
-                          (item.loc && item.loc.toLowerCase().includes(s)) ||
-                          (item.zone && item.zone.toLowerCase().includes(s)) ||
-                          (item.folder && item.folder.toLowerCase().includes(s)) ||
-                          (item.mfr && item.mfr.toLowerCase().includes(s)) ||
-                          (item.cat && item.cat.toLowerCase().includes(s)) ||
-                          (item.cas && item.cas.toLowerCase().includes(s)) ||
-                          (item.capacity && item.capacity.toLowerCase().includes(s)) ||
-                          (item.remarks && item.remarks.toLowerCase().includes(s));
-          }
-        }
+        const matchSearch = itemMatchesSearch(item, searchTokensList);
 
         let matchLoc = true;
         if (state.filters.location !== "all") {
@@ -4102,6 +4202,13 @@
       state.renderFrame = requestAnimationFrame(() => {
         const filtered = getFilteredData();
         const sorted = getSortedData(filtered);
+        const pageSignature = JSON.stringify([state.activeTab, state.filters, state.sort]);
+        if (pageSignature !== state.pageSignature) {
+          state.pageSignature = pageSignature;
+          state.visible = PAGE_SIZE;
+        }
+        const shown = sorted.slice(0, state.visible);
+        state.viewList = sorted;
         renderKPIs();
         if (state.viewMode === 'table') {
           const viewTable = document.getElementById('table-view-wrapper');
@@ -4109,15 +4216,21 @@
           if (viewTable) viewTable.classList.toggle('reagent-table-container', state.activeTab === 'reagent');
           if (viewTable) viewTable.classList.remove('hidden');
           if (viewGrid) viewGrid.classList.add('hidden');
-          renderTable(sorted);
+          renderTable(shown);
         } else {
           const viewTable = document.getElementById('table-view-wrapper');
           const viewGrid = document.getElementById('grid-view-wrapper');
           if (viewTable) viewTable.classList.add('hidden');
           if (viewGrid) viewGrid.classList.remove('hidden');
-          renderGrid(sorted);
+          renderGrid(shown);
         }
+        tagDetailRows();
+        highlightSearchHits();
         renderAnalytics(filtered);
+        renderLoadMore(sorted.length, shown.length);
+        renderActiveFilters();
+        renderOtherTabHits();
+        renderEmptySuggestions(sorted.length === 0);
         
         const emptyStateEl = document.getElementById('empty-state');
         const countTextEl = document.getElementById('results-count-text');
@@ -4845,8 +4958,26 @@
     window.addEventListener('keydown', (e) => {
       const modal = document.getElementById('image-modal');
       const modalOpen = modal && modal.classList.contains('active');
+      const drawer = document.getElementById('side-drawer');
+      const drawerOpen = drawer && drawer.classList.contains('active');
       if (e.key === 'Escape') {
         closeModal();
+        closeDrawer();
+      } else if (e.key === 'Tab' && drawerOpen && !modalOpen) {
+        const focusable = [...drawer.querySelectorAll('button:not([hidden]):not(:disabled), a[href], [tabindex="0"]')];
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (!drawer.contains(document.activeElement)) {
+          e.preventDefault();
+          first.focus();
+        } else if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       } else if (e.key === 'Tab' && modalOpen) {
         e.preventDefault();
         modal.querySelector('.modal-close-btn').focus();
@@ -4866,13 +4997,25 @@
       }
       const zoomTarget = event.target.closest('[data-zoom]');
       const zoomImage = zoomTarget && zoomTarget.querySelector('img');
-      if (zoomImage) openImageModal(zoomImage.src, zoomTarget.dataset.zoom, zoomTarget);
+      if (zoomImage) {
+        openImageModal(zoomImage.src, zoomTarget.dataset.zoom, zoomTarget);
+        return;
+      }
+      const goTarget = event.target.closest('[data-goto-tab]');
+      if (goTarget) {
+        goToTabSearch(goTarget.dataset.gotoTab, goTarget.dataset.gotoQ, goTarget.dataset.gotoExtra ? JSON.parse(goTarget.dataset.gotoExtra) : null);
+        return;
+      }
+      const detailTarget = event.target.closest('[data-detail]');
+      if (detailTarget && !event.target.closest('button, a, input, select, summary')) {
+        openDetail(Number(detailTarget.dataset.detail));
+      }
     });
 
     document.addEventListener('keydown', (event) => {
       if (event.key !== 'Enter' && event.key !== ' ') return;
       const target = event.target;
-      if (target.matches && target.matches('.kpi-card, th[data-sort], [data-zoom], .chart-row')) {
+      if (target.matches && target.matches('.kpi-card, th[data-sort], [data-zoom], .chart-row, tr[data-detail], .eq-card[data-detail]')) {
         event.preventDefault();
         target.click();
       }
@@ -4890,6 +5033,436 @@
       event.preventDefault();
       tabs[index].focus();
     });
+
+    function tagDetailRows() {
+      document.querySelectorAll('#inventory-table-body tr').forEach((row, index) => {
+        row.dataset.detail = index;
+        row.tabIndex = 0;
+      });
+      document.querySelectorAll('#grid-view-wrapper .eq-card').forEach((card, index) => {
+        card.dataset.detail = index;
+        card.tabIndex = 0;
+      });
+    }
+
+    function highlightSearchHits() {
+      const tokens = searchTokens(state.filters.search);
+      if (!tokens.length) return;
+      const pattern = new RegExp('(' + tokens.map(token => token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')', 'gi');
+      ['inventory-table-body', 'grid-view-wrapper'].forEach(id => {
+        const root = document.getElementById(id);
+        if (!root) return;
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+        const nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(node => {
+          const parts = node.nodeValue.split(pattern);
+          if (parts.length < 2) return;
+          const fragment = document.createDocumentFragment();
+          parts.forEach((part, index) => {
+            if (index % 2) {
+              const mark = document.createElement('mark');
+              mark.className = 'search-hit';
+              mark.textContent = part;
+              fragment.appendChild(mark);
+            } else if (part) {
+              fragment.appendChild(document.createTextNode(part));
+            }
+          });
+          node.replaceWith(fragment);
+        });
+      });
+    }
+
+    function renderLoadMore(total, shownCount) {
+      const wrap = document.getElementById('load-more-wrap');
+      const button = document.getElementById('load-more-btn');
+      if (!wrap || !button) return;
+      wrap.hidden = total <= shownCount;
+      button.textContent = `더 보기 (남은 ${total - shownCount}개)`;
+    }
+
+    function loadMore() {
+      state.visible += PAGE_SIZE;
+      updateDashboard();
+    }
+
+    function printList() {
+      const previous = state.visible;
+      state.visible = Math.max(previous, state.viewList.length);
+      updateDashboard();
+      setTimeout(() => {
+        window.print();
+        state.visible = previous;
+        updateDashboard();
+      }, 300);
+    }
+
+    function activeFilterEntries() {
+      const f = state.filters;
+      const entries = [];
+      const mgrLabel = { pipette: '제조사', reagent: '제조사', pc: '사용자' }[state.activeTab] || '담당자';
+      if (f.search.trim()) entries.push(['search', `검색: "${f.search.trim()}"`]);
+      if (f.kpi !== 'all') {
+        const title = document.querySelector('.kpi-card.active .kpi-card-title');
+        entries.push(['kpi', `요약: ${title ? title.textContent.trim() : f.kpi}`]);
+      }
+      if (f.location !== 'all') entries.push(['location', `위치: ${f.location}`]);
+      if (f.manager !== 'all') entries.push(['manager', `${mgrLabel}: ${f.manager}`]);
+      if (f.capacity !== 'all') entries.push(['capacity', `용량: ${f.capacity}`]);
+      if (state.activeTab === 'reagent') {
+        if (f.reagentType !== 'all') entries.push(['reagentType', `구분: ${f.reagentType}`]);
+        if (f.reagentLocation !== 'all') entries.push(['reagentLocation', `보관실: ${f.reagentLocation}`]);
+        if (f.reagentZone !== 'all') entries.push(['reagentZone', `보관 구역: ${f.reagentZone}`]);
+        if (f.reagentFolder !== 'all') entries.push(['reagentFolder', `폴더: ${f.reagentFolder}`]);
+      }
+      return entries;
+    }
+
+    function syncFilterControls() {
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.value = state.filters.search;
+      [['filter-location', state.activeTab === 'reagent' ? 'reagentLocation' : 'location'], ['filter-manager', 'manager'], ['filter-capacity', 'capacity']].forEach(([id, key]) => {
+        const select = document.getElementById(id);
+        if (select) select.value = state.filters[key];
+      });
+    }
+
+    function clearFilter(key) {
+      if (key === 'search') {
+        clearTimeout(searchTimer);
+        state.filters.search = '';
+      } else {
+        state.filters[key] = 'all';
+      }
+      syncFilterControls();
+      updateDashboard();
+    }
+
+    function renderActiveFilters() {
+      const container = document.getElementById('active-filters');
+      if (!container) return;
+      const entries = activeFilterEntries();
+      container.hidden = entries.length === 0;
+      container.innerHTML = '';
+      if (!entries.length) return;
+      const label = document.createElement('span');
+      label.className = 'active-filter-label';
+      label.textContent = '적용된 필터';
+      container.appendChild(label);
+      entries.forEach(([key, text]) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'active-filter-chip';
+        chip.setAttribute('aria-label', `${text} 해제`);
+        chip.title = '클릭하여 해제';
+        chip.innerHTML = `<span>${esc(text)}</span><span class="chip-x" aria-hidden="true">×</span>`;
+        chip.onclick = () => clearFilter(key);
+        container.appendChild(chip);
+      });
+    }
+
+    const TAB_SHORT = { general: '장비', pipette: '피펫', pc: 'PC', animalLab: '동물실험실', reagent: '시약·물품' };
+
+    function renderOtherTabHits() {
+      const container = document.getElementById('other-tab-hits');
+      if (!container) return;
+      const tokens = searchTokens(state.filters.search);
+      container.innerHTML = '';
+      const hits = tokens.length
+        ? TAB_NAMES.filter(tab => tab !== state.activeTab)
+            .map(tab => [tab, datasetFor(tab).filter(item => itemMatchesSearch(item, tokens)).length])
+            .filter(([, count]) => count > 0)
+        : [];
+      container.hidden = hits.length === 0;
+      if (!hits.length) return;
+      const label = document.createElement('span');
+      label.textContent = '다른 탭에서도 발견:';
+      container.appendChild(label);
+      hits.forEach(([tab, count]) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'other-tab-hit';
+        button.textContent = `${TAB_SHORT[tab]} ${count}`;
+        button.dataset.gotoTab = tab;
+        button.dataset.gotoQ = state.filters.search;
+        container.appendChild(button);
+      });
+    }
+
+    function renderEmptySuggestions(isEmpty) {
+      const container = document.getElementById('empty-suggestions');
+      if (!container) return;
+      container.innerHTML = '';
+      if (!isEmpty) return;
+      activeFilterEntries().forEach(([key, text]) => {
+        const previous = state.filters[key];
+        state.filters[key] = key === 'search' ? '' : 'all';
+        const count = getFilteredData().length;
+        state.filters[key] = previous;
+        if (!count) return;
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = `${text} 해제 → ${count}개`;
+        button.onclick = () => clearFilter(key);
+        container.appendChild(button);
+      });
+    }
+
+    function goToTabSearch(tab, query, extra) {
+      closeDrawer();
+      if (state.activeTab !== tab) switchTab(tab, true);
+      Object.assign(state.filters, { search: query || '', location: 'all', manager: 'all', kpi: 'all', reagentLocation: 'all', reagentType: 'all', reagentZone: 'all', reagentFolder: 'all', capacity: 'all' }, extra || {});
+      syncFilterControls();
+      updateDashboard();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function copyShareLink() {
+      syncHash();
+      copyToClipboard(location.href, '링크');
+    }
+
+    const TEXT_SIZES = [100, 112, 125];
+    function applyTextSize(size) {
+      document.documentElement.style.fontSize = size === 100 ? '' : size + '%';
+      const button = document.getElementById('text-size-btn');
+      if (button) button.title = `글자 크기 변경 (현재 ${size}%)`;
+    }
+
+    function cycleTextSize() {
+      let current = 100;
+      try { current = Number(localStorage.getItem('sbl-text-size')) || 100; } catch (error) { /* storage can be blocked */ }
+      const next = TEXT_SIZES[(TEXT_SIZES.indexOf(current) + 1) % TEXT_SIZES.length];
+      try { localStorage.setItem('sbl-text-size', String(next)); } catch (error) { /* storage can be blocked */ }
+      applyTextSize(next);
+      showToast(`글자 크기 ${next}%`);
+    }
+
+    function initTextSize() {
+      let size = 100;
+      try { size = Number(localStorage.getItem('sbl-text-size')) || 100; } catch (error) { /* storage can be blocked */ }
+      applyTextSize(TEXT_SIZES.includes(size) ? size : 100);
+    }
+
+    /* Side drawer: item detail and lab overview */
+    let drawerReturnFocus = null;
+
+    function showDrawer(title, showSteps) {
+      const drawer = document.getElementById('side-drawer');
+      document.getElementById('drawer-title').textContent = title;
+      document.getElementById('drawer-prev').hidden = !showSteps;
+      document.getElementById('drawer-next').hidden = !showSteps;
+      if (!drawer.classList.contains('active')) drawerReturnFocus = document.activeElement;
+      drawer.removeAttribute('inert');
+      drawer.classList.add('active');
+      document.getElementById('drawer-backdrop').classList.add('active');
+      lucide.createIcons();
+      document.getElementById('drawer-close').focus();
+    }
+
+    function closeDrawer() {
+      const drawer = document.getElementById('side-drawer');
+      if (!drawer || !drawer.classList.contains('active')) return;
+      drawer.classList.remove('active');
+      drawer.setAttribute('inert', '');
+      document.getElementById('drawer-backdrop').classList.remove('active');
+      if (drawerReturnFocus && drawerReturnFocus.isConnected) drawerReturnFocus.focus();
+      drawerReturnFocus = null;
+      state.detailIndex = -1;
+    }
+
+    const DETAIL_FIELDS = {
+      general: [['loc', '설치 위치'], ['mgr', '담당 관리자'], ['remarks', '비고']],
+      pipette: [['spec', '사양'], ['loc', '위치'], ['brand', '제조사'], ['status', '상태'], ['remarks', '비고']],
+      pc: [['kind', '종류'], ['loc', '위치'], ['user', '사용자'], ['brand', '제조사']],
+      animalLab: [['code', '품목코드'], ['loc', '위치'], ['mgr', '담당자']],
+      reagent: [['type', '구분'], ['loc', '보관실'], ['zone', '보관 구역'], ['folder', '폴더'], ['mfr', '제조사'], ['cas', 'CAS No.'], ['cat', 'Cat. No.'], ['capacity', '용량'], ['qty', '수량'], ['remarks', '비고']]
+    };
+
+    function renderDetail(index) {
+      const item = state.viewList[index];
+      if (!item) return;
+      state.detailIndex = index;
+      const tab = state.activeTab;
+      const title = item.name || item.label || '';
+      const body = document.getElementById('drawer-body');
+      body.innerHTML = '';
+      body.scrollTop = 0;
+
+      if (tab === 'general' || tab === 'pc' || tab === 'animalLab') {
+        const candidates = getImageCandidates(tab, item);
+        if (candidates.length) {
+          const image = document.createElement('img');
+          image.className = 'drawer-image';
+          image.alt = title;
+          let attempt = 0;
+          image.onerror = () => {
+            attempt += 1;
+            if (attempt < candidates.length) image.src = candidates[attempt]; else image.remove();
+          };
+          image.src = candidates[0];
+          body.appendChild(image);
+        }
+      }
+
+      const list = document.createElement('dl');
+      list.className = 'drawer-fields';
+      const addField = (label, html) => {
+        const row = document.createElement('div');
+        row.className = 'drawer-field';
+        row.innerHTML = `<dt>${esc(label)}</dt><dd>${html}</dd>`;
+        list.appendChild(row);
+      };
+      addField('No', esc(item.no));
+      DETAIL_FIELDS[tab].forEach(([key, label]) => {
+        let value = key === 'status' ? (item.broken === 'O' ? '고장' : '정상') : item[key];
+        value = String(value ?? '').trim();
+        if (!value || value === '-') return;
+        if (key === 'qty' && /^\d+$/.test(value)) value += '개';
+        if (key === 'cas' || key === 'cat') {
+          addField(label, `<button type="button" class="copy-btn-inline" data-copy="${esc(value)}" data-copy-label="${esc(label)}" title="클릭하여 복사">${esc(value)}</button>`);
+        } else {
+          addField(label, esc(value));
+        }
+      });
+      body.appendChild(list);
+
+      if (tab === 'reagent') {
+        const hasCas = item.cas && item.cas !== '-';
+        const links = document.createElement('div');
+        links.className = 'drawer-links';
+        const pubchem = 'https://pubchem.ncbi.nlm.nih.gov/#query=' + encodeURIComponent(hasCas ? item.cas : item.name);
+        const web = 'https://www.google.com/search?q=' + encodeURIComponent([item.name, item.mfr, item.cat].filter(value => value && value !== '-').join(' '));
+        links.innerHTML = `<a class="drawer-link" href="${esc(pubchem)}" target="_blank" rel="noopener">PubChem 검색</a><a class="drawer-link" href="${esc(web)}" target="_blank" rel="noopener">웹 검색</a>`;
+        body.appendChild(links);
+      }
+
+      document.getElementById('drawer-title').textContent = title;
+      document.getElementById('drawer-prev').disabled = index <= 0;
+      document.getElementById('drawer-next').disabled = index >= state.viewList.length - 1;
+    }
+
+    function openDetail(index) {
+      showDrawer('', true);
+      renderDetail(index);
+    }
+
+    function stepDetail(delta) {
+      const next = state.detailIndex + delta;
+      if (next >= 0 && next < state.viewList.length) renderDetail(next);
+    }
+
+    function roomKey(loc) {
+      const text = String(loc ?? '').trim();
+      if (!text || text === '-' || text === '미지정') return '미지정';
+      const room = text.match(/(\d{3}(?:-\d)?)\s*호/);
+      if (room) return room[1] + '호';
+      if (/ABMRC/i.test(text)) return 'ABMRC';
+      const named = text.match(/세균실|세포실|Cold Room/i);
+      return named ? named[0] : text;
+    }
+
+    function isBlank(value) {
+      const text = String(value ?? '').trim();
+      return !text || text === '-' || text === '미지정';
+    }
+
+    function computeIssues() {
+      const groups = [];
+      const group = (title, items, aggregated) => {
+        if (items.length) groups.push({ title, items, aggregated: Boolean(aggregated) });
+      };
+      const itemRef = (tab, item) => {
+        const label = item.name || item.label;
+        return { tab, label: item.spec ? `${label} ${item.spec}` : label, q: item.spec ? `${label} ${item.spec}` : label };
+      };
+
+      const noLocation = [];
+      ['general', 'pipette', 'pc', 'animalLab'].forEach(tab => {
+        datasetFor(tab).filter(item => isBlank(item.loc)).forEach(item => noLocation.push(itemRef(tab, item)));
+      });
+      group('위치 미지정', noLocation);
+
+      const noOwner = [];
+      inventoryData.filter(item => isBlank(item.mgr)).forEach(item => noOwner.push(itemRef('general', item)));
+      animalLabData.filter(item => isBlank(item.mgr)).forEach(item => noOwner.push(itemRef('animalLab', item)));
+      datasetFor('pc').filter(item => isBlank(item.user)).forEach(item => noOwner.push(itemRef('pc', item)));
+      group('담당자·사용자 미지정', noOwner);
+
+      group('고장 피펫', pipetteData.filter(item => item.broken === 'O').map(item => itemRef('pipette', item)));
+
+      const byName = new Map();
+      inventoryData.forEach(item => {
+        const core = item.name.replace(/\(.*?\)/g, '').replace(/\s+/g, '').toLowerCase();
+        byName.set(core, [...(byName.get(core) || []), item]);
+      });
+      const duplicates = [];
+      byName.forEach(items => { if (items.length > 1) items.forEach(item => duplicates.push(itemRef('general', item))); });
+      group('중복 의심 (이름이 같은 장비)', duplicates);
+
+      const aggregated = [];
+      const noReagentLoc = reagentData.filter(item => isBlank(item.loc)).length;
+      if (noReagentLoc) aggregated.push({ tab: 'reagent', label: `보관실 미지정 ${noReagentLoc}개`, q: '', extra: { reagentLocation: '미지정' } });
+      const noFolder = reagentData.filter(item => item.type === '시약' && isBlank(item.folder)).length;
+      if (noFolder) aggregated.push({ tab: 'reagent', label: `시약 폴더 미지정 ${noFolder}개`, q: '', extra: { reagentType: '시약', reagentFolder: '미지정' } });
+      group('시약·물품 정리 필요', aggregated, true);
+
+      const count = groups.filter(entry => !entry.aggregated).reduce((sum, entry) => sum + entry.items.length, 0);
+      return { groups, count };
+    }
+
+    function updateHubBadge() {
+      const badge = document.getElementById('hub-badge');
+      if (!badge) return;
+      const { count } = computeIssues();
+      badge.hidden = count === 0;
+      badge.textContent = count;
+    }
+
+    function gotoAttributes(tab, query, extra) {
+      return `data-goto-tab="${esc(tab)}" data-goto-q="${esc(query || '')}"` + (extra ? ` data-goto-extra="${esc(JSON.stringify(extra))}"` : '');
+    }
+
+    function openHub() {
+      const tabs = ['general', 'pipette', 'pc', 'animalLab', 'reagent'];
+      const rooms = new Map();
+      tabs.forEach(tab => {
+        datasetFor(tab).forEach(item => {
+          const key = roomKey(item.loc);
+          if (!rooms.has(key)) rooms.set(key, Object.fromEntries(tabs.map(name => [name, 0])));
+          rooms.get(key)[tab] += 1;
+        });
+      });
+      const rows = [...rooms.entries()]
+        .map(([room, counts]) => ({ room, counts, total: Object.values(counts).reduce((sum, value) => sum + value, 0) }))
+        .sort((a, b) => b.total - a.total || a.room.localeCompare(b.room, 'ko'));
+
+      const head = tabs.map(tab => `<th scope="col">${TAB_SHORT[tab]}</th>`).join('');
+      const tableRows = rows.map(({ room, counts }) => {
+        const cells = tabs.map(tab => {
+          if (!counts[tab]) return '<td>-</td>';
+          return room === '미지정'
+            ? `<td>${counts[tab]}</td>`
+            : `<td><button type="button" class="hub-count" ${gotoAttributes(tab, room)}>${counts[tab]}</button></td>`;
+        }).join('');
+        return `<tr><th scope="row">${esc(room)}</th>${cells}</tr>`;
+      }).join('');
+
+      const { groups } = computeIssues();
+      const limit = 12;
+      const issuesHtml = groups.length ? groups.map(entry => {
+        const shownItems = entry.items.slice(0, limit).map(item =>
+          `<li><button type="button" class="hub-issue" ${gotoAttributes(item.tab, item.q, item.extra)}><span class="hub-issue-tab">${esc(TAB_SHORT[item.tab])}</span><span>${esc(item.label)}</span></button></li>`).join('');
+        const more = entry.items.length > limit ? `<li class="hub-more">외 ${entry.items.length - limit}개</li>` : '';
+        const heading = entry.aggregated ? esc(entry.title) : `${esc(entry.title)} (${entry.items.length})`;
+        return `<h3 class="hub-section-title">${heading}</h3><ul class="hub-issue-list">${shownItems}${more}</ul>`;
+      }).join('') : '<p class="hub-empty">확인이 필요한 항목이 없습니다.</p>';
+
+      const body = document.getElementById('drawer-body');
+      body.innerHTML = `<h3 class="hub-section-title">방별 현황</h3><table class="hub-table"><thead><tr><th scope="col">위치</th>${head}</tr></thead><tbody>${tableRows}</tbody></table>${'<h2 class="hub-section-title" style="font-size:var(--fs-lg)">확인 필요 항목</h2>'}${issuesHtml}`;
+      showDrawer('점검·현황', false);
+    }
 
     function exportCSV() {
       const dataToExport = getSortedData(getFilteredData());
