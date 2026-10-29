@@ -5487,7 +5487,7 @@
 
       const body = document.getElementById('drawer-body');
       body.innerHTML = `<h3 class="hub-section-title">방별 현황</h3><table class="hub-table"><thead><tr><th scope="col">위치</th>${head}</tr></thead><tbody>${tableRows}</tbody></table>${'<h2 class="hub-section-title" style="font-size:var(--fs-lg)">확인 필요 항목</h2>'}${issuesHtml}`;
-      showDrawer('점검·현황', false);
+      showDrawer(`점검·현황 (확인 필요 ${computeIssues().count})`, false);
     }
 
     function exportCSV() {
