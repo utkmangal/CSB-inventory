@@ -307,9 +307,14 @@ def sync():
     # Read reagent list workbook
     reagent_data = []
     reagent_files = sorted(
-        [f for f in root.glob("시약_리스트_*.xlsx") if not f.name.startswith("~$") and f.is_file()],
+        [f for f in root.glob("*시약_물품_리스트*.xlsx") if not f.name.startswith("~$") and f.is_file()],
         key=lambda x: x.name
     )
+    if not reagent_files:
+        reagent_files = sorted(
+            [f for f in root.glob("시약_리스트_*.xlsx") if not f.name.startswith("~$") and f.is_file()],
+            key=lambda x: x.name
+        )
     if not reagent_files:
         # Fallback to archive folder if exists
         if archive_dir.exists():
@@ -323,42 +328,37 @@ def sync():
         print(f"Reading Reagent inventory from {latest_reagent.name}...")
         try:
             wb_reagent = openpyxl.load_workbook(latest_reagent, read_only=True, data_only=True)
-            ws_reagent = wb_reagent[wb_reagent.sheetnames[0]]
-            header_row = next(ws_reagent.iter_rows(min_row=1, max_row=1, values_only=True), ())
-            header_map = {
-                re.sub(r"\s+", "", str(header).strip()).lower(): index
-                for index, header in enumerate(header_row)
-                if header is not None
-            }
+            def normalize(header):
+                return re.sub(r"\s+", "", str(header).strip()).lower()
 
-            def cell_value(row, *header_names):
-                for header_name in header_names:
-                    index = header_map.get(re.sub(r"\s+", "", header_name).lower())
-                    if index is not None and index < len(row):
-                        return row[index]
-                return None
+            # Sheets with these headers are read; the 시약/재료/Buffers sheets are reagents
+            # and the 장비 sheet (장비명 column) holds equipment. Supply sheets are ignored.
+            def sheet_rows():
+                for ws_reagent in wb_reagent.worksheets:
+                    header_row = next(ws_reagent.iter_rows(min_row=1, max_row=1, values_only=True), ())
+                    header_map = {normalize(h): i for i, h in enumerate(header_row) if h is not None}
+                    name_header = next((h for h in ("시약명", "장비명") if normalize(h) in header_map), None)
+                    required = {"보관 위치", "구역", "세부", "제조사", "Cat.No (제품번호)", "CAS No.", "용량", "수량", "비고"}
+                    if name_header is None or any(normalize(h) not in header_map for h in required):
+                        print(f"Skipping sheet '{ws_reagent.title}' (not a reagent/equipment sheet).")
+                        continue
+                    for row in ws_reagent.iter_rows(min_row=2, values_only=True):
+                        if row and any(c is not None for c in row):
+                            yield header_map, name_header, row
 
-            required_headers = {
-                "구분", "보관 위치", "구역", "세부", "시약명", "제조사",
-                "Cat.No (제품번호)", "CAS No.", "용량", "수량", "비고"
-            }
-            missing_headers = [
-                header for header in required_headers
-                if re.sub(r"\s+", "", header).lower() not in header_map
-            ]
-            if missing_headers:
-                print(f"Warning: Reagent workbook is missing headers: {', '.join(missing_headers)}")
-                wb_reagent.close()
-                return False
+            for header_map, name_header, row in sheet_rows():
+                def cell_value(row, *header_names):
+                    for header_name in header_names:
+                        index = header_map.get(normalize(header_name))
+                        if index is not None and index < len(row):
+                            return row[index]
+                    return None
 
-            for r_idx, row in enumerate(ws_reagent.iter_rows(min_row=2, values_only=True), start=1):
-                if not row or all(c is None for c in row):
-                    continue
-                category_val = cell_value(row, "구분")
+                category_val = "장비" if name_header == "장비명" else cell_value(row, "구분")
                 loc_val = cell_value(row, "보관 위치")
                 zone_val = cell_value(row, "구역")
                 folder_val = cell_value(row, "세부")
-                name_val = cell_value(row, "시약명")
+                name_val = cell_value(row, name_header)
                 mfr_val = cell_value(row, "제조사")
                 cat_val = cell_value(row, "Cat.No (제품번호)")
                 cas_val = cell_value(row, "CAS No.")
@@ -376,7 +376,7 @@ def sync():
                     equipment_note = str(remarks_val).strip() if remarks_val is not None else ""
                     equipment_remarks = [
                         value for value in (
-                            f"보관 구역: {equipment_zone}" if equipment_zone else "",
+                            f"보관 구역: {equipment_zone}" if equipment_zone not in ("", "-") else "",
                             f"제조사: {equipment_mfr}" if equipment_mfr else "",
                             f"수량: {equipment_qty}" if equipment_qty else "",
                             equipment_note
@@ -424,8 +424,45 @@ def sync():
                     "qty": qty,
                     "remarks": remarks
                 })
+            # Supply sheets ("<호실>-물품 및 소모품" and "<호실> Mold List") are listed as
+            # stock items alongside the reagents so they appear in the same directory.
+            def clean(value):
+                return str(value).strip() if value is not None else ""
+
+            for ws_supply in wb_reagent.worksheets:
+                room_match = re.match(r"(\d+호)", ws_supply.title.strip())
+                if not room_match:
+                    continue
+                room = room_match.group(1)
+                is_mold = "mold" in ws_supply.title.lower()
+                if not is_mold and "물품" not in ws_supply.title:
+                    continue
+                for row in ws_supply.iter_rows(min_row=3 if is_mold else 2, values_only=True):
+                    if not row or all(c is None for c in row):
+                        continue
+                    if is_mold:
+                        spec, _image, count = (list(row) + [None] * 3)[:3]
+                        if not clean(spec):
+                            continue
+                        entry = {"zone": "Mold", "folder": "-", "name": f"Mold {clean(spec)}",
+                                 "mfr": "", "capacity": clean(spec), "qty": clean(count), "remarks": ""}
+                    else:
+                        category, detail, item, brand, spec, qty, note = (list(row) + [None] * 7)[:7]
+                        if not clean(item):
+                            continue
+                        entry = {"zone": clean(category) or "-", "folder": clean(detail) or "-",
+                                 "name": clean(item), "mfr": clean(brand), "capacity": clean(spec),
+                                 "qty": clean(qty), "remarks": clean(note)}
+                    if entry["qty"].endswith(".0"):
+                        entry["qty"] = entry["qty"][:-2]
+                    reagent_data.append({
+                        "no": len(reagent_data) + 1, "loc": room, "zone": entry["zone"],
+                        "folder": entry["folder"], "name": entry["name"], "mfr": entry["mfr"],
+                        "cat": "", "cas": "", "capacity": entry["capacity"], "qty": entry["qty"],
+                        "remarks": entry["remarks"]
+                    })
             wb_reagent.close()
-            print(f"Successfully parsed {len(reagent_data)} reagent entries.")
+            print(f"Successfully parsed {len(reagent_data)} reagent/supply entries.")
         except Exception as e:
             print(f"Warning: Could not read reagent workbook: {e}")
     else:
